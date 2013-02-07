@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  subject: MyString
+  impact_statement: MyText
+  window_start: 2013-02-07 15:42:07
+  window_end: 2013-02-07 15:42:07
+  purpose: MyText
+  resolution: MyText
+  workaround: MyText
+  other_services: MyText
+  sender_uid: MyString
+
+two:
+  subject: MyString
+  impact_statement: MyText
+  window_start: 2013-02-07 15:42:07
+  window_end: 2013-02-07 15:42:07
+  purpose: MyText
+  resolution: MyText
+  workaround: MyText
+  other_services: MyText
+  sender_uid: MyString

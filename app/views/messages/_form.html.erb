@@ -1,0 +1,53 @@
+<%= form_for(@message) do |f| %>
+  <% if @message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
+
+      <ul>
+      <% @message.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :subject %><br />
+    <%= f.text_field :subject %>
+  </div>
+  <div class="field">
+    <%= f.label :impact_statement %><br />
+    <%= f.text_area :impact_statement %>
+  </div>
+  <div class="field">
+    <%= f.label :window_start %><br />
+    <%= f.datetime_select :window_start %>
+  </div>
+  <div class="field">
+    <%= f.label :window_end %><br />
+    <%= f.datetime_select :window_end %>
+  </div>
+  <div class="field">
+    <%= f.label :purpose %><br />
+    <%= f.text_area :purpose %>
+  </div>
+  <div class="field">
+    <%= f.label :resolution %><br />
+    <%= f.text_area :resolution %>
+  </div>
+  <div class="field">
+    <%= f.label :workaround %><br />
+    <%= f.text_area :workaround %>
+  </div>
+  <div class="field">
+    <%= f.label :other_services %><br />
+    <%= f.text_area :other_services %>
+  </div>
+  <div class="field">
+    <%= f.label :sender_uid %><br />
+    <%= f.text_field :sender_uid %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
