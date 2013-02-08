@@ -18,7 +18,7 @@
   </div>
   <div class="field">
     <%= f.label :impact_statement %><br />
-    <%= f.text_area :impact_statement %>
+    <%= f.text_area :impact_statement, :rows => '3' %>
 	<span class="help-block">Short, customer-centric description of the issue. What does this problem look like from the customer's perspective?</span>
   </div>
   <div class="field">
@@ -33,22 +33,22 @@
   </div>
   <div class="field">
     <%= f.label :purpose %><br />
-    <%= f.text_area :purpose %>
+    <%= f.text_area :purpose, :rows => '3' %>
 	<span class="help-block">For PLANNED events only, brief description of the reason for the event.</span>
   </div>
   <div class="field">
     <%= f.label :resolution %><br />
-    <%= f.text_area :resolution %>
+    <%= f.text_area :resolution, :rows => '3' %>
 	<span class="help-block">For any RESOLVED items, a short description of the resolution, e.g., "Servers were restarted and services have been restored" or "The upgrade was successfully completed"</span>
   </div>
   <div class="field">
     <%= f.label :workaround %><br />
-    <%= f.text_area :workaround %>
+    <%= f.text_area :workaround, :rows => '3' %>
 	<span class="help-block">If a workaround is available, provide concise directions (or links to more thorough directions) here.</span>
   </div>
   <div class="field">
     <%= f.label :other_services %><br />
-    <%= f.text_area :other_services %>
+    <%= f.text_area :other_services, :rows => '3' %>
 	<span class="help-block">Name the service based on the customers' perspective. Provide the scope (building, network, DSS-wide, campus-wide, service, etc.)</span>
   </div>
   <div class="field">
