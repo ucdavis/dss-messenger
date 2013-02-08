@@ -1,0 +1,23 @@
+<h1>Listing impacted_services</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @impacted_services.each do |impacted_service| %>
+  <tr>
+    <td><%= impacted_service.name %></td>
+    <td><%= link_to 'Show', impacted_service %></td>
+    <td><%= link_to 'Edit', edit_impacted_service_path(impacted_service) %></td>
+    <td><%= link_to 'Destroy', impacted_service, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Impacted service', new_impacted_service_path %>
