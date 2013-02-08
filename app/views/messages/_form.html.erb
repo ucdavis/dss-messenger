@@ -14,38 +14,47 @@
   <div class="field">
     <%= f.label :subject %><br />
     <%= f.text_field :subject %>
+	<span class="help-block">Used in the subject line--should be 5 words or less and succinctly summarize the services that are unavailable or that will be unavailable. Examples: DSS file services (dss-filer1); DSS VPN service; CMB networks; campus wireless networks; Matlab network licensing.</span>
   </div>
   <div class="field">
     <%= f.label :impact_statement %><br />
     <%= f.text_area :impact_statement %>
+	<span class="help-block">Short, customer-centric description of the issue. What does this problem look like from the customer's perspective?</span>
   </div>
   <div class="field">
     <%= f.label :window_start %><br />
     <%= f.datetime_select :window_start %>
+	<span class="help-block"></span>
   </div>
   <div class="field">
     <%= f.label :window_end %><br />
     <%= f.datetime_select :window_end %>
+	<span class="help-block"></span>
   </div>
   <div class="field">
     <%= f.label :purpose %><br />
     <%= f.text_area :purpose %>
+	<span class="help-block">For PLANNED events only, brief description of the reason for the event.</span>
   </div>
   <div class="field">
     <%= f.label :resolution %><br />
     <%= f.text_area :resolution %>
+	<span class="help-block">For any RESOLVED items, a short description of the resolution, e.g., "Servers were restarted and services have been restored" or "The upgrade was successfully completed"</span>
   </div>
   <div class="field">
     <%= f.label :workaround %><br />
     <%= f.text_area :workaround %>
+	<span class="help-block">If a workaround is available, provide concise directions (or links to more thorough directions) here.</span>
   </div>
   <div class="field">
     <%= f.label :other_services %><br />
     <%= f.text_area :other_services %>
+	<span class="help-block">Name the service based on the customers' perspective. Provide the scope (building, network, DSS-wide, campus-wide, service, etc.)</span>
   </div>
   <div class="field">
     <%= f.label :sender_uid %><br />
     <%= f.text_field :sender_uid %>
+	<span class="help-block"></span>
   </div>
   <div class="actions">
     <%= f.submit %>
