@@ -56,6 +56,9 @@ class MessagesController < ApplicationController
   # PUT /messages/1
   # PUT /messages/1.json
   def update
+    params[:message][:recipient_ids] ||=[]
+    params[:message][:event_ids] ||=[]
+    params[:message][:impacted_service_ids] ||=[]
     @message = Message.find(params[:id])
 
     respond_to do |format|

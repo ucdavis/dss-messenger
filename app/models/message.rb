@@ -1,5 +1,5 @@
 class Message < ActiveRecord::Base
-  attr_accessible :impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround
+  attr_accessible :impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround, :recipient_ids, :event_ids, :impacted_service_ids
   has_many :damages
   has_many :impacted_services, :through => :damages
   has_many :broadcasts

@@ -12,6 +12,20 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :sender_uid %><br />
+    <%= f.text_field :sender_uid %>
+	<span class="help-block"></span>
+  </div>
+  <div class="field">
+    <%= f.label :recipients %><br />
+    <% for recipient in Recipient.find(:all) %>
+	<div>
+	  <%= check_box_tag "message[recipient_ids][]", recipient.id, @message.recipients.include?(recipient) %>
+	  <%= recipient.uid %>
+	</div>
+	<% end %>
+  </div>
+  <div class="field">
     <%= f.label :subject %><br />
     <%= f.text_field :subject %>
 	<span class="help-block">Used in the subject line--should be 5 words or less and succinctly summarize the services that are unavailable or that will be unavailable. Examples: DSS file services (dss-filer1); DSS VPN service; CMB networks; campus wireless networks; Matlab network licensing.</span>
@@ -52,10 +66,24 @@
 	<span class="help-block">Name the service based on the customers' perspective. Provide the scope (building, network, DSS-wide, campus-wide, service, etc.)</span>
   </div>
   <div class="field">
-    <%= f.label :sender_uid %><br />
-    <%= f.text_field :sender_uid %>
-	<span class="help-block"></span>
+    <%= f.label :impacted_services %><br />
+    <% for impacted_service in ImpactedService.find(:all) %>
+	<div>
+	  <%= check_box_tag "message[impacted_service_ids][]", impacted_service.id, @message.impacted_services.include?(impacted_service) %>
+	  <%= impacted_service.name %>
+	</div>
+	<% end %>
   </div>
+  <div class="field">
+    <%= f.label :events %><br />
+    <% for event in Event.find(:all) %>
+	<div>
+	  <%= check_box_tag "message[event_ids][]", event.id, @message.events.include?(event) %>
+	  <%= event.description %>
+	</div>
+	<% end %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
