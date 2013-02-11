@@ -1,29 +1,51 @@
-<h1>Listing messages</h1>
+<div class="span9">
 
-<table class="table table-striped">
-  <tr>
-    <th>Subject</th>
-    <th>Statement</th>
-    <th>Sender</th>
-    <th>Sent</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+	<h1>Listing messages</h1>
 
-<% @messages.each do |message| %>
-  <tr>
-    <td><%= message.subject %></td>
-    <td><%= message.impact_statement %></td>
-    <td><%= message.sender_uid %></td>
-    <td><%= message.created_at.to_formatted_s(:long) %></td>
-    <td><%= link_to '<i class="icon-eye-open"></i>'.html_safe, message, :title => "Show" %></td>
-    <td><%= link_to '<i class="icon-edit"></i>'.html_safe, edit_message_path(message), :title => "Edit" %></td>
-    <td><%= link_to '<i class="icon-trash"></i>'.html_safe, message, method: :delete, data: { confirm: 'Are you sure?', :title => "Trash" } %></td>
-  </tr>
-<% end %>
-</table>
+	<table class="table table-striped">
+	  <tr>
+	    <th>Subject</th>
+	    <th>Statement</th>
+	    <th>Sender</th>
+	    <th>Sent</th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
 
-<br />
+	<% @messages.each do |message| %>
+	  <tr>
+	    <td><%= message.subject %></td>
+	    <td><%= message.impact_statement %></td>
+	    <td><%= message.sender_uid %></td>
+	    <td><%= message.created_at.to_formatted_s(:long) %></td>
+	    <td><%= link_to '<i class="icon-eye-open"></i>'.html_safe, message, :title => "Show" %></td>
+	    <td><%= link_to '<i class="icon-edit"></i>'.html_safe, edit_message_path(message), :title => "Edit" %></td>
+	    <td><%= link_to '<i class="icon-trash"></i>'.html_safe, message, method: :delete, data: { confirm: 'Are you sure?' }, :title => "Delete" %></td>
+	  </tr>
+	<% end %>
+	</table>
 
-<%= link_to 'New Message', new_message_path, :class => 'btn' %>
+</div>
+<div class="span3">
+	<div class="well">
+		<%= link_to 'New Message', new_message_path, :class => 'btn btn-primary btn-large btn-block' %>
+	</div>
+	<div class="well">
+		<h3>Filters:</h3>
+		<h4>Impacted Services</h4>
+	    <% for impacted_service in ImpactedService.find(:all) %>
+		<div>
+		  <%= check_box_tag "message[impacted_service_ids][]", impacted_service.id %>
+		  <%= impacted_service.name %>
+		</div>
+		<% end %>
+		<h4>Events</h4>
+	    <% for event in Event.find(:all) %>
+		<div>
+		  <%= check_box_tag "message[event_ids][]", event.id %>
+		  <%= event.description %>
+		</div>
+		<% end %>
+	</div>
+</div>
