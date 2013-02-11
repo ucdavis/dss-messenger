@@ -7,8 +7,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<div class="navbar navbar-fixed-top">
+	  <div class="navbar-inner">
+	    <a class="brand" href="#">DSS-Messenger</a>
+	    <ul class="nav">
+	      <li class="active"><a href="#">Home</a></li>
+	    </ul>
+	  </div>
+	</div>
 
-<%= yield %>
+	<div class="span9">
 
+	<%= yield %>
+
+	</div>
 </body>
 </html>

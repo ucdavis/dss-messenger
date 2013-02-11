@@ -1,16 +1,11 @@
 <h1>Listing messages</h1>
 
-<table>
+<table class="table table-striped">
   <tr>
     <th>Subject</th>
-    <th>Impact statement</th>
-    <th>Window start</th>
-    <th>Window end</th>
-    <th>Purpose</th>
-    <th>Resolution</th>
-    <th>Workaround</th>
-    <th>Other services</th>
-    <th>Sender uid</th>
+    <th>Statement</th>
+    <th>Sender</th>
+    <th>Sent</th>
     <th></th>
     <th></th>
     <th></th>
@@ -20,20 +15,15 @@
   <tr>
     <td><%= message.subject %></td>
     <td><%= message.impact_statement %></td>
-    <td><%= message.window_start %></td>
-    <td><%= message.window_end %></td>
-    <td><%= message.purpose %></td>
-    <td><%= message.resolution %></td>
-    <td><%= message.workaround %></td>
-    <td><%= message.other_services %></td>
     <td><%= message.sender_uid %></td>
-    <td><%= link_to 'Show', message %></td>
-    <td><%= link_to 'Edit', edit_message_path(message) %></td>
-    <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= message.created_at.to_formatted_s(:long) %></td>
+    <td><%= link_to '<i class="icon-eye-open"></i>'.html_safe, message, :title => "Show" %></td>
+    <td><%= link_to '<i class="icon-edit"></i>'.html_safe, edit_message_path(message), :title => "Edit" %></td>
+    <td><%= link_to '<i class="icon-trash"></i>'.html_safe, message, method: :delete, data: { confirm: 'Are you sure?', :title => "Trash" } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Message', new_message_path %>
+<%= link_to 'New Message', new_message_path, :class => 'btn' %>
