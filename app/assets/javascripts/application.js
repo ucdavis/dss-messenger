@@ -14,4 +14,9 @@
 //= require jquery_ujs
 //= require jquery-ui-1.10.0.custom.min
 //= require twitter/bootstrap
+//= require underscore
+//= require backbone
+//= require backbone_rails_sync
+//= require backbone_datalink
+//= require backbone/dss_messenger
 //= require_tree .
