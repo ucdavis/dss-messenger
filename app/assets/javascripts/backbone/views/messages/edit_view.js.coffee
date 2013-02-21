@@ -14,7 +14,7 @@ class DssMessenger.Views.Messages.EditView extends Backbone.View
     @model.save(null,
       success: (message) =>
         @model = message
-        window.location.hash = "/#{@model.id}"
+        window.location.hash = "#/index"
     )
 
   displayPicker: (e) ->

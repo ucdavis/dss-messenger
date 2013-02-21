@@ -12,7 +12,7 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
 
   newMessage: ->
     @view = new DssMessenger.Views.Messages.NewView(collection: @messages)
-    $("#messages").html(@view.render().el)
+    $("#messages").append(@view.render().el)
 
   index: ->
     @view = new DssMessenger.Views.Messages.IndexView(messages: @messages)
@@ -22,10 +22,10 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
     message = @messages.get(id)
 
     @view = new DssMessenger.Views.Messages.ShowView(model: message)
-    $("#messages").html(@view.render().el)
+    $("#messages").append(@view.render().el)
 
   edit: (id) ->
     message = @messages.get(id)
 
     @view = new DssMessenger.Views.Messages.EditView(model: message)
-    $("#messages").html(@view.render().el)
+    $("#messages").append(@view.render().el)

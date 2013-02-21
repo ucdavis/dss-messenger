@@ -28,7 +28,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     @collection.create(@model.toJSON(),
       success: (message) =>
         @model = message
-        window.location.hash = "/#{@model.id}"
+        window.location.hash = "#/index"
 
       error: (message, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})

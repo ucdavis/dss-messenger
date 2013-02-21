@@ -1,55 +1,59 @@
-<h1>Edit message</h1>
+<div class="modal">
+    <div class="modal-header"><h3>Edit message</h3></div>
+	<form id="edit-message" name="message">
+	  <div class="modal-body">
 
-<form id="edit-message" name="message">
-  <div class="field">
-    <label for="subject"> subject:</label>
-    <input type="text" name="subject" id="subject" value="<%= subject %>" >
-  </div>
+		  <div class="field">
+		    <label for="subject"> subject:</label>
+		    <input type="text" name="subject" id="subject" value="<%= subject %>" >
+		  </div>
 
-  <div class="field">
-    <label for="impact_statement"> impact_statement:</label>
-    <input type="text" name="impact_statement" id="impact_statement" value="<%= impact_statement %>" >
-  </div>
+		  <div class="field">
+		    <label for="impact_statement"> impact_statement:</label>
+		    <input type="text" name="impact_statement" id="impact_statement" value="<%= impact_statement %>" >
+		  </div>
 
-  <div class="field">
-    <label for="window_start"> window_start:</label>
-    <input type="text" name="window_start" id="window_start" class="datepicker" value="<%= window_start %>" >
-  </div>
+		  <div class="field">
+		    <label for="window_start"> window_start:</label>
+		    <input type="text" name="window_start" id="window_start" class="datepicker" value="<%= window_start %>" >
+		  </div>
 
-  <div class="field">
-    <label for="window_end"> window_end:</label>
-    <input type="text" name="window_end" id="window_end" class="datepicker" value="<%= window_end %>" >
-  </div>
+		  <div class="field">
+		    <label for="window_end"> window_end:</label>
+		    <input type="text" name="window_end" id="window_end" class="datepicker" value="<%= window_end %>" >
+		  </div>
 
-  <div class="field">
-    <label for="purpose"> purpose:</label>
-    <input type="text" name="purpose" id="purpose" value="<%= purpose %>" >
-  </div>
+		  <div class="field">
+		    <label for="purpose"> purpose:</label>
+		    <input type="text" name="purpose" id="purpose" value="<%= purpose %>" >
+		  </div>
 
-  <div class="field">
-    <label for="resolution"> resolution:</label>
-    <input type="text" name="resolution" id="resolution" value="<%= resolution %>" >
-  </div>
+		  <div class="field">
+		    <label for="resolution"> resolution:</label>
+		    <input type="text" name="resolution" id="resolution" value="<%= resolution %>" >
+		  </div>
 
-  <div class="field">
-    <label for="workaround"> workaround:</label>
-    <input type="text" name="workaround" id="workaround" value="<%= workaround %>" >
-  </div>
+		  <div class="field">
+		    <label for="workaround"> workaround:</label>
+		    <input type="text" name="workaround" id="workaround" value="<%= workaround %>" >
+		  </div>
 
-  <div class="field">
-    <label for="other_services"> other_services:</label>
-    <input type="text" name="other_services" id="other_services" value="<%= other_services %>" >
-  </div>
+		  <div class="field">
+		    <label for="other_services"> other_services:</label>
+		    <input type="text" name="other_services" id="other_services" value="<%= other_services %>" >
+		  </div>
 
-  <div class="field">
-    <label for="sender_uid"> sender_uid:</label>
-    <input type="text" name="sender_uid" id="sender_uid" value="<%= sender_uid %>" >
-  </div>
+		  <div class="field">
+		    <label for="sender_uid"> sender_uid:</label>
+		    <input type="text" name="sender_uid" id="sender_uid" value="<%= sender_uid %>" >
+		  </div>
 
-  <div class="actions">
-    <input type="submit" value="Update Message" />
-  </div>
+	  </div>
+	  <div class="modal-footer">
+		<input type="submit" class="btn btn-primary" value="Update Message" />
+		<a class="btn" href="#/index">Close</a>
+	  </div>
+	</form>
+</div>
+<div class="modal-backdrop"></div>
 
-</form>
-
-<a href="#/index">Back</a>
