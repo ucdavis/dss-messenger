@@ -5,6 +5,7 @@ class DssMessenger.Views.Messages.EditView extends Backbone.View
 
   events:
     "submit #edit-message": "update"
+    "focus .datepicker"	:	"displayPicker"
 
   update: (e) ->
     e.preventDefault()
@@ -15,6 +16,10 @@ class DssMessenger.Views.Messages.EditView extends Backbone.View
         @model = message
         window.location.hash = "/#{@model.id}"
     )
+
+  displayPicker: (e) ->
+    $('.datepicker').datetimepicker()
+
 
   render: ->
     @$el.html(@template(@model.toJSON() ))

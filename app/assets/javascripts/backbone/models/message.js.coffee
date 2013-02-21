@@ -12,6 +12,9 @@ class DssMessenger.Models.Message extends Backbone.Model
     other_services: null
     sender_uid: null
 
+  toJSON: () ->
+    _.omit(this.attributes, 'updated_at')
+
 class DssMessenger.Collections.MessagesCollection extends Backbone.Collection
   model: DssMessenger.Models.Message
   url: '/messages'

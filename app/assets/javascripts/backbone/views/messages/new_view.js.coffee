@@ -5,6 +5,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
   events:
     "submit #new-message": "save"
+    "focus .datepicker"	:	"displayPicker"
 
   constructor: (options) ->
     super(options)
@@ -13,6 +14,10 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     @model.bind("change:errors", () =>
       this.render()
     )
+
+  displayPicker: (e) ->
+    $('.datepicker').datetimepicker()
+
 
   save: (e) ->
     e.preventDefault()
