@@ -14,8 +14,7 @@ class DssMessenger.Views.Messages.EditView extends Backbone.View
       success: (recipients) ->
         recipients_list = ""
         recipients.each (recipient) ->
-          recipients_list = recipients_list + "<option value='" + recipient.get('uid') + "'>" + recipient.get('uid') + "</option>"
-          $("#new_recipients_select").append recipients_list
+          $("#new_recipients_select").append "<option value='" + recipient.get('uid') + "'>" + recipient.get('uid') + "</option>"
 
       error: (recipients, response) ->
         console.log "#{response.status}."
