@@ -15,8 +15,6 @@ class DssMessenger.Models.Message extends Backbone.Model
 
   toJSON: () ->
     json = _.omit(this.attributes, 'updated_at')
-	console.log @recipients_list
-	
 
 
 class DssMessenger.Collections.MessagesCollection extends Backbone.Collection

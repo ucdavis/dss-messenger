@@ -35,11 +35,12 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     e.stopPropagation()
 
     @model.unset("errors")
+    @model.set
+      recipient_ids: $("#new_recipients_select").val()
 
     @collection.create(@model.toJSON(),
       success: (message) =>
         @model = message
-        #@recipient_ids = recipient_ids
         window.location.hash = "#/index"
 
       error: (message, jqXHR) =>
