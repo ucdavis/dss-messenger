@@ -4,6 +4,16 @@
 	  <div class="modal-body">
 
 		  <div class="field">
+		    <label for="sender_uid"> sender_uid:</label>
+		    <input type="text" name="sender_uid" id="sender_uid" value="<%= sender_uid %>" >
+		  </div>
+
+		  <div class="field">
+		    <label for="subject"> Recipients:</label>
+			<select id="new_recipients_select"></select>
+		  </div>
+
+		  <div class="field">
 		    <label for="subject"> subject:</label>
 		    <input type="text" name="subject" id="subject" value="<%= subject %>" >
 		  </div>
@@ -25,27 +35,22 @@
 
 		  <div class="field">
 		    <label for="purpose"> purpose:</label>
-		    <input type="text" name="purpose" id="purpose" value="<%= purpose %>" >
+		    <textarea type="text" name="purpose" id="purpose" value="<%= purpose %>" />
 		  </div>
 
 		  <div class="field">
 		    <label for="resolution"> resolution:</label>
-		    <input type="text" name="resolution" id="resolution" value="<%= resolution %>" >
+		    <textarea type="text" name="resolution" id="resolution" value="<%= resolution %>" />
 		  </div>
 
 		  <div class="field">
 		    <label for="workaround"> workaround:</label>
-		    <input type="text" name="workaround" id="workaround" value="<%= workaround %>" >
+		    <textarea type="text" name="workaround" id="workaround" value="<%= workaround %>" />
 		  </div>
 
 		  <div class="field">
 		    <label for="other_services"> other_services:</label>
-		    <input type="text" name="other_services" id="other_services" value="<%= other_services %>" >
-		  </div>
-
-		  <div class="field">
-		    <label for="sender_uid"> sender_uid:</label>
-		    <input type="text" name="sender_uid" id="sender_uid" value="<%= sender_uid %>" >
+		    <textarea type="text" name="other_services" id="other_services" value="<%= other_services %>" />
 		  </div>
 
 	  </div>

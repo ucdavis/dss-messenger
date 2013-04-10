@@ -5,7 +5,19 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
   events:
     "submit #new-message": "save"
-    "focus .datepicker"	:	"displayPicker"
+    "focus .datepicker"	 : "displayPicker"
+
+  initialize: ->
+    @recipients = new DssMessenger.Collections.RecipientsCollection()
+    @recipients.fetch	
+
+      success: (recipients) ->
+        recipient_ids = []
+        recipients.each (recipient) ->
+          $("#new_recipients_select").append "<option value='" + recipient.get('uid') + "'>" + recipient.get('uid') + "</option>"
+
+      error: (recipients, response) ->
+        console.log "#{response.status}."
 
   constructor: (options) ->
     super(options)
@@ -28,6 +40,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     @collection.create(@model.toJSON(),
       success: (message) =>
         @model = message
+        #@recipient_ids = recipient_ids
         window.location.hash = "#/index"
 
       error: (message, jqXHR) =>
