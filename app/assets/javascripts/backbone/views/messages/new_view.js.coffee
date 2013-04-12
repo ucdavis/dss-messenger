@@ -36,7 +36,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
     @model.unset("errors")
     @model.set
-      recipient_ids: $("#new_recipients_select").val()
+      recipient_ids: _.map($("#new_recipients_select").val(), (a) -> a )
 
     @collection.create(@model.toJSON(),
       success: (message) =>
