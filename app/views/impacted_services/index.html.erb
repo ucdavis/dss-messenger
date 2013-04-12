@@ -1,23 +1,10 @@
-<h1>Listing impacted_services</h1>
+<div id="impacted_services" class="span9"></div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
-<% @impacted_services.each do |impacted_service| %>
-  <tr>
-    <td><%= impacted_service.name %></td>
-    <td><%= link_to 'Show', impacted_service %></td>
-    <td><%= link_to 'Edit', edit_impacted_service_path(impacted_service) %></td>
-    <td><%= link_to 'Destroy', impacted_service, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Impacted service', new_impacted_service_path %>
+<script type="text/javascript">
+  $(function() {
+    // DssMessenger is the app name
+    window.router = new DssMessenger.Routers.impacted_servicesRouter({impacted_services: <%= @impacted_services.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>
