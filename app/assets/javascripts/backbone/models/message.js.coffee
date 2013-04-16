@@ -16,7 +16,7 @@ class DssMessenger.Models.Message extends Backbone.Model
     dssevent_ids: null
 
   toJSON: () ->
-    json = _.omit(this.attributes, 'updated_at')
+    json = _.omit(this.attributes, 'updated_at', 'dssevent_ids')
     console.log json
     json
 

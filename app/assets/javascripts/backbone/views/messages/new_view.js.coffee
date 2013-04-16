@@ -59,7 +59,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     @model.set
       recipient_ids: _.map($("#new_recipients_select").val(), (a) -> a )
       impacted_service_ids: _.map($("#impacted_services_select").val(), (a) -> a )
-      dssevent_ids: _.map($("#dssevents_select").val(), (a) -> a )
+      event_ids: _.map($("#dssevents_select").val(), (a) -> a )
 
     @collection.create(@model.toJSON(),
       success: (message) =>
