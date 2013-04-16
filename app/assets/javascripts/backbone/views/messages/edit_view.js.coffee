@@ -28,6 +28,16 @@ class DssMessenger.Views.Messages.EditView extends Backbone.View
       error: (impacted_services, response) ->
         console.log "#{response.status}."
 
+    @dssevents = new DssMessenger.Collections.DsseventsCollection()
+    @dssevents.fetch	
+
+      success: (dssevents) ->
+        dssevents.each (dssevent) ->
+          $("#dssevents_select").append "<option value='" + dssevent.get('id') + "'>" + dssevent.get('description') + "</option>"
+
+      error: (dssevents, response) ->
+        console.log "#{response.status}."
+
 
   update: (e) ->
     e.preventDefault()
