@@ -1,7 +1,7 @@
-DssMessenger.Views.Dssevents ||= {}
+DssMessenger.Views.messenger_events ||= {}
 
-class DssMessenger.Views.Dssevents.DsseventsView extends Backbone.View
-  template: JST["backbone/templates/dssevents/dssevents"]
+class DssMessenger.Views.messenger_events.messenger_eventsView extends Backbone.View
+  template: JST["backbone/templates/messenger_events/messenger_events"]
 
   events:
     "click .destroy" : "destroy"

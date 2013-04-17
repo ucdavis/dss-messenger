@@ -1,10 +1,10 @@
-<div id="dssevents" class="span9"></div>
+<div id="messenger_events" class="span9"></div>
 
 
 <script type="text/javascript">
   $(function() {
     // DssMessenger is the app name
-    window.router = new DssMessenger.Routers.DsseventsRouter({dssevents: <%= @events.to_json.html_safe -%>});
+    window.router = new DssMessenger.Routers.messenger_eventsRouter({messenger_events: <%= @messenger_events.to_json.html_safe -%>});
     Backbone.history.start();
   });
 </script>

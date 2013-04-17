@@ -1,10 +1,10 @@
-DssMessenger.Views.Dssevents ||= {}
+DssMessenger.Views.messenger_events ||= {}
 
-class DssMessenger.Views.Dssevents.NewView extends Backbone.View
-  template: JST["backbone/templates/dssevents/new"]
+class DssMessenger.Views.messenger_events.NewView extends Backbone.View
+  template: JST["backbone/templates/messenger_events/new"]
 
   events:
-    "submit #new-dssevents": "save"
+    "submit #new-messenger_events": "save"
 
   constructor: (options) ->
     super(options)
@@ -21,11 +21,11 @@ class DssMessenger.Views.Dssevents.NewView extends Backbone.View
     @model.unset("errors")
 
     @collection.create(@model.toJSON(),
-      success: (dssevents) =>
-        @model = dssevents
+      success: (messenger_events) =>
+        @model = messenger_events
         window.location.hash = "/#{@model.id}"
 
-      error: (dssevents, jqXHR) =>
+      error: (messenger_events, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
     )
 
