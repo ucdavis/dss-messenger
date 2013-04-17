@@ -6,7 +6,7 @@ class MessengerEventsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @events }
+      format.json { render json: @messenger_events }
     end
   end
 
@@ -17,7 +17,7 @@ class MessengerEventsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @event }
+      format.json { render json: @messenger_events }
     end
   end
 
@@ -28,7 +28,7 @@ class MessengerEventsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @event }
+      format.json { render json: @messenger_events }
     end
   end
 

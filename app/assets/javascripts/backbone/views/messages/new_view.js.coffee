@@ -28,14 +28,14 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
       error: (impacted_services, response) ->
         console.log "#{response.status}."
 
-    @dssevents = new DssMessenger.Collections.DsseventsCollection()
-    @dssevents.fetch	
+    @messenger_events = new DssMessenger.Collections.messenger_eventsCollection()
+    @messenger_events.fetch	
 
-      success: (dssevents) ->
-        dssevents.each (dssevent) ->
-          $("#dssevents_select").append "<option value='" + dssevent.get('id') + "'>" + dssevent.get('description') + "</option>"
+      success: (messenger_events) ->
+        messenger_events.each (messenger_event) ->
+          $("#messenger_events_select").append "<option value='" + messenger_event.get('id') + "'>" + messenger_event.get('description') + "</option>"
 
-      error: (dssevents, response) ->
+      error: (messenger_events, response) ->
         console.log "#{response.status}."
 
 
@@ -59,7 +59,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     @model.set
       recipient_ids: _.map($("#new_recipients_select").val(), (a) -> a )
       impacted_service_ids: _.map($("#impacted_services_select").val(), (a) -> a )
-      event_ids: _.map($("#dssevents_select").val(), (a) -> a )
+      messenger_event_ids: _.map($("#messenger_events_select").val(), (a) -> a )
 
     @collection.create(@model.toJSON(),
       success: (message) =>
