@@ -2,8 +2,8 @@
 
 one:
   message_id: 1
-  event_id: 1
+  messenger_event_id: 1
 
 two:
   message_id: 1
-  event_id: 1
+  messenger_event_id: 1
