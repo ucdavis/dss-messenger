@@ -75,11 +75,11 @@
 	<% end %>
   </div>
   <div class="field">
-    <%= f.label :events %><br />
-    <% for event in Event.find(:all) %>
+    <%= f.label :messenger_events %><br />
+    <% for messenger_event in MessengerEvent.find(:all) %>
 	<div>
-	  <%= check_box_tag "message[event_ids][]", event.id, @message.events.include?(event) %>
-	  <%= event.description %>
+	  <%= check_box_tag "message[messenger_event_ids][]", messenger_event.id, @message.messenger_events.include?(messenger_event) %>
+	  <%= messenger_event.description %>
 	</div>
 	<% end %>
   </div>
