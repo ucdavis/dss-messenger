@@ -9,7 +9,11 @@
 
 		<p>
 		  <b>Recipients:</b>
-		  <%= recipients %>
+		  <ul>
+		  <% _.each(recipients, function(recipient){ %>
+		    <li><%= recipient.uid %></li>
+		  <% }); %>
+		  </ul>
 		</p>
 
 		<p>
@@ -49,12 +53,20 @@
 
 		<p>
 		  <b>Impacted Services:</b>
-		  <%= impacted_services %>
+		  <ul>
+		  <% _.each(impacted_services, function(impacted_service){ %>
+		    <li><%= impacted_service.name %></li>
+		  <% }); %>
+		  </ul>
 		</p>
 
 		<p>
 		  <b>Events:</b>
-		  <%= messenger_events %>
+		  <ul>
+		  <% _.each(messenger_events, function(messenger_event){ %>
+		    <li><%= messenger_event.description %></li>
+		  <% }); %>
+		  </ul>
 		</p>
 
     </div>
