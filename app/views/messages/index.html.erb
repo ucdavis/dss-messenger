@@ -12,7 +12,7 @@
 <script type="text/javascript">
   $(function() {
     // DssMessenger is the app name
-    window.router = new DssMessenger.Routers.MessagesRouter({messages: <%= @messages.to_json.html_safe -%>});
+    window.router = new DssMessenger.Routers.MessagesRouter({messages: <%= @messages.to_json(include: [:recipients, :messenger_events, :impacted_services]).html_safe -%>});
     Backbone.history.start();
   });
 </script>
