@@ -13,7 +13,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
       success: (recipients) ->
         recipients.each (recipient) ->
-          $("#new_recipients_select").append "<option value='" + recipient.get('id') + "'>" + recipient.get('uid') + "</option>"
+          $("#new_recipients_select").append "<input type='checkbox' name='recipient_ids' value='" + recipient.get('id') + "'>" + recipient.get('uid') + "<br \>"
 
       error: (recipients, response) ->
         console.log "#{response.status}."
