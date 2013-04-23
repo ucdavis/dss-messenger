@@ -23,7 +23,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
       success: (impacted_services) ->
         impacted_services.each (impacted_service) ->
-          $("#impacted_services_select").append "<option value='" + impacted_service.get('id') + "'>" + impacted_service.get('name') + "</option>"
+          $("#impacted_services_select").append "<input type='checkbox' name='impacted_service_ids' value='" + impacted_service.get('id') + "'>" + impacted_service.get('name') + "<br \>"
 
       error: (impacted_services, response) ->
         console.log "#{response.status}."
@@ -33,7 +33,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
       success: (messenger_events) ->
         messenger_events.each (messenger_event) ->
-          $("#messenger_events_select").append "<option value='" + messenger_event.get('id') + "'>" + messenger_event.get('description') + "</option>"
+          $("#messenger_events_select").append "<input type='checkbox' name='messenger_event_ids' value='" + messenger_event.get('id') + "'>" + messenger_event.get('description') + "<br \>"
 
       error: (messenger_events, response) ->
         console.log "#{response.status}."
