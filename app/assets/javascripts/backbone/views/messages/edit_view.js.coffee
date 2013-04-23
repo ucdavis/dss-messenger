@@ -8,15 +8,23 @@ class DssMessenger.Views.Messages.EditView extends Backbone.View
     "focus .datepicker"	:	"displayPicker"
 
   initialize: ->
+    @current_recipients = @model.get('recipients')
     @recipients = new DssMessenger.Collections.RecipientsCollection()
     @recipients.fetch	
 
-      success: (recipients) ->
-        recipients.each (recipient) ->
-          $("#new_recipients_select").append "<option value='" + recipient.get('id') + "'>" + recipient.get('uid') + "</option>"
+      success: (recipients) =>
+        recipients.each (recipient) =>
+          @checked = _.find @current_recipients, (current_recipient) =>
+            return current_recipient.id is recipient.get('id')
+          if @checked
+            $("#new_recipients_select").append "<input type='checkbox' name='recipient_ids' value='" + recipient.get('id') + "' checked>" + recipient.get('uid') + "<br \>"
+          else
+            $("#new_recipients_select").append "<input type='checkbox' name='recipient_ids' value='" + recipient.get('id') + "'>" + recipient.get('uid') + "<br \>"
+            
 
       error: (recipients, response) ->
         console.log "#{response.status}."
+        #TODO: display error on screen
 
     @impacted_services = new DssMessenger.Collections.impacted_servicesCollection()
     @impacted_services.fetch	
