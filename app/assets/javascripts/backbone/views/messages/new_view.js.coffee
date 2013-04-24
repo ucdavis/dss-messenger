@@ -13,7 +13,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
       success: (recipients) ->
         recipients.each (recipient) ->
-          $("#new_recipients_select").append "<input type='checkbox' name='recipient_ids' value='" + recipient.get('id') + "'>" + recipient.get('uid') + "<br \>"
+          $("#new_recipients_select").append "<input type='checkbox' name='recipient_ids[]' value='" + recipient.get('id') + "' /> " + recipient.get('uid') + "<br />"
 
       error: (recipients, response) ->
         console.log "#{response.status}."
@@ -23,7 +23,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
       success: (impacted_services) ->
         impacted_services.each (impacted_service) ->
-          $("#impacted_services_select").append "<input type='checkbox' name='impacted_service_ids' value='" + impacted_service.get('id') + "'>" + impacted_service.get('name') + "<br \>"
+          $("#impacted_services_select").append "<input type='checkbox' name='impacted_service_ids' value='" + impacted_service.get('id') + "'>" + impacted_service.get('name') + "<br />"
 
       error: (impacted_services, response) ->
         console.log "#{response.status}."
@@ -33,7 +33,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
       success: (messenger_events) ->
         messenger_events.each (messenger_event) ->
-          $("#messenger_events_select").append "<input type='checkbox' name='messenger_event_ids' value='" + messenger_event.get('id') + "'>" + messenger_event.get('description') + "<br \>"
+          $("#messenger_events_select").append "<input type='checkbox' name='messenger_event_ids' value='" + messenger_event.get('id') + "'>" + messenger_event.get('description') + "<br />"
 
       error: (messenger_events, response) ->
         console.log "#{response.status}."
@@ -57,9 +57,9 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
     @model.unset("errors")
     @model.set
-      recipient_ids: _.map($("#new_recipients_select").val(), (a) -> a )
-      impacted_service_ids: _.map($("#impacted_services_select").val(), (a) -> a )
-      messenger_event_ids: _.map($("#messenger_events_select").val(), (a) -> a )
+      recipient_ids: _.map($("input[name='recipient_ids[]']:checked"), (a) -> a.value )
+      impacted_service_ids: _.map($("input[name='impacted_service_ids[]']:checked"), (a) -> a.value )
+      messenger_event_ids: _.map($("input[name='messenger_event_ids[]']:checked"), (a) -> a.value )
 
     @collection.create(@model.toJSON(),
       success: (message) =>
