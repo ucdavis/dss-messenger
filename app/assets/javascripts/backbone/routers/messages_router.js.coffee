@@ -6,9 +6,10 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
   routes:
     "new"      : "newMessage"
     "index"    : "index"
+    "prefs"    : "Preferences"
     ":id/edit" : "edit"
     ":id"      : "show"
-    ".*"        : "index"
+    ".*"       : "index"
 
   newMessage: ->
     @view = new DssMessenger.Views.Messages.NewView(collection: @messages)
@@ -29,3 +30,8 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
 
     @view = new DssMessenger.Views.Messages.EditView(model: message)
     $("#messages").append(@view.render().el)
+
+  Preferences: ->
+    @view = new DssMessenger.Views.Messages.PrefsView(collection: @messages)
+    $("#messages").append(@view.render().el)
+    
