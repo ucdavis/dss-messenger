@@ -15,18 +15,8 @@ console.log (<%= @messages.to_json(include: [:recipients, :messenger_events, :im
 	<div class="well">
 		<h3>Filters:</h3>
 		<h4>Impacted Services</h4>
-	    <% for impacted_service in ImpactedService.find(:all) %>
-		<div>
-		  <%= check_box_tag "message[impacted_service_ids][]", impacted_service.id %>
-		  <%= impacted_service.name %>
-		</div>
-		<% end %>
+		<div id="filter_impacted_services"></div>
 		<h4>Events</h4>
-	    <% for messenger_event in MessengerEvent.find(:all) %>
-		<div>
-		  <%= check_box_tag "message[messenger_event_ids][]", messenger_event.id %>
-		  <%= messenger_event.description %>
-		</div>
-		<% end %>
+		<div id="filter_messenger_events"></div>
 	</div>
 </div>

@@ -6,8 +6,6 @@ class DssMessenger.Views.impacted_services.impacted_servicesView extends Backbon
   events:
     "click .destroy" : "destroy"
 
-  tagName: "tr"
-
   destroy: () ->
     @model.destroy()
     this.remove()

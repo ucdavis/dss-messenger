@@ -6,7 +6,6 @@ class DssMessenger.Views.messenger_events.messenger_eventsView extends Backbone.
   events:
     "click .destroy" : "destroy"
 
-  tagName: "tr"
 
   destroy: () ->
     @model.destroy()

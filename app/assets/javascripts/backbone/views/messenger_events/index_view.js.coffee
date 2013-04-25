@@ -11,7 +11,7 @@ class DssMessenger.Views.messenger_events.IndexView extends Backbone.View
 
   addOne: (messenger_events) =>
     view = new DssMessenger.Views.messenger_events.messenger_eventsView({model : messenger_events})
-    @$("tbody").append(view.render().el)
+    @$("#select_me_filter").append(view.render().el)
 
   render: =>
     @$el.html(@template(messenger_events: @options.messenger_events.toJSON() ))

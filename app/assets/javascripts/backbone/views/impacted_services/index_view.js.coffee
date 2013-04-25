@@ -11,7 +11,7 @@ class DssMessenger.Views.impacted_services.IndexView extends Backbone.View
 
   addOne: (impacted_services) =>
     view = new DssMessenger.Views.impacted_services.impacted_servicesView({model : impacted_services})
-    @$("tbody").append(view.render().el)
+    @$("#select_is_filter").append(view.render().el)
 
   render: =>
     @$el.html(@template(impacted_services: @options.impacted_services.toJSON() ))
