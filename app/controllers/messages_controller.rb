@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.all
+    @messages = Message.filter(params[:is],params[:me])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -83,4 +83,5 @@ class MessagesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
 end

@@ -13,10 +13,12 @@ console.log (<%= @messages.to_json(include: [:recipients, :messenger_events, :im
 		<a href="#/new" class="btn btn-primary btn-large btn-block">New Message</a>
 	</div>
 	<div class="well">
-		<h3>Filters:</h3>
-		<h4>Impacted Services</h4>
-		<div id="filter_impacted_services"></div>
-		<h4>Events</h4>
-		<div id="filter_messenger_events"></div>
+		<form id="filters-form">
+			<h3>Filters:</h3>
+			<h4>Impacted Services</h4>
+			<div id="filter_impacted_services"></div>
+			<h4>Events</h4>
+			<div id="filter_messenger_events"></div>
+		</form>
 	</div>
 </div>

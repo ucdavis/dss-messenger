@@ -9,4 +9,15 @@ class Message < ActiveRecord::Base
   
   belongs_to :classification
   belongs_to :modifier
+
+  def self.filter(is,me)
+    if is
+      joins(:damages).where( damages: { impacted_service_id: "#{is}"})
+    elsif me
+      joins(:broadcasts).where( broadcasts: { messenger_event_id: "#{me}"})
+    else
+      all
+    end
+  end
+
 end
