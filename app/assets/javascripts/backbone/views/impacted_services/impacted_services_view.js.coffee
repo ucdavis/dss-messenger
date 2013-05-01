@@ -16,6 +16,7 @@ class DssMessenger.Views.impacted_services.impacted_servicesView extends Backbon
     e.stopPropagation()
     selected_id = this.model.get('id')
     $('#reset-filters').removeClass('hidden')
+    $("#messages").append("<div class='overlay'><div class='loading'></div></div>")
 
     @messages = new DssMessenger.Collections.MessagesCollection()
     @messages.fetch

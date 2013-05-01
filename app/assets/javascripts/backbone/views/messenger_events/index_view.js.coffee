@@ -26,6 +26,8 @@ class DssMessenger.Views.messenger_events.IndexView extends Backbone.View
     e.stopPropagation()
     $('#reset-filters').addClass('hidden')
     $('#filters-form input[type="radio"]').each -> $(this).prop 'checked', false
+    $("#messages").append("<div class='overlay'><div class='loading'></div></div>")
+
     @messages = new DssMessenger.Collections.MessagesCollection()
     @messages.fetch
 

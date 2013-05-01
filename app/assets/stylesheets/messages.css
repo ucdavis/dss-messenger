@@ -1,0 +1,21 @@
+#messages {
+	position: relative;
+}
+.overlay {
+	position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color:rgba(0, 0, 0, 0.10);
+    z-index:9999;
+    color:white;
+    text-align: center;
+}
+
+.overlay .loading {
+	background: transparent url('loading.gif') no-repeat 50% 50%;
+	height: 100%;
+	width: 100%;
+    position:relative;
+}
