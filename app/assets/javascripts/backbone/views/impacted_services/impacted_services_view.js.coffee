@@ -15,7 +15,6 @@ class DssMessenger.Views.impacted_services.impacted_servicesView extends Backbon
   filter: (e) ->
     e.stopPropagation()
     selected_id = this.model.get('id')
-    $('#reset-filters').removeClass('hidden')
     $("#messages").append("<div class='overlay'><div class='loading'></div></div>")
 
     @messages = new DssMessenger.Collections.MessagesCollection()
@@ -26,9 +25,11 @@ class DssMessenger.Views.impacted_services.impacted_servicesView extends Backbon
       success: (messages) =>
         @view = new DssMessenger.Views.Messages.IndexView(messages: @messages)
         $("#messages").html(@view.render().el)
+	    $('#reset-filters').removeClass('hidden')
 
       error: (messages, response) ->
         console.log "#{response.status}."
+        $("#messages").append("<div class='overlay'><div class='error'>Loading Error</div></div>")
     return true
 	
   render: ->

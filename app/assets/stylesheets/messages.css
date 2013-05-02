@@ -19,3 +19,8 @@
 	width: 100%;
     position:relative;
 }
+
+.overlay .error {
+	padding: 3em;
+	font-size: 3em;
+}
