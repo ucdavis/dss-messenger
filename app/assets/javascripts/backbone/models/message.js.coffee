@@ -11,12 +11,11 @@ class DssMessenger.Models.Message extends Backbone.Model
     workaround: null
     other_services: null
     sender_uid: null
-    recipient_ids: null
-    impacted_service_ids: null
-    messenger_event_ids: null
 
   toJSON: () ->
     json = _.omit(this.attributes, 'updated_at')
+    console.log "Message bb JSON:"
+    console.log json
     json
 
 

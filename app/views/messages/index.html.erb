@@ -3,10 +3,10 @@
 <script type="text/javascript">
   $(function() {
     // DssMessenger is the app name
-    window.router = new DssMessenger.Routers.MessagesRouter({messages: <%= @messages.to_json(include: [:recipients, :messenger_events, :impacted_services]).html_safe -%>});
+    window.router = new DssMessenger.Routers.MessagesRouter({messages: <%= @messages.to_json.html_safe -%>});
     Backbone.history.start();
   });
-console.log (<%= @messages.to_json(include: [:recipients, :messenger_events, :impacted_services]).html_safe -%>);
+console.log (<%= @messages.to_json.html_safe -%>);
 </script>
 <div class="span3">
 	<div class="well">

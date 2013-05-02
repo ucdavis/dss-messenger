@@ -53,14 +53,10 @@ class DssMessenger.Views.Messages.EditView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
 
-    @model.unset('recipients')
-    @model.unset('impacted_services')
-    @model.unset('messenger_events')
-
     @model.set
-      recipient_ids: _.map($("input[name='recipient_ids[]']:checked"), (a) -> a.value )
-      impacted_service_ids: _.map($("input[name='impacted_service_ids[]']:checked"), (a) -> a.value )
-      messenger_event_ids: _.map($("input[name='messenger_event_ids[]']:checked"), (a) -> a.value )
+      #recipient_ids: _.map($("input[name='recipient_ids[]']:checked"), (a) -> a.value )
+      #impacted_service_ids: _.map($("input[name='impacted_service_ids[]']:checked"), (a) -> a.value )
+      #messenger_event_ids: _.map($("input[name='messenger_event_ids[]']:checked"), (a) -> a.value )
     
     @model.save(null,
       success: (message) =>
