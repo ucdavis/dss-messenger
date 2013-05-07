@@ -1,5 +1,17 @@
-<td><%= subject %></td>
-<td><%= impact_statement %></td>
+<td>
+	<div class="accordion-group frameless">
+	  <div class="accordion-heading">
+	    <a class="accordion-toggle" data-toggle="collapse" href="#collapse<%= id %>">
+	      <%= subject %>
+	    </a>
+	  </div>
+	  <div id="collapse<%= id %>" class="accordion-body collapse">
+	    <div class="accordion-inner">
+	      <%= impact_statement %>
+	    </div>
+	  </div>
+	</div>
+</td>
 <td><%= sender_uid %></td>
 <td><%= created_at %></td>
 

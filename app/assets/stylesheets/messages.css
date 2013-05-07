@@ -24,3 +24,7 @@
 	padding: 3em;
 	font-size: 3em;
 }
+
+.frameless {
+    border: none;
+}
