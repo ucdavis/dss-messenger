@@ -57,18 +57,20 @@ class DssMessenger.Views.Messages.EditView extends Backbone.View
         _.contains(_.map($("input[name='recipient_ids[]']:checked"), (a) -> parseInt a.value ), a.get('id'))
     )
     @picked_impacted_services = _.filter(@impacted_services.models, (a) ->
-        return _.contains(_.map($("input[name='impacted_service_ids[]']:checked"), (a) -> parseInt a.value ), a.get('id'))
+        _.contains(_.map($("input[name='impacted_service_ids[]']:checked"), (a) -> parseInt a.value ), a.get('id'))
     )
     @picked_messenger_events = _.filter(@messenger_events.models, (a) ->
-        return _.contains(_.map($("input[name='messenger_event_ids[]']:checked"), (a) -> parseInt a.value ), a.get('id'))
+        _.contains(_.map($("input[name='messenger_event_ids[]']:checked"), (a) -> parseInt a.value ), a.get('id'))
     )
-
     
     @model.set
-      recipients_attributes: @picked_recipients
-      impacted_services_attributes: @picked_impacted_services
-      messenger_events_attributes: @picked_messenger_events
-    
+      recipient_ids: _.map($("input[name='recipient_ids[]']:checked"), (a) -> a.value )
+      impacted_service_ids: _.map($("input[name='impacted_service_ids[]']:checked"), (a) -> a.value )
+      messenger_event_ids: _.map($("input[name='messenger_event_ids[]']:checked"), (a) -> a.value )
+      recipients: @picked_recipients
+      impacted_services: @picked_impacted_services
+      messenger_events: @picked_messenger_events
+
     @model.save(null,
       success: (message) =>
         @model = message

@@ -15,5 +15,5 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
     return false
 
   render: ->
-    @$el.html(@template(@model.toJSON() ))
+    @$el.html(@template(@model.toFullJSON() ))
     return this
