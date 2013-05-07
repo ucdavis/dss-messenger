@@ -129,6 +129,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   delayed_job_active_record
   jquery-rails
+  mail
   rails (= 3.2.11)
   rails-backbone!
   rubycas-client
