@@ -7,6 +7,7 @@ gem 'rails', '3.2.11'
 
 gem 'sqlite3'
 gem 'rubycas-client'
+gem 'delayed_job_active_record'
 
 # Gems used only for assets and not required
 # in production environments by default.
