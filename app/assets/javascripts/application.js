@@ -16,6 +16,7 @@
 //= require ../../../vendor/assets/javascripts/jquery-ui-sliderAccess
 //= require ../../../vendor/assets/javascripts/jquery-ui-timepicker-addon
 //= require ../../../vendor/assets/javascripts/jquery.tokeninput
+//= require twitter/bootstrap
 //= require underscore
 //= require backbone
 //= require backbone_rails_sync
