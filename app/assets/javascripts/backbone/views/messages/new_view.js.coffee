@@ -6,8 +6,11 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
   events:
     "submit #new-message": "save"
     "focus .datepicker"	 : "displayPicker"
+    "focus #Recipients"	:	"tokenInput"
 
   initialize: ->
+    $("input[name=Recipients]").tokenInput "http://shell.loopj.com/tokeninput/tvshows.php",
+      theme: "facebook" #WHY NO SHOW!
     @recipients = new DssMessenger.Collections.RecipientsCollection()
     @recipients.fetch	
 
@@ -50,10 +53,14 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
   displayPicker: (e) ->
     $('.datepicker').datetimepicker()
 
-
+  tokenInput: (e) ->
+    $("input[name=Recipients]").tokenInput "http://shell.loopj.com/tokeninput/tvshows.php",
+      theme: "facebook"
+    
   save: (e) ->
     e.preventDefault()
     e.stopPropagation()
+
 
     @model.unset("errors")
     @model.set

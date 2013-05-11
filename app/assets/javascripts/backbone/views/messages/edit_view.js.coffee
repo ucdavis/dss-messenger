@@ -6,8 +6,11 @@ class DssMessenger.Views.Messages.EditView extends Backbone.View
   events:
     "submit #edit-message": "update"
     "focus .datepicker"	:	"displayPicker"
+    "focus #Recipients"	:	"tokenInput"
 
   initialize: ->
+    $("input[name=Recipients]").tokenInput "http://shell.loopj.com/tokeninput/tvshows.php",
+      theme: "facebook" #WHY NO SHOW!
     @current_recipients = @model.get('recipients')
     @recipients = new DssMessenger.Collections.RecipientsCollection()
     @recipients.fetch	
@@ -79,6 +82,10 @@ class DssMessenger.Views.Messages.EditView extends Backbone.View
 
   displayPicker: (e) ->
     $('.datepicker').datetimepicker()
+
+  tokenInput: (e) ->
+    $('#Recipients').tokenInput "http://shell.loopj.com/tokeninput/tvshows.php",
+      theme: "facebook"    
 
 
   render: ->
