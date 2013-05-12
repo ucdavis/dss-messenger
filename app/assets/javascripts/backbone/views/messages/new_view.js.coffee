@@ -54,8 +54,13 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     $('.datepicker').datetimepicker()
 
   tokenInput: (e) ->
-    $("input[name=Recipients]").tokenInput "http://shell.loopj.com/tokeninput/tvshows.php",
+    $("input[name=recipient_ids]").tokenInput "/recipients",
       theme: "facebook"
+      onAdd: (item) =>
+        console.log @model
+
+      onDelete: (item) =>
+        console.log @model
     
   save: (e) ->
     e.preventDefault()
@@ -64,7 +69,6 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
     @model.unset("errors")
     @model.set
-      recipient_ids: _.map($("input[name='recipient_ids[]']:checked"), (a) -> a.value )
       impacted_service_ids: _.map($("input[name='impacted_service_ids[]']:checked"), (a) -> a.value )
       messenger_event_ids: _.map($("input[name='messenger_event_ids[]']:checked"), (a) -> a.value )
 

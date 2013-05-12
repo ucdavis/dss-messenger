@@ -2,10 +2,10 @@ class RecipientsController < ApplicationController
   # GET /recipients
   # GET /recipients.json
   def index
-    @recipients = Recipient.all
+    @recipients = Entity.find(:all, :params => {:q => params[:q]}) #Recipient.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render json: @recipients }# index.html.erb
       format.json { render json: @recipients }
     end
   end
