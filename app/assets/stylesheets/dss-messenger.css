@@ -1,6 +1,13 @@
 #messages {
 	position: relative;
 }
+
+.span3.affix{
+    position: fixed; /* to stop the div from scrolling */
+    top: 70px;          /* to fix the div at the top its containing element */
+    right: 25px;        /* to fix the div at the right of its containing element */
+}
+
 .overlay {
 	position:absolute;
     top:0;
@@ -48,3 +55,4 @@ ul.token-input-list-facebook {
     border-radius: 4px;
     margin-bottom: 1em;
 }
+
