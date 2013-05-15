@@ -56,3 +56,6 @@ ul.token-input-list-facebook {
     margin-bottom: 1em;
 }
 
+td.nowrap {
+    white-space: nowrap;
+}
