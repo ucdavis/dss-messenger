@@ -16,7 +16,7 @@ class DssMessenger.Models.Message extends Backbone.Model
     @recipients = new DssMessenger.Collections.RecipientsCollection(@get("recipient_ids"))
   
   toJSON: () ->
-    json = _.omit(this.attributes, 'updated_at','created_at','recipients','impacted_services','messenger_events')
+    json = _.omit(this.attributes, 'updated_at','created_at', 'classification','recipients','impacted_services','messenger_events')
     console.log "toJSON"
     console.log json
     json
