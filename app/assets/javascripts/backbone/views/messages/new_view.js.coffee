@@ -57,6 +57,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     $("input[name=recipient_ids]").tokenInput "/recipients",
       theme: "facebook"
       onAdd: (item) =>
+        @model.recipients.add {uid: item.id}
         console.log @model
 
       onDelete: (item) =>

@@ -1,5 +1,5 @@
 class DssMailer < ActionMailer::Base
-  default :from => "obadski@gmail.com"
+  default :from => "okadri@ucdavis.edu"
   
   def deliver_message(message)
     @message = message

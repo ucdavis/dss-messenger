@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.filter(params[:is],params[:me]) #filter(impacted services filer, messenger event filter)
+    @messages = Message.filter(params[:cl],params[:is],params[:me]) #filter(impacted services filer, messenger event filter)
 
     respond_to do |format|
       format.html # index.html.erb
