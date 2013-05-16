@@ -11,14 +11,14 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
   initialize: ->
     $("input[name=Recipients]").tokenInput "http://shell.loopj.com/tokeninput/tvshows.php",
       theme: "facebook" #WHY NO SHOW!
-    @recipients = new DssMessenger.Collections.RecipientsCollection()
-    @recipients.fetch	
+    @classifications = new DssMessenger.Collections.ClassificationsCollection()
+    @classifications.fetch	
 
-      success: (recipients) ->
-        recipients.each (recipient) ->
-          $("#new_recipients_select").append "<input type='checkbox' name='recipient_ids[]' value='" + recipient.get('id') + "' /> " + recipient.get('uid') + "<br />"
+      success: (classifications) ->
+        classifications.each (classification) ->
+          $("#classifications_select").append "<input type='radio' name='classification_id[]' value='" + classification.get('id') + "'>" + classification.get('description') + "<br />"
 
-      error: (recipients, response) ->
+      error: (classifications, response) ->
         console.log "#{response.status}."
 
     @impacted_services = new DssMessenger.Collections.impacted_servicesCollection()
@@ -72,6 +72,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     @model.set
       impacted_service_ids: _.map($("input[name='impacted_service_ids[]']:checked"), (a) -> a.value )
       messenger_event_ids: _.map($("input[name='messenger_event_ids[]']:checked"), (a) -> a.value )
+      classification_id: $("input[name='classification_id[]']:checked").val()
 
     @collection.create(@model.toJSON(),
       success: (message) =>

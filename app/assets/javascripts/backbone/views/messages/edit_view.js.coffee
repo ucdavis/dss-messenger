@@ -11,19 +11,17 @@ class DssMessenger.Views.Messages.EditView extends Backbone.View
   initialize: ->
     $("input[name=Recipients]").tokenInput "http://shell.loopj.com/tokeninput/tvshows.php",
       theme: "facebook" #WHY NO SHOW!
-    @current_recipients = @model.get('recipients')
-    @recipients = new DssMessenger.Collections.RecipientsCollection()
-    @recipients.fetch	
+    @current_classification = @model.get('classification_id')
+    @classifications = new DssMessenger.Collections.ClassificationsCollection()
+    @classifications.fetch	
 
-      success: (recipients) =>
-        recipients.each (recipient) =>
-          @checked = _.find @current_recipients, (current_recipient) =>
-            return current_recipient.id is recipient.get('id')
-          $("#new_recipients_select").append "<input type='checkbox' name='recipient_ids[]' value='" + recipient.get('id') + (if @checked then "' checked />" else "' />") + recipient.get('uid') + "<br />"
+      success: (classifications) =>
+        classifications.each (classification) =>
+          @checked = @current_classification is classification.get('id')
+          $("#classifications_select").append "<input type='radio' name='classification_id[]' value='" + classification.get('id') + (if @checked then "' checked />" else "' />") + classification.get('description') + "<br />"
 
-      error: (recipients, response) ->
+      error: (impacted_services, response) ->
         console.log "#{response.status}."
-        #TODO: display error on screen
 
     @current_services = @model.get('impacted_services')
     @impacted_services = new DssMessenger.Collections.impacted_servicesCollection()
@@ -56,9 +54,6 @@ class DssMessenger.Views.Messages.EditView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
 
-    @picked_recipients = _.filter(@recipients.models, (a) ->
-        _.contains(_.map($("input[name='recipient_ids[]']:checked"), (a) -> parseInt a.value ), a.get('id'))
-    )
     @picked_impacted_services = _.filter(@impacted_services.models, (a) ->
         _.contains(_.map($("input[name='impacted_service_ids[]']:checked"), (a) -> parseInt a.value ), a.get('id'))
     )
@@ -73,6 +68,7 @@ class DssMessenger.Views.Messages.EditView extends Backbone.View
       recipients: @picked_recipients
       impacted_services: @picked_impacted_services
       messenger_events: @picked_messenger_events
+      classification_id: $("input[name='classification_id[]']:checked").val()
 
     @model.save(null,
       success: (message) =>
@@ -84,8 +80,14 @@ class DssMessenger.Views.Messages.EditView extends Backbone.View
     $('.datepicker').datetimepicker()
 
   tokenInput: (e) ->
-    $('#Recipients').tokenInput "http://shell.loopj.com/tokeninput/tvshows.php",
-      theme: "facebook"    
+    $("input[name=recipient_ids]").tokenInput "/recipients",
+      theme: "facebook"
+      onAdd: (item) =>
+        @model.recipients.add {uid: item.id}
+        console.log @model
+
+      onDelete: (item) =>
+        console.log @model
 
 
   render: ->

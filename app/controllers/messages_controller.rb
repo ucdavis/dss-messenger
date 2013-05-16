@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @messages, include: [:recipients, :messenger_events, :impacted_services] }
+      format.json { render json: @messages, include: [:recipients, :classification, :messenger_events, :impacted_services] }
     end
   end
 
@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @message, include: [:recipients, :messenger_events, :impacted_services] }
+      format.json { render json: @message, include: [:recipients, :classification, :messenger_events, :impacted_services] }
     end
   end
 
