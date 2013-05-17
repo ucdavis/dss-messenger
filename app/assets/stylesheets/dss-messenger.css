@@ -12,6 +12,11 @@ h1 {
     right: 25px;        /* to fix the div at the right of its containing element */
 }
 
+.filters-well {
+  height: 400px;
+  overflow: auto;
+}
+
 #filters-form label {
   font-size: 12px;
   line-height: 1.2em;
