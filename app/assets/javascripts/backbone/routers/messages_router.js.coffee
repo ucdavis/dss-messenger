@@ -11,6 +11,14 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
       error: (classifications, response) ->
         console.log "#{response.status}."
 
+    @modifiers = new DssMessenger.Collections.ModifiersCollection()
+    @modifiers.fetch
+      success: (modifiers) =>
+        @modifiers = modifiers
+
+      error: (modifiers, response) ->
+        console.log "#{response.status}."
+
     @impacted_services = new DssMessenger.Collections.impacted_servicesCollection()
     @impacted_services.fetch
       success: (impacted_services) =>
@@ -44,6 +52,8 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
     $("#messages").html(@view.render().el)
     @view = new DssMessenger.Views.Classifications.IndexView(classifications: @classifications)
     $("#filter_classifications").html(@view.render().el)
+    @view = new DssMessenger.Views.Modifiers.IndexView(modifiers: @modifiers)
+    $("#filter_modifiers").html(@view.render().el)
     @view = new DssMessenger.Views.impacted_services.IndexView(impacted_services: @impacted_services)
     $("#filter_impacted_services").html(@view.render().el)
     @view = new DssMessenger.Views.messenger_events.IndexView(messenger_events: @messenger_events)

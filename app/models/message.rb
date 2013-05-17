@@ -13,9 +13,11 @@ class Message < ActiveRecord::Base
   belongs_to :modifier
 
   # Filters to limit the result to specified criterion
-  def self.filter(cl,is,me)
+  def self.filter(cl,mo,is,me)
     if cl
       self.where( classification_id: "#{cl}")
+    elsif mo
+      self.where( modifier_id: "#{mo}")
     elsif is
       joins(:damages).where( damages: { impacted_service_id: "#{is}"})
     elsif me
