@@ -16,7 +16,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
       success: (classifications) ->
         classifications.each (classification) ->
-          $("#classifications_select").append "<input type='radio' name='classification_id[]' value='" + classification.get('id') + "'>" + classification.get('description') + "<br />"
+          $("#classifications_select").append "<label class='radio'><input type='radio' name='classification_id[]' value='" + classification.get('id') + "'>" + classification.get('description') + "</label>"
 
       error: (classifications, response) ->
         console.log "#{response.status}."
@@ -26,7 +26,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
       success: (modifiers) ->
         modifiers.each (modifier) ->
-          $("#modifiers_select").append "<input type='radio' name='modifier_id[]' value='" + modifier.get('id') + "'>" + modifier.get('description') + "<br />"
+          $("#modifiers_select").append "<label class='radio'><input type='radio' name='modifier_id[]' value='" + modifier.get('id') + "'>" + modifier.get('description') + "</label>"
 
       error: (modifiers, response) ->
         console.log "#{response.status}."
@@ -36,7 +36,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
       success: (impacted_services) ->
         impacted_services.each (impacted_service) ->
-          $("#impacted_services_select").append "<input type='checkbox' name='impacted_service_ids[]' value='" + impacted_service.get('id') + "'>" + impacted_service.get('name') + "<br />"
+          $("#impacted_services_select").append "<label class='checkbox'><input type='checkbox' name='impacted_service_ids[]' value='" + impacted_service.get('id') + "'>" + impacted_service.get('name') + "</label>"
 
       error: (impacted_services, response) ->
         console.log "#{response.status}."
@@ -46,7 +46,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
       success: (messenger_events) ->
         messenger_events.each (messenger_event) ->
-          $("#messenger_events_select").append "<input type='checkbox' name='messenger_event_ids[]' value='" + messenger_event.get('id') + "'>" + messenger_event.get('description') + "<br />"
+          $("#messenger_events_select").append "<label class='checkbox'><input type='checkbox' name='messenger_event_ids[]' value='" + messenger_event.get('id') + "'>" + messenger_event.get('description') + "</label>"
 
       error: (messenger_events, response) ->
         console.log "#{response.status}."

@@ -18,7 +18,7 @@ class DssMessenger.Views.Messages.EditView extends Backbone.View
       success: (classifications) =>
         classifications.each (classification) =>
           @checked = @current_classification is classification.get('id')
-          $("#classifications_select").append "<input type='radio' name='classification_id[]' value='" + classification.get('id') + (if @checked then "' checked />" else "' />") + classification.get('description') + "<br />"
+          $("#classifications_select").append "<label class='radio'><input type='radio' name='classification_id[]' value='" + classification.get('id') + (if @checked then "' checked />" else "' />") + classification.get('description') + "</label>"
 
       error: (classifications, response) ->
         console.log "#{response.status}."
@@ -30,7 +30,7 @@ class DssMessenger.Views.Messages.EditView extends Backbone.View
       success: (modifiers) =>
         modifiers.each (modifier) =>
           @checked = @current_modifier is modifier.get('id')
-          $("#modifiers_select").append "<input type='radio' name='modifier_id[]' value='" + modifier.get('id') + (if @checked then "' checked />" else "' />") + modifier.get('description') + "<br />"
+          $("#modifiers_select").append "<label class='radio'><input type='radio' name='modifier_id[]' value='" + modifier.get('id') + (if @checked then "' checked />" else "' />") + modifier.get('description') + "</label>"
 
       error: (modifiers, response) ->
         console.log "#{response.status}."
@@ -43,7 +43,7 @@ class DssMessenger.Views.Messages.EditView extends Backbone.View
         impacted_services.each (impacted_service) =>
           @checked = _.find @current_services, (current_service) =>
             return current_service.id is impacted_service.get('id')
-          $("#impacted_services_select").append "<input type='checkbox' name='impacted_service_ids[]' value='" + impacted_service.get('id') + (if @checked then "' checked />" else "' />") + impacted_service.get('name') + "<br />"
+          $("#impacted_services_select").append "<label class='checkbox'><input type='checkbox' name='impacted_service_ids[]' value='" + impacted_service.get('id') + (if @checked then "' checked />" else "' />") + impacted_service.get('name') + "</label>"
 
       error: (impacted_services, response) ->
         console.log "#{response.status}."
@@ -56,7 +56,7 @@ class DssMessenger.Views.Messages.EditView extends Backbone.View
         messenger_events.each (messenger_event) =>
           @checked = _.find @current_events, (current_event) =>
             return current_event.id is messenger_event.get('id')
-          $("#messenger_events_select").append "<input type='checkbox' name='messenger_event_ids[]' value='" + messenger_event.get('id') + (if @checked then "' checked />" else "' />") + messenger_event.get('description') + "<br />"
+          $("#messenger_events_select").append "<label class='checkbox'><input type='checkbox' name='messenger_event_ids[]' value='" + messenger_event.get('id') + (if @checked then "' checked />" else "' />") + messenger_event.get('description') + "</label>"
 
       error: (messenger_events, response) ->
         console.log "#{response.status}."

@@ -17,7 +17,7 @@ h1 {
   overflow: auto;
 }
 
-#filters-form label {
+label.radio, label.checkbox {
   font-size: 12px;
   line-height: 1.2em;
 }
