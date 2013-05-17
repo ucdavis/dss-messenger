@@ -20,7 +20,19 @@ class DssMessenger.Views.Messages.EditView extends Backbone.View
           @checked = @current_classification is classification.get('id')
           $("#classifications_select").append "<input type='radio' name='classification_id[]' value='" + classification.get('id') + (if @checked then "' checked />" else "' />") + classification.get('description') + "<br />"
 
-      error: (impacted_services, response) ->
+      error: (classifications, response) ->
+        console.log "#{response.status}."
+
+    @current_modifier = @model.get('modifier_id')
+    @modifiers = new DssMessenger.Collections.ModifiersCollection()
+    @modifiers.fetch	
+
+      success: (modifiers) =>
+        modifiers.each (modifier) =>
+          @checked = @current_modifier is modifier.get('id')
+          $("#modifiers_select").append "<input type='radio' name='modifier_id[]' value='" + modifier.get('id') + (if @checked then "' checked />" else "' />") + modifier.get('description') + "<br />"
+
+      error: (modifiers, response) ->
         console.log "#{response.status}."
 
     @current_services = @model.get('impacted_services')
@@ -69,6 +81,7 @@ class DssMessenger.Views.Messages.EditView extends Backbone.View
       impacted_services: @picked_impacted_services
       messenger_events: @picked_messenger_events
       classification_id: $("input[name='classification_id[]']:checked").val()
+      modifier_id: $("input[name='modifier_id[]']:checked").val()
 
     @model.save(null,
       success: (message) =>

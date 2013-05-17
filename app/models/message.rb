@@ -1,5 +1,5 @@
 class Message < ActiveRecord::Base
-  attr_accessible :impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround, :classification_id, :recipient_ids, :messenger_event_ids, :impacted_service_ids
+  attr_accessible :impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround, :classification_id, :modifier_id, :recipient_ids, :messenger_event_ids, :impacted_service_ids
   has_many :damages
   has_many :impacted_services, :through => :damages
   
@@ -41,6 +41,8 @@ class Message < ActiveRecord::Base
       :workaround => self.workaround,
       :classification_id => self.classification_id,
       :classification => self.classification,
+      :modifier_id => self.modifier_id,
+      :modifier => self.modifier,
       :recipients => self.recipients,
       :recipient_ids => self.recipients.pluck(:recipient_id),
       :impacted_services => self.impacted_services,

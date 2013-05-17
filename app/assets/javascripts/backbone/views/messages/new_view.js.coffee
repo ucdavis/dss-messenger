@@ -21,6 +21,16 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
       error: (classifications, response) ->
         console.log "#{response.status}."
 
+    @modifiers = new DssMessenger.Collections.ModifiersCollection()
+    @modifiers.fetch	
+
+      success: (modifiers) ->
+        modifiers.each (modifier) ->
+          $("#modifiers_select").append "<input type='radio' name='modifier_id[]' value='" + modifier.get('id') + "'>" + modifier.get('description') + "<br />"
+
+      error: (modifiers, response) ->
+        console.log "#{response.status}."
+
     @impacted_services = new DssMessenger.Collections.impacted_servicesCollection()
     @impacted_services.fetch	
 
