@@ -3,13 +3,13 @@ h1 {
 }
 
 #messages {
-	position: relative;
+	/*position: relative;   *** uncomment to have the overlay only on the messages table**/
+	float: right;
 }
 
-.span3.affix{
-    position: fixed; /* to stop the div from scrolling */
-    top: 70px;          /* to fix the div at the top its containing element */
-    right: 25px;        /* to fix the div at the right of its containing element */
+.affix{
+    position: fixed;  /* to stop the div from scrolling */
+    top: 70px;        /* to fix the div at the top its containing element */
 }
 
 .filters-well {
@@ -72,4 +72,14 @@ ul.token-input-list-facebook {
 
 td.nowrap {
     white-space: nowrap;
+}
+
+
+/******* Nawrrow view / mobile view ********/
+@media (max-width: 767px) {
+	.affix {
+	  position: static;
+	  width: auto;
+	  top: 0;
+	}
 }

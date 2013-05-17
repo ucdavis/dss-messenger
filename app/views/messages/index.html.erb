@@ -1,18 +1,8 @@
-<div id="messages" class="span9"></div>
-
-<script type="text/javascript">
-  $(function() {
-    // DssMessenger is the app name
-    window.router = new DssMessenger.Routers.MessagesRouter({messages: <%= @messages.to_json.html_safe -%>});
-    Backbone.history.start();
-  });
-console.log (<%= @messages.to_json.html_safe -%>);
-</script>
 <div class="span3 affix">
 	<div class="well">
 		<a href="#/new" class="btn btn-primary btn-large btn-block">New Message</a>
 	</div>
-	<div class="well filters-well">
+	<div class="well filters-well hidden-phone">
 		<form id="filters-form">
 			<h3>Filters:</h3>
 			<h4>Classifications</h4>
@@ -26,3 +16,14 @@ console.log (<%= @messages.to_json.html_safe -%>);
 		</form>
 	</div>
 </div>
+
+<div id="messages" class="span9"></div>
+
+<script type="text/javascript">
+  $(function() {
+    // DssMessenger is the app name
+    window.router = new DssMessenger.Routers.MessagesRouter({messages: <%= @messages.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+console.log (<%= @messages.to_json.html_safe -%>);
+</script>
