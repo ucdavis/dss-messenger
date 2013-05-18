@@ -1,5 +1,5 @@
 class Message < ActiveRecord::Base
-  attr_accessible :impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround, :classification_id, :modifier_id, :recipient_ids, :messenger_event_ids, :impacted_service_ids
+  attr_accessible :impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround, :classification_id, :modifier_id, :recipient_uids, :messenger_event_ids, :impacted_service_ids
   has_many :damages
   has_many :impacted_services, :through => :damages
   
@@ -27,6 +27,13 @@ class Message < ActiveRecord::Base
     end
   end
   
+  def recipient_uids=(ids_str)
+    ids_str.split(",").each do |r|
+      recipient = Recipient.find_or_create_by_uid(r)
+      self.recipients << recipient
+    end
+  end
+  
   def as_json(options = {})
     {
       :id => self.id,
@@ -45,6 +52,7 @@ class Message < ActiveRecord::Base
       :modifier => self.modifier,
       :recipients => self.recipients,
       :recipient_ids => self.recipients.pluck(:recipient_id),
+      :recipient_uids => self.recipients.pluck(:recipient_id),
       :impacted_services => self.impacted_services,
       :impacted_service_ids => self.impacted_services.pluck(:impacted_service_id),
       :messenger_events => self.messenger_events,
