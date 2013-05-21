@@ -18,12 +18,16 @@
 
 		<p>
 		  <b>Classification:</b>
-		  <%= classification.description %>
+			<% if (classification) { %>
+				<%= classification.description %></td>
+			<% } %>
 		</p>
 
 		<p>
 		  <b>Modifier:</b>
-		  <%= modifier.description %>
+			<% if (modifier) { %>
+				<%= modifier.description %></td>
+			<% } %>
 		</p>
 
 		<p>
