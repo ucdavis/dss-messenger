@@ -10,12 +10,14 @@ class DssMailer < ActionMailer::Base
         @entity.members.each do |m|
           # Send the e-mail
           @member = Entity.find(m.id)
-          mail(:to => "#{@member.name} <#{@member.email}>", :subject => @message.subject)
+          mail(:to => "#{@member.name} <#{@member.email}>",
+            :subject => "#{@message.classification.description}: #{@message.subject}")
         end
       elsif @entity.type == "Person"
         # Send the e-mail
         @member = @entity
-        mail(:to => "#{@member.name} <#{@member.email}>", :subject => @message.subject)
+        mail(:to => "#{@member.name} <#{@member.email}>",
+          :subject => "#{@message.classification.description}: #{@message.subject}")
       end
     end
   end
