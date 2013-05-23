@@ -80,6 +80,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
       impacted_service_ids: _.map($("input[name='impacted_service_ids[]']:checked"), (a) -> a.value )
       messenger_event_ids: _.map($("input[name='messenger_event_ids[]']:checked"), (a) -> a.value )
       classification_id: $("input[name='classification_id[]']:checked").val()
+      modifier_id: $("input[name='modifier_id[]']:checked").val()
 
     @collection.create(@model.toJSON(),
       success: (message) =>
