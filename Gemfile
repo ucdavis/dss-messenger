@@ -10,6 +10,9 @@ gem 'rubycas-client'
 gem 'delayed_job_active_record'
 gem 'mail'
 
+gem 'hpricot'
+gem 'premailer-rails3' #for automatic inline css in mailer
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
