@@ -1,7 +1,9 @@
 <div class="span3 affix">
+	<% if permitted_to? :create, @message %>
 	<div class="well">
 		<a href="#/new" class="btn btn-primary btn-large btn-block">New Message</a>
 	</div>
+	<% end %>
 	<div class="well filters-well hidden-phone">
 		<form id="filters-form">
 			<h3>Filters:</h3>
