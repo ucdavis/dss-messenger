@@ -10,6 +10,8 @@ gem 'rubycas-client'
 gem 'delayed_job_active_record'
 gem 'mail'
 
+gem 'declarative_authorization'
+
 gem 'hpricot'
 gem 'premailer-rails3' #for automatic inline css in mailer
 
