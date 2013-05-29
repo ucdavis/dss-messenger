@@ -13,19 +13,10 @@ class Message < ActiveRecord::Base
   belongs_to :modifier
 
   # Filters to limit the result to specified criterion
-  def self.filter(cl,mo,is,me)
-    if cl
-      self.where( classification_id: "#{cl}")
-    elsif mo
-      self.where( modifier_id: "#{mo}")
-    elsif is
-      joins(:damages).where( damages: { impacted_service_id: "#{is}"})
-    elsif me
-      joins(:broadcasts).where( broadcasts: { messenger_event_id: "#{me}"})
-    else
-      all
-    end
-  end
+  scope :by_classification, lambda { |classification| where(classification_id: classification) unless classification.nil? }
+  scope :by_modifier, lambda { |modifier| where(modifier_id: modifier) unless modifier.nil? }
+  scope :by_service, lambda { |service| joins(:impacted_services).where('impacted_services.id = ?', service) unless service.nil? }
+  scope :by_mevent, lambda { |mevent| joins(:messenger_events).where('messenger_events.id = ?', mevent) unless mevent.nil? }
   
   def recipient_uids=(ids_str)
     ids_str.split(",").each do |r|

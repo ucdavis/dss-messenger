@@ -2,7 +2,13 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.filter(params[:cl],params[:mo],params[:is],params[:me]) #filter(impacted services filer, messenger event filter)
+    @messages = Message
+      .order('created_at DESC')
+      .by_classification(params[:cl])
+      .by_modifier(params[:mo])
+      .by_service(params[:is])
+      .by_mevent(params[:me])
+      .page(params[:page]).per(20) #paginate with 'page' param being the page number, and 20 as the items per page
 
     respond_to do |format|
       format.html # index.html.erb

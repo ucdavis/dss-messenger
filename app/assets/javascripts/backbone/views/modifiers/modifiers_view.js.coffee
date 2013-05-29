@@ -16,13 +16,20 @@ class DssMessenger.Views.Modifiers.ModifiersView extends Backbone.View
 
   filter: (e) ->
     e.stopPropagation()
-    selected_id = this.model.get('id')
+    classification = $("input[name='cl_filter[]']:checked").val()
+    modifier = this.model.get('id')
+    service = $("input[name='is_filter[]']:checked").val()
+    mevent = $("input[name='me_filter[]']:checked").val()
+
     $("#messages").append("<div class='overlay'><div class='loading'></div></div>")
 
     @messages = new DssMessenger.Collections.MessagesCollection()
     @messages.fetch
       data:
-        mo: selected_id
+        cl: classification
+        mo: modifier
+        is: service
+        me: mevent
 
       success: (messages) =>
         @view = new DssMessenger.Views.Messages.IndexView(messages: @messages)
