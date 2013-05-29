@@ -12,8 +12,12 @@ gem 'mail'
 
 gem 'declarative_authorization'
 
+#for automatic inline css in mailer
 gem 'hpricot'
-gem 'premailer-rails3' #for automatic inline css in mailer
+gem 'premailer-rails3' 
+
+#for pagination
+gem 'kaminari'
 
 # Gems used only for assets and not required
 # in production environments by default.
