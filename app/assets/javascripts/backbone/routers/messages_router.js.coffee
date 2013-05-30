@@ -2,6 +2,8 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
   initialize: (options) ->
     @messages = new DssMessenger.Collections.MessagesCollection()
     @messages.reset options.messages
+    @pages = options.pages
+    @current = options.current
 
     @classifications = new DssMessenger.Collections.ClassificationsCollection()
     @classifications.fetch
@@ -48,7 +50,7 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
     $("#messages").append(@view.render().el)
 
   index: ->
-    @view = new DssMessenger.Views.Messages.IndexView(messages: @messages)
+    @view = new DssMessenger.Views.Messages.IndexView(messages: @messages, pages: @pages, current: @current)
     $("#messages").html(@view.render().el)
     @view = new DssMessenger.Views.Classifications.IndexView(classifications: @classifications)
     $("#filter_classifications").html(@view.render().el)

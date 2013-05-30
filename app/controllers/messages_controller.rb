@@ -12,7 +12,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @messages, include: [:recipients, :classification, :modifier, :messenger_events, :impacted_services] }
+      format.json { render json: @messages }
     end
   end
 
@@ -23,7 +23,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @message, include: [:recipients, :classification, :modifier, :messenger_events, :impacted_services] }
+      format.json { render json: @message }
     end
   end
 
