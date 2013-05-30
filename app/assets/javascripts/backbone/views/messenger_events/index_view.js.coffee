@@ -33,7 +33,7 @@ class DssMessenger.Views.messenger_events.IndexView extends Backbone.View
       success: (messages) =>
         @view = new DssMessenger.Views.Messages.IndexView(messages: @messages)
         $("#messages").html(@view.render().el)
-	    $('#reset-filters').addClass('hidden')
+        $('#reset-filters').addClass('hidden')
 
       error: (messages, response) ->
         console.log "#{response.status}."

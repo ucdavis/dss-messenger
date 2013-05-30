@@ -34,7 +34,7 @@ class DssMessenger.Views.Modifiers.ModifiersView extends Backbone.View
       success: (messages) =>
         @view = new DssMessenger.Views.Messages.IndexView(messages: @messages)
         $("#messages").html(@view.render().el)
-	    $('#reset-filters').removeClass('hidden')
+        $('#reset-filters').removeClass('hidden')
 
       error: (messages, response) ->
         console.log "#{response.status}."
