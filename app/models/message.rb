@@ -43,7 +43,7 @@ class Message < ActiveRecord::Base
       :modifier => self.modifier,
       :recipients => self.recipients,
       :recipient_ids => self.recipients.pluck(:recipient_id),
-      :recipient_uids => self.recipients.pluck(:recipient_id),
+      :recipient_uids => self.recipients.pluck(:uid),
       :impacted_services => self.impacted_services,
       :impacted_service_ids => self.impacted_services.pluck(:impacted_service_id),
       :messenger_events => self.messenger_events,

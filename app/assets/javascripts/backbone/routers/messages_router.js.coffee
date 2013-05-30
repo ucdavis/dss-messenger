@@ -41,7 +41,7 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
     "new"      : "newMessage"
     "index"    : "index"
     "prefs"    : "Preferences"
-    ":id/edit" : "edit"
+    ":id/duplicate" : "duplicate"
     ":id"      : "show"
     ".*"       : "index"
 
@@ -67,10 +67,10 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
     @view = new DssMessenger.Views.Messages.ShowView(model: message)
     $("#messages").append(@view.render().el)
 
-  edit: (id) ->
+  duplicate: (id) ->
     message = @messages.get(id)
 
-    @view = new DssMessenger.Views.Messages.EditView(model: message)
+    @view = new DssMessenger.Views.Messages.DuplicateView(collection: @messages, model: message)
     $("#messages").append(@view.render().el)
 
   Preferences: ->
