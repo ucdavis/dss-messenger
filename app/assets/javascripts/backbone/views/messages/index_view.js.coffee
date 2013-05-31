@@ -11,20 +11,28 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
 
   addAll: () =>
     @options.messages.each(@addOne)
+    console.log @options.current, @options.pages
+    _.defer =>  # this will un-hide the 'show more' button if there is more messages
+      $(".pagination").removeClass('hidden') if @options.current < @options.pages
 
   getMore: (e) =>
+    e.preventDefault()
     e.stopPropagation()
     # @$el.append("<div class='overlay'><div class='loading'></div></div>")
-    $(".pagination").hide() if ++@options.current >= @options.pages
+    $(".pagination").fadeOut() if ++@options.current >= @options.pages
+    classification = $("input[name='cl_filter[]']:checked").val()
+    modifier = $("input[name='mo_filter[]']:checked").val()
+    service = $("input[name='is_filter[]']:checked").val()
+    mevent = $("input[name='me_filter[]']:checked").val()
 
     @messages = new DssMessenger.Collections.MessagesCollection()
     @messages.fetch
       data:
-        page: @options.current
-        # cl: classification
-        # mo: modifier
-        # is: service
-        # me: mevent
+        page: @options.current,
+        cl: classification,
+        mo: modifier,
+        is: service,
+        me: mevent
 
       success: (messages) =>
         @options.messages.reset(messages.models)
