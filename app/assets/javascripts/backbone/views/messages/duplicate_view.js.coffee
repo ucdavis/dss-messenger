@@ -9,8 +9,6 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
     "focus #Recipients"	:	"tokenInput"
 
   initialize: ->
-    $("input[name=Recipients]").tokenInput "http://shell.loopj.com/tokeninput/tvshows.php",
-      theme: "facebook" #WHY NO SHOW!
     @current_classification = @model.get('classification_id')
     @classifications = new DssMessenger.Collections.ClassificationsCollection()
     @classifications.fetch	
@@ -62,20 +60,6 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
         console.log "#{response.status}."
 
 
-    # @current_recipients = @model.get('recipients')
-    # @recipients = new DssMessenger.Collections.messenger_recipientsCollection()
-    # @recipients.fetch 
-    # 
-    #   success: (recipients) =>
-    #     recipients.each (recipient) =>
-    #       @checked = _.find @current_events, (current_event) =>
-    #         return current_event.id is messenger_event.get('id')
-    #       $("#messenger_events_select").append "<label class='checkbox'><input type='checkbox' name='messenger_event_ids[]' value='" + messenger_event.get('id') + (if @checked then "' checked />" else "' />") + messenger_event.get('description') + "</label>"
-    # 
-    #   error: (messenger_events, response) ->
-    #     console.log "#{response.status}."
-    console.log @model.get('recipients')
-
   save: (e) ->
     e.preventDefault()
     e.stopPropagation()
@@ -126,5 +110,15 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
     @$el.html(@template(@model.toJSON() ))
 
     this.$("form").backboneLink(@model)
+
+    _.defer =>
+      @tokenInput
+      # recipients_tokeninput = @$("input[name=recipient_ids]")
+      #       recipients_tokeninput.tokenInput "clear"
+      #       _.each @model.get("recipients"), (recipient) ->
+      #         recipients_tokeninput.tokenInput "add",
+      #         id: recipient.uid
+      #         name: recipient.uid
+    console.log @model.get('recipients')
 
     return this
