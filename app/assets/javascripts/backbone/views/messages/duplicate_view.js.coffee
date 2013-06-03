@@ -9,6 +9,15 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
     "focus #Recipients"	:	"tokenInput"
 
   initialize: ->
+    _.defer =>
+      @tokenInput()
+      recipients_tokeninput = @$("input[name=recipient_ids]")
+      recipients_tokeninput.tokenInput "clear"
+      _.each @model.get("recipients"), (recipient) ->
+        recipients_tokeninput.tokenInput "add",
+        id: recipient.uid
+        name: recipient.uid
+
     @current_classification = @model.get('classification_id')
     @classifications = new DssMessenger.Collections.ClassificationsCollection()
     @classifications.fetch	
@@ -84,9 +93,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
 
   constructor: (options) ->
     super(options)
-    console.log @model.attributes
     @model = new @collection.model(_.omit(@model.attributes, 'created_at', 'updated_at', 'id'))
-    console.log @model
 
     @model.bind("change:errors", () =>
       this.render()
@@ -99,26 +106,15 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
     $("input[name=recipient_ids]").tokenInput "/recipients",
       theme: "facebook"
       onAdd: (item) =>
-        @model.recipients.add {uid: item.id}
-        console.log @model
+        # console.log @model
 
       onDelete: (item) =>
-        console.log @model
+        # console.log @model
 
 
   render: ->
     @$el.html(@template(@model.toJSON() ))
 
     this.$("form").backboneLink(@model)
-
-    _.defer =>
-      @tokenInput
-      # recipients_tokeninput = @$("input[name=recipient_ids]")
-      #       recipients_tokeninput.tokenInput "clear"
-      #       _.each @model.get("recipients"), (recipient) ->
-      #         recipients_tokeninput.tokenInput "add",
-      #         id: recipient.uid
-      #         name: recipient.uid
-    console.log @model.get('recipients')
 
     return this
