@@ -13,9 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require ../../../vendor/assets/javascripts/jquery-ui-1.10.0.custom.min
-//= require ../../../vendor/assets/javascripts/jquery-ui-sliderAccess
-//= require ../../../vendor/assets/javascripts/jquery-ui-timepicker-addon
+//= require ../../../vendor/assets/javascripts/bootstrap-datetimepicker.min
 //= require ../../../vendor/assets/javascripts/jquery.tokeninput
+//= require ../../../vendor/assets/javascripts/moment.min
 //= require twitter/bootstrap
 //= require underscore
 //= require backbone

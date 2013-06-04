@@ -5,7 +5,6 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
 
   events:
     "submit #new-message": "save"
-    "focus .datepicker"	:	"displayPicker"
     "focus #Recipients"	:	"tokenInput"
 
   initialize: ->
@@ -99,8 +98,11 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
       this.render()
     )
 
-  displayPicker: (e) ->
-    $('.datepicker').datetimepicker()
+  datetimePicker: ->
+    $('.datetimepicker').datetimepicker
+      language: "en"
+      pick12HourFormat: true
+      pickSeconds: false
 
   tokenInput: (e) ->
     $("input[name=recipient_ids]").tokenInput "/recipients",
@@ -117,4 +119,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
 
     this.$("form").backboneLink(@model)
 
+    _.defer =>
+      @datetimePicker()
+    
     return this

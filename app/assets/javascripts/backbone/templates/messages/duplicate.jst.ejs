@@ -1,5 +1,5 @@
 <div class="modal">
-    <div class="modal-header"><h3>Edit message</h3></div>
+    <div class="modal-header"><h3>Duplicate message</h3></div>
 	<form id="new-message" name="message">
 	  <div class="modal-body">
 
@@ -30,12 +30,24 @@
 
 		  <div class="field">
 		    <label for="window_start"> window_start:</label>
-		    <input type="text" name="window_start" id="window_start" class="datepicker" value="<%= window_start %>" >
+				<div id="datetimepicker" class="input-append datetimepicker">
+			    <input type="text" name="window_start" id="window_start"
+						data-format="yyyy/MM/dd HH:mm PP" value="<%= window_start %>" >
+					<span class="add-on">
+					      <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+					</span>
+				</div>
 		  </div>
 
 		  <div class="field">
 		    <label for="window_end"> window_end:</label>
-		    <input type="text" name="window_end" id="window_end" class="datepicker" value="<%= window_end %>" >
+				<div id="datetimepicker" class="input-append datetimepicker">
+			    <input type="text" name="window_end" id="window_end"
+						data-format="yyyy/MM/dd HH:mm PP" value="<%= window_end %>" >
+					<span class="add-on">
+					      <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+					</span>
+				</div>
 		  </div>
 
 		  <div class="field">

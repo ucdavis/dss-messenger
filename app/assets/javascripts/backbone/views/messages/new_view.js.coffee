@@ -5,7 +5,6 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
   events:
     "submit #new-message": "save"
-    "focus .datepicker"	 : "displayPicker"
     "focus #Recipients"	:	"tokenInput"
 
   initialize: ->
@@ -58,8 +57,11 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
       this.render()
     )
 
-  displayPicker: (e) ->
-    $('.datepicker').datetimepicker()
+  datetimePicker: ->
+    $('.datetimepicker').datetimepicker
+      language: "en"
+      pick12HourFormat: true
+      pickSeconds: false
 
   tokenInput: (e) ->
     $("input[name=recipient_uids]").tokenInput "/recipients",
@@ -81,6 +83,8 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
       messenger_event_ids: _.map($("input[name='messenger_event_ids[]']:checked"), (a) -> a.value )
       classification_id: $("input[name='classification_id[]']:checked").val()
       modifier_id: $("input[name='modifier_id[]']:checked").val()
+      window_start: $("input[name='window_start']").val()
+      window_end: $("input[name='window_end']").val()
 
     @collection.create(@model.toJSON(),
       success: (message) =>
@@ -93,7 +97,10 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
   render: ->
     @$el.html(@template(@model.toJSON() ))
-
+    
     this.$("form").backboneLink(@model)
 
+    _.defer =>
+      @datetimePicker()
+    
     return this
