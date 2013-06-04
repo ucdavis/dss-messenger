@@ -47,7 +47,7 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
 
   newMessage: ->
     @view = new DssMessenger.Views.Messages.NewView(collection: @messages)
-    $("#filters-sidebar").fadeOut()
+    $("#filters-sidebar").hide()
     $("#messages").html(@view.render().el)
 
   index: ->
@@ -67,14 +67,14 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
     message = @messages.get(id)
 
     @view = new DssMessenger.Views.Messages.ShowView(model: message)
-    $("#filters-sidebar").fadeOut()
+    $("#filters-sidebar").hide()
     $("#messages").html(@view.render().el)
 
   duplicate: (id) ->
     message = @messages.get(id)
 
     @view = new DssMessenger.Views.Messages.DuplicateView(collection: @messages, model: message)
-    $("#filters-sidebar").fadeOut()
+    $("#filters-sidebar").hide()
     $("#messages").html(@view.render().el)
 
   Preferences: ->

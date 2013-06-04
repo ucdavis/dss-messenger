@@ -8,6 +8,9 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     "focus #Recipients"	:	"tokenInput"
 
   initialize: ->
+    _.defer =>
+      @tokenInput()
+
     @classifications = new DssMessenger.Collections.ClassificationsCollection()
     @classifications.fetch	
 
