@@ -1,90 +1,83 @@
-<div class="modal">
-    <div class="modal-header"><h3><%= subject %></h3></div>
-    <div class="modal-body">
+<a  href="#/index" class="close pull-right">&times;</a>
+<h1><%= subject %></h1>
+<h4 class="text-info">Sent at <%= created_at %>.</h4>
+<p>
+  <b>Sender uid:</b>
+  <%= sender_uid %>
+</p>
 
-		<p>
-		  <b>Sender uid:</b>
-		  <%= sender_uid %>
-		</p>
+<p>
+  <b>Recipients:</b>
+  <ul>
+  <% _.each(recipients, function(recipient){ %>
+    <li><%= recipient.uid %></li>
+  <% }); %>
+  </ul>
+</p>
 
-		<p>
-		  <b>Recipients:</b>
-		  <ul>
-		  <% _.each(recipients, function(recipient){ %>
-		    <li><%= recipient.uid %></li>
-		  <% }); %>
-		  </ul>
-		</p>
+<p>
+  <b>Classification:</b>
+	<% if (classification) { %>
+		<%= classification.description %></td>
+	<% } %>
+</p>
 
-		<p>
-		  <b>Classification:</b>
-			<% if (classification) { %>
-				<%= classification.description %></td>
-			<% } %>
-		</p>
+<p>
+  <b>Modifier:</b>
+	<% if (modifier) { %>
+		<%= modifier.description %></td>
+	<% } %>
+</p>
 
-		<p>
-		  <b>Modifier:</b>
-			<% if (modifier) { %>
-				<%= modifier.description %></td>
-			<% } %>
-		</p>
+<p>
+  <b>Impact statement:</b>
+  <%= impact_statement %>
+</p>
 
-		<p>
-		  <b>Impact statement:</b>
-		  <%= impact_statement %>
-		</p>
+<p>
+  <b>Window start:</b>
+  <%= window_start %>
+</p>
 
-		<p>
-		  <b>Window start:</b>
-		  <%= window_start %>
-		</p>
+<p>
+  <b>Window end:</b>
+  <%= window_end %>
+</p>
 
-		<p>
-		  <b>Window end:</b>
-		  <%= window_end %>
-		</p>
+<p>
+  <b>Purpose:</b>
+  <%= purpose %>
+</p>
 
-		<p>
-		  <b>Purpose:</b>
-		  <%= purpose %>
-		</p>
+<p>
+  <b>Resolution:</b>
+  <%= resolution %>
+</p>
 
-		<p>
-		  <b>Resolution:</b>
-		  <%= resolution %>
-		</p>
+<p>
+  <b>Workaround:</b>
+  <%= workaround %>
+</p>
 
-		<p>
-		  <b>Workaround:</b>
-		  <%= workaround %>
-		</p>
+<p>
+  <b>Other services:</b>
+  <%= other_services %>
+</p>
 
-		<p>
-		  <b>Other services:</b>
-		  <%= other_services %>
-		</p>
+<p>
+  <b>Impacted Services:</b>
+  <ul>
+  <% _.each(impacted_services, function(impacted_service){ %>
+    <li><%= impacted_service.name %></li>
+  <% }); %>
+  </ul>
+</p>
 
-		<p>
-		  <b>Impacted Services:</b>
-		  <ul>
-		  <% _.each(impacted_services, function(impacted_service){ %>
-		    <li><%= impacted_service.name %></li>
-		  <% }); %>
-		  </ul>
-		</p>
-
-		<p>
-		  <b>Events:</b>
-		  <ul>
-		  <% _.each(messenger_events, function(messenger_event){ %>
-		    <li><%= messenger_event.description %></li>
-		  <% }); %>
-		  </ul>
-		</p>
-
-    </div>
-    <div class="modal-footer"><a class="btn" href="#/index">Close</a></div>
-</div>
-<div class="modal-backdrop"></div>
-
+<p>
+  <b>Events:</b>
+  <ul>
+  <% _.each(messenger_events, function(messenger_event){ %>
+    <li><%= messenger_event.description %></li>
+  <% }); %>
+  </ul>
+</p>

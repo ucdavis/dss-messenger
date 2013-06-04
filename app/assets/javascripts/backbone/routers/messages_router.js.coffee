@@ -38,18 +38,20 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
         console.log "#{response.status}."
 
   routes:
-    "new"      : "newMessage"
-    "index"    : "index"
-    "prefs"    : "Preferences"
+    "new"           : "newMessage"
+    "index"         : "index"
+    "prefs"         : "Preferences"
     ":id/duplicate" : "duplicate"
-    ":id"      : "show"
-    ".*"       : "index"
+    ":id"           : "show"
+    ".*"            : "index"
 
   newMessage: ->
     @view = new DssMessenger.Views.Messages.NewView(collection: @messages)
-    $("#messages").append(@view.render().el)
+    $("#filters-sidebar").fadeOut()
+    $("#messages").html(@view.render().el)
 
   index: ->
+    $("#filters-sidebar").fadeIn()
     @view = new DssMessenger.Views.Messages.IndexView(messages: @messages, pages: @pages, current: @current)
     $("#messages").html(@view.render().el)
     @view = new DssMessenger.Views.Classifications.IndexView(classifications: @classifications)
@@ -65,13 +67,15 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
     message = @messages.get(id)
 
     @view = new DssMessenger.Views.Messages.ShowView(model: message)
-    $("#messages").append(@view.render().el)
+    $("#filters-sidebar").fadeOut()
+    $("#messages").html(@view.render().el)
 
   duplicate: (id) ->
     message = @messages.get(id)
 
     @view = new DssMessenger.Views.Messages.DuplicateView(collection: @messages, model: message)
-    $("#messages").append(@view.render().el)
+    $("#filters-sidebar").fadeOut()
+    $("#messages").html(@view.render().el)
 
   Preferences: ->
     @view = new DssMessenger.Views.Messages.PrefsView(collection: @messages)
