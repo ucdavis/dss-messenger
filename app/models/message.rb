@@ -25,6 +25,25 @@ class Message < ActiveRecord::Base
     end
   end
   
+  #DssMailer.delay.deliver_message(@message) if @message.messenger_event_ids.include? 1 # 1=send email?
+  def send_mass_email()
+    self.recipients.each do |r|
+      # Look up e-mail address for r.uid
+      @entity = Entity.find(r.uid)
+      if @entity.type == "Group"
+        @entity.members.each do |m|
+          # Send the e-mail
+          @member = Person.find(m.id)
+          DssMailer.delay.deliver_message(self,@member)
+        end
+      elsif @entity.type == "Person"
+        # Send the e-mail
+        @member = Person.find(@entity.id)
+        DssMailer.delay.deliver_message(self,@member)
+      end
+    end
+  end
+  
   def as_json(options = {})
     {
       :id => self.id,

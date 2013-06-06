@@ -48,12 +48,12 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(params[:message])
     @message.sender_uid = Person.find(session[:cas_user]).id #get the uid of the currently logged in user.
-
+    
     respond_to do |format|
       if @message.save
         format.html { redirect_to @message, notice: 'Message was successfully created.' }
         format.json { render json: @message, status: :created, location: @message }
-        DssMailer.delay.deliver_message(@message) if @message.messenger_event_ids.include? 1 # 1=send email?
+        @message.delay.send_mass_email if @message.messenger_event_ids.include? 1 # 1=send email?
       else
         format.html { render action: "new" }
         format.json { render json: @message.errors, status: :unprocessable_entity }
