@@ -10,7 +10,7 @@ class Person < ActiveResource::Base
     roles.each do |r|
       Rails.logger.debug r.inspect
       tokens << r.token.to_sym if r.application_name == "DSS Messenger"
-      #tokens = [:access]
+      # tokens = [:guest]
     end
     
     Rails.logger.debug tokens.inspect
