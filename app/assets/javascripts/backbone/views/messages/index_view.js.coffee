@@ -12,10 +12,11 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
   addAll: () =>
     @options.messages.each(@addOne)
     console.log @options.current, @options.pages
-    _.defer =>  # this will un-hide the 'show more' button if there is more messages
+    _.defer =>
+      # this will un-hide the 'show more' button if there is more messages
       $(".pagination").removeClass('hidden') if @options.current < @options.pages
-      
-      $("#mtable-head").affix offset: $("#messages-table").position()
+      # this will affix the table header when scrolled
+      $("#mtable-head").affix offset: $("#messages-table").position().top - 40
       $("#mtable-head th").each ->
         $(this).width $(this).width()
 
