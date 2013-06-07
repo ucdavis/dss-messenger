@@ -14,6 +14,10 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
     console.log @options.current, @options.pages
     _.defer =>  # this will un-hide the 'show more' button if there is more messages
       $(".pagination").removeClass('hidden') if @options.current < @options.pages
+      
+      $("#mtable-head").affix offset: $("#messages-table").position()
+      $("#mtable-head th").each ->
+        $(this).width $(this).width()
 
   getMore: (e) =>
     e.preventDefault()

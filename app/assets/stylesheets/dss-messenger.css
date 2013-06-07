@@ -12,6 +12,15 @@ h1 {
     top: 70px;        /* to fix the div at the top its containing element */
 }
 
+tr#mtable-head.affix {
+    position: fixed;
+    top: 40px;
+}
+
+tr#mtable-head.affix th{
+    width: 100%;
+}
+
 .filters-well {
   height: 400px;
   overflow: auto;
