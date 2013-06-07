@@ -75,6 +75,10 @@ td.nowrap {
 }
 
 
+ul.token-input-list-facebook {
+  clear: none;
+}
+
 /******* Nawrrow view / mobile view ********/
 @media (max-width: 767px) {
 	.affix {
