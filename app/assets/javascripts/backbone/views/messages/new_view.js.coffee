@@ -10,45 +10,57 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
   initialize: ->
     _.defer =>
       @tokenInput()
+      $("#classifications_select").html("<div class='loading'></div>")
+      $("#modifiers_select").html("<div class='loading'></div>")
+      $("#impacted_services_select").html("<div class='loading'></div>")
+      $("#messenger_events_select").html("<div class='loading'></div>")
 
     @classifications = new DssMessenger.Collections.ClassificationsCollection()
     @classifications.fetch	
 
       success: (classifications) ->
+        $("#classifications_select").empty()
         classifications.each (classification) ->
           $("#classifications_select").append "<label class='radio'><input type='radio' name='classification_id[]' value='" + classification.get('id') + "'>" + classification.get('description') + "</label>"
 
       error: (classifications, response) ->
+        $("#classifications_select").html("<div class='error'></div>")
         console.log "#{response.status}."
 
     @modifiers = new DssMessenger.Collections.ModifiersCollection()
     @modifiers.fetch	
 
       success: (modifiers) ->
+        $("#modifiers_select").empty()
         modifiers.each (modifier) ->
           $("#modifiers_select").append "<label class='radio'><input type='radio' name='modifier_id[]' value='" + modifier.get('id') + "'>" + modifier.get('description') + "</label>"
 
       error: (modifiers, response) ->
+        $("#modifiers_select").html("<div class='error'></div>")
         console.log "#{response.status}."
 
     @impacted_services = new DssMessenger.Collections.impacted_servicesCollection()
-    @impacted_services.fetch	
+    @impacted_services.fetch
 
       success: (impacted_services) ->
+        $("#impacted_services_select").empty()
         impacted_services.each (impacted_service) ->
           $("#impacted_services_select").append "<label class='checkbox'><input type='checkbox' name='impacted_service_ids[]' value='" + impacted_service.get('id') + "'>" + impacted_service.get('name') + "</label>"
 
       error: (impacted_services, response) ->
+        $("#impacted_services_select").html("<div class='error'></div>")
         console.log "#{response.status}."
 
     @messenger_events = new DssMessenger.Collections.messenger_eventsCollection()
     @messenger_events.fetch	
 
       success: (messenger_events) ->
+        $("#messenger_events_select").empty()
         messenger_events.each (messenger_event) ->
           $("#messenger_events_select").append "<label class='checkbox'><input type='checkbox' name='messenger_event_ids[]' value='" + messenger_event.get('id') + "'>" + messenger_event.get('description') + "</label>"
 
       error: (messenger_events, response) ->
+        $("#messenger_events_select").html("<div class='error'></div>")
         console.log "#{response.status}."
 
 

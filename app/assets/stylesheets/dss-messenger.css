@@ -34,26 +34,40 @@ label.radio, label.checkbox {
 
 .overlay {
 	position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    background-color:rgba(0, 0, 0, 0.10);
-    z-index:9999;
-    color:white;
-    text-align: center;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background-color:rgba(0, 0, 0, 0.10);
+  z-index:9999;
+  color:white;
+  text-align: center;
 }
 
 .overlay .loading {
 	background: transparent url('loading.gif') no-repeat 50% 50%;
 	height: 100%;
 	width: 100%;
-    position:relative;
+  position:relative;
 }
 
 .overlay .error {
 	padding: 3em;
 	font-size: 3em;
+}
+
+.loading{
+	background: transparent url('loading-small.gif') no-repeat 50% 50%;
+	margin: 10px;
+	width: 43px;
+	height: 11px;
+}
+
+.error{
+	background: transparent url('error.gif') no-repeat 50% 50%;
+	margin: 10px;
+	width: 16px;
+	height: 16px;
 }
 
 .frameless {
