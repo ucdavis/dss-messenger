@@ -47,7 +47,7 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(params[:message])
-    @message.sender_uid = Person.find(session[:cas_user]).id #get the uid of the currently logged in user.
+    @message.sender_uid = session[:cas_user] #get the uid of the currently logged in user.
     
     respond_to do |format|
       if @message.save
