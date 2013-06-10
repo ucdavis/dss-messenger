@@ -15,7 +15,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
       _.each @model.get("recipients"), (recipient) ->
         recipients_tokeninput.tokenInput "add",
         id: recipient.uid
-        name: recipient.uid
+        name: recipient.name
 
     @current_classification = @model.get('classification_id')
     @classifications = new DssMessenger.Collections.ClassificationsCollection()

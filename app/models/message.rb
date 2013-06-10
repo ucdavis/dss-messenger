@@ -20,7 +20,8 @@ class Message < ActiveRecord::Base
   
   def recipient_uids=(ids_str)
     ids_str.split(",").each do |r|
-      recipient = Recipient.find_or_create_by_uid(r)
+      name = Entity.find(r).name
+      recipient = Recipient.find_or_create_by_uid(uid: r, name: name)
       self.recipients << recipient
     end
   end
