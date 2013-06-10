@@ -90,9 +90,11 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
       window_end: $("input[name='window_end']").val()
 
     @collection.create(@model.toJSON(),
+      at: 0
       success: (message) =>
         @model = message
         window.location.hash = "#/index"
+        window.scrollTo 0, 0
 
       error: (message, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
