@@ -1,9 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+gem 'rails', '3.2.12'
 
 gem 'sqlite3'
 gem 'rubycas-client'
@@ -14,7 +11,7 @@ gem 'declarative_authorization'
 
 #for automatic inline css in mailer
 gem 'hpricot'
-gem 'premailer-rails3' 
+gem 'premailer-rails' 
 
 #for pagination
 gem 'kaminari'
