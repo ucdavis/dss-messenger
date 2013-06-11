@@ -2,7 +2,7 @@ class RecipientsController < ApplicationController
   # GET /recipients
   # GET /recipients.json
   def index
-    @recipients = Recipient.all
+    @recipients = Entity.find(:all, :params => {:q => params[:q]}) #Recipient.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class RecipientsController < ApplicationController
   # GET /recipients/1
   # GET /recipients/1.json
   def show
-    @recipient = Recipient.find(params[:id])
+    @recipient = Entity.find(params[:id]) #Recipient.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

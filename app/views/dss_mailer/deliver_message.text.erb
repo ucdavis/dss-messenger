@@ -1,0 +1,58 @@
+Dear <%= @member.first %>,
+
+<% if @message.impact_statement %>
+	Summary:
+	<%= @message.impact_statement %>
+<% end %>
+
+<% if @message.purpose %>
+	Purpose:
+	<%= @message.purpose %>
+<% end %>
+
+<% if @message.resolution %>
+	Resolution:
+	<%= @message.resolution %>
+<% end %>
+
+<% if @message.workaround %>
+	Workaround:
+	<%= @message.workaround %>
+<% end %>
+
+<% if @message.window_start %>
+	Window Start:
+	<%= @message.window_start %>
+<% end %>
+
+<% if @message.window_end %>
+	Window End:
+	<%= @message.window_end %>
+<% end %>
+
+<% if @message.classification %>
+	Classification:
+	<%= @message.classification.description %>
+<% end %>
+
+<% if @message.modifier %>
+	Modifier:
+	<%= @message.modifier.description %>
+<% end %>
+
+<% if @message.impacted_services %>
+	Impacted Services:
+	<% @message.impacted_services.each do |i| %>
+		 - <%= i.name %>
+	<% end %>
+<% end %>
+
+<% if @message.other_services %>
+	Other Services:
+	<%= @message.other_services %>
+<% end %>
+
+Please contact the DSS IT Service Desk with any questions or concerns:
+Via web: http://it.dss.ucdavis.edu/selfserve
+Via phone: 530-752-8800
+Via email: ithelp@dss.ucdavis.edu

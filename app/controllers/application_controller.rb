@@ -1,4 +1,9 @@
 class ApplicationController < ActionController::Base
-  before_filter CASClient::Frameworks::Rails::Filter
+  include Authentication
+  
+  before_filter :authenticate
+  
+  filter_resource_access
+  
   protect_from_forgery
 end

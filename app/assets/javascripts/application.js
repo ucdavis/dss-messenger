@@ -12,11 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui-1.10.0.custom.min
+//= require ../../../vendor/assets/javascripts/jquery-ui-1.10.0.custom.min
+//= require ../../../vendor/assets/javascripts/bootstrap-datetimepicker.min
+//= require ../../../vendor/assets/javascripts/jquery.tokeninput
+//= require ../../../vendor/assets/javascripts/moment.min
 //= require twitter/bootstrap
 //= require underscore
 //= require backbone
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/dss_messenger
-//= require_tree .
+//= require dss-messenger

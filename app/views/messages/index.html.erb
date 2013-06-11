@@ -1,20 +1,16 @@
-<div id="messages" class="span9"></div>
-
-<script type="text/javascript">
-  $(function() {
-    // DssMessenger is the app name
-    window.router = new DssMessenger.Routers.MessagesRouter({messages: <%= @messages.to_json.html_safe -%>});
-    Backbone.history.start();
-  });
-console.log (<%= @messages.to_json.html_safe -%>);
-</script>
-<div class="span3">
+<div class="span3 affix" id="filters-sidebar">
+	<% if permitted_to? :create, @message %>
 	<div class="well">
 		<a href="#/new" class="btn btn-primary btn-large btn-block">New Message</a>
 	</div>
-	<div class="well">
+	<% end %>
+	<div class="well filters-well hidden-phone">
 		<form id="filters-form">
 			<h3>Filters:</h3>
+			<h4>Classifications</h4>
+			<div id="filter_classifications"></div>
+			<h4>Modifiers</h4>
+			<div id="filter_modifiers"></div>
 			<h4>Impacted Services</h4>
 			<div id="filter_impacted_services"></div>
 			<h4>Events</h4>
@@ -22,3 +18,19 @@ console.log (<%= @messages.to_json.html_safe -%>);
 		</form>
 	</div>
 </div>
+
+<div id="messages" class="span9"></div>
+
+<script type="text/javascript">
+  $(function() {
+    // DssMessenger is the app name
+    window.router = new DssMessenger.Routers.MessagesRouter(
+			{
+				messages: <%= @messages.to_json.html_safe -%>,
+				pages: <%= @messages.total_pages -%>,
+				current: <%= @messages.current_page -%>
+			});
+    Backbone.history.start();
+  });
+console.log (<%= @messages.to_json.html_safe -%>);
+</script>

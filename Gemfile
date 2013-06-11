@@ -4,6 +4,17 @@ gem 'rails', '3.2.12'
 
 gem 'sqlite3'
 gem 'rubycas-client'
+gem 'delayed_job_active_record'
+gem 'mail'
+
+gem 'declarative_authorization'
+
+#for automatic inline css in mailer
+gem 'hpricot'
+gem 'premailer-rails' 
+
+#for pagination
+gem 'kaminari'
 
 # Gems used only for assets and not required
 # in production environments by default.

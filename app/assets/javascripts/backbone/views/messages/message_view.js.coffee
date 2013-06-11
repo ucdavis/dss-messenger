@@ -4,7 +4,10 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
   template: JST["backbone/templates/messages/message"]
 
   events:
-    "click .destroy" : "destroy"
+    "mouseenter .tooltip-show"      : "tooltipShow"
+    "mouseenter .tooltip-duplicate" : "tooltipDuplicate"
+    "mouseenter .tooltip-destroy"   : "tooltipDestroy"
+    "click      .tooltip-destroy"   : "destroy"
 
   tagName: "tr"
 
@@ -15,5 +18,23 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
     return false
 
   render: ->
-    @$el.html(@template(@model.toJSON() ))
+    @$el.html(@template(@model.toFullJSON() )).fadeIn()
     return this
+
+  tooltipShow: ->
+    @$('.tooltip-show').tooltip
+      title:"Show"
+      placement: "top"
+    @$('.tooltip-show').tooltip('show')
+    
+  tooltipDuplicate: ->
+    @$('.tooltip-duplicate').tooltip
+      title:"Duplicate"
+      placement: "top"
+    @$('.tooltip-duplicate').tooltip('show')
+    
+  tooltipDestroy: ->
+    @$('.tooltip-destroy').tooltip
+      title:"Delete"
+      placement: "top"
+    @$('.tooltip-destroy').tooltip('show')

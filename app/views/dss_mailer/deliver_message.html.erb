@@ -1,0 +1,93 @@
+<head>
+<style>
+	.table {
+		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		font-size: 12px;
+	}
+	td {
+		border-bottom: 1px solid #ccc;
+	}
+	td.title {
+		font-weight: bold;
+		font-size: 120%;
+		vertical-align: top;
+	}
+</style>
+</head>
+
+<p>Dear <%= @member.first %>,</p>
+
+<table class="table table-striped">
+	<% if @message.impact_statement %>
+	<tr>
+		<td class="title">Summary:</td>
+		<td><%= @message.impact_statement %></td>
+	</tr>
+	<% end %>
+	<% if @message.purpose %>
+	<tr>
+		<td class="title">Purpose:</td>
+		<td><%= @message.purpose %></td>
+	</tr>
+	<% end %>
+	<% if @message.resolution %>
+	<tr>
+		<td class="title">Resolution:</td>
+		<td><%= @message.resolution %></td>
+	</tr>
+	<% end %>
+	<% if @message.workaround %>
+	<tr>
+		<td class="title">Workaround:</td>
+		<td><%= @message.workaround %></td>
+	</tr>
+	<% end %>
+	<% if @message.window_start %>
+	<tr>
+		<td class="title">Window Start:</td>
+		<td><%= @message.window_start %></td>
+	</tr>
+	<% end %>
+	<% if @message.window_end %>
+	<tr>
+		<td class="title">Window End:</td>
+		<td><%= @message.window_end %></td>
+	</tr>
+	<% end %>
+	<% if @message.classification %>
+	<tr>
+		<td class="title">Classification:</td>
+		<td><%= @message.classification.description %></td>
+	</tr>
+	<% end %>
+	<% if @message.modifier %>
+	<tr>
+		<td class="title">Modifier:</td>
+		<td><%= @message.modifier.description %></td>
+	</tr>
+	<% end %>
+	<% if @message.impacted_services %>
+	<tr>
+		<td class="title">Impacted Services:</td>
+		<td>
+			<% @message.impacted_services.each do |i| %>
+				<li><%= i.name %></li>
+			<% end %>
+		</td>
+	</tr>
+	<% end %>
+	<% if @message.other_services %>
+	<tr>
+		<td class="title">Other Services:</td>
+		<td><%= @message.other_services %></td>
+	</tr>
+	<% end %>
+</table>
+
+<p>
+	Please contact the DSS IT Service Desk with any questions or concerns:
+	<br /><br />
+	<strong>Via web</strong>: <a href="http://it.dss.ucdavis.edu/selfserve">http://it.dss.ucdavis.edu/selfserve</a><br />
+	<strong>Via phone</strong>: 530-752-8800<br />
+	<strong>Via email</strong>: <a href="mailto:ithelp@dss.ucdavis.edu">ithelp@dss.ucdavis.edu</a><br />
+</p>

@@ -13,12 +13,12 @@ class DssMessenger.Models.Message extends Backbone.Model
     sender_uid: null
 
   toJSON: () ->
-    json = _.omit(this.attributes, 'updated_at')
-    console.log "Message bb JSON:"
-    console.log json
+    json = _.omit(this.attributes, 'updated_at','created_at','classification','modifier','recipients','recipient_ids','impacted_services','messenger_events')
     json
 
-
+  toFullJSON: () ->
+    json = _.omit(this.attributes, 'updated_at','recipient_ids')
+    json
 
 class DssMessenger.Collections.MessagesCollection extends Backbone.Collection
   model: DssMessenger.Models.Message

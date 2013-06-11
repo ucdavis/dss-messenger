@@ -1,8 +1,20 @@
-<td><%= subject %></td>
-<td><%= impact_statement %></td>
+<td>
+	<div class="accordion-group frameless">
+	  <div class="accordion-heading">
+	    <a class="accordion-toggle" data-toggle="collapse" href="#collapse<%= id %>">
+	      <%= subject %>
+	    </a>
+	  </div>
+	  <div id="collapse<%= id %>" class="accordion-body collapse">
+	    <div class="accordion-inner">
+	      <%= impact_statement %>
+	    </div>
+	  </div>
+	</div>
+</td>
 <td><%= sender_uid %></td>
-<td><%= created_at %></td>
+<td class="nowrap"><%= created_at %></td>
 
-<td><a href="#/<%= id %>" title="Show"><i class="icon-eye-open"></i></td>
-<td><a href="#/<%= id %>/edit" title="Edit"><i class="icon-edit"></i></td>
-<td><a href="#/<%= id %>/destroy" title="Delete" class="destroy"><i class="icon-trash"></i></a></td>
+<td><a href="#/<%= id %>" class="tooltip-show" ><i class="icon-eye-open"></i></td>
+<td><a href="#/<%= id %>/duplicate" class="tooltip-duplicate" ><i class="icon-retweet"></i></td>
+<td><a href="#/<%= id %>/destroy" class="tooltip-destroy" ><i class="icon-trash"></i></a></td>

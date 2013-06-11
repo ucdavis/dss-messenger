@@ -1,23 +1,10 @@
-<h1>Listing classifications</h1>
+<div id="classifications" class="span9"></div>
 
-<table>
-  <tr>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
-<% @classifications.each do |classification| %>
-  <tr>
-    <td><%= classification.description %></td>
-    <td><%= link_to 'Show', classification %></td>
-    <td><%= link_to 'Edit', edit_classification_path(classification) %></td>
-    <td><%= link_to 'Destroy', classification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Classification', new_classification_path %>
+<script type="text/javascript">
+  $(function() {
+    // DssMessenger is the app name
+    window.router = new DssMessenger.Routers.ClassificationsRouter({classifications: <%= @classifications.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>

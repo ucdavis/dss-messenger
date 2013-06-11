@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130417030304) do
+ActiveRecord::Schema.define(:version => 20130607215425) do
 
   create_table "audiences", :force => true do |t|
     t.integer  "message_id"
@@ -40,6 +40,22 @@ ActiveRecord::Schema.define(:version => 20130417030304) do
     t.datetime "updated_at",          :null => false
   end
 
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
   create_table "impacted_services", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -56,8 +72,10 @@ ActiveRecord::Schema.define(:version => 20130417030304) do
     t.text     "workaround"
     t.text     "other_services"
     t.string   "sender_uid"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "classification_id"
+    t.integer  "modifier_id"
   end
 
   create_table "messenger_events", :force => true do |t|
@@ -76,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20130417030304) do
     t.string   "uid"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "name"
   end
 
 end

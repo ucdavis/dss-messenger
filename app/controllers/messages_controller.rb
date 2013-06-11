@@ -2,11 +2,17 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.filter(params[:is],params[:me])
+    @messages = Message
+      .order('created_at DESC')
+      .by_classification(params[:cl])
+      .by_modifier(params[:mo])
+      .by_service(params[:is])
+      .by_mevent(params[:me])
+      .page(params[:page]).per(20) #paginate with 'page' param being the page number, and 20 as the items per page
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @messages, include: [:recipients, :messenger_events, :impacted_services] }
+      format.json { render json: @messages }
     end
   end
 
@@ -17,7 +23,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @message, include: [:recipients, :messenger_events, :impacted_services] }
+      format.json { render json: @message }
     end
   end
 
@@ -41,11 +47,13 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(params[:message])
-
+    @message.sender_uid = session[:cas_user] #get the uid of the currently logged in user.
+    
     respond_to do |format|
       if @message.save
         format.html { redirect_to @message, notice: 'Message was successfully created.' }
         format.json { render json: @message, status: :created, location: @message }
+        @message.delay.send_mass_email if @message.messenger_event_ids.include? 1 # 1=send email?
       else
         format.html { render action: "new" }
         format.json { render json: @message.errors, status: :unprocessable_entity }

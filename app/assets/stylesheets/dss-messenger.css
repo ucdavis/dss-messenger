@@ -1,0 +1,113 @@
+h1 {
+    margin-bottom: 1em;
+}
+
+#messages {
+	/*position: relative;   *** uncomment to have the overlay only on the messages table**/
+	float: right;
+}
+
+.affix{
+    position: fixed;  /* to stop the div from scrolling */
+    top: 70px;        /* to fix the div at the top its containing element */
+}
+
+tr#mtable-head.affix {
+    position: fixed;
+    top: 40px;
+}
+
+tr#mtable-head.affix th{
+    width: 100%;
+    border-bottom: 1px solid #DDD;
+}
+
+.filters-well {
+  height: 400px;
+  overflow: auto;
+}
+
+label.radio, label.checkbox {
+  font-size: 12px;
+  line-height: 1.2em;
+}
+
+.overlay {
+	position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background-color:rgba(0, 0, 0, 0.10);
+  z-index:9999;
+  color:white;
+  text-align: center;
+}
+
+.overlay .loading {
+	background: transparent url('loading.gif') no-repeat 50% 50%;
+	height: 100%;
+	width: 100%;
+  position:relative;
+}
+
+.overlay .error {
+	padding: 3em;
+	font-size: 3em;
+}
+
+.loading{
+	background: transparent url('loading-small.gif') no-repeat 50% 50%;
+	margin: 10px;
+	width: 43px;
+	height: 11px;
+}
+
+.error{
+	background: transparent url('error.gif') no-repeat 50% 50%;
+	margin: 10px;
+	width: 16px;
+	height: 16px;
+}
+
+.frameless {
+    border: none;
+}
+
+div.token-input-dropdown-facebook {
+    z-index: 1100;
+}
+
+input[type="text"], textarea {
+    width: 400px;
+    padding: 0;
+}
+
+ul.token-input-list-facebook {
+    border: 1px solid #cccccc;
+    webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    margin-bottom: 1em;
+}
+
+td.nowrap {
+    white-space: nowrap;
+}
+
+
+ul.token-input-list-facebook {
+  clear: none;
+}
+
+/******* Nawrrow view / mobile view ********/
+@media (max-width: 767px) {
+	.affix {
+	  position: static;
+	  width: auto;
+	  top: 0;
+	}
+}

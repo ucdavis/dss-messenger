@@ -1,23 +1,10 @@
-<h1>Listing modifiers</h1>
+<div id="modifiers" class="span9"></div>
 
-<table>
-  <tr>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
-<% @modifiers.each do |modifier| %>
-  <tr>
-    <td><%= modifier.description %></td>
-    <td><%= link_to 'Show', modifier %></td>
-    <td><%= link_to 'Edit', edit_modifier_path(modifier) %></td>
-    <td><%= link_to 'Destroy', modifier, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Modifier', new_modifier_path %>
+<script type="text/javascript">
+  $(function() {
+    // DssMessenger is the app name
+    window.router = new DssMessenger.Routers.ModifiersRouter({modifiers: <%= @modifiers.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>
