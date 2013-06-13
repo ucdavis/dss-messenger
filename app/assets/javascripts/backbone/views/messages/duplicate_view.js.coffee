@@ -10,7 +10,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
   initialize: ->
     _.defer =>
       @tokenInput()
-      recipients_tokeninput = @$("input[name=recipient_ids]")
+      recipients_tokeninput = @$("input[name=recipient_uids]")
       recipients_tokeninput.tokenInput "clear"
       _.each @model.get("recipients"), (recipient) ->
         recipients_tokeninput.tokenInput "add",
@@ -93,9 +93,11 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
       modifier_id: $("input[name='modifier_id[]']:checked").val()
 
     @collection.create(@model.toJSON(),
+      at: 0
       success: (message) =>
         @model = message
         window.location.hash = "#/index"
+        window.scrollTo 0, 0
 
       error: (message, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
@@ -117,7 +119,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
       pickSeconds: false
 
   tokenInput: (e) ->
-    $("input[name=recipient_ids]").tokenInput "/recipients",
+    $("input[name=recipient_uids]").tokenInput "/recipients",
       theme: "facebook"
       onAdd: (item) =>
         # console.log @model
