@@ -1,7 +1,10 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+# Data seed for Classifications
 
-one:
-  description: MyString
+degradation:
+  description: "SERVICE DEGRADATION: service is operational but slow or with some features disabled"
 
-two:
-  description: MyString
+outage:
+  description: "SERVICE OUTAGE: service is unexpectedly unavailable"
+
+maintenance:
+  description: "PLANNED MAINTENANCE: will impact service availability"

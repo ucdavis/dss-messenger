@@ -1,7 +1,13 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+# Data seed for Messenger Events
 
-one:
-  description: MyString
+sendemail:
+  id: 1
+  description: Send Email
 
-two:
-  description: MyString
+rss:
+  id: 2
+  description: RSS Feed
+  
+im:
+  id: 3
+  description: Instant Message

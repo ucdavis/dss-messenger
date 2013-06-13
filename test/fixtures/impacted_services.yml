@@ -1,7 +1,22 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+# Data seed for Impacted Services
 
-one:
-  name: MyString
+file:
+  name: "DSS File Services (dss-filer1)"
 
-two:
-  name: MyString
+print:
+  name: "DSS Print Services (Network Printing and Print Metering)"
+
+web:
+  name: "Department and Project Websites (hosted by DSS IT)"
+
+uconnect:
+  name: "uConnect Email and Calendaring Services"
+
+network:
+  name: "Network Connectivity"
+
+wifi:
+  name: "Moobilenet/X and eduRoam Wireless Networks"
+
+matlab:
+  name: "Matlab Network Licensing"
