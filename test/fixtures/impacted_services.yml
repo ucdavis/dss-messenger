@@ -1,22 +1,29 @@
 # Data seed for Impacted Services
 
 file:
+  id: 1
   name: "DSS File Services (dss-filer1)"
 
 print:
+  id: 2
   name: "DSS Print Services (Network Printing and Print Metering)"
 
 web:
+  id: 3
   name: "Department and Project Websites (hosted by DSS IT)"
 
 uconnect:
+  id: 4
   name: "uConnect Email and Calendaring Services"
 
 network:
+  id: 5
   name: "Network Connectivity"
 
 wifi:
+  id: 6
   name: "Moobilenet/X and eduRoam Wireless Networks"
 
 matlab:
+  id: 7
   name: "Matlab Network Licensing"

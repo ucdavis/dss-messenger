@@ -1,16 +1,21 @@
 # Data seed for Modifiers
 
 update:
+  id: 1
   description: "UPDATE: prefix to previous subject when sending an update to an existing issue"
 
 resolved:
+  id: 2
   description: "RESOLVED: prefix to previous subject when notifying that an issue has been resolved"
 
 cancelled:
+  id: 3
   description: "CANCELED: prefix to previous subject when notifying of cancellation of planned maintenance"
 
 reminder:
+  id: 4
   description: "REMINDER: prefix to previous subject when sending a reminder about planned maintenance"
 
 headsup:
+  id: 5
   description: "HEADS-UP: prefix to subject when serious outage or degradation is suspected but not confirmed"
