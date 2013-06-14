@@ -15,8 +15,8 @@ class DssMessenger.Views.Messages.PrefsView extends Backbone.View
       success: (classifications) ->
         $("#classifications_select").empty()
         classifications.each (classification) ->
-          $("#classifications_select").append "<input type='text' class='pref_input' name='classifications[]' value='" + classification.get('description') +
-          "'> <a href='#classifications/" + classification.get('id') + "/destroy' ><i class='icon-trash'></i></a>"
+          view = new DssMessenger.Views.Classifications.EditView({model : classification})
+          @$("#classifications_select").append(view.render().el)
         $("#classifications_select").append "<input type='text' class='pref_input' name='classifications[]' placeholder='Add Classification' >"
 
       error: (classifications, response) ->
