@@ -43,8 +43,8 @@ class DssMessenger.Views.Messages.PrefsView extends Backbone.View
       success: (impacted_services) ->
         $("#impacted_services_select").empty()
         impacted_services.each (impacted_service) ->
-          $("#impacted_services_select").append "<input type='text' class='pref_input' name='impacted_services[]' value='" + impacted_service.get('name') +
-          "'> <a href='#impacted_services/" + impacted_service.get('id') + "/destroy' ><i class='icon-trash'></i></a>"
+          view = new DssMessenger.Views.impacted_services.EditView({model : impacted_service})
+          @$("#impacted_services_select").append(view.render().el)
         $("#impacted_services_select").append "<input type='text' class='pref_input' name='impacted_services[]' placeholder='Add Impacted Service' >"
 
       error: (impacted_services, response) ->
