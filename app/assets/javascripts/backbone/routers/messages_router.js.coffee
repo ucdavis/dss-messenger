@@ -78,6 +78,7 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
     $("#messages").html(@view.render().el)
 
   Preferences: ->
-    @view = new DssMessenger.Views.Messages.PrefsView(collection: @messages)
-    $("#messages").append(@view.render().el)
+    @view = new DssMessenger.Views.Messages.PrefsView()
+    $("#filters-sidebar").hide()
+    $("#messages").html(@view.render().el)
     
