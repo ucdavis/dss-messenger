@@ -6,6 +6,12 @@ class DssMessenger.Views.Modifiers.EditView extends Backbone.View
   events:
     "click .icon-trash": "destroy"
     "change .pref_input": "update"
+    "keypress .pref_input": "checkKey"
+
+  checkKey: (e) ->
+    e.stopPropagation()
+    @save if e.keyCode == 13
+
 
   destroy: () ->
     @model.destroy()
@@ -18,7 +24,7 @@ class DssMessenger.Views.Modifiers.EditView extends Backbone.View
     e.stopPropagation()
 
     @model.set
-      description: $("input[name='modifier']").val()
+      description: @$("input[name='modifier']").val()
 
     @model.save(null,
       success: (modifiers) =>

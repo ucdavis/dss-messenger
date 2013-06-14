@@ -5,7 +5,12 @@ class DssMessenger.Views.Classifications.NewView extends Backbone.View
 
   events:
     "change .pref_input": "save"
+    "keypress .pref_input": "checkKey"
 
+  checkKey: (e) ->
+    e.stopPropagation()
+    @save if e.keyCode == 13
+    
   constructor: (options) ->
     super(options)
     @model = new @collection.model()
@@ -26,6 +31,7 @@ class DssMessenger.Views.Classifications.NewView extends Backbone.View
     @collection.create(@model.toJSON(),
       success: (classifications) =>
         @model = classifications
+        window.location.hash = "#/prefs"
 
       error: (classifications, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})

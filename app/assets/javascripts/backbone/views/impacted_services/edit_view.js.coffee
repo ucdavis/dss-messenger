@@ -6,6 +6,12 @@ class DssMessenger.Views.impacted_services.EditView extends Backbone.View
   events:
     "click .icon-trash": "destroy"
     "change .pref_input": "update"
+    "keypress .pref_input": "checkKey"
+
+  checkKey: (e) ->
+    e.stopPropagation()
+    @save if e.keyCode == 13
+
 
   destroy: () ->
     @model.destroy()
@@ -16,7 +22,7 @@ class DssMessenger.Views.impacted_services.EditView extends Backbone.View
     e.stopPropagation()
 
     @model.set
-      name: $("input[name='impacted_service']").val()
+      name: @$("input[name='impacted_service']").val()
 
     @model.save(null,
       success: (impacted_services) =>

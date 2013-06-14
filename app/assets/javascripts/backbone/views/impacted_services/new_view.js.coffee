@@ -5,6 +5,12 @@ class DssMessenger.Views.impacted_services.NewView extends Backbone.View
 
   events:
     "change .pref_input": "save"
+    "keypress .pref_input": "checkKey"
+
+  checkKey: (e) ->
+    e.stopPropagation()
+    @save if e.keyCode == 13
+
 
   constructor: (options) ->
     super(options)
