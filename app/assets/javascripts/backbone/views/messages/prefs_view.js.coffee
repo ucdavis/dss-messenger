@@ -29,8 +29,8 @@ class DssMessenger.Views.Messages.PrefsView extends Backbone.View
       success: (modifiers) ->
         $("#modifiers_select").empty()
         modifiers.each (modifier) ->
-          $("#modifiers_select").append "<input type='text' class='pref_input' name='modifiers[]' value='" + modifier.get('description') +
-          "'> <a href='#modifiers/" + modifier.get('id') + "/destroy' ><i class='icon-trash'></i></a>"
+          view = new DssMessenger.Views.Modifiers.EditView({model : modifier})
+          @$("#modifiers_select").append(view.render().el)
         $("#modifiers_select").append "<input type='text' class='pref_input' name='modifiers[]' placeholder='Add Modifier' >"
 
       error: (modifiers, response) ->
