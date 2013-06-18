@@ -4,8 +4,13 @@ class DssMessenger.Views.Classifications.NewView extends Backbone.View
   template: JST["backbone/templates/classifications/new"]
 
   events:
-    "submit #new-classifications": "save"
+    "change .pref_input": "save"
+    "keypress .pref_input": "checkKey"
 
+  checkKey: (e) ->
+    e.stopPropagation()
+    @save if e.keyCode == 13
+    
   constructor: (options) ->
     super(options)
     @model = new @collection.model()
@@ -20,10 +25,13 @@ class DssMessenger.Views.Classifications.NewView extends Backbone.View
 
     @model.unset("errors")
 
+    @model.set
+      description: @$("input[name='description']").val()
+
     @collection.create(@model.toJSON(),
       success: (classifications) =>
         @model = classifications
-        window.location.hash = "/#{@model.id}"
+        window.location.hash = "#/prefs"
 
       error: (classifications, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})

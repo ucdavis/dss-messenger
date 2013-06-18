@@ -83,6 +83,11 @@ input[type="text"], textarea {
     padding: 0;
 }
 
+input[type="text"].pref_input {
+  padding: 2px;
+  margin: 2px;
+}
+
 ul.token-input-list-facebook {
     border: 1px solid #cccccc;
     webkit-border-radius: 4px;
