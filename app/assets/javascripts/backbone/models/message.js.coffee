@@ -12,6 +12,11 @@ class DssMessenger.Models.Message extends Backbone.Model
     other_services: null
     sender_uid: null
 
+  validation:
+    subject:
+      required: true
+      msg: "please enter message subject"
+
   toJSON: () ->
     json = _.omit(this.attributes, 'updated_at','created_at','classification','modifier','recipients','recipient_ids','impacted_services','messenger_events')
     json
@@ -19,6 +24,7 @@ class DssMessenger.Models.Message extends Backbone.Model
   toFullJSON: () ->
     json = _.omit(this.attributes, 'updated_at','recipient_ids')
     json
+    
 
 class DssMessenger.Collections.MessagesCollection extends Backbone.Collection
   model: DssMessenger.Models.Message

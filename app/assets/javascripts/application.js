@@ -22,5 +22,6 @@
 //= require backbone
 //= require backbone_rails_sync
 //= require backbone_datalink
+//= require ../../../vendor/assets/javascripts/backbone-validation
 //= require backbone/dss_messenger
 //= require dss-messenger

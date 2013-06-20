@@ -63,6 +63,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
         $("#messenger_events_select").html("<div class='error'></div>")
         console.log "#{response.status}."
 
+    Backbone.Validation.bind this
 
   constructor: (options) ->
     super(options)
