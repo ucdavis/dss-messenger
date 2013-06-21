@@ -63,13 +63,6 @@ label.radio, label.checkbox {
 	height: 11px;
 }
 
-.error{
-	background: transparent url('error.gif') no-repeat 50% 50%;
-	margin: 10px;
-	width: 16px;
-	height: 16px;
-}
-
 .frameless {
     border: none;
 }
@@ -106,6 +99,34 @@ td.nowrap {
 
 ul.token-input-list-facebook {
   clear: none;
+}
+
+/*------- Message Show View -------*/
+.message-box {
+  border: 1px solid #cedff2;
+  background: #f5faff;
+}
+
+.message-header {
+  margin: 3px;
+  background: #cedff2;
+  border: 1px solid #a3b0bf;
+  text-align: left;
+  padding: 0.2em 0.5em;
+}
+
+.message-header .title {
+  font-size: 150%;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.message-header .info {
+  margin-right: 1em;
+}
+
+.message-body {
+  margin: 1em;
 }
 
 /******* Nawrrow view / mobile view ********/

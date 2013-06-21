@@ -11,7 +11,7 @@
  *= require_self
  *= require bootstrap_and_overrides
  *= require ../../../vendor/assets/stylesheets/jquery-ui-1.10.0.custom.min
- *= require ../../../vendor/assets/stylesheets/bootstrap-datetimepicker.min.css
+ *= require ../../../vendor/assets/stylesheets/datetimepicker
  *= require ../../../vendor/assets/stylesheets/token-input
  *= require ../../../vendor/assets/stylesheets/token-input-facebook
  *= require dss-messenger
