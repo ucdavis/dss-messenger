@@ -13,9 +13,15 @@ class DssMessenger.Models.Message extends Backbone.Model
     sender_uid: null
 
   validation:
+    recipient_uids:
+      required: true
+      msg: "Please enter at least one recipient"
     subject:
       required: true
-      msg: "please enter message subject"
+      msg: "Please enter message subject"
+    impact_statement:
+      required: true
+      msg: "Please enter an impact statement"
 
   toJSON: () ->
     json = _.omit(this.attributes, 'updated_at','created_at','classification','modifier','recipients','recipient_ids','impacted_services','messenger_events')

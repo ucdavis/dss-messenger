@@ -63,13 +63,6 @@ label.radio, label.checkbox {
 	height: 11px;
 }
 
-.error{
-	background: transparent url('error.gif') no-repeat 50% 50%;
-	margin: 10px;
-	width: 16px;
-	height: 16px;
-}
-
 .frameless {
     border: none;
 }
