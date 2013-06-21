@@ -75,9 +75,15 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
   datetimePicker: ->
     $('.datetimepicker').datetimepicker
-      language: "en"
-      pick12HourFormat: true
-      pickSeconds: false
+      format: "yyyy/mm/dd HH:ii P"
+      minuteStep: 30
+      # minView: 2 (this + an interactive format could be used to have only dates)
+      autoclose: true
+      todayBtn: true
+      todayHighlight: true
+      showMeridian: true
+      pickerPosition: "bottom-left"
+    
 
   tokenInput: (e) ->
     $("input[name=recipient_uids]").tokenInput "/recipients",
