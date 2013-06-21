@@ -5,85 +5,87 @@
 		<span class="info text-info pull-right">Sent at <%= created_at %></span>
 	</div>
 	<div class="message-body">
-		<p>
-		  <b>Sender uid:</b>
-		  <%= sender_uid %>
-		</p>
-
-		<p>
-		  <b>Recipients:</b>
-		  <ul>
-		  <% _.each(recipients, function(recipient){ %>
-		    <li><%= recipient.name %></li>
-		  <% }); %>
-		  </ul>
-		</p>
-
-		<p>
-		  <b>Classification:</b>
-			<% if (classification) { %>
-				<%= classification.description %></td>
-			<% } %>
-		</p>
-
-		<p>
-		  <b>Modifier:</b>
-			<% if (modifier) { %>
-				<%= modifier.description %></td>
-			<% } %>
-		</p>
-
-		<p>
-		  <b>Impact statement:</b>
-		  <%= impact_statement %>
-		</p>
-
-		<p>
-		  <b>Window start:</b>
-		  <%= window_start %>
-		</p>
-
-		<p>
-		  <b>Window end:</b>
-		  <%= window_end %>
-		</p>
-
-		<p>
-		  <b>Purpose:</b>
-		  <%= purpose %>
-		</p>
-
-		<p>
-		  <b>Resolution:</b>
-		  <%= resolution %>
-		</p>
-
-		<p>
-		  <b>Workaround:</b>
-		  <%= workaround %>
-		</p>
-
-		<p>
-		  <b>Other services:</b>
-		  <%= other_services %>
-		</p>
-
-		<p>
-		  <b>Impacted Services:</b>
-		  <ul>
-		  <% _.each(impacted_services, function(impacted_service){ %>
-		    <li><%= impacted_service.name %></li>
-		  <% }); %>
-		  </ul>
-		</p>
-
-		<p>
-		  <b>Events:</b>
-		  <ul>
-		  <% _.each(messenger_events, function(messenger_event){ %>
-		    <li><%= messenger_event.description %></li>
-		  <% }); %>
-		  </ul>
-		</p>
+		<table class="table table-hover table-condensed">
+		  	<tbody>
+		    <tr>
+		      <td><b>Recipients</b></td>
+		      <td>
+				  <ul>
+					  <% _.each(recipients, function(recipient){ %>
+					    <li><%= recipient.name %></li>
+					  <% }); %>
+					  </ul>
+					</td>
+		    </tr>
+				<tr>
+					<td><b>Sender</b></td>
+					<td><%= sender_uid %></td>
+				</tr>
+				<tr>
+					<td><b>Classification</b></td>
+					<td>
+						<% if (classification) { %>
+							<%= classification.description %></td>
+						<% } %>
+					</td>
+				</tr>
+				<tr>
+					<td><b>Modifier</b></td>
+					<td>
+						<% if (modifier) { %>
+							<%= modifier.description %></td>
+						<% } %>
+					</td>
+				</tr>
+				<tr>
+					<td><b>Impact statement</b></td>
+					<td><%= impact_statement %></td>
+				</tr>
+				<tr>
+					<td><b>Window start</b></td>
+					<td><%= window_start %></td>
+				</tr>
+				<tr>
+					<td><b>Window end</b></td>
+					<td><%= window_end %></td>
+				</tr>
+				<tr>
+					<td><b>Purpose</b></td>
+					<td><%= purpose %></td>
+				</tr>
+				<tr>
+					<td><b>Resolution</b></td>
+					<td><%= resolution %></td>
+				</tr>
+				<tr>
+					<td><b>Workaround</b></td>
+					<td><%= workaround %></td>
+				</tr>
+				<tr>
+					<td><b>Other services</b></td>
+					<td><%= other_services %></td>
+				</tr>
+				<tr>
+					<td><b>Impacted Services</b></td>
+					<td>
+						<ul>
+					  <% _.each(impacted_services, function(impacted_service){ %>
+					    <li><%= impacted_service.name %></li>
+					  <% }); %>
+					  </ul>
+				  </td>
+				</tr>
+				<tr>
+					<td><b>Events</b></td>
+					<td>
+						<ul>
+					  <% _.each(messenger_events, function(messenger_event){ %>
+					    <li><%= messenger_event.description %></li>
+					  <% }); %>
+					  </ul>
+					</td>
+				</tr>
+		  </tbody>
+		</table>
 	</div>
 </div>
