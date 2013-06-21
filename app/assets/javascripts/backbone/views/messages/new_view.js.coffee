@@ -57,7 +57,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
       success: (messenger_events) ->
         $("#messenger_events_select").empty()
         messenger_events.each (messenger_event) ->
-          $("#messenger_events_select").append "<label class='checkbox'><input type='checkbox' name='messenger_event_ids[]' value='" + messenger_event.get('id') + "'>" + messenger_event.get('description') + "</label>"
+          $("#messenger_events_select").append "<label class='checkbox'><input type='checkbox' name='messenger_event_ids[]' value='" + messenger_event.get('id') + (if messenger_event.get('id') == 1 then "' checked />" else "' />") + messenger_event.get('description') + "</label>"
 
       error: (messenger_events, response) ->
         $("#messenger_events_select").html("<div class='error'></div>")
