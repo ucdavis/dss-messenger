@@ -21,14 +21,8 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
       error: (modifiers, response) ->
         console.log "#{response.status}."
 
-    @impacted_services = new DssMessenger.Collections.impacted_servicesCollection()
-    @impacted_services.fetch
-      success: (impacted_services) =>
-        @impacted_services = impacted_services
-
-      error: (impacted_services, response) ->
-        console.log "#{response.status}."
-
+    DssMessenger.impacted_services = new DssMessenger.Collections.impacted_servicesCollection(options.impacted_services)
+    
     @messenger_events = new DssMessenger.Collections.messenger_eventsCollection()
     @messenger_events.fetch
       success: (messenger_events) =>

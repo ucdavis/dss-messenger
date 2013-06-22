@@ -28,7 +28,8 @@
 			{
 				messages: <%= @messages.to_json.html_safe -%>,
 				pages: <%= @messages.total_pages -%>,
-				current: <%= @messages.current_page -%>
+				current: <%= @messages.current_page -%>,
+        impacted_services: <%= @impacted_services.to_json.html_safe -%>
 			});
     Backbone.history.start();
   });
