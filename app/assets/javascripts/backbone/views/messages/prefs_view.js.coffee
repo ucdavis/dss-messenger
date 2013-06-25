@@ -4,11 +4,25 @@ class DssMessenger.Views.Messages.PrefsView extends Backbone.View
   template: JST["backbone/templates/messages/prefs"]
 
   initialize: ->
+    DssMessenger.classifications.bind("change", () =>
+      this.render()
+    )
+    DssMessenger.modifiers.bind("change", () =>
+      this.render()
+    )
+    DssMessenger.impacted_services.bind("change", () =>
+      this.render()
+    )
+
+  render: ->
+    @$el.html(@template( ))
+
     _.defer =>
+      # display loading gif while loading content
       $("#classifications_select").html("<div class='loading'></div>")
       $("#modifiers_select").html("<div class='loading'></div>")
       $("#impacted_services_select").html("<div class='loading'></div>")
-
+      # load the inputs originally laoded from the router
       $("#classifications_select").empty()
       DssMessenger.classifications.each (classification) ->
         view = new DssMessenger.Views.Classifications.EditView({model : classification})
@@ -29,10 +43,5 @@ class DssMessenger.Views.Messages.PrefsView extends Backbone.View
         @$("#impacted_services_select").append(view.render().el)
       @view = new DssMessenger.Views.impacted_services.NewView(collection: DssMessenger.impacted_services)
       $("#impacted_services_select").append(@view.render().el)
-
-
-  render: ->
-    console.log 'rendering preferences'
-    @$el.html(@template( ))
 
     return this
