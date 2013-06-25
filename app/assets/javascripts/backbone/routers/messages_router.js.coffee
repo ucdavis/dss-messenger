@@ -1,36 +1,14 @@
 class DssMessenger.Routers.MessagesRouter extends Backbone.Router
   initialize: (options) ->
-    @messages = new DssMessenger.Collections.MessagesCollection()
-    @messages.reset options.messages
-    @pages = options.pages
-    @current = options.current
+    DssMessenger.messages = new DssMessenger.Collections.MessagesCollection(options.messages)
+    DssMessenger.pages = options.pages
+    DssMessenger.current = options.current
 
-    @classifications = new DssMessenger.Collections.ClassificationsCollection()
-    @classifications.fetch
-      success: (classifications) =>
-        @classifications = classifications
-
-      error: (classifications, response) ->
-        console.log "#{response.status}."
-
-    @modifiers = new DssMessenger.Collections.ModifiersCollection()
-    @modifiers.fetch
-      success: (modifiers) =>
-        @modifiers = modifiers
-
-      error: (modifiers, response) ->
-        console.log "#{response.status}."
-
+    DssMessenger.classifications = new DssMessenger.Collections.ClassificationsCollection(options.classifications)
+    DssMessenger.modifiers = new DssMessenger.Collections.ModifiersCollection(options.modifiers)
     DssMessenger.impacted_services = new DssMessenger.Collections.impacted_servicesCollection(options.impacted_services)
+    DssMessenger.messenger_events = new DssMessenger.Collections.messenger_eventsCollection(options.messenger_events)
     
-    @messenger_events = new DssMessenger.Collections.messenger_eventsCollection()
-    @messenger_events.fetch
-      success: (messenger_events) =>
-        @messenger_events = messenger_events
-
-      error: (messenger_events, response) ->
-        console.log "#{response.status}."
-
   routes:
     "new"           : "newMessage"
     "index"         : "index"
@@ -40,34 +18,34 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
     ".*"            : "index"
 
   newMessage: ->
-    @view = new DssMessenger.Views.Messages.NewView(collection: @messages)
+    @view = new DssMessenger.Views.Messages.NewView(collection: DssMessenger.messages)
     $("#filters-sidebar").hide()
     $("#messages").html(@view.render().el)
 
   index: ->
     $("#filters-sidebar").fadeIn()
-    @view = new DssMessenger.Views.Messages.IndexView(messages: @messages, pages: @pages, current: @current)
+    @view = new DssMessenger.Views.Messages.IndexView(messages: DssMessenger.messages, pages: DssMessenger.pages, current: DssMessenger.current)
     $("#messages").html(@view.render().el)
-    @view = new DssMessenger.Views.Classifications.IndexView(classifications: @classifications)
+    @view = new DssMessenger.Views.Classifications.IndexView(classifications: DssMessenger.classifications)
     $("#filter_classifications").html(@view.render().el)
-    @view = new DssMessenger.Views.Modifiers.IndexView(modifiers: @modifiers)
+    @view = new DssMessenger.Views.Modifiers.IndexView(modifiers: DssMessenger.modifiers)
     $("#filter_modifiers").html(@view.render().el)
-    @view = new DssMessenger.Views.impacted_services.IndexView(impacted_services: @impacted_services)
+    @view = new DssMessenger.Views.impacted_services.IndexView(impacted_services: DssMessenger.impacted_services)
     $("#filter_impacted_services").html(@view.render().el)
-    @view = new DssMessenger.Views.messenger_events.IndexView(messenger_events: @messenger_events)
+    @view = new DssMessenger.Views.messenger_events.IndexView(messenger_events: DssMessenger.messenger_events)
     $("#filter_messenger_events").html(@view.render().el)
 
   show: (id) ->
-    message = @messages.get(id)
+    message = DssMessenger.messages.get(id)
 
     @view = new DssMessenger.Views.Messages.ShowView(model: message)
     $("#filters-sidebar").hide()
     $("#messages").html(@view.render().el)
 
   duplicate: (id) ->
-    message = @messages.get(id)
+    message = DssMessenger.messages.get(id)
 
-    @view = new DssMessenger.Views.Messages.DuplicateView(collection: @messages, model: message)
+    @view = new DssMessenger.Views.Messages.DuplicateView(collection: DssMessenger.messages, model: message)
     $("#filters-sidebar").hide()
     $("#messages").html(@view.render().el)
 

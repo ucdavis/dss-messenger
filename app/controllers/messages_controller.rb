@@ -9,7 +9,10 @@ class MessagesController < ApplicationController
       .by_service(params[:is])
       .by_mevent(params[:me])
       .page(params[:page]).per(20) #paginate with 'page' param being the page number, and 20 as the items per page
+    @classifications = Classification.all
+    @modifiers = Modifier.all
     @impacted_services = ImpactedService.all
+    @messenger_events = MessengerEvent.all
 
     respond_to do |format|
       format.html # index.html.erb
