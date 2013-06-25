@@ -8,7 +8,12 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
     "focus #Recipients"	:	"tokenInput"
 
   initialize: ->
+    @current_classification = @model.get('classification_id')
+    @current_modifier = @model.get('modifier_id')
+    @current_services = @model.get('impacted_services')
+    @current_events = @model.get('messenger_events')
     _.defer =>
+      # initialise recipients token input and load duplicated recipients
       @tokenInput()
       recipients_tokeninput = @$("input[name=recipient_uids]")
       recipients_tokeninput.tokenInput "clear"
@@ -16,68 +21,34 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
         recipients_tokeninput.tokenInput "add",
         id: recipient.uid
         name: recipient.name
+      # display loading gif while loading single and multi select inputs
       $("#classifications_select").html("<div class='loading'></div>")
       $("#modifiers_select").html("<div class='loading'></div>")
       $("#impacted_services_select").html("<div class='loading'></div>")
       $("#messenger_events_select").html("<div class='loading'></div>")
+      # load the single and multi select inputs laoded originally from the router
+      $("#classifications_select").empty()
+      DssMessenger.classifications.each (classification) =>
+        console.log @current_classification
+        @checked = @current_classification is classification.get('id')
+        $("#classifications_select").append "<label class='radio'><input type='radio' name='classification_id[]' value='" + classification.get('id') + (if @checked then "' checked />" else "' />") + classification.get('description') + "</label>"
 
-    @current_classification = @model.get('classification_id')
-    @classifications = new DssMessenger.Collections.ClassificationsCollection()
-    @classifications.fetch	
+      $("#modifiers_select").empty()
+      DssMessenger.modifiers.each (modifier) =>
+        @checked = @current_modifier is modifier.get('id')
+        $("#modifiers_select").append "<label class='radio'><input type='radio' name='modifier_id[]' value='" + modifier.get('id') + (if @checked then "' checked />" else "' />") + modifier.get('description') + "</label>"
 
-      success: (classifications) =>
-        $("#classifications_select").empty()
-        classifications.each (classification) =>
-          @checked = @current_classification is classification.get('id')
-          $("#classifications_select").append "<label class='radio'><input type='radio' name='classification_id[]' value='" + classification.get('id') + (if @checked then "' checked />" else "' />") + classification.get('description') + "</label>"
+      $("#impacted_services_select").empty()
+      DssMessenger.impacted_services.each (impacted_service) =>
+        @checked = _.find @current_services, (current_service) =>
+          return current_service.id is impacted_service.get('id')
+        $("#impacted_services_select").append "<label class='checkbox'><input type='checkbox' name='impacted_service_ids[]' value='" + impacted_service.get('id') + (if @checked then "' checked />" else "' />") + impacted_service.get('name') + "</label>"
 
-      error: (classifications, response) ->
-        $("#classifications_select").html("<div class='error'></div>")
-        console.log "#{response.status}."
-
-    @current_modifier = @model.get('modifier_id')
-    @modifiers = new DssMessenger.Collections.ModifiersCollection()
-    @modifiers.fetch	
-
-      success: (modifiers) =>
-        $("#modifiers_select").empty()
-        modifiers.each (modifier) =>
-          @checked = @current_modifier is modifier.get('id')
-          $("#modifiers_select").append "<label class='radio'><input type='radio' name='modifier_id[]' value='" + modifier.get('id') + (if @checked then "' checked />" else "' />") + modifier.get('description') + "</label>"
-
-      error: (modifiers, response) ->
-        $("#modifiers_select").html("<div class='error'></div>")
-        console.log "#{response.status}."
-
-    @current_services = @model.get('impacted_services')
-    @impacted_services = new DssMessenger.Collections.impacted_servicesCollection()
-    @impacted_services.fetch	
-
-      success: (impacted_services) =>
-        $("#impacted_services_select").empty()
-        impacted_services.each (impacted_service) =>
-          @checked = _.find @current_services, (current_service) =>
-            return current_service.id is impacted_service.get('id')
-          $("#impacted_services_select").append "<label class='checkbox'><input type='checkbox' name='impacted_service_ids[]' value='" + impacted_service.get('id') + (if @checked then "' checked />" else "' />") + impacted_service.get('name') + "</label>"
-
-      error: (impacted_services, response) ->
-        $("#impacted_services_select").html("<div class='error'></div>")
-        console.log "#{response.status}."
-
-    @current_events = @model.get('messenger_events')
-    @messenger_events = new DssMessenger.Collections.messenger_eventsCollection()
-    @messenger_events.fetch	
-
-      success: (messenger_events) =>
-        $("#messenger_events_select").empty()
-        messenger_events.each (messenger_event) =>
-          @checked = _.find @current_events, (current_event) =>
-            return current_event.id is messenger_event.get('id')
-          $("#messenger_events_select").append "<label class='checkbox'><input type='checkbox' name='messenger_event_ids[]' value='" + messenger_event.get('id') + (if @checked then "' checked />" else "' />") + messenger_event.get('description') + "</label>"
-
-      error: (messenger_events, response) ->
-        $("#messenger_events_select").html("<div class='error'></div>")
-        console.log "#{response.status}."
+      $("#messenger_events_select").empty()
+      DssMessenger.messenger_events.each (messenger_event) =>
+        @checked = _.find @current_events, (current_event) =>
+          return current_event.id is messenger_event.get('id')
+        $("#messenger_events_select").append "<label class='checkbox'><input type='checkbox' name='messenger_event_ids[]' value='" + messenger_event.get('id') + (if @checked then "' checked />" else "' />") + messenger_event.get('description') + "</label>"
 
 
   save: (e) ->
