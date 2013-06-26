@@ -67,6 +67,11 @@ label.radio, label.checkbox {
     border: none;
 }
 
+i.icon-trash {
+    color:red;
+    cursor:pointer;
+}
+
 div.token-input-dropdown-facebook {
     z-index: 1100;
 }
