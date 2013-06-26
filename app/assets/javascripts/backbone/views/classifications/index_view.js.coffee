@@ -10,6 +10,8 @@ class DssMessenger.Views.Classifications.IndexView extends Backbone.View
   
   initialize: () ->
     @options.classifications.bind('reset', @addAll)
+    _.defer =>
+      $('.selectpicker').selectpicker()
 
   addAll: () =>
     @$el.append('<option value="">Select one...</option>')

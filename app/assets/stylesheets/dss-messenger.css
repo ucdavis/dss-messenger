@@ -22,11 +22,11 @@ tr#mtable-head.affix th{
     border-bottom: 1px solid #DDD;
 }
 
-.filters-well {
+/*.filters-well {
   height: 400px;
   overflow: auto;
 }
-
+*/
 label.radio, label.checkbox {
   font-size: 12px;
   line-height: 1.2em;

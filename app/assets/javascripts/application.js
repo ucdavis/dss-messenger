@@ -17,6 +17,7 @@
 //= require ../../../vendor/assets/javascripts/jquery.tokeninput
 //= require ../../../vendor/assets/javascripts/moment.min
 //= require ../../../vendor/assets/javascripts/bootbox.min
+//= require ../../../vendor/assets/javascripts/bootstrap-select
 //= require twitter/bootstrap
 //= require underscore
 //= require backbone
