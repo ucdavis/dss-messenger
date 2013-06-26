@@ -14,8 +14,14 @@ class DssMessenger.Views.Modifiers.EditView extends Backbone.View
 
 
   destroy: () ->
-    @model.destroy()
-    this.remove()
+    bootbox.confirm "Are you sure you want to delete '" + @model.escape("description") + "' ?", (result) =>
+      if result
+        # delete the object and remove from view
+        @model.destroy()
+        this.remove()
+        
+    # dismiss the dialog
+    @$(".modal-header a.close").trigger "click"
 
     return false
 
