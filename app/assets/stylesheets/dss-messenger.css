@@ -141,4 +141,10 @@ ul.token-input-list-facebook {
 	  width: auto;
 	  top: 0;
 	}
+	
+	tr#mtable-head.affix {
+      position: fixed;
+      top: 0px;
+  }
+  
 }
