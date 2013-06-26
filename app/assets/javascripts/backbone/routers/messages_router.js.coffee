@@ -34,6 +34,8 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
     $("#filter_impacted_services").html(@view.render().el)
     @view = new DssMessenger.Views.messenger_events.IndexView(messenger_events: DssMessenger.messenger_events)
     $("#filter_messenger_events").html(@view.render().el)
+    @view = new DssMessenger.Views.Messages.ResetFiltersView()
+    $("#reset_filters").html(@view.render().el)
 
   show: (id) ->
     message = DssMessenger.messages.get(id)

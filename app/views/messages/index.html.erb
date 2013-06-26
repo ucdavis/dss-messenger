@@ -1,9 +1,7 @@
 <div class="span3 affix" id="filters-sidebar">
-	<% if permitted_to? :create, @message %>
 	<div class="well">
 		<a href="#/new" class="btn btn-primary btn-large btn-block">New Message</a>
 	</div>
-	<% end %>
 	<div class="well filters-well hidden-phone">
 		<form id="filters-form">
 			<h3>Filters:</h3>
@@ -12,7 +10,7 @@
 			<div id="filter_impacted_services"></div>
 			<div id="filter_messenger_events"></div>
 			<br />
-			<a href="#/index" id="reset-filters" class="btn hidden">Reset Filters</a>
+			<div id="reset_filters"></div>
 		</form>
 	</div>
 </div>

@@ -5,9 +5,6 @@ class DssMessenger.Views.messenger_events.IndexView extends Backbone.View
 
   tagName: "select"
 
-  events:
-    "click #reset-filters" : "reset"
-
   initialize: () ->
     @options.messenger_events.bind('reset', @addAll)
     _.defer =>
@@ -26,22 +23,4 @@ class DssMessenger.Views.messenger_events.IndexView extends Backbone.View
     @addAll()
 
     return this
-
-  reset: (e) ->
-    e.stopPropagation()
-    $('#filters-form input[type="radio"]').each -> $(this).prop 'checked', false
-    $("#messages").append("<div class='overlay'><div class='loading'></div></div>")
-
-    @messages = new DssMessenger.Collections.MessagesCollection()
-    @messages.fetch
-
-      success: (messages) =>
-        @view = new DssMessenger.Views.Messages.IndexView(messages: @messages)
-        $("#messages").html(@view.render().el)
-        $('#reset-filters').addClass('hidden')
-
-      error: (messages, response) ->
-        console.log "#{response.status}."
-        $("#messages").append("<div class='overlay'><div class='error'>Loading Error</div></div>")
-    return false
 
