@@ -7,10 +7,11 @@ class Person < ActiveResource::Base
     tokens = []
 
     Rails.logger.debug "onetwothreefour"    
-    roles.each do |r|
+    role_assignments.each do |r|
       Rails.logger.debug r.inspect
       tokens << r.token.to_sym if r.application_name == "DSS Messenger"
-      # tokens = [:guest]
+      # uncomment this line to override dss-rm roles
+      # tokens = [:access] 
     end
     
     Rails.logger.debug tokens.inspect
