@@ -1,5 +1,6 @@
 class Message < ActiveRecord::Base
   attr_accessible :impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround, :classification_id, :modifier_id, :recipient_uids, :messenger_event_ids, :impacted_service_ids
+  
   has_many :damages
   has_many :impacted_services, :through => :damages
   
@@ -11,6 +12,11 @@ class Message < ActiveRecord::Base
   
   belongs_to :classification
   belongs_to :modifier
+
+  # Validations
+  validates :subject, presence: true
+  validates :impact_statement, presence: true
+  validates_associated :recipients
 
   # Filters to limit the result to specified criterion
   scope :by_classification, lambda { |classification| where(classification_id: classification) unless classification.nil? }
