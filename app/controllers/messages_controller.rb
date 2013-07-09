@@ -13,11 +13,12 @@ class MessagesController < ApplicationController
     @modifiers = Modifier.all
     @impacted_services = ImpactedService.all
     @messenger_events = MessengerEvent.all
+    @rssMessages = Message.by_mevent(2)
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @messages }
-      format.rss { render :layout => false } #index.rss.builder
+      format.rss { render layout: false } #index.rss.builder
     end
   end
 

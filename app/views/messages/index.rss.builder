@@ -2,10 +2,10 @@ xml.instruct! :xml, :version => "1.0"
 xml.rss :version => "2.0" do
   xml.channel do
     xml.title "DSS-Messenger"
-    xml.description "Most recent DSS notifications"
+    xml.description "Most recent DSS notifications (RSS)"
     xml.link messages_url
 
-    for m in @messages
+    for m in @rssMessages
       xml.item do
         xml.title m.subject
         xml.description m.impact_statement
