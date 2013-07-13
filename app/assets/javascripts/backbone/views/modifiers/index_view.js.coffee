@@ -30,28 +30,36 @@ class DssMessenger.Views.Modifiers.IndexView extends Backbone.View
   filter: (e) ->
     e.stopPropagation()
     modifier = @$el.val()
-    if modifier != ''
-      classification = $("input[name='cl_filter[]']:checked").val()
-      service = $("input[name='is_filter[]']:checked").val()
-      mevent = $("input[name='me_filter[]']:checked").val()
+    classification = $("#filter_classifications li.selected").attr "rel"
+    service = $("#filter_impacted_services li.selected").attr "rel"
+    mevent = $("#filter_messenger_events li.selected").attr "rel"
 
-      $("#messages").append("<div class='overlay'><div class='loading'></div></div>")
+    $("#messages").append("<div class='overlay'><div class='loading'></div></div>")
 
-      @messages = new DssMessenger.Collections.MessagesCollection()
-      @messages.fetch
-        data:
-          cl: classification
-          mo: modifier
-          is: service
-          me: mevent
+    @messages = new DssMessenger.Collections.MessagesCollection()
+    @messages.fetch
+      data:
+        page: DssMessenger.current,
+        cl: classification if classification > 0,
+        mo: modifier if modifier > 0,
+        is: service if service > 0,
+        me: mevent if mevent > 0
 
-        success: (messages) =>
-          @view = new DssMessenger.Views.Messages.IndexView(messages: @messages)
-          $("#messages").html(@view.render().el)
-          $('#reset-filters').removeClass('hidden')
+      success: (messages) =>
+        if @messages.length > 0
+          DssMessenger.pages = @messages.first().get('pages')
+          DssMessenger.current = @messages.first().get('current')
+        else
+          DssMessenger.pages = 0
+          DssMessenger.current = 0
+          
+        @view = new DssMessenger.Views.Messages.IndexView(messages: @messages)
+        $("#messages").html(@view.render().el)
+        $('#reset-filters').removeClass('hidden')
 
-        error: (messages, response) ->
-          console.log "#{response.status}."
-          $("#messages").append("<div class='overlay'><div class='error'>Loading Error</div></div>")
-      return true
+      error: (messages, response) ->
+        console.log "#{response.status}."
+        $("#messages").append("<div class='overlay'><div class='error'>Loading Error</div></div>")
+
+    return true
 

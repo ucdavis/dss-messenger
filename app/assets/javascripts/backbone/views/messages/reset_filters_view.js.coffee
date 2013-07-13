@@ -18,6 +18,13 @@ class DssMessenger.Views.Messages.ResetFiltersView extends Backbone.View
     @messages.fetch
 
       success: (messages) =>
+        if @messages.length > 0
+          DssMessenger.pages = @messages.first().get('pages')
+          DssMessenger.current = @messages.first().get('current')
+        else
+          DssMessenger.pages = 0
+          DssMessenger.current = 0
+          
         @view = new DssMessenger.Views.Messages.IndexView(messages: @messages)
         $("#messages").html(@view.render().el)
         $('#reset-filters').addClass('hidden')
