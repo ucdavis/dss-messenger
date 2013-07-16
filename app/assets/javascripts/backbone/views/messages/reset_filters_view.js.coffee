@@ -4,7 +4,7 @@ class DssMessenger.Views.Messages.ResetFiltersView extends Backbone.View
     "click #reset-filters" : "reset"
   
   render: =>
-    @$el.html('<a href="#/index" id="reset-filters" class="btn hidden">Reset Filters</a>')
+    @$el.html('<a href="#" id="reset-filters" class="btn hidden">Reset Filters</a>')
 
     return this
 
@@ -24,8 +24,6 @@ class DssMessenger.Views.Messages.ResetFiltersView extends Backbone.View
           DssMessenger.pages = 0
           DssMessenger.current = 0
           
-        @view = new DssMessenger.Views.Messages.IndexView(messages: @messages)
-        $("#messages").html(@view.render().el)
         $('#reset-filters').addClass('hidden')
 
       error: (messages, response) ->
