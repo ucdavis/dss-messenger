@@ -3,6 +3,8 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
     DssMessenger.messages = new DssMessenger.Collections.MessagesCollection(options.messages)
     DssMessenger.pages = options.pages
     DssMessenger.current = options.current
+    # Initialize filters
+    DssMessenger.filterClassification = DssMessenger.filterModifier = DssMessenger.filterService = DssMessenger.filterMevent = 0
 
     DssMessenger.classifications = new DssMessenger.Collections.ClassificationsCollection(options.classifications)
     DssMessenger.modifiers = new DssMessenger.Collections.ModifiersCollection(options.modifiers)

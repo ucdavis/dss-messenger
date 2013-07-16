@@ -12,6 +12,7 @@ class DssMessenger.Views.impacted_services.IndexView extends Backbone.View
     @options.impacted_services.bind('reset', @addAll)
     _.defer =>
       @$el.selectpicker()
+      @$el.selectpicker 'val', DssMessenger.filterService if DssMessenger.filterService > 0
 
   addAll: () =>
     @$el.append('<option value="">Impacted Services</option>')
@@ -29,10 +30,7 @@ class DssMessenger.Views.impacted_services.IndexView extends Backbone.View
 
   filter: (e) ->
     e.stopPropagation()
-    service = @$el.val()
-    classification = $("#filter_classifications li.selected").attr "rel"
-    modifier = $("#filter_modifiers li.selected").attr "rel"
-    mevent = $("#filter_messenger_events li.selected").attr "rel"
+    DssMessenger.filterService = @$el.val()
 
     $("#messages").append("<div class='overlay'><div class='loading'></div></div>")
 
@@ -40,10 +38,10 @@ class DssMessenger.Views.impacted_services.IndexView extends Backbone.View
     @messages.fetch
       data:
         page: DssMessenger.current,
-        cl: classification if classification > 0,
-        mo: modifier if modifier > 0,
-        is: service if service > 0,
-        me: mevent if mevent > 0
+        cl: DssMessenger.filterClassification if DssMessenger.filterClassification > 0,
+        mo: DssMessenger.filterModifier if DssMessenger.filterModifier > 0,
+        is: DssMessenger.filterService if DssMessenger.filterService > 0,
+        me: DssMessenger.filterMevent if DssMessenger.filterMevent > 0
 
       success: (messages) =>
         if @messages.length > 0
