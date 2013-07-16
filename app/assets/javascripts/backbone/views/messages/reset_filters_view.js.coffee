@@ -12,18 +12,17 @@ class DssMessenger.Views.Messages.ResetFiltersView extends Backbone.View
     e.stopPropagation()
     $('#filters-form select').each -> $(this).selectpicker 'val', 0
     $("#messages").append("<div class='overlay'><div class='loading'></div></div>")
+    DssMessenger.current = 1
 
     @messages = new DssMessenger.Collections.MessagesCollection()
     @messages.fetch
+      data:
+        page: DssMessenger.current
 
       success: (messages) =>
-        if @messages.length > 0
-          DssMessenger.pages = @messages.first().get('pages')
-          DssMessenger.current = @messages.first().get('current')
-        else
-          DssMessenger.pages = 0
-          DssMessenger.current = 0
-          
+        DssMessenger.filterClassification = DssMessenger.filterModifier = DssMessenger.filterService = DssMessenger.filterMevent = 0
+        @view = new DssMessenger.Views.Messages.IndexView(messages: @messages)
+        $("#messages").html(@view.render().el)
         $('#reset-filters').addClass('hidden')
 
       error: (messages, response) ->
