@@ -8,6 +8,7 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
 
   initialize: () ->
     @options.messages.bind('reset', @addAll)
+    DssMessenger.messages = @options.messages
 
   addAll: () =>
     @options.messages.each(@addOne)

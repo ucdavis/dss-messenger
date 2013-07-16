@@ -11,7 +11,7 @@ class DssMessenger.Views.Modifiers.IndexView extends Backbone.View
   initialize: () ->
     @options.modifiers.bind('reset', @addAll)
     _.defer =>
-      $('.selectpicker').selectpicker()
+      @$el.selectpicker()
 
   addAll: () =>
     @$el.append('<option value="">Modifiers</option>')

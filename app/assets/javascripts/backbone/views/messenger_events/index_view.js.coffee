@@ -11,7 +11,7 @@ class DssMessenger.Views.messenger_events.IndexView extends Backbone.View
   initialize: () ->
     @options.messenger_events.bind('reset', @addAll)
     _.defer =>
-      $('.selectpicker').selectpicker()
+      @$el.selectpicker()
 
   addAll: () =>
     @$el.append('<option value="">Events</option>')

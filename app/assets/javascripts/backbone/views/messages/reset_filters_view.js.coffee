@@ -4,7 +4,6 @@ class DssMessenger.Views.Messages.ResetFiltersView extends Backbone.View
     "click #reset-filters" : "reset"
   
   render: =>
-    console.log "rendering reset filters"
     @$el.html('<a href="#/index" id="reset-filters" class="btn hidden">Reset Filters</a>')
 
     return this

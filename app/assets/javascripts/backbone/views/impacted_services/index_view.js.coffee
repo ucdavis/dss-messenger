@@ -11,7 +11,7 @@ class DssMessenger.Views.impacted_services.IndexView extends Backbone.View
   initialize: () ->
     @options.impacted_services.bind('reset', @addAll)
     _.defer =>
-      $('.selectpicker').selectpicker()
+      @$el.selectpicker()
 
   addAll: () =>
     @$el.append('<option value="">Impacted Services</option>')
