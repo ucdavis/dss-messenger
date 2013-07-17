@@ -8,11 +8,13 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
 
   initialize: () ->
     @options.messages.bind('reset', @addAll)
+    @options.messages.bind('add', @addOne)
     DssMessenger.messages = @options.messages
     window.scrollTo 0, 0
 
   addAll: () =>
     @options.messages.each(@addOne)
+    
     console.log DssMessenger.current, DssMessenger.pages
     _.defer =>
       # this will un-hide the 'show more' button if there is more messages
@@ -38,7 +40,7 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
         me: DssMessenger.filterMevent if DssMessenger.filterMevent > 0
 
       success: (messages) =>
-        @options.messages.reset(messages.models)
+        @options.messages.add(messages.models)
 
       error: (messages, response) ->
         console.log "#{response.status}."
