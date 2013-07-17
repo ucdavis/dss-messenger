@@ -48,8 +48,8 @@ class DssMessenger.Views.Classifications.IndexView extends Backbone.View
             DssMessenger.pages = messages.first().get('pages')
             DssMessenger.current = messages.first().get('current')
           else
-            DssMessenger.pages = 0
-            DssMessenger.current = 0
+            DssMessenger.pages = 1
+            DssMessenger.current = 1
           
           $("#reset-filters").removeClass("hidden")
 

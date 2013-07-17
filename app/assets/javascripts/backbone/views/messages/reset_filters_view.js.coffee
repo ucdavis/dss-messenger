@@ -11,22 +11,27 @@ class DssMessenger.Views.Messages.ResetFiltersView extends Backbone.View
   reset: (e) ->
     e.stopPropagation()
     $('#filters-form select').each -> $(this).selectpicker 'val', 0
-    $("#messages").append("<div class='overlay'><div class='loading'></div></div>")
     DssMessenger.current = 1
 
-    @messages = new DssMessenger.Collections.MessagesCollection()
-    @messages.fetch
+    $('.overlay,.loading').removeClass('hidden')
+
+    DssMessenger.messages.fetch
       data:
         page: DssMessenger.current
 
       success: (messages) =>
+        if messages.length > 0
+          DssMessenger.pages = messages.first().get('pages')
+          DssMessenger.current = messages.first().get('current')
+        else
+          DssMessenger.pages = 1
+          DssMessenger.current = 1
+
         DssMessenger.filterClassification = DssMessenger.filterModifier = DssMessenger.filterService = DssMessenger.filterMevent = 0
-        @view = new DssMessenger.Views.Messages.IndexView(messages: @messages)
-        $("#messages").html(@view.render().el)
         $('#reset-filters').addClass('hidden')
 
       error: (messages, response) ->
         console.log "#{response.status}."
-        $("#messages").append("<div class='overlay'><div class='error'>Loading Error</div></div>")
+        $('.error').removeClass('hidden')
     return false
 

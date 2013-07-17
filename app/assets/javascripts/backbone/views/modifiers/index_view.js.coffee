@@ -33,10 +33,9 @@ class DssMessenger.Views.Modifiers.IndexView extends Backbone.View
     if @$el.val() > 0
       DssMessenger.filterModifier = @$el.val()
     
-      $("#messages").append("<div class='overlay'><div class='loading'></div></div>")
+      $('.overlay,.loading').removeClass('hidden')
     
-      @messages = new DssMessenger.Collections.MessagesCollection()
-      @messages.fetch
+      DssMessenger.messages.fetch
         data:
           page: DssMessenger.current,
           cl: DssMessenger.filterClassification if DssMessenger.filterClassification > 0,
@@ -45,20 +44,18 @@ class DssMessenger.Views.Modifiers.IndexView extends Backbone.View
           me: DssMessenger.filterMevent if DssMessenger.filterMevent > 0
     
         success: (messages) =>
-          if @messages.length > 0
-            DssMessenger.pages = @messages.first().get('pages')
-            DssMessenger.current = @messages.first().get('current')
+          if messages.length > 0
+            DssMessenger.pages = messages.first().get('pages')
+            DssMessenger.current = messages.first().get('current')
           else
-            DssMessenger.pages = 0
-            DssMessenger.current = 0
+            DssMessenger.pages = 1
+            DssMessenger.current = 1
           
-          @view = new DssMessenger.Views.Messages.IndexView(messages: @messages)
-          $("#messages").html(@view.render().el)
           $('#reset-filters').removeClass('hidden')
     
         error: (messages, response) ->
           console.log "#{response.status}."
-          $("#messages").append("<div class='overlay'><div class='error'>Loading Error</div></div>")
+          $('.error').removeClass('hidden')
     
       return true
     
