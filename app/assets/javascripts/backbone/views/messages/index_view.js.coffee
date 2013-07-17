@@ -31,6 +31,7 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
 
     @messages = new DssMessenger.Collections.MessagesCollection()
     @messages.fetch
+      timeout: 30000 # 30 seconds
       data:
         page: DssMessenger.current,
         cl: DssMessenger.filterClassification if DssMessenger.filterClassification > 0,

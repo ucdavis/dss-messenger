@@ -16,6 +16,7 @@ class DssMessenger.Views.Messages.ResetFiltersView extends Backbone.View
     $('.overlay,.loading').removeClass('hidden')
 
     DssMessenger.messages.fetch
+      timeout: 30000 # 30 seconds
       data:
         page: DssMessenger.current
 
