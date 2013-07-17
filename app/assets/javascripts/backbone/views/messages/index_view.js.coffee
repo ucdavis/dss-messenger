@@ -9,7 +9,6 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
   initialize: () ->
     DssMessenger.messages.bind('reset', @render)
     DssMessenger.messages.bind('add', @addOne)
-    window.scrollTo 0, 0
 
   addAll: () =>
     DssMessenger.messages.each(@addOne)
@@ -51,6 +50,7 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
     @$("tbody").append(view.render().el)
 
   render: =>
+    window.scrollTo 0, 0
     $('.overlay,.loading,.error').addClass('hidden')
     @$el.html(@template(messages: DssMessenger.messages.toJSON() ))
     @addAll()

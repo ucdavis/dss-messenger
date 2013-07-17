@@ -32,6 +32,7 @@ class DssMessenger.Views.impacted_services.IndexView extends Backbone.View
     e.stopPropagation()
     if @$el.val() > 0
       DssMessenger.filterService = @$el.val()
+      DssMessenger.current = 1
 
       $('.overlay,.loading').removeClass('hidden')
 

@@ -32,6 +32,7 @@ class DssMessenger.Views.messenger_events.IndexView extends Backbone.View
     e.stopPropagation()
     if @$el.val() > 0
       DssMessenger.filterMevent = @$el.val()
+      DssMessenger.current = 1
 
       $('.overlay,.loading').removeClass('hidden')
 
