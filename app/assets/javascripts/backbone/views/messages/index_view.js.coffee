@@ -7,14 +7,13 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
     "click .more" : "getMore"
 
   initialize: () ->
-    @options.messages.bind('reset', @addAll)
-    @options.messages.bind('add', @addOne)
-    DssMessenger.messages = @options.messages
+    DssMessenger.messages.bind('reset', @render)
+    DssMessenger.messages.bind('add', @addOne)
     window.scrollTo 0, 0
 
   addAll: () =>
-    @options.messages.each(@addOne)
-    
+    DssMessenger.messages.each(@addOne)
+    console.log DssMessenger.messages
     console.log DssMessenger.current, DssMessenger.pages
     _.defer =>
       # this will un-hide the 'show more' button if there is more messages
@@ -27,7 +26,7 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
   getMore: (e) =>
     e.preventDefault()
     e.stopPropagation()
-    # @$el.append("<div class='overlay'><div class='loading'></div></div>")
+
     $(".pagination").fadeOut() if ++DssMessenger.current >= DssMessenger.pages
 
     @messages = new DssMessenger.Collections.MessagesCollection()
@@ -40,7 +39,7 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
         me: DssMessenger.filterMevent if DssMessenger.filterMevent > 0
 
       success: (messages) =>
-        @options.messages.add(messages.models)
+        DssMessenger.messages.add(messages.models)
 
       error: (messages, response) ->
         console.log "#{response.status}."
@@ -51,7 +50,8 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
     @$("tbody").append(view.render().el)
 
   render: =>
-    @$el.html(@template(messages: @options.messages.toJSON() ))
+    $('.overlay,.loading,.error').addClass('hidden')
+    @$el.html(@template(messages: DssMessenger.messages.toJSON() ))
     @addAll()
 
     return this
