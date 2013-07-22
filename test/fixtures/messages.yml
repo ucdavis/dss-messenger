@@ -1,23 +1,27 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  subject: MyString
-  impact_statement: MyText
+  subject: Test Message 1
+  impact_statement: Impact statement 1
   window_start: 2013-02-07 15:42:07
   window_end: 2013-02-07 15:42:07
-  purpose: MyText
-  resolution: MyText
-  workaround: MyText
-  other_services: MyText
-  sender_uid: MyString
+  purpose: Purpose 1
+  resolution: Resolution 1
+  workaround: Workaround 1
+  other_services: Other Services 1
+  sender_uid: Sender1
+  classification_id: 1
+  modifier_id: 1
 
 two:
-  subject: MyString
-  impact_statement: MyText
-  window_start: 2013-02-07 15:42:07
-  window_end: 2013-02-07 15:42:07
-  purpose: MyText
-  resolution: MyText
-  workaround: MyText
-  other_services: MyText
-  sender_uid: MyString
+  subject: Test Message 2
+  impact_statement: Impact statement 2
+  window_start: 2013-02-07 16:42:07
+  window_end: 2013-02-07 16:42:07
+  purpose: Purpose 2
+  resolution: Resolution 2
+  workaround: Workaround 2
+  other_services: Other Services 2
+  sender_uid: Sender2
+  classification_id: 2
+  modifier_id: 2
