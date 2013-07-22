@@ -38,9 +38,11 @@ class Message < ActiveRecord::Base
       # Look up e-mail address for r.uid
       @entity = Entity.find(r.uid)
       if @entity.type == "Group"
-        @entity.members.each do |m|
+        # get unique memberships of the group
+        memberships = @entity.memberships.map(&:entity_id).uniq
+        memberships.each do |m|
           # Send the e-mail
-          @member = Person.find(m.id)
+          @member = Person.find(m)
           DssMailer.delay.deliver_message(self,@member)
         end
       elsif @entity.type == "Person"
