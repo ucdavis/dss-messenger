@@ -41,7 +41,9 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     @model = new @collection.model()
 
     @model.bind("change:errors", () =>
-      this.render()
+      _.each @model.get('errors'), (error,index) ->
+        $('#'+index).closest('.control-group').addClass('error')
+        $('#'+index).closest('.control-group .controls').append('<p class="help-block error-message">' + error + '</p>')
     )
 
   datetimePicker: ->
@@ -80,6 +82,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
       window_end: $("input[name='window_end']").val()
 
     @collection.create(@model.toJSON(),
+      wait: true
       at: 0
       success: (message) =>
         @model = message
