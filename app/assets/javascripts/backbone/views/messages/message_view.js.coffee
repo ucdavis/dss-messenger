@@ -8,6 +8,7 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
     "mouseenter .tooltip-duplicate" : "tooltipDuplicate"
     "mouseenter .tooltip-destroy"   : "tooltipDestroy"
     "click      .tooltip-destroy"   : "destroy"
+    "click      .accordion-heading" : "toggleAccordion"
 
   tagName: "tr"
 
@@ -26,6 +27,10 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
   render: ->
     @$el.html(@template(@model.toFullJSON() )).fadeIn()
     return this
+
+  toggleAccordion: ->
+    @$(".accordion-group").on "hide", => @$(".accordion-toggle-icon").addClass('icon-arrow-right').removeClass('icon-arrow-down')
+    @$(".accordion-group").on "show", => @$(".accordion-toggle-icon").addClass('icon-arrow-down').removeClass('icon-arrow-right')
 
   tooltipShow: ->
     @$('.tooltip-show').tooltip

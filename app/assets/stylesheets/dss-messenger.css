@@ -105,6 +105,15 @@ td.nowrap {
   padding: 0px;
 }
 
+.accordion-heading a.accordion-toggle:hover {
+  text-decoration:none;
+}
+
+.accordion-heading .accordion-toggle-icon {
+  font-size: 70%;
+  margin-right: 5px;
+}
+
 ul.token-input-list-facebook {
   clear: none;
 }
