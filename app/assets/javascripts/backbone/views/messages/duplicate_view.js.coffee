@@ -8,6 +8,13 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
     "focus #Recipients"	:	"tokenInput"
 
   initialize: ->
+    Backbone.Validation.bind this
+    @model.bind("change:errors", () =>
+      _.each @model.get('errors'), (error,index) ->
+        $('#'+index).closest('.control-group').addClass('error')
+        $('#'+index).closest('.control-group .controls').append('<p class="help-block error-message">' + error + '</p>')
+    )
+
     @current_classification = @model.get('classification_id')
     @current_modifier = @model.get('modifier_id')
     @current_services = @model.get('impacted_services')
@@ -51,7 +58,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
           return current_event.id is messenger_event.get('id')
         $("#messenger_events_select").append "<label class='checkbox'><input type='checkbox' name='messenger_event_ids[]' value='" + messenger_event.get('id') + (if @checked then "' checked />" else "' />") + messenger_event.get('description') + "</label>"
 
-
+    
   save: (e) ->
     e.preventDefault()
     e.stopPropagation()
@@ -65,6 +72,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
       modifier_id: $("input[name='modifier_id[]']:checked").val()
 
     @collection.create(@model.toJSON(),
+      wait: true
       at: 0
       success: (message) =>
         @model = message
