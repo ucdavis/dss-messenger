@@ -101,6 +101,9 @@ td.nowrap {
     white-space: nowrap;
 }
 
+.accordion-heading .accordion-toggle {
+  padding: 0px;
+}
 
 ul.token-input-list-facebook {
   clear: none;
