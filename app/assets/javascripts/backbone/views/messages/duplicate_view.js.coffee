@@ -13,6 +13,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
     @current_services = @model.get('impacted_services')
     @current_events = @model.get('messenger_events')
     _.defer =>
+      $("html, body").animate({ scrollTop: "0px" });
       # initialise recipients token input and load duplicated recipients
       @tokenInput()
       recipients_tokeninput = @$("input[name=recipient_uids]")
@@ -68,7 +69,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
       success: (message) =>
         @model = message
         window.location.hash = "#/index"
-        window.scrollTo 0, 0
+        $("html, body").animate({ scrollTop: "0px" });
 
       error: (message, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
