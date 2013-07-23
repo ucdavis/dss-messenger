@@ -86,7 +86,7 @@ class Message < ActiveRecord::Base
       :impacted_service_ids => self.impacted_services.pluck(:impacted_service_id),
       :messenger_events => self.messenger_events,
       :messenger_event_ids => self.messenger_events.pluck(:messenger_event_id),
-      :created_at => self.created_at.strftime("%b %d %I:%M %P"),
+      :created_at => self.created_at.strftime("%A, %B %d, %Y at %l:%M %p"),
       :pages => options[:pages],
       :current => options[:current]
     }
