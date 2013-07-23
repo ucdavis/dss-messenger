@@ -13,7 +13,7 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
   tagName: "tr"
 
   destroy: () ->
-    bootbox.confirm "Are you sure you want to delete " + @model.escape("subject") + "?", (result) =>
+    bootbox.confirm "Are you sure you want to delete <span class='confirm-name'>" + @model.escape("subject") + "</span>?", (result) =>
       if result
         # delete the message and remove from log
         @model.destroy()

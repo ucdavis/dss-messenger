@@ -14,7 +14,7 @@ class DssMessenger.Views.Classifications.EditView extends Backbone.View
 
 
   destroy: () ->
-    bootbox.confirm "Are you sure you want to delete '" + @model.escape("description") + "' ?", (result) =>
+    bootbox.confirm "Are you sure you want to delete <span class='confirm-name'>" + @model.escape("description") + "</span> ?", (result) =>
       if result
         # delete the object and remove from view
         @model.destroy()

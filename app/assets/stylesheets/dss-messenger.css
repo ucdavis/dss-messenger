@@ -146,6 +146,12 @@ ul.token-input-list-facebook {
   margin: 1em;
 }
 
+.confirm-name {
+  font-weight: bold;
+  color: #A60000;
+  text-transform: capitalize;
+}
+
 /******* Nawrrow view / mobile view ********/
 @media (max-width: 767px) {
 	.affix {
