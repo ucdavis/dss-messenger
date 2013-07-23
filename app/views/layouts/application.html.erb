@@ -8,29 +8,38 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+	<script type="text/javascript">
+		DssMessenger.last_updated = "<%= LAST_UPDATED %>"
+	</script>
 	<div class="overlay hidden">
 		<div class="loading hidden">
 			<div class="error hidden">Loading Error</div>
 		</div>
 	</div>
 	<div class="navbar navbar-fixed-top">
-	      <div class="navbar-inner">
-	        <div class="container">
-	          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	          </button>
-	          <a class="brand" href="/#index">DSS Messenger</a>
-	          <div class="nav-collapse collapse">
-	            <ul class="nav">
-	            </ul>
-				<ul class="nav pull-right">
-				  <li><a href="#/prefs" class="icon-wrench nav-icon" title="Settings"></a></li>
-				</ul>
-	          </div><!--/.nav-collapse -->
-	        </div>
-	      </div>
+		<div class="navbar-inner">
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="brand" href="/#index">DSS Messenger</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+					</ul>
+					<ul class="nav pull-right">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle icon-wrench nav-icon" data-toggle="dropdown"></a>
+							<ul class="dropdown-menu">
+								<li><a href="#/prefs">Values</a></li>
+								<li><a href="#/about">About</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
 	</div>
 	<div class="container">
 		<div class="row">

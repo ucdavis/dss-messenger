@@ -1,7 +1,7 @@
-DssMessenger.Views.Messages ||= {}
+DssMessenger.Views.Settings ||= {}
 
-class DssMessenger.Views.Messages.PrefsView extends Backbone.View
-  template: JST["backbone/templates/messages/prefs"]
+class DssMessenger.Views.Settings.PrefsView extends Backbone.View
+  template: JST["backbone/templates/settings/prefs"]
 
   initialize: ->
     DssMessenger.classifications.bind("change", () =>
