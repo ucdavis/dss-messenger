@@ -15,7 +15,7 @@ class DssMessenger.Views.impacted_services.IndexView extends Backbone.View
       @$el.selectpicker 'val', DssMessenger.filterService if DssMessenger.filterService > 0
 
   addAll: () =>
-    @$el.append('<option value="">Impacted Services</option>')
+    @$el.append('<option></option>')
     @options.impacted_services.each(@addOne)
 
   addOne: (impacted_services) =>
@@ -23,7 +23,7 @@ class DssMessenger.Views.impacted_services.IndexView extends Backbone.View
     @$el.append(view.render().el)
 
   render: =>
-    @$el.addClass('selectpicker').html(@template(impacted_services: @options.impacted_services.toJSON() ))
+    @$el.addClass('selectpicker').html(@template(DssMessenger.impacted_services.toJSON() ))
     @addAll()
 
     return this

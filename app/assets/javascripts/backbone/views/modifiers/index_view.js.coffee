@@ -15,7 +15,7 @@ class DssMessenger.Views.Modifiers.IndexView extends Backbone.View
       @$el.selectpicker 'val', DssMessenger.filterModifier if DssMessenger.filterModifier > 0
 
   addAll: () =>
-    @$el.append('<option value="">Modifiers</option>')
+    @$el.append('<option></option>')
     @options.modifiers.each(@addOne)
 
   addOne: (modifiers) =>
@@ -23,7 +23,7 @@ class DssMessenger.Views.Modifiers.IndexView extends Backbone.View
     @$el.append(view.render().el)
 
   render: =>
-    @$el.addClass('selectpicker').html(@template(modifiers: @options.modifiers.toJSON() ))
+    @$el.addClass('selectpicker').html(@template(DssMessenger.modifiers.toJSON() ))
     @addAll()
 
     return this

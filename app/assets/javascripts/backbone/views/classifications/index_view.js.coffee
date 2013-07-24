@@ -15,7 +15,7 @@ class DssMessenger.Views.Classifications.IndexView extends Backbone.View
       @$el.selectpicker 'val', DssMessenger.filterClassification if DssMessenger.filterClassification > 0
 
   addAll: () =>
-    @$el.append('<option value="">Classifications</option>')
+    @$el.append('<option></option>')
     @options.classifications.each(@addOne)
 
   addOne: (classifications) =>
@@ -23,7 +23,7 @@ class DssMessenger.Views.Classifications.IndexView extends Backbone.View
     @$el.append(view.render().el)
 
   render: =>
-    @$el.addClass('selectpicker').html(@template(classifications: @options.classifications.toJSON() ))
+    @$el.addClass('selectpicker').html(@template(DssMessenger.classifications.toJSON() ))
     @addAll()
 
     return this

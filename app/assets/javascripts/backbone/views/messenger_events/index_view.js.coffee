@@ -15,7 +15,7 @@ class DssMessenger.Views.messenger_events.IndexView extends Backbone.View
       @$el.selectpicker 'val', DssMessenger.filterMevent if DssMessenger.filterMevent > 0
 
   addAll: () =>
-    @$el.append('<option value="">Events</option>')
+    @$el.append('<option></option>')
     @options.messenger_events.each(@addOne)
 
   addOne: (messenger_events) =>
@@ -23,7 +23,7 @@ class DssMessenger.Views.messenger_events.IndexView extends Backbone.View
     @$el.append(view.render().el)
 
   render: =>
-    @$el.addClass('selectpicker').html(@template(messenger_events: @options.messenger_events.toJSON() ))
+    @$el.addClass('selectpicker').html(@template(DssMessenger.messenger_events.toJSON() ))
     @addAll()
 
     return this
