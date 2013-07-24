@@ -57,7 +57,9 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
   save: (e) ->
     e.preventDefault()
     e.stopPropagation()
-
+    
+    # Disable the submit button
+    $('input[type="submit"]').val('Sending...').attr('disabled', 'disabled');
 
     @model.unset("errors")
     @model.set
@@ -86,6 +88,8 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
     @model.bind("change:errors", () =>
       $('p.error-message').remove()
       $('.error').removeClass('error')
+      $('input[type="submit"]').val('Send Message').removeAttr('disabled');
+      $("html, body").animate({ scrollTop: "0px" });
       _.each @model.get('errors'), (error,index) ->
         $('#'+index).closest('.control-group').addClass('error')
         $('#'+index).closest('.control-group .controls').append('<p class="help-block error-message">' + error + '</p>')
