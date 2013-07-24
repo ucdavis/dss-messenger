@@ -121,14 +121,18 @@ ul.token-input-list-facebook {
 
 /*------- Message Show View -------*/
 .message-box {
-  border: 1px solid #cedff2;
-  background: #f5faff;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  padding: 5px;
+  -moz-box-shadow: 5px 5px 5px #777;
+  -webkit-box-shadow: 5px 5px 5px #777;
+  box-shadow: 5px 5px 5px #777;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow\(Strength=5\,Direction=135\,Color=\'#777777\'\)";
+  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=5,Direction=135,Color='#777777');
 }
-
 .message-header {
   margin: 3px;
-  background: #cedff2;
-  border: 1px solid #a3b0bf;
+  background-color: #ddd;
   text-align: left;
   padding: 0.2em 0.5em;
 }
