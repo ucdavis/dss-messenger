@@ -9,11 +9,6 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
 
   initialize: ->
     Backbone.Validation.bind this
-    @model.bind("change:errors", () =>
-      _.each @model.get('errors'), (error,index) ->
-        $('#'+index).closest('.control-group').addClass('error')
-        $('#'+index).closest('.control-group .controls').append('<p class="help-block error-message">' + error + '</p>')
-    )
 
     @current_classification = @model.get('classification_id')
     @current_modifier = @model.get('modifier_id')
@@ -89,7 +84,11 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
     @model = new @collection.model(_.omit(@model.attributes, 'created_at', 'updated_at', 'id'))
 
     @model.bind("change:errors", () =>
-      this.render()
+      $('p.error-message').remove()
+      $('.error').removeClass('error')
+      _.each @model.get('errors'), (error,index) ->
+        $('#'+index).closest('.control-group').addClass('error')
+        $('#'+index).closest('.control-group .controls').append('<p class="help-block error-message">' + error + '</p>')
     )
 
   datetimePicker: ->

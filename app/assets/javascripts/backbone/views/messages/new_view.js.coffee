@@ -42,6 +42,8 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     @model = new @collection.model()
 
     @model.bind("change:errors", () =>
+      $('p.error-message').remove()
+      $('.error').removeClass('error')
       _.each @model.get('errors'), (error,index) ->
         $('#'+index).closest('.control-group').addClass('error')
         $('#'+index).closest('.control-group .controls').append('<p class="help-block error-message">' + error + '</p>')
