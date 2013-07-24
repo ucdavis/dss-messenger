@@ -33,6 +33,7 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
     e.stopPropagation()
 
     $(".pagination").fadeOut() if ++DssMessenger.current >= DssMessenger.pages
+    $(".pagination a").removeClass('more').html('loading...')
 
     @messages = new DssMessenger.Collections.MessagesCollection()
     @messages.fetch
@@ -46,10 +47,11 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
 
       success: (messages) =>
         DssMessenger.messages.add(messages.models)
+        $(".pagination a").addClass('more').html('Show more')
 
       error: (messages, response) ->
         console.log "#{response.status}."
-        $("#messages").append("<div class='overlay'><div class='error'>Loading Error</div></div>")
+        $(".pagination a").addClass('text-error').html('Error loading')
     
   addOne: (message) =>
     view = new DssMessenger.Views.Messages.MessageView({model : message})

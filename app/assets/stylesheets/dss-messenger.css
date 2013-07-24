@@ -63,6 +63,10 @@ label.radio, label.checkbox {
 	height: 11px;
 }
 
+.more {
+  cursor:pointer;
+}
+
 .frameless {
     border: none;
 }
