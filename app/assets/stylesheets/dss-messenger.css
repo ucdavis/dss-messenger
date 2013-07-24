@@ -147,6 +147,18 @@ ul.token-input-list-facebook {
   margin: 1em;
 }
 
+/*--------- Forms ---------*/
+
+.form-horizontal .control-label {
+  padding: 0px;
+}
+
+.radio input[type="radio"], .checkbox input[type="checkbox"] {
+  margin-top: -1px;
+}
+
+/*--------- Delete Dialog ----------*/
+
 .confirm-name {
   font-weight: bold;
   color: #A60000;
