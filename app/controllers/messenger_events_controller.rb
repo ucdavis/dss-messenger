@@ -40,7 +40,7 @@ class MessengerEventsController < ApplicationController
   # POST /messenger_events
   # POST /messenger_events.json
   def create
-    @messenger_event = MessengerEvent.new(params[:event])
+    @messenger_event = MessengerEvent.new(params[:messenger_event])
 
     respond_to do |format|
       if @messenger_event.save
