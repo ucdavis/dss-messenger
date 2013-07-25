@@ -2,6 +2,7 @@ require 'test_helper'
 
 class RecipientsControllerTest < ActionController::TestCase
   setup do
+    CASClient::Frameworks::Rails::Filter.fake("okadri")
     @recipient = recipients(:one)
   end
 
