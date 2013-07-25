@@ -2,7 +2,8 @@ require 'test_helper'
 
 class ImpactedServicesControllerTest < ActionController::TestCase
   setup do
-    @impacted_service = impacted_services(:one)
+    CASClient::Frameworks::Rails::Filter.fake("okadri")
+    @impacted_service = impacted_services(:file)
   end
 
   test "should get index" do
