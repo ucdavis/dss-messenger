@@ -2,7 +2,8 @@ require 'test_helper'
 
 class ClassificationsControllerTest < ActionController::TestCase
   setup do
-    @classification = classifications(:one)
+    CASClient::Frameworks::Rails::Filter.fake("okadri")
+    @classification = classifications(:degradation)
   end
 
   test "should get index" do
