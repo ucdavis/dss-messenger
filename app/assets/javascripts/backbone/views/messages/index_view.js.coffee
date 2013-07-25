@@ -10,12 +10,6 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
     DssMessenger.messages.bind('reset', @render)
     DssMessenger.messages.bind('add', @addOne)
     
-    _.defer =>
-      #Hide the table and display "No Messages" if the collection is empty
-      if DssMessenger.messages.size() is 0
-        $("#messages-table, .pagination").hide()
-        @$el.html('<h2 class="text-center">No Messages</h2>')
-
   addAll: () =>
     DssMessenger.messages.each(@addOne)
 
@@ -62,5 +56,12 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
     $('.overlay,.loading,.error').addClass('hidden')
     @$el.html(@template(messages: DssMessenger.messages.toJSON() ))
     @addAll()
+
+    _.defer =>
+      #Hide the table and display "No Messages" if the collection is empty
+      if DssMessenger.messages.size() is 0
+        $("#messages-table, .pagination").hide()
+        @$el.html('<h2 class="text-center">No Messages</h2>')
+
 
     return this
