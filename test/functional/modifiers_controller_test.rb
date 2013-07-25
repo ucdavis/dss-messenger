@@ -2,7 +2,8 @@ require 'test_helper'
 
 class ModifiersControllerTest < ActionController::TestCase
   setup do
-    @modifier = modifiers(:one)
+    CASClient::Frameworks::Rails::Filter.fake("okadri")
+    @modifier = modifiers(:update)
   end
 
   test "should get index" do
