@@ -6,6 +6,7 @@ gem 'rails', '3.2.14'
 gem 'rubycas-client'
 gem 'delayed_job_active_record'
 gem 'daemons'
+gem 'unicorn'
 gem 'mail'
 
 gem 'declarative_authorization'
