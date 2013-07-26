@@ -25,10 +25,10 @@ class RecipientsControllerTest < ActionController::TestCase
     assert_redirected_to recipient_path(assigns(:recipient))
   end
 
-  test "should show recipient" do
-    get :show, id: @recipient
-    assert_response :success
-  end
+  # test "should show recipient" do
+  #   get :show, id: @recipient
+  #   assert_response :success
+  # end
 
   test "should get edit" do
     get :edit, id: @recipient
