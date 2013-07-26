@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.14'
 
-gem 'sqlite3'
+
 gem 'rubycas-client'
 gem 'delayed_job_active_record'
 gem 'mail'
@@ -28,6 +28,10 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+end
+
+group :test, :development do
+  gem 'sqlite3'
 end
 
 gem 'jquery-rails'
