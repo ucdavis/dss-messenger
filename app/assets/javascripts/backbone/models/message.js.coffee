@@ -24,7 +24,7 @@ class DssMessenger.Models.Message extends Backbone.Model
       msg: "Please enter an impact statement"
 
   toJSON: () ->
-    json = _.omit(this.attributes, 'updated_at','created_at','classification','modifier','recipients','recipient_ids','impacted_services','messenger_events','pages','current')
+    json = _.omit(this.attributes, 'updated_at','created_at','classification','modifier','recipients','recipient_ids','impacted_services','messenger_events','pages','current','sender_name')
     json
 
   toFullJSON: () ->

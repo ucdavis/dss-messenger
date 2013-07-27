@@ -4,12 +4,8 @@
 		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 		font-size: 12px;
 	}
-	td {
-		border-bottom: 1px solid #ccc;
-	}
 	td.title {
 		font-weight: bold;
-		font-size: 120%;
 		vertical-align: top;
 	}
 </style>
@@ -66,7 +62,7 @@
 		<td><%= @message.modifier.description %></td>
 	</tr>
 	<% end %>
-	<% if @message.impacted_services %>
+	<% if @message.impacted_services.length > 0 %>
 	<tr>
 		<td class="title">Impacted Services:</td>
 		<td>

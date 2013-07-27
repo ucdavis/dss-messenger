@@ -61,6 +61,7 @@ class Message < ActiveRecord::Base
       :purpose => self.purpose,
       :resolution => self.resolution,
       :sender_uid => self.sender_uid,
+      :sender_name => Person.find(self.sender_uid).name,
       :subject => self.subject,
       :window_start => 
         if self.window_start
