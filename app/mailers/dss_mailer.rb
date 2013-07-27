@@ -1,5 +1,5 @@
 class DssMailer < ActionMailer::Base
-  default :from => "okadri@ucdavis.edu"
+  default :from => "dss-notify@ucdavis.edu"
   
   def deliver_message(message,member)
     @message = message
