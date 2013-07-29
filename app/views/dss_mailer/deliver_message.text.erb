@@ -22,12 +22,12 @@ Dear <%= @member.first %>,
 
 <% if @message.window_start %>
 	Window Start:
-	<%= @message.window_start %>
+	<%= @message.window_start.strftime("%A, %B %d, %Y at %l:%M %p") %>
 <% end %>
 
 <% if @message.window_end %>
 	Window End:
-	<%= @message.window_end %>
+	<%= @message.window_end.strftime("%A, %B %d, %Y at %l:%M %p") %>
 <% end %>
 
 <% if @message.classification %>

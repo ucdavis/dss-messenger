@@ -41,13 +41,13 @@
 	<% if @message.window_start %>
 	<tr>
 		<td class="title">Window Start:</td>
-		<td><%= @message.window_start %></td>
+		<td><%= @message.window_start.strftime("%A, %B %d, %Y at %l:%M %p") %></td>
 	</tr>
 	<% end %>
 	<% if @message.window_end %>
 	<tr>
 		<td class="title">Window End:</td>
-		<td><%= @message.window_end %></td>
+		<td><%= @message.window_end.strftime("%A, %B %d, %Y at %l:%M %p") %></td>
 	</tr>
 	<% end %>
 	<% if @message.classification %>
