@@ -46,11 +46,11 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
         $(".pagination a").addClass('text-error').html('Error loading')
     
   addOne: (message) =>
-    view = new DssMessenger.Views.Messages.MessageView({model : message})
-    console.log message.get('closed')
     if message.get('closed')
+      view = new DssMessenger.Views.Messages.ArchiveMessageView({model : message})
       @$("#archive-table tbody").append(view.render().el)
     else
+      view = new DssMessenger.Views.Messages.ActiveMessageView({model : message})
       @$("#active-table tbody").append(view.render().el)
 
   render: =>

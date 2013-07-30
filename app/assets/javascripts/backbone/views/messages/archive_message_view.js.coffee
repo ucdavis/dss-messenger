@@ -1,7 +1,7 @@
 DssMessenger.Views.Messages ||= {}
 
-class DssMessenger.Views.Messages.MessageView extends Backbone.View
-  template: JST["backbone/templates/messages/message"]
+class DssMessenger.Views.Messages.ArchiveMessageView extends Backbone.View
+  template: JST["backbone/templates/messages/archive_message"]
   show: JST["backbone/templates/messages/show"]
 
   events:

@@ -1,0 +1,15 @@
+<td>
+	<div class="accordion-group frameless">
+	  <div class="accordion-heading collapsed">
+	    <a class="accordion-toggle" data-toggle="collapse" href="#collapse<%= id %>">
+				<i class="icon-arrow-right accordion-toggle-icon"></i>
+	      <%= subject %>
+	    </a>
+	  </div>
+	</div>
+</td>
+<td class="nowrap"><%= sender_name %></td>
+<td class="nowrap"><%= created_at %></td>
+
+<td><a href="#/<%= id %>/duplicate" class="tooltip-duplicate" ><i class="icon-retweet"></i></td>
+<td><a href="#/<%= id %>/destroy" class="tooltip-destroy" ><i class="icon-trash"></i></a></td>
