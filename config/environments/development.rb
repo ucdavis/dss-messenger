@@ -46,4 +46,12 @@ DssMessenger::Application.configure do
   require 'development_mail_interceptor'
   Mail.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?
   
+  # Send e-mail on exceptions
+  config.middleware.use ExceptionNotification::Rack,
+    :email => {
+      :email_prefix => "[DSS Messenger] ",
+      :sender_address => %{no-reply@messenger.dss.ucdavis.edu},
+      :exception_recipients => %w{okadri@ucdavis.edu}
+    }  
+
 end

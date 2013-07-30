@@ -72,5 +72,13 @@ DssMessenger::Application.configure do
     :domain               => "ucdavis.edu",
     :enable_starttls_auto => true
   }
-  
+
+  # Send e-mail on exceptions
+  config.middleware.use ExceptionNotification::Rack,
+    :email => {
+      :email_prefix => "[DSS Messenger] ",
+      :sender_address => %{no-reply@messenger.dss.ucdavis.edu},
+      :exception_recipients => %w{okadri@ucdavis.edu}
+    }  
+
 end

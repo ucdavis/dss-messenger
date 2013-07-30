@@ -65,6 +65,9 @@ GEM
       delayed_job (~> 3.0)
     ejs (1.1.1)
     erubis (2.7.0)
+    exception_notification (4.0.0)
+      actionmailer (>= 3.0.4)
+      activesupport (>= 3.0.4)
     execjs (1.4.0)
       multi_json (~> 1.0)
     highline (1.6.19)
@@ -129,7 +132,7 @@ GEM
       json (~> 1.4)
     rubycas-client (2.3.9)
       activesupport
-    sass (3.2.9)
+    sass (3.2.10)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -168,6 +171,7 @@ DEPENDENCIES
   daemons
   declarative_authorization
   delayed_job_active_record
+  exception_notification
   hpricot
   jquery-rails
   kaminari
