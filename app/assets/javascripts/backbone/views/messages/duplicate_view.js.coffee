@@ -32,7 +32,6 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
       # load the single and multi select inputs laoded originally from the router
       $("#classifications_select").empty()
       DssMessenger.classifications.each (classification) =>
-        console.log @current_classification
         @checked = @current_classification is classification.get('id')
         $("#classifications_select").append "<label class='radio'><input type='radio' name='classification_id[]' value='" + classification.get('id') + (if @checked then "' checked />" else "' />") + classification.get('description') + "</label>"
 

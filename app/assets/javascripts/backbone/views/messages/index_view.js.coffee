@@ -13,7 +13,6 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
   addAll: () =>
     DssMessenger.messages.each(@addOne)
 
-    console.log DssMessenger.current, DssMessenger.pages
     _.defer =>
       # this will un-hide the 'show more' button if there is more messages
       $(".pagination").removeClass('hidden') if DssMessenger.current < DssMessenger.pages

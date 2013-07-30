@@ -20,7 +20,6 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
       # load the single and multi select inputs laoded originally from the router
       $("#classifications_select").empty()
       DssMessenger.classifications.each (classification) ->
-        console.log classification.get('id');
         $("#classifications_select").append "<label class='radio'><input type='radio' name='classification_id[]' value='" + classification.get('id') + "'>" + classification.get('description') + "</label>"
 
       $("#modifiers_select").empty()
