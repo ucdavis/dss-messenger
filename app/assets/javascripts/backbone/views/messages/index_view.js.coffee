@@ -36,7 +36,6 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
         cl: DssMessenger.filterClassification if DssMessenger.filterClassification > 0,
         mo: DssMessenger.filterModifier if DssMessenger.filterModifier > 0,
         is: DssMessenger.filterService if DssMessenger.filterService > 0,
-        me: DssMessenger.filterMevent if DssMessenger.filterMevent > 0
 
       success: (messages) =>
         DssMessenger.messages.add(messages.models)

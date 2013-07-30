@@ -1,8 +1,5 @@
 DssMessenger::Application.routes.draw do
 
-  resources :messenger_events
-
-
   resources :impacted_services
 
 

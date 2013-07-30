@@ -42,7 +42,6 @@ class DssMessenger.Views.Modifiers.IndexView extends Backbone.View
         cl: DssMessenger.filterClassification if DssMessenger.filterClassification > 0,
         mo: DssMessenger.filterModifier if DssMessenger.filterModifier > 0,
         is: DssMessenger.filterService if DssMessenger.filterService > 0,
-        me: DssMessenger.filterMevent if DssMessenger.filterMevent > 0
   
       success: (messages) =>
         if messages.length > 0
@@ -52,7 +51,7 @@ class DssMessenger.Views.Modifiers.IndexView extends Backbone.View
           DssMessenger.pages = 1
           DssMessenger.current = 1
         
-        if DssMessenger.filterClassification == DssMessenger.filterModifier == DssMessenger.filterService == DssMessenger.filterMevent
+        if DssMessenger.filterClassification == DssMessenger.filterModifier == DssMessenger.filterService
           $("#reset-filters").addClass("hidden")
         else
           $("#reset-filters").removeClass("hidden")

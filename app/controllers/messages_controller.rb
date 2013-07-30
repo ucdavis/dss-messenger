@@ -7,13 +7,10 @@ class MessagesController < ApplicationController
       .by_classification(params[:cl])
       .by_modifier(params[:mo])
       .by_service(params[:is])
-      .by_mevent(params[:me])
       .page(params[:page]).per(20) #paginate with 'page' param being the page number, and 20 as the items per page
     @classifications = Classification.all
     @modifiers = Modifier.all
     @impacted_services = ImpactedService.all
-    @messenger_events = MessengerEvent.all
-    @rssMessages = Message.by_mevent(2)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -59,7 +56,7 @@ class MessagesController < ApplicationController
       if @message.save
         format.html { redirect_to @message, notice: 'Message was successfully created.' }
         format.json { render json: @message, status: :created, location: @message }
-        @message.delay.send_mass_email if @message.messenger_event_ids.include? 1 # 1=send email?
+        @message.delay.send_mass_email
       else
         format.html { render action: "new" }
         format.json { render json: @message.errors, status: :unprocessable_entity }

@@ -13,7 +13,6 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
     @current_classification = @model.get('classification_id')
     @current_modifier = @model.get('modifier_id')
     @current_services = @model.get('impacted_services')
-    @current_events = @model.get('messenger_events')
     _.defer =>
       $("html, body").animate({ scrollTop: "0px" });
       # initialise recipients token input and load duplicated recipients
@@ -24,11 +23,6 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
         recipients_tokeninput.tokenInput "add",
         id: recipient.uid
         name: recipient.name
-      # display loading gif while loading single and multi select inputs
-      $("#classifications_select").html("<div class='loading'></div>")
-      $("#modifiers_select").html("<div class='loading'></div>")
-      $("#impacted_services_select").html("<div class='loading'></div>")
-      $("#messenger_events_select").html("<div class='loading'></div>")
       # load the single and multi select inputs laoded originally from the router
       $("#classifications_select").empty()
       DssMessenger.classifications.each (classification) =>
@@ -46,12 +40,6 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
           return current_service.id is impacted_service.get('id')
         $("#impacted_services_select").append "<label class='checkbox'><input type='checkbox' name='impacted_service_ids[]' value='" + impacted_service.get('id') + (if @checked then "' checked />" else "' />") + impacted_service.get('name') + "</label>"
 
-      $("#messenger_events_select").empty()
-      DssMessenger.messenger_events.each (messenger_event) =>
-        @checked = _.find @current_events, (current_event) =>
-          return current_event.id is messenger_event.get('id')
-        $("#messenger_events_select").append "<label class='checkbox'><input type='checkbox' name='messenger_event_ids[]' value='" + messenger_event.get('id') + (if @checked then "' checked />" else "' />") + messenger_event.get('description') + "</label>"
-
     
   save: (e) ->
     e.preventDefault()
@@ -63,7 +51,6 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
     @model.unset("errors")
     @model.set
       impacted_service_ids: _.map($("input[name='impacted_service_ids[]']:checked"), (a) -> a.value )
-      messenger_event_ids: _.map($("input[name='messenger_event_ids[]']:checked"), (a) -> a.value )
       classification_id: $("input[name='classification_id[]']:checked").val()
       modifier_id: $("input[name='modifier_id[]']:checked").val()
 

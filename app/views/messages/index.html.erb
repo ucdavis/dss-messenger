@@ -11,8 +11,6 @@
 			<div id="filter_modifiers"></div>
 			<h5>Impacted Services</h5>
 			<div id="filter_impacted_services"></div>
-			<h5>Events</h5>
-			<div id="filter_messenger_events"></div>
 			<br />
 			<div id="reset_filters"></div>
 		</form>
@@ -32,7 +30,6 @@
 				classifications: <%= @classifications.to_json.html_safe -%>,
 				modifiers: <%= @modifiers.to_json.html_safe -%>,
 				impacted_services: <%= @impacted_services.to_json.html_safe -%>,
-				messenger_events: <%= @messenger_events.to_json.html_safe -%>
 			});
     Backbone.history.start();
   });

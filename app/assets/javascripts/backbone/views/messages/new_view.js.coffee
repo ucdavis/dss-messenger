@@ -16,7 +16,6 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
       $("#classifications_select").html("<div class='loading'></div>")
       $("#modifiers_select").html("<div class='loading'></div>")
       $("#impacted_services_select").html("<div class='loading'></div>")
-      $("#messenger_events_select").html("<div class='loading'></div>")
       # load the single and multi select inputs laoded originally from the router
       $("#classifications_select").empty()
       DssMessenger.classifications.each (classification) ->
@@ -29,10 +28,6 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
       $("#impacted_services_select").empty()
       DssMessenger.impacted_services.each (impacted_service) ->
         $("#impacted_services_select").append "<label class='checkbox'><input type='checkbox' name='impacted_service_ids[]' value='" + impacted_service.get('id') + "'>" + impacted_service.get('name') + "</label>"
-
-      $("#messenger_events_select").empty()
-      DssMessenger.messenger_events.each (messenger_event) ->
-        $("#messenger_events_select").append "<label class='checkbox'><input type='checkbox' name='messenger_event_ids[]' value='" + messenger_event.get('id') + (if messenger_event.get('id') == 1 then "' checked />" else "' />") + messenger_event.get('description') + "</label>"
 
     Backbone.Validation.bind this
 
@@ -81,7 +76,6 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     @model.unset("errors")
     @model.set
       impacted_service_ids: _.map($("input[name='impacted_service_ids[]']:checked"), (a) -> a.value )
-      messenger_event_ids: _.map($("input[name='messenger_event_ids[]']:checked"), (a) -> a.value )
       classification_id: $("input[name='classification_id[]']:checked").val()
       modifier_id: $("input[name='modifier_id[]']:checked").val()
       window_start: $("input[name='window_start']").val()

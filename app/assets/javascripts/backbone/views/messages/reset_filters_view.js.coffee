@@ -28,7 +28,7 @@ class DssMessenger.Views.Messages.ResetFiltersView extends Backbone.View
           DssMessenger.pages = 1
           DssMessenger.current = 1
 
-        DssMessenger.filterClassification = DssMessenger.filterModifier = DssMessenger.filterService = DssMessenger.filterMevent = 0
+        DssMessenger.filterClassification = DssMessenger.filterModifier = DssMessenger.filterService = 0
         $('#reset-filters').addClass('hidden')
 
       error: (messages, response) ->

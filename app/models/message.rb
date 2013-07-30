@@ -1,11 +1,8 @@
 class Message < ActiveRecord::Base
-  attr_accessible :impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround, :classification_id, :modifier_id, :recipient_uids, :messenger_event_ids, :impacted_service_ids
+  attr_accessible :impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround, :classification_id, :modifier_id, :recipient_uids, :impacted_service_ids
   
   has_many :damages
   has_many :impacted_services, :through => :damages
-  
-  has_many :broadcasts
-  has_many :messenger_events, :through => :broadcasts
   
   has_many :audiences
   has_many :recipients, :through => :audiences
@@ -22,7 +19,6 @@ class Message < ActiveRecord::Base
   scope :by_classification, lambda { |classification| where(classification_id: classification) unless classification.nil? }
   scope :by_modifier, lambda { |modifier| where(modifier_id: modifier) unless modifier.nil? }
   scope :by_service, lambda { |service| joins(:impacted_services).where('impacted_services.id = ?', service) unless service.nil? }
-  scope :by_mevent, lambda { |mevent| joins(:messenger_events).where('messenger_events.id = ?', mevent) unless mevent.nil? }
   
   def recipient_uids=(ids_str)
     ids_str.split(",").each do |r|
@@ -32,7 +28,6 @@ class Message < ActiveRecord::Base
     end
   end
   
-  #DssMailer.delay.deliver_message(@message) if @message.messenger_event_ids.include? 1 # 1=send email?
   def send_mass_email()
     self.recipients.each do |r|
       # Look up e-mail address for r.uid
@@ -85,8 +80,6 @@ class Message < ActiveRecord::Base
       :recipient_uids => self.recipients.map(&:uid).join(","),
       :impacted_services => self.impacted_services,
       :impacted_service_ids => self.impacted_services.pluck(:impacted_service_id),
-      :messenger_events => self.messenger_events,
-      :messenger_event_ids => self.messenger_events.pluck(:messenger_event_id),
       :created_at => self.created_at.strftime("%A, %B %d, %Y at %l:%M %p"),
       :pages => options[:pages],
       :current => options[:current]

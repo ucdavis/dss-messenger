@@ -4,12 +4,11 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
     DssMessenger.pages = options.pages
     DssMessenger.current = options.current
     # Initialize filters
-    DssMessenger.filterClassification = DssMessenger.filterModifier = DssMessenger.filterService = DssMessenger.filterMevent = 0
+    DssMessenger.filterClassification = DssMessenger.filterModifier = DssMessenger.filterService = 0
 
     DssMessenger.classifications = new DssMessenger.Collections.ClassificationsCollection(options.classifications)
     DssMessenger.modifiers = new DssMessenger.Collections.ModifiersCollection(options.modifiers)
     DssMessenger.impacted_services = new DssMessenger.Collections.impacted_servicesCollection(options.impacted_services)
-    DssMessenger.messenger_events = new DssMessenger.Collections.messenger_eventsCollection(options.messenger_events)
     
   routes:
     "new"           : "newMessage"
@@ -35,8 +34,6 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
     $("#filter_modifiers").html(@view.render().el)
     @view = new DssMessenger.Views.impacted_services.IndexView(impacted_services: DssMessenger.impacted_services)
     $("#filter_impacted_services").html(@view.render().el)
-    @view = new DssMessenger.Views.messenger_events.IndexView(messenger_events: DssMessenger.messenger_events)
-    $("#filter_messenger_events").html(@view.render().el)
     @view = new DssMessenger.Views.Messages.ResetFiltersView()
     $("#reset_filters").html(@view.render().el)
 
