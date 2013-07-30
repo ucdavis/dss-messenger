@@ -30,10 +30,11 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
     return this
 
   toggleAccordion: ->
-    @$(".accordion-group").on "hide", => @$(".accordion-toggle-icon").addClass('icon-arrow-right').removeClass('icon-arrow-down')
-    @$(".accordion-group").on "show", =>
-      @$(".accordion-toggle-icon").addClass('icon-arrow-down').removeClass('icon-arrow-right')
-      @$(".accordion-inner").html(@show(@model.toFullJSON() ))
+    @$(".accordion-toggle-icon").toggleClass('icon-arrow-down')
+    if $('#collapse'+@model.get('id')).length
+      $('#collapse'+@model.get('id')).remove()
+    else
+      @$el.after(@show(@model.toFullJSON() ))
 
   tooltipShow: ->
     @$('.tooltip-show').tooltip

@@ -138,23 +138,6 @@ ul.token-input-list-facebook {
   -ms-filter: "progid:DXImageTransform.Microsoft.Shadow\(Strength=5\,Direction=135\,Color=\'#777777\'\)";
   filter: progid:DXImageTransform.Microsoft.Shadow(Strength=5,Direction=135,Color='#777777');
 }
-.message-header {
-  margin: 3px;
-  background-color: #ddd;
-  text-align: left;
-  padding: 0.2em 0.5em;
-}
-
-.message-header .title {
-  font-size: 150%;
-  font-weight: bold;
-  text-transform: capitalize;
-}
-
-.message-header .info {
-  margin-right: 1em;
-}
-
 .message-body {
   margin: 1em;
 }

@@ -1,91 +1,86 @@
-<div class="message-box well">
-	<div class="message-header well">
-		<a  href="#/index" class="close pull-right">&times;</a>
-		<span class="title"><%= subject %></span>
-		<span class="info text-info pull-right">Sent on <%= created_at %></span>
-	</div>
-	<div class="message-body">
-		<table class="table table-hover table-condensed">
-		  	<tbody>
-		    <tr>
-		      <td><b>Recipients</b></td>
-		      <td>
-				  <ul>
-					  <% _.each(recipients, function(recipient){ %>
-					    <li><%= recipient.name %></li>
-					  <% }); %>
-					  </ul>
-					</td>
-		    </tr>
-				<tr>
-					<td><b>Sender</b></td>
-					<td><%= sender_name %></td>
-				</tr>
-				<tr>
-					<td><b>Classification</b></td>
-					<td>
-						<% if (classification) { %>
-							<%= classification.description %></td>
-						<% } %>
-					</td>
-				</tr>
-				<tr>
-					<td><b>Modifier</b></td>
-					<td>
-						<% if (modifier) { %>
-							<%= modifier.description %></td>
-						<% } %>
-					</td>
-				</tr>
-				<tr>
-					<td><b>Impact statement</b></td>
-					<td><%= impact_statement %></td>
-				</tr>
-				<tr>
-					<td><b>Window start</b></td>
-					<td><%= window_start %></td>
-				</tr>
-				<tr>
-					<td><b>Window end</b></td>
-					<td><%= window_end %></td>
-				</tr>
-				<tr>
-					<td><b>Purpose</b></td>
-					<td><%= purpose %></td>
-				</tr>
-				<tr>
-					<td><b>Resolution</b></td>
-					<td><%= resolution %></td>
-				</tr>
-				<tr>
-					<td><b>Workaround</b></td>
-					<td><%= workaround %></td>
-				</tr>
-				<tr>
-					<td><b>Other services</b></td>
-					<td><%= other_services %></td>
-				</tr>
-				<tr>
-					<td><b>Impacted Services</b></td>
-					<td>
-						<ul>
-					  <% _.each(impacted_services, function(impacted_service){ %>
-					    <li><%= impacted_service.name %></li>
-					  <% }); %>
-					  </ul>
-				  </td>
-				</tr>
-				<tr>
-					<td><b>Events</b></td>
-					<td>
-						<ul>
-					  <% _.each(messenger_events, function(messenger_event){ %>
-					    <li><%= messenger_event.description %></li>
-					  <% }); %>
-					  </ul>
-					</td>
-				</tr>
-		  </tbody>
-		</table>
-	</div>
-</div>
+<tr id="collapse<%= id %>" class="accordion-body collapse">
+	<td colspan='6'>
+		<div class="message-box well">
+			<div class="message-body">
+				<table class="table table-hover table-condensed">
+				  	<tbody>
+				    <tr>
+				      <td><b>Recipients</b></td>
+				      <td>
+						  <ul>
+							  <% _.each(recipients, function(recipient){ %>
+							    <li><%= recipient.name %></li>
+							  <% }); %>
+							  </ul>
+							</td>
+				    </tr>
+						<tr>
+							<td><b>Classification</b></td>
+							<td>
+								<% if (classification) { %>
+									<%= classification.description %></td>
+								<% } %>
+							</td>
+						</tr>
+						<tr>
+							<td><b>Modifier</b></td>
+							<td>
+								<% if (modifier) { %>
+									<%= modifier.description %></td>
+								<% } %>
+							</td>
+						</tr>
+						<tr>
+							<td><b>Impact statement</b></td>
+							<td><%= impact_statement %></td>
+						</tr>
+						<tr>
+							<td><b>Window start</b></td>
+							<td><%= window_start %></td>
+						</tr>
+						<tr>
+							<td><b>Window end</b></td>
+							<td><%= window_end %></td>
+						</tr>
+						<tr>
+							<td><b>Purpose</b></td>
+							<td><%= purpose %></td>
+						</tr>
+						<tr>
+							<td><b>Resolution</b></td>
+							<td><%= resolution %></td>
+						</tr>
+						<tr>
+							<td><b>Workaround</b></td>
+							<td><%= workaround %></td>
+						</tr>
+						<tr>
+							<td><b>Other services</b></td>
+							<td><%= other_services %></td>
+						</tr>
+						<tr>
+							<td><b>Impacted Services</b></td>
+							<td>
+								<ul>
+							  <% _.each(impacted_services, function(impacted_service){ %>
+							    <li><%= impacted_service.name %></li>
+							  <% }); %>
+							  </ul>
+						  </td>
+						</tr>
+						<tr>
+							<td><b>Events</b></td>
+							<td>
+								<ul>
+							  <% _.each(messenger_events, function(messenger_event){ %>
+							    <li><%= messenger_event.description %></li>
+							  <% }); %>
+							  </ul>
+							</td>
+						</tr>
+				  </tbody>
+				</table>
+			</div>
+		</div>
+	</td>
+</tr>
