@@ -2,6 +2,7 @@ DssMessenger.Views.Messages ||= {}
 
 class DssMessenger.Views.Messages.MessageView extends Backbone.View
   template: JST["backbone/templates/messages/message"]
+  show: JST["backbone/templates/messages/show"]
 
   events:
     "mouseenter .tooltip-show"      : "tooltipShow"
@@ -17,7 +18,7 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
       if result
         # delete the message and remove from log
         @model.destroy()
-        this.remove()
+        @$el.toggle("highlight", {color: "#700000"}, 1000)
         
     # dismiss the dialog
     @$(".modal-header a.close").trigger "click"
@@ -30,7 +31,9 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
 
   toggleAccordion: ->
     @$(".accordion-group").on "hide", => @$(".accordion-toggle-icon").addClass('icon-arrow-right').removeClass('icon-arrow-down')
-    @$(".accordion-group").on "show", => @$(".accordion-toggle-icon").addClass('icon-arrow-down').removeClass('icon-arrow-right')
+    @$(".accordion-group").on "show", =>
+      @$(".accordion-toggle-icon").addClass('icon-arrow-down').removeClass('icon-arrow-right')
+      @$(".accordion-inner").html(@show(@model.toFullJSON() ))
 
   tooltipShow: ->
     @$('.tooltip-show').tooltip
