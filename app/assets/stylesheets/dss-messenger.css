@@ -123,6 +123,10 @@ ul.token-input-list-facebook {
   clear: none;
 }
 
+.bootstrap-select.btn-group, .bootstrap-select.btn-group[class*="span"] {
+  width: 180px;
+}
+
 /*------- Message Show View -------*/
 .message-box {
   border: 1px solid #ddd;
@@ -173,7 +177,17 @@ ul.token-input-list-facebook {
   text-transform: capitalize;
 }
 
-/******* Nawrrow view / mobile view ********/
+/******* Wide view / mobile view ********/
+@media (min-width: 1200px) {
+  .bootstrap-select.btn-group, .bootstrap-select.btn-group[class*="span"] {
+    width: 220px;
+  }
+}
+@media (max-width: 979px) and (min-width: 768px) {
+  .bootstrap-select.btn-group, .bootstrap-select.btn-group[class*="span"] {
+    width: 128px;
+  }
+}
 @media (max-width: 767px) {
 	.affix {
 	  position: static;
