@@ -51,6 +51,7 @@ class Message < ActiveRecord::Base
   def as_json(options = {})
     {
       :id => self.id,
+      :closed => self.closed,
       :impact_statement => self.impact_statement,
       :other_services => self.other_services,
       :purpose => self.purpose,

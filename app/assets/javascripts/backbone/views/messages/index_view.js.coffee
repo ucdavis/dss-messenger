@@ -47,7 +47,11 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
     
   addOne: (message) =>
     view = new DssMessenger.Views.Messages.MessageView({model : message})
-    @$("tbody").append(view.render().el)
+    console.log message.get('closed')
+    if message.get('closed')
+      @$("#archive-table tbody").append(view.render().el)
+    else
+      @$("#active-table tbody").append(view.render().el)
 
   render: =>
     window.scrollTo 0, 0
