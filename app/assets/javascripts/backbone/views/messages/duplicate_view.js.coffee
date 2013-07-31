@@ -60,6 +60,10 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
       at: 0
       success: (message) =>
         @model = message
+        
+        #close the original message
+        @original.save(closed:true)
+        
         window.location.hash = "#/index"
         $("html, body").animate({ scrollTop: "0px" });
 
@@ -70,7 +74,8 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
 
   constructor: (options) ->
     super(options)
-    @model = new @collection.model(_.omit(@model.attributes, 'created_at', 'updated_at', 'id'))
+    @original = @model
+    @model = new @collection.model(_.omit(@original.attributes, 'created_at', 'updated_at', 'id'))
     @model.set('modifier_id', Number options.action) if options.action
 
     @model.bind("change:errors", () =>
