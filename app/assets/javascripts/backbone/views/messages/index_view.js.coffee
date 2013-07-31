@@ -17,7 +17,7 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
       # this will un-hide the 'show more' button if there is more messages
       $(".pagination").removeClass('hidden') if DssMessenger.current < DssMessenger.pages
       # this will affix the table header when scrolled
-      $("#archive-table #mtable-head").affix offset: $("#archive-table").position().top - 40
+      # $("#archive-table #mtable-head").affix offset: $("#archive-table").position().top - 40
       $("#archive-table #mtable-head th").each ->
         $(this).width $(this).width()
 
