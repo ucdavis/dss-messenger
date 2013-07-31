@@ -5,20 +5,26 @@ class DssMessenger.Views.Messages.ActiveMessageView extends Backbone.View
   show: JST["backbone/templates/messages/show"]
 
   events:
-    "mouseenter .tooltip-show"      : "tooltipShow"
-    "mouseenter .tooltip-duplicate" : "tooltipDuplicate"
-    "mouseenter .tooltip-destroy"   : "tooltipDestroy"
-    "click      .tooltip-destroy"   : "destroy"
+    "mouseenter .tooltip-archive"   : "tooltipArchive"
+    "click      .tooltip-archive"   : "archive"
     "click      .accordion-heading" : "toggleAccordion"
 
   tagName: "tr"
 
-  destroy: () ->
-    bootbox.confirm "Are you sure you want to delete <span class='confirm-name'>" + @model.escape("subject") + "</span>?", (result) =>
+  archive: () ->
+    bootbox.confirm "Are you sure you want to archive <span class='confirm-name'>" + @model.escape("subject") + "</span> without sending a message?", (result) =>
       if result
-        # delete the message and remove from log
-        @model.destroy()
-        @$el.toggle("highlight", {color: "#700000"}, 1000)
+        # archive the message
+        @model.save(closed:true,
+          timeout: 10000 # 10 seconds
+          wait:true
+          success: (message) ->
+            @$el.toggle("highlight", {color: "#700000"}, 1000)
+            
+          error: (message, jqXHR) ->
+            message.set({errors: $.parseJSON(jqXHR.responseText)})
+          )
+          
         
     # dismiss the dialog
     @$(".modal-header a.close").trigger "click"
@@ -36,20 +42,9 @@ class DssMessenger.Views.Messages.ActiveMessageView extends Backbone.View
     else
       @$el.after(@show(@model.toFullJSON() ))
 
-  tooltipShow: ->
-    @$('.tooltip-show').tooltip
-      title:"Show"
+  tooltipArchive: ->
+    @$('.tooltip-archive').tooltip
+      title:"Archive"
       placement: "top"
-    @$('.tooltip-show').tooltip('show')
-    
-  tooltipDuplicate: ->
-    @$('.tooltip-duplicate').tooltip
-      title:"Duplicate"
-      placement: "top"
-    @$('.tooltip-duplicate').tooltip('show')
-    
-  tooltipDestroy: ->
-    @$('.tooltip-destroy').tooltip
-      title:"Delete"
-      placement: "top"
-    @$('.tooltip-destroy').tooltip('show')
+    @$('.tooltip-archive').tooltip('show')
+

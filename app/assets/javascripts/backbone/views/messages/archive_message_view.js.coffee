@@ -5,7 +5,6 @@ class DssMessenger.Views.Messages.ArchiveMessageView extends Backbone.View
   show: JST["backbone/templates/messages/show"]
 
   events:
-    "mouseenter .tooltip-show"      : "tooltipShow"
     "mouseenter .tooltip-duplicate" : "tooltipDuplicate"
     "mouseenter .tooltip-destroy"   : "tooltipDestroy"
     "click      .tooltip-destroy"   : "destroy"
@@ -36,12 +35,6 @@ class DssMessenger.Views.Messages.ArchiveMessageView extends Backbone.View
     else
       @$el.after(@show(@model.toFullJSON() ))
 
-  tooltipShow: ->
-    @$('.tooltip-show').tooltip
-      title:"Show"
-      placement: "top"
-    @$('.tooltip-show').tooltip('show')
-    
   tooltipDuplicate: ->
     @$('.tooltip-duplicate').tooltip
       title:"Duplicate"
