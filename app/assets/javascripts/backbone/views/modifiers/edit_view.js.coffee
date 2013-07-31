@@ -7,6 +7,7 @@ class DssMessenger.Views.Modifiers.EditView extends Backbone.View
     "click .icon-trash": "destroy"
     "change .pref_input": "update"
     "keypress .pref_input": "checkKey"
+    "change input[type=checkbox]": "changeOpenEnded"
 
   checkKey: (e) ->
     e.stopPropagation()
@@ -37,8 +38,18 @@ class DssMessenger.Views.Modifiers.EditView extends Backbone.View
         @model = modifiers
     )
 
+  changeOpenEnded: ->
+    @model.set
+      open_ended: @$("input[type=checkbox]").is(':checked')
+
+    @model.save(null,
+      success: (modifiers) =>
+        @model = modifiers
+    )
+    
   render: ->
     @$el.html(@template(@model.toJSON() ))
+    @$('input[type=checkbox]').prop('checked', @model.get('open_ended'));
 
     this.$("form").backboneLink(@model)
 
