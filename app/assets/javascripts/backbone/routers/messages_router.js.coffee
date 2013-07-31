@@ -16,6 +16,7 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
     "prefs"         : "Preferences"
     "about"         : "About"
     ":id/duplicate" : "duplicate"
+    ":id/duplicate/:action" : "action"
     ":id"           : "show"
     ".*"            : "index"
 
@@ -48,6 +49,13 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
     message = DssMessenger.messages.get(id)
 
     @view = new DssMessenger.Views.Messages.DuplicateView(collection: DssMessenger.messages, model: message)
+    $("#filters-sidebar").hide()
+    $("#messages").html(@view.render().el)
+
+  action: (id,action) ->
+    message = DssMessenger.messages.get(id)
+
+    @view = new DssMessenger.Views.Messages.DuplicateView(collection: DssMessenger.messages, model: message, action:action)
     $("#filters-sidebar").hide()
     $("#messages").html(@view.render().el)
 

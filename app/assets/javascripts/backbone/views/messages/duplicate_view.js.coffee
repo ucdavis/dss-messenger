@@ -10,10 +10,11 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
   initialize: ->
     Backbone.Validation.bind this
 
-    @current_classification = @model.get('classification_id')
-    @current_modifier = @model.get('modifier_id')
-    @current_services = @model.get('impacted_services')
     _.defer =>
+      @current_classification = @model.get('classification_id')
+      @current_modifier = @model.get('modifier_id')
+      @current_services = @model.get('impacted_services')
+
       $("html, body").animate({ scrollTop: "0px" });
       # initialise recipients token input and load duplicated recipients
       @tokenInput()
@@ -70,6 +71,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
   constructor: (options) ->
     super(options)
     @model = new @collection.model(_.omit(@model.attributes, 'created_at', 'updated_at', 'id'))
+    @model.set('modifier_id', Number options.action) if options.action
 
     @model.bind("change:errors", () =>
       $('p.error-message').remove()

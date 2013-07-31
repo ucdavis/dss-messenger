@@ -40,6 +40,9 @@ class DssMessenger.Views.Messages.ActiveMessageView extends Backbone.View
 
   render: ->
     @$el.html(@template(@model.toFullJSON() )).fadeIn()
+    _.each DssMessenger.modifiers.models, (modifier,index) =>
+      description = modifier.get('description').split(':')[0]
+      @$('.actions').append('<a href="#/'+@model.get('id')+'/duplicate/'+modifier.id+'" class="label label-info">'+description+'</a> ')
     return this
 
   toggleAccordion: ->
