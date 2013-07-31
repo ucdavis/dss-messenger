@@ -2,6 +2,14 @@ h1 {
     margin-bottom: 1em;
 }
 
+.invisible-well {
+  background-color: #fff;
+  border: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+}
+
 #messages {
 	/*position: relative;   *** uncomment to have the overlay only on the messages table**/
 	float: right;
