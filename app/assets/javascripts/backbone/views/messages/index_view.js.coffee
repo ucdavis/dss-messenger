@@ -58,11 +58,17 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
     $('.overlay,.loading,.error').addClass('hidden')
     @$el.html(@template(messages: DssMessenger.messages.toJSON() ))
     @addAll()
-
+    
+    @active = DssMessenger.messages.filter (messages) ->
+      messages.get("closed") is false
+      
     _.defer =>
+      #Hide the table titles if no active messages
+      if @active.length is 0
+        $("#active-table, .table-title").hide()
       #Hide the table and display "No Messages" if the collection is empty
       if DssMessenger.messages.size() is 0
-        $("#messages-table, .pagination").hide()
+        $("#archive-table, .pagination").hide()
         @$el.html('<h2 class="text-center">No Messages</h2>')
 
 

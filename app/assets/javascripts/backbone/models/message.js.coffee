@@ -11,6 +11,7 @@ class DssMessenger.Models.Message extends Backbone.Model
     workaround: null
     other_services: null
     sender_uid: null
+    closed: false
 
   validation:
     recipient_uids:

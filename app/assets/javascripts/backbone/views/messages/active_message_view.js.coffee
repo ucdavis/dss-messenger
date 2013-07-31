@@ -18,10 +18,10 @@ class DssMessenger.Views.Messages.ActiveMessageView extends Backbone.View
         @model.save(closed:true,
           timeout: 10000 # 10 seconds
           wait:true
-          success: (message) ->
+          success: (message) =>
             @$el.toggle("highlight", {color: "#700000"}, 1000)
             
-          error: (message, jqXHR) ->
+          error: (message, jqXHR) =>
             message.set({errors: $.parseJSON(jqXHR.responseText)})
           )
           
