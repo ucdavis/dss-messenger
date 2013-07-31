@@ -24,7 +24,7 @@ class Message < ActiveRecord::Base
     ids_str.split(",").each do |r|
       name = Entity.find(r).name
       recipient = Recipient.find_or_create_by_uid(uid: r, name: name)
-      self.recipients << recipient
+      self.recipients << recipient unless self.recipients.include?(recipient) # Avoid duplicates
     end
   end
   
