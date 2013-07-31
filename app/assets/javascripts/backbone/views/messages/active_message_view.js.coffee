@@ -19,7 +19,13 @@ class DssMessenger.Views.Messages.ActiveMessageView extends Backbone.View
           timeout: 10000 # 10 seconds
           wait:true
           success: (message) =>
-            @$el.toggle("highlight", {color: "#700000"}, 1000)
+            $('#archive-table #mtable-head').after(@$el)
+            #Hide the table titles if no more active messages
+            @active = DssMessenger.messages.filter (messages) ->
+              messages.get("closed") is false
+            if @active.length is 0
+              $("#active-table, .table-title").fadeOut()
+          
             
           error: (message, jqXHR) =>
             message.set({errors: $.parseJSON(jqXHR.responseText)})
