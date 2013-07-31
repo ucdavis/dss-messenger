@@ -54,7 +54,7 @@ class MessagesController < ApplicationController
     
     # The message is open or closed depending on the selected modifier
     unless @message.modifier.nil?
-      if @message.modifier.openended
+      if @message.modifier.open_ended
         @message.closed = false 
       else
         @message.closed = true 

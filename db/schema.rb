@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130731192227) do
+ActiveRecord::Schema.define(:version => 20130731214355) do
 
   create_table "audiences", :force => true do |t|
     t.integer  "message_id"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(:version => 20130731192227) do
     t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    t.boolean  "openended"
+    t.boolean  "open_ended"
   end
 
   create_table "recipients", :force => true do |t|
