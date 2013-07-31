@@ -53,10 +53,12 @@ class MessagesController < ApplicationController
     @message.sender_uid = Person.find(session[:cas_user]).id #get the full name of the currently logged in user.
     
     # The message is open or closed depending on the selected modifier
-    if @message.modifier.openended
-      @message.closed = false 
-    else
-      @message.closed = true 
+    unless @message.modifier.nil?
+      if @message.modifier.openended
+        @message.closed = false 
+      else
+        @message.closed = true 
+      end
     end
       
     respond_to do |format|
