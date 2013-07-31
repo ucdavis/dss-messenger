@@ -3,19 +3,24 @@
 update:
   id: 1
   description: "UPDATE: prefix to previous subject when sending an update to an existing issue"
+  openended: t
 
 resolved:
   id: 2
   description: "RESOLVED: prefix to previous subject when notifying that an issue has been resolved"
+  openended: f
 
 cancelled:
   id: 3
   description: "CANCELED: prefix to previous subject when notifying of cancellation of planned maintenance"
+  openended: f
 
 reminder:
   id: 4
   description: "REMINDER: prefix to previous subject when sending a reminder about planned maintenance"
+  openended: t
 
 headsup:
   id: 5
   description: "HEADS-UP: prefix to subject when serious outage or degradation is suspected but not confirmed"
+  openended: t
