@@ -51,6 +51,7 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(params[:message])
     @message.sender_uid = Person.find(session[:cas_user]).id #get the full name of the currently logged in user.
+    @message.closed = false # The message is open by default
     
     respond_to do |format|
       if @message.save
