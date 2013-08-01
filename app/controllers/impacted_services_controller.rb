@@ -1,4 +1,6 @@
 class ImpactedServicesController < ApplicationController
+  filter_resource_access
+  
   # GET /impacted_services
   # GET /impacted_services.json
   def index

@@ -3,7 +3,9 @@ class ApplicationController < ActionController::Base
   
   before_filter :authenticate
   
-  filter_resource_access
-  
   protect_from_forgery
+  
+  def logout
+      CASClient::Frameworks::Rails::Filter.logout(self)
+  end
 end

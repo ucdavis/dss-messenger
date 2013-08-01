@@ -1,4 +1,6 @@
 class MessagesController < ApplicationController
+  filter_resource_access
+  
   # GET /messages
   # GET /messages.json
   def index

@@ -1,4 +1,6 @@
 class ClassificationsController < ApplicationController
+  filter_resource_access
+  
   # GET /classifications
   # GET /classifications.json
   def index

@@ -15,5 +15,6 @@ DssMessenger::Application.routes.draw do
   resources :messages
 
   root :to => 'messages#index'
+  get "/logout" => 'application#logout'
 
 end

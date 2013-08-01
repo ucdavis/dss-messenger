@@ -1,4 +1,6 @@
 class MessengerEventsController < ApplicationController
+  filter_resource_access
+  
   # GET /events
   # GET /events.json
   def index

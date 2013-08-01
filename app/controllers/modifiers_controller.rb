@@ -1,4 +1,6 @@
 class ModifiersController < ApplicationController
+  filter_resource_access
+  
   # GET /modifiers
   # GET /modifiers.json
   def index

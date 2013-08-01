@@ -1,4 +1,6 @@
 class RecipientsController < ApplicationController
+  filter_resource_access
+  
   # GET /recipients
   # GET /recipients.json
   def index
