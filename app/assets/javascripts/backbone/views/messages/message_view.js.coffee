@@ -26,7 +26,8 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
             $("#archive-table, .table-title").show()
             $('#archive-table #mtable-head').after(@$el)
             @$el.effect( "highlight", "slow" )
-            @$('.actions,.icon-inbox').hide()
+            @$('.archive-only').show()
+            @$('.active-only').hide()
             #Hide the table titles if no more active messages
             @active = DssMessenger.messages.filter (messages) ->
               messages.get("closed") is false
