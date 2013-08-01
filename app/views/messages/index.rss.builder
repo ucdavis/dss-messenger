@@ -5,7 +5,7 @@ xml.rss :version => "2.0" do
     xml.description "Most recent DSS notifications (RSS)"
     xml.link messages_url
 
-    for m in @messages.select{ |m| not m.closed }
+    for m in @open_messages
       xml.item do
         xml.title m.subject
         xml.description m.impact_statement
