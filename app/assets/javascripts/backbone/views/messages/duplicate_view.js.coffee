@@ -1,7 +1,7 @@
 DssMessenger.Views.Messages ||= {}
 
 class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
-  template: JST["backbone/templates/messages/duplicate"]
+  template: JST["backbone/templates/messages/form"]
 
   events:
     "submit #new-message": "save"
@@ -112,7 +112,8 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
 
 
   render: ->
-    @$el.html(@template(@model.toJSON() ))
+    @$el.html("<h1>Duplicate Message</h1>")
+    @$el.append(@template(@model.toJSON() ))
 
     this.$("form").backboneLink(@model)
 

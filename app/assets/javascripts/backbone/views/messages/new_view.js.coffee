@@ -1,7 +1,7 @@
 DssMessenger.Views.Messages ||= {}
 
 class DssMessenger.Views.Messages.NewView extends Backbone.View
-  template: JST["backbone/templates/messages/new"]
+  template: JST["backbone/templates/messages/form"]
 
   events:
     "submit #new-message": "save"
@@ -96,7 +96,8 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     )
 
   render: ->
-    @$el.html(@template(@model.toJSON() ))
+    @$el.html("<h1>New Message</h1>")
+    @$el.append(@template(@model.toJSON() ))
     
     this.$("form").backboneLink(@model)
 
