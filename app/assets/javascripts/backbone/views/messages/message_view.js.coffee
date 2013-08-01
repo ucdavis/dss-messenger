@@ -1,14 +1,17 @@
 DssMessenger.Views.Messages ||= {}
 
-class DssMessenger.Views.Messages.ActiveMessageView extends Backbone.View
-  template: JST["backbone/templates/messages/active_message"]
+class DssMessenger.Views.Messages.MessageView extends Backbone.View
+  template: JST["backbone/templates/messages/message"]
   show: JST["backbone/templates/messages/show"]
 
   events:
     "mouseenter .tooltip-archive"   : "tooltipArchive"
-    "mouseenter .actions"   : "tooltipAction"
+    "mouseenter .actions"           : "tooltipAction"
     "click      .tooltip-archive"   : "archive"
     "click      .accordion-heading" : "toggleAccordion"
+    "mouseenter .tooltip-duplicate" : "tooltipDuplicate"
+    "mouseenter .tooltip-destroy"   : "tooltipDestroy"
+    "click      .tooltip-destroy"   : "destroy"
 
   tagName: "tr"
 
@@ -41,12 +44,31 @@ class DssMessenger.Views.Messages.ActiveMessageView extends Backbone.View
 
     return false
 
+  destroy: () ->
+    bootbox.confirm "Are you sure you want to delete <span class='confirm-name'>" + @model.escape("subject") + "</span>?", (result) =>
+      if result
+        # delete the message and remove from log
+        @model.destroy()
+        @$el.toggle("highlight", {color: "#700000"}, 1000)
+
+    # dismiss the dialog
+    @$(".modal-header a.close").trigger "click"
+
+    return false
+
   render: ->
     @$el.html(@template(@model.toFullJSON() )).fadeIn()
     colors = ['info','success','inverse','important','warning']
     _.each DssMessenger.modifiers.models, (modifier,index) =>
       description = modifier.get('description').split(':')[0] # get part before the colon
       @$('.actions').append('<a href="#/'+@model.get('id')+'/duplicate/'+modifier.id+'" class="label label-'+colors[index%5]+'">'+description+'</a> ')
+    
+    _.defer =>
+      if @model.get('closed')
+        @$('.active-only').hide()
+      else
+        @$('.archive-only').hide()
+
     return this
 
   toggleAccordion: ->
@@ -58,7 +80,7 @@ class DssMessenger.Views.Messages.ActiveMessageView extends Backbone.View
 
   tooltipArchive: ->
     @$('.tooltip-archive').tooltip
-      title:"Archive"
+      title:"Archive without sending an email"
       placement: "top"
     @$('.tooltip-archive').tooltip('show')
 
@@ -68,3 +90,14 @@ class DssMessenger.Views.Messages.ActiveMessageView extends Backbone.View
       placement: "top"
     @$('.actions').tooltip('show')
 
+  tooltipDuplicate: ->
+    @$('.tooltip-duplicate').tooltip
+      title:"Duplicate"
+      placement: "top"
+    @$('.tooltip-duplicate').tooltip('show')
+
+  tooltipDestroy: ->
+    @$('.tooltip-destroy').tooltip
+      title:"Delete"
+      placement: "top"
+    @$('.tooltip-destroy').tooltip('show')
