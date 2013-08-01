@@ -38,8 +38,6 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     @model.bind("change:errors", () =>
       $('p.error-message').remove()
       $('.error').removeClass('error')
-      $('input[type="submit"]').val('Send Message').removeAttr('disabled');
-      $("html, body").animate({ scrollTop: "0px" });
       _.each @model.get('errors'), (error,index) ->
         $('#'+index).closest('.control-group').addClass('error')
         $('#'+index).closest('.control-group .controls').append('<p class="help-block error-message">' + error + '</p>')
@@ -82,6 +80,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
       window_end: $("input[name='window_end']").val()
 
     @collection.create(@model.toJSON(),
+      timeout: 30000
       wait: true
       at: 0
       success: (message) =>
@@ -91,6 +90,9 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
       error: (message, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
+        unless jqXHR.status >= 200 and jqXHR.status < 300
+          $("html, body").animate({ scrollTop: "0px" });
+          $('input[type="submit"]').val('Try Sending Again').removeAttr('disabled').addClass('btn-danger');
     )
 
   render: ->
