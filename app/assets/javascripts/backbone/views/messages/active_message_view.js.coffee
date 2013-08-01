@@ -6,6 +6,7 @@ class DssMessenger.Views.Messages.ActiveMessageView extends Backbone.View
 
   events:
     "mouseenter .tooltip-archive"   : "tooltipArchive"
+    "mouseenter .actions"   : "tooltipAction"
     "click      .tooltip-archive"   : "archive"
     "click      .accordion-heading" : "toggleAccordion"
 
@@ -19,8 +20,10 @@ class DssMessenger.Views.Messages.ActiveMessageView extends Backbone.View
           timeout: 10000 # 10 seconds
           wait:true
           success: (message) =>
+            $("#archive-table, .table-title").show()
             $('#archive-table #mtable-head').after(@$el)
             @$el.effect( "highlight", "slow" )
+            @$('.actions,.icon-inbox').hide()
             #Hide the table titles if no more active messages
             @active = DssMessenger.messages.filter (messages) ->
               messages.get("closed") is false
@@ -58,4 +61,10 @@ class DssMessenger.Views.Messages.ActiveMessageView extends Backbone.View
       title:"Archive"
       placement: "top"
     @$('.tooltip-archive').tooltip('show')
+
+  tooltipAction: ->
+    @$('.actions').tooltip
+      title:"Compose new message with the selected status filled in"
+      placement: "top"
+    @$('.actions').tooltip('show')
 
