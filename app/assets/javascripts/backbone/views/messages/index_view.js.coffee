@@ -61,11 +61,15 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
     
     @active = DssMessenger.messages.filter (messages) ->
       messages.get("closed") is false
+    @archive = DssMessenger.messages.filter (messages) ->
+      messages.get("closed") is true
       
     _.defer =>
       #Hide the table titles if no active messages
       if @active.length is 0
         $("#active-table, .table-title").hide()
+      if @archive.length is 0
+        $("#archive-table, .table-title").hide()
       #Hide the table and display "No Messages" if the collection is empty
       if DssMessenger.messages.size() is 0
         $("#archive-table, .pagination").hide()
