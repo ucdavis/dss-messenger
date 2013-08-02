@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
-  filter_resource_access
+  filter_access_to :all, :attribute_check => true
+  filter_access_to :open, :attribute_check => false
   
   # GET /messages
   # GET /messages.json
@@ -19,7 +20,6 @@ class MessagesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @messages.to_json(pages: @messages.total_pages, current: @messages.current_page) }
-      format.rss { render layout: false } #index.rss.builder
     end
   end
   
@@ -102,6 +102,16 @@ class MessagesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to messages_url }
       format.json { head :no_content }
+    end
+  end
+  
+  def open
+    @open_messages = Message.where(closed: false)
+    
+    respond_to do |format|
+      format.html # open.html.erb
+      format.json { render json: @open_messages }
+      format.rss { render layout: false } #open.rss.builder
     end
   end
 

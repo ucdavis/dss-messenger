@@ -11,6 +11,7 @@ DssMessenger::Application.routes.draw do
 
   resources :recipients
 
+  get "/messages/open" => 'messages#open'
   resources :messages
   
   root :to => 'messages#index'

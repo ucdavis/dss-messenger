@@ -1,0 +1,12 @@
+<div id="messages" class="span9"></div>
+
+<script type="text/javascript">
+  $(function() {
+    // DssMessenger is the app name
+    window.router = new DssMessenger.Routers.MessagesRouter(
+			{
+				messages: <%= @open_messages.to_json.html_safe -%>,
+			});
+    Backbone.history.start();
+  });
+</script>
