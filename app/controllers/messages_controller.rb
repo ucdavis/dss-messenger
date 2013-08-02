@@ -1,6 +1,5 @@
 class MessagesController < ApplicationController
-  filter_access_to :all, :attribute_check => true
-  filter_access_to :open, :attribute_check => false
+  filter_access_to :all, :attribute_check => true, :except => [:open]
   
   # GET /messages
   # GET /messages.json

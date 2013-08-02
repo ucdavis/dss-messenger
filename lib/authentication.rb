@@ -1,7 +1,6 @@
 module Authentication
   def current_user
-    logger.debug Person.find(session[:cas_user]).role_symbols
-    Person.find(session[:cas_user])
+    Person.find(session[:cas_user]) if session[:cas_user]
   end
   
   def authenticate
