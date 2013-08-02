@@ -1,5 +1,10 @@
 class MessagesController < ApplicationController
-  filter_access_to :all, :attribute_check => true, :except => [:open]
+  filter_resource_access
+  
+  # filter_access_to :all, :attribute_check => true
+  # filter_access_to :open, :attribute_check => false
+
+  #filter_access_to :index, :attribute_check => true, :load_method => :load_messages
   
   # GET /messages
   # GET /messages.json
@@ -10,6 +15,7 @@ class MessagesController < ApplicationController
       .by_modifier(params[:mo])
       .by_service(params[:is])
       .page(params[:page]).per(20) #paginate with 'page' param being the page number, and 20 as the items per page
+
     @classifications = Classification.all
     @modifiers = Modifier.all
     @impacted_services = ImpactedService.all
@@ -105,7 +111,7 @@ class MessagesController < ApplicationController
   end
   
   def open
-    @open_messages = Message.where(closed: false)
+    @open_messages = Message.where(closed: false).order('created_at DESC')
     
     respond_to do |format|
       format.html {render layout: 'public' }# open.html.erb
@@ -113,5 +119,5 @@ class MessagesController < ApplicationController
       format.rss { render layout: false } #open.rss.builder
     end
   end
-
+  
 end

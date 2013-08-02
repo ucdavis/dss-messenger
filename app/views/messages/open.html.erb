@@ -1,12 +1,58 @@
-<div id="messages" class="span12"></div>
-
-<script type="text/javascript">
-  $(function() {
-    // DssMessenger is the app name
-    window.router = new DssMessenger.Routers.MessagesRouter(
-			{
-				messages: <%= @open_messages.to_json.html_safe -%>,
-			});
-    Backbone.history.start();
-  });
-</script>
+<div id="messages" class="span12">
+	<table class="table table-striped table-bordered table-condensed">
+		<% @open_messages.each do |om| %>
+			<tr>
+				<td>
+					<dl class="dl-horizontal">
+					  <dt>Date</dt>
+					  <dd><%= om.created_at.strftime("%A, %B %d, %Y at %l:%M %p") %></dd>
+					  <dt>Subject</dt>
+					  <dd>
+							<% if om.classification %>
+							  <%= om.classification.description.slice(0..(om.classification.description.index(':')))  %>
+							<% end %>
+							<% if om.modifier %>
+							  <%= om.modifier.description.slice(0..(om.modifier.description.index(':'))) %>
+							<% end %>
+						  <%= om.subject %>
+						</dd>
+					  <dt>Summary</dt>
+					  <dd><%= om.impact_statement %></dd>
+					<% if om.window_start %>
+					  <dt>Start of window</dt>
+					  <dd><%= om.window_start.strftime("%A, %B %d, %Y at %l:%M %p") %></dd>
+					<% end %>
+					<% if om.window_end %>
+					  <dt>End of window</dt>
+					  <dd><%= om.window_end.strftime("%A, %B %d, %Y at %l:%M %p") %></dd>
+					<% end %>
+					<% if om.purpose %>
+					  <dt>Purpose</dt>
+					  <dd><%= om.purpose %></dd>
+					<% end %>
+					<% if om.resolution %>
+					  <dt>Resolution</dt>
+					  <dd><%= om.resolution %></dd>
+					<% end %>
+					<% if om.workaround %>
+					  <dt>Workaround</dt>
+					  <dd><%= om.workaround %></dd>
+					<% end %>
+					<% if om.other_services %>
+					  <dt>Other Services</dt>
+					  <dd><%= om.other_services %></dd>
+					<% end %>
+					<% if om.impacted_services.length > 0 %>
+					  <dt>Impacted Services</dt>
+					  <dd>
+							<% om.impacted_services.each do |is| %>
+								<li><%= is.name %></li>
+							<% end %>
+						</dd>
+					<% end %>
+					</dl>
+				</td>
+			</tr>
+		<% end %>
+	</table>
+</div>
