@@ -4,7 +4,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
   template: JST["backbone/templates/messages/form"]
 
   events:
-    "submit #new-message": "save"
+    "submit #message-form": "save"
     "focus #Recipients"	:	"tokenInput"
     "mouseenter .control-group"   : "tooltip"
 
