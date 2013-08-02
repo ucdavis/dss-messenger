@@ -108,7 +108,7 @@ class MessagesController < ApplicationController
     @open_messages = Message.where(closed: false)
     
     respond_to do |format|
-      format.html # open.html.erb
+      format.html {render layout: 'public' }# open.html.erb
       format.json { render json: @open_messages }
       format.rss { render layout: false } #open.rss.builder
     end
