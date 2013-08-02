@@ -1,89 +1,78 @@
 <head>
 <style>
-	.table {
-		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-		font-size: 12px;
+	dl {
+		margin-bottom: 20px;
 	}
-	td.title {
+	dt {
+		float: left;
+		width: 120px;
+		clear: left;
+		text-align: right;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 		font-weight: bold;
-		vertical-align: top;
+		display: block;
+	}
+	dd {
+		margin-left: 140px;
 	}
 </style>
 </head>
 
 <p>Dear <%= @member.first %>,</p>
 
-<table class="table table-striped">
 	<% if @message.impact_statement %>
-	<tr>
-		<td class="title">Summary:</td>
-		<td><%= @message.impact_statement %></td>
-	</tr>
+	<dl>
+		<dt class="title">Summary</dt>
+		<dd><%= @message.impact_statement %></dd>
 	<% end %>
 	<% if @message.purpose %>
-	<tr>
-		<td class="title">Purpose:</td>
-		<td><%= @message.purpose %></td>
-	</tr>
+		<dt class="title">Purpose</dt>
+		<dd><%= @message.purpose %></dd>
 	<% end %>
 	<% if @message.resolution %>
-	<tr>
-		<td class="title">Resolution:</td>
-		<td><%= @message.resolution %></td>
-	</tr>
+		<dt class="title">Resolution</dt>
+		<dd><%= @message.resolution %></dd>
 	<% end %>
 	<% if @message.workaround %>
-	<tr>
-		<td class="title">Workaround:</td>
-		<td><%= @message.workaround %></td>
-	</tr>
+		<dt class="title">Workaround</dt>
+		<dd><%= @message.workaround %></dd>
 	<% end %>
 	<% if @message.window_start %>
-	<tr>
-		<td class="title">Window Start:</td>
-		<td><%= @message.window_start.strftime("%A, %B %d, %Y at %l:%M %p") %></td>
-	</tr>
+		<dt class="title">Window Start</dt>
+		<dd><%= @message.window_start.strftime("%A, %B %d, %Y at %l:%M %p") %></dd>
 	<% end %>
 	<% if @message.window_end %>
-	<tr>
-		<td class="title">Window End:</td>
-		<td><%= @message.window_end.strftime("%A, %B %d, %Y at %l:%M %p") %></td>
-	</tr>
+		<dt class="title">Window End</dt>
+		<dd><%= @message.window_end.strftime("%A, %B %d, %Y at %l:%M %p") %></dd>
 	<% end %>
 	<% if @message.classification %>
-	<tr>
-		<td class="title">Classification:</td>
-		<td><%= @message.classification.description %></td>
-	</tr>
+		<dt class="title">Classification</dt>
+		<dd><%= @message.classification.description %></dd>
 	<% end %>
 	<% if @message.modifier %>
-	<tr>
-		<td class="title">Modifier:</td>
-		<td><%= @message.modifier.description %></td>
-	</tr>
+		<dt class="title">Modifier</dt>
+		<dd><%= @message.modifier.description %></dd>
 	<% end %>
 	<% if @message.impacted_services.length > 0 %>
-	<tr>
-		<td class="title">Impacted Services:</td>
-		<td>
+		<dt class="title">Impacted Services</dt>
+		<dd>
 			<% @message.impacted_services.each do |i| %>
 				<li><%= i.name %></li>
 			<% end %>
-		</td>
-	</tr>
+		</dd>
 	<% end %>
 	<% if @message.other_services %>
-	<tr>
-		<td class="title">Other Services:</td>
-		<td><%= @message.other_services %></td>
-	</tr>
+		<dt class="title">Other Services</dt>
+		<dd><%= @message.other_services %></dd>
 	<% end %>
-</table>
+	</dl>
 
 <p>
 	Please contact the DSS IT Service Desk with any questions or concerns:
 	<br /><br />
-	<strong>Via web</strong>: <a href="http://it.dss.ucdavis.edu/selfserve">http://it.dss.ucdavis.edu/selfserve</a><br />
-	<strong>Via phone</strong>: 530-752-8800<br />
-	<strong>Via email</strong>: <a href="mailto:ithelp@dss.ucdavis.edu">ithelp@dss.ucdavis.edu</a><br />
+	<sdlong>Via web</sdlong>: <a href="http://it.dss.ucdavis.edu/selfserve">http://it.dss.ucdavis.edu/selfserve</a><br />
+	<sdlong>Via phone</sdlong>: 530-752-8800<br />
+	<sdlong>Via email</sdlong>: <a href="mailto:ithelp@dss.ucdavis.edu">ithelp@dss.ucdavis.edu</a><br />
 </p>
