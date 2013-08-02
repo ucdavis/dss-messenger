@@ -6,6 +6,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
   events:
     "submit #new-message": "save"
     "focus #Recipients"	:	"tokenInput"
+    "mouseenter .control-group"   : "tooltip"
 
   initialize: ->
     _.defer =>
@@ -54,6 +55,9 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
       showMeridian: true
       pickerPosition: "bottom-left"
     
+  tooltip: (a) ->
+    @$('#'+a.currentTarget.id).tooltip
+      placement: "left"
 
   tokenInput: (e) ->
     $("input[name=recipient_uids]").tokenInput "/recipients",

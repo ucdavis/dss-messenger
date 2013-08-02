@@ -6,6 +6,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
   events:
     "submit #new-message": "save"
     "focus #Recipients"	:	"tokenInput"
+    "mouseenter .control-group"   : "tooltip"
 
   initialize: ->
     Backbone.Validation.bind this
@@ -89,6 +90,10 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
         $('#'+index).closest('.control-group').addClass('error')
         $('#'+index).closest('.control-group .controls').append('<p class="help-block error-message">' + error + '</p>')
     )
+
+  tooltip: (a) ->
+    @$('#'+a.currentTarget.id).tooltip
+      placement: "left"
 
   datetimePicker: ->
     $('.datetimepicker').datetimepicker
