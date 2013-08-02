@@ -115,7 +115,6 @@ class MessagesController < ApplicationController
     
     respond_to do |format|
       format.html {render layout: 'public' }# open.html.erb
-      format.json { render json: @open_messages }
       format.rss { render layout: false } #open.rss.builder
     end
   end
