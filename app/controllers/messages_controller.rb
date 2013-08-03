@@ -1,10 +1,10 @@
 class MessagesController < ApplicationController
   filter_resource_access
   
-  # filter_access_to :all, :attribute_check => true
-  # filter_access_to :open, :attribute_check => false
+  filter_access_to :all, :attribute_check => true
+  filter_access_to :open, :attribute_check => false
 
-  #filter_access_to :index, :attribute_check => true, :load_method => :load_messages
+  # filter_access_to :index, :attribute_check => true, :load_method => :load_messages
   
   # GET /messages
   # GET /messages.json
