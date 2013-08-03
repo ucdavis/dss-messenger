@@ -25,5 +25,6 @@
 //= require backbone_datalink
 //= require ../../../vendor/assets/javascripts/backbone-validation
 //= require ../../../vendor/assets/javascripts/backbone.validation.bootstrap
+//= require ../../../vendor/assets/javascripts/backbone.bootstrap-modal
 //= require backbone/dss_messenger
 //= require dss-messenger
