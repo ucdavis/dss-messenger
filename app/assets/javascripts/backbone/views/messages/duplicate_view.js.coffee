@@ -2,11 +2,13 @@ DssMessenger.Views.Messages ||= {}
 
 class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
   template: JST["backbone/templates/messages/form"]
+  preview: JST["backbone/templates/messages/form"]
 
   events:
     "submit #message-form": "save"
     "focus #Recipients"	:	"tokenInput"
     "mouseenter .control-group"   : "tooltip"
+    "click .message-preview"  : "preview"
 
   initialize: ->
     Backbone.Validation.bind this
@@ -115,6 +117,9 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
       onDelete: (item) =>
         # console.log @model
 
+  preview: (e) ->
+    view = new DssMessenger.Views.Messages.PreviewView({model : @model})
+    modal = new Backbone.BootstrapModal(content: view).open()
 
   render: ->
     @$el.html("<h1>Duplicate Message</h1>")
