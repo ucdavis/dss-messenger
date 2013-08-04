@@ -129,7 +129,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
     subject = modifier + classification + @model.get('subject')
 
     view = new DssMessenger.Views.Messages.PreviewView({model : @model})
-    modal = new Backbone.BootstrapModal(content: view, title: subject, animate: true).open()
+    modal = new Backbone.BootstrapModal(content: view, title: subject).open()
 
   render: ->
     @$el.html("<h1>Duplicate Message</h1>")
