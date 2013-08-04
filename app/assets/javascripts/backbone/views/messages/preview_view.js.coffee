@@ -10,6 +10,9 @@ class DssMessenger.Views.Messages.PreviewView extends Backbone.View
       _.each @model.get("impacted_services"), (impacted_service) ->
         @$('#impacted_services_list').append('<li>' + impacted_service.name + '</li>')
       _.each @model.attributes, (a, b) ->
-        @$('.'+b).hide() if a is null
+        if Object::toString.call(a) is "[object Array]"
+          @$('.'+b).hide() if a.length is 0
+        else
+          @$('.'+b).hide() if (a is null or a is '')
     
     return this
