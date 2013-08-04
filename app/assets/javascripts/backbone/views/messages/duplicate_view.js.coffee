@@ -118,8 +118,15 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
         # console.log @model
 
   preview: (e) ->
+    @model.set
+      impacted_services: _.map($("input[name='impacted_service_ids[]']:checked"), (a) -> DssMessenger.impacted_services.get(a.value).attributes )
+
+    modifier = DssMessenger.modifiers.get($("input[name='modifier_id[]']:checked").val()).get('description').split(':')[0]
+    classification = DssMessenger.classifications.get($("input[name='classification_id[]']:checked").val()).get('description').split(':')[0]
+    subject = modifier + ": " + classification + ": " + @model.get('subject')
+
     view = new DssMessenger.Views.Messages.PreviewView({model : @model})
-    modal = new Backbone.BootstrapModal(content: view).open()
+    modal = new Backbone.BootstrapModal(content: view, title: subject, animate: true).open()
 
   render: ->
     @$el.html("<h1>Duplicate Message</h1>")

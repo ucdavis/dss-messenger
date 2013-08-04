@@ -7,6 +7,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     "submit #message-form": "save"
     "focus #Recipients"	:	"tokenInput"
     "mouseenter .control-group"   : "tooltip"
+    "click .message-preview"  : "preview"
 
   initialize: ->
     _.defer =>
@@ -98,6 +99,17 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
           $("html, body").animate({ scrollTop: "0px" });
           $('input[type="submit"]').val('Try Sending Again').removeAttr('disabled').addClass('btn-danger');
     )
+
+  preview: (e) ->
+    @model.set
+      impacted_services: _.map($("input[name='impacted_service_ids[]']:checked"), (a) -> DssMessenger.impacted_services.get(a.value).attributes )
+
+    modifier = DssMessenger.modifiers.get($("input[name='modifier_id[]']:checked").val()).get('description').split(':')[0]
+    classification = DssMessenger.classifications.get($("input[name='classification_id[]']:checked").val()).get('description').split(':')[0]
+    subject = modifier + ": " + classification + ": " + @model.get('subject')
+
+    view = new DssMessenger.Views.Messages.PreviewView({model : @model})
+    modal = new Backbone.BootstrapModal(content: view, title: subject, animate: true).open()
 
   render: ->
     @$el.html("<h1>New Message</h1>")

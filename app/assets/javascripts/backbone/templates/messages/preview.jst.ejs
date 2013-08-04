@@ -1,27 +1,23 @@
 <p>Dear [Firstname],</p>
 
-	<dl>
-		<dt class="title">Summary</dt>
+	<dl class="dl-horizontal">
+		<dt>Summary</dt>
 		<dd><%= impact_statement %></dd>
-		<dt class="title">Purpose</dt>
-		<dd><%= purpose %></dd>
-		<dt class="title">Resolution</dt>
-		<dd><%= resolution %></dd>
-		<dt class="title">Workaround</dt>
-		<dd><%= workaround %></dd>
-		<dt class="title">Window Start</dt>
-		<dd><%= window_start %></dd>
-		<dt class="title">Window End</dt>
-		<dd><%= window_end %></dd>
-		<dt class="title">Classification</dt>
-		<dd><%= classification.description %></dd>
-		<dt class="title">Modifier</dt>
-		<dd><%= modifier.description %></dd>
-		<dt class="title">Impacted Services</dt>
-		<dd>
+		<dt class="window_start">Window Start</dt>
+		<dd class="window_start"><%= window_start %></dd>
+		<dt class="window_end">Window End</dt>
+		<dd class="window_end"><%= window_end %></dd>
+		<dt class="purpose">Purpose</dt>
+		<dd class="purpose"><%= purpose %></dd>
+		<dt class="resolution">Resolution</dt>
+		<dd class="resolution"><%= resolution %></dd>
+		<dt class="workaround">Workaround</dt>
+		<dd class="workaround"><%= workaround %></dd>
+		<dt class="impacted_services">Impacted Services</dt>
+		<dd class="impacted_services" id="impacted_services_list">
 		</dd>
-		<dt class="title">Other Services</dt>
-		<dd><%= other_services %></dd>
+		<dt id="other_services">Other Services</dt>
+		<dd id="other_services"><%= other_services %></dd>
 	</dl>
 
 <p>

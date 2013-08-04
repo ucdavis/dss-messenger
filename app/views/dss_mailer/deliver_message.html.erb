@@ -27,6 +27,14 @@
 		<dt class="title">Summary</dt>
 		<dd><%= @message.impact_statement %></dd>
 	<% end %>
+	<% if @message.window_start %>
+		<dt class="title">Window Start</dt>
+		<dd><%= @message.window_start.strftime("%A, %B %d, %Y at %l:%M %p") %></dd>
+	<% end %>
+	<% if @message.window_end %>
+		<dt class="title">Window End</dt>
+		<dd><%= @message.window_end.strftime("%A, %B %d, %Y at %l:%M %p") %></dd>
+	<% end %>
 	<% if @message.purpose %>
 		<dt class="title">Purpose</dt>
 		<dd><%= @message.purpose %></dd>
@@ -38,22 +46,6 @@
 	<% if @message.workaround %>
 		<dt class="title">Workaround</dt>
 		<dd><%= @message.workaround %></dd>
-	<% end %>
-	<% if @message.window_start %>
-		<dt class="title">Window Start</dt>
-		<dd><%= @message.window_start.strftime("%A, %B %d, %Y at %l:%M %p") %></dd>
-	<% end %>
-	<% if @message.window_end %>
-		<dt class="title">Window End</dt>
-		<dd><%= @message.window_end.strftime("%A, %B %d, %Y at %l:%M %p") %></dd>
-	<% end %>
-	<% if @message.classification %>
-		<dt class="title">Classification</dt>
-		<dd><%= @message.classification.description %></dd>
-	<% end %>
-	<% if @message.modifier %>
-		<dt class="title">Modifier</dt>
-		<dd><%= @message.modifier.description %></dd>
 	<% end %>
 	<% if @message.impacted_services.length > 0 %>
 		<dt class="title">Impacted Services</dt>
