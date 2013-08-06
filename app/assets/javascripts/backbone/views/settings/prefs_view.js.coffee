@@ -18,6 +18,7 @@ class DssMessenger.Views.Settings.PrefsView extends Backbone.View
     @$el.html(@template( ))
 
     _.defer =>
+      $("#configTabs a:first").tab "show"
       # display loading gif while loading content
       $("#classifications_select").html("<div class='loading'></div>")
       $("#modifiers_select").html("<div class='loading'></div>")
