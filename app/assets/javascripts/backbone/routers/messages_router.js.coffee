@@ -14,7 +14,6 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
     "new"           : "newMessage"
     "index"         : "index"
     "prefs"         : "Preferences"
-    "about"         : "About"
     ":id/duplicate" : "duplicate"
     ":id/duplicate/:action" : "action"
     ":id"           : "show"
@@ -63,7 +62,3 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
     @view = new DssMessenger.Views.Settings.PrefsView()
     $("#filters-sidebar").hide()
     $("#messages").html(@view.render().el)
-
-  About: ->
-    @view = new DssMessenger.Views.Settings.AboutView()
-    $("#messages").append(@view.render().el)
