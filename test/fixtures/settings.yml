@@ -1,9 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  item_name: MyString
-  item_value: MyText
+footer:
+  id: 1
+  item_name: footer
+  item_value: "
+  <p>
+  	Please contact the DSS IT Service Desk with any questions or concerns:
+  	<br /><br />
+  	<sdlong>Via web</sdlong>: <a href='http://it.dss.ucdavis.edu/selfserve'>http://it.dss.ucdavis.edu/selfserve</a><br />
+  	<sdlong>Via phone</sdlong>: 530-752-8800<br />
+  	<sdlong>Via email</sdlong>: <a href='mailto:ithelp@dss.ucdavis.edu'>ithelp@dss.ucdavis.edu</a><br />
+  </p>
+  "
 
-two:
-  item_name: MyString
-  item_value: MyText
