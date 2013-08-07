@@ -135,6 +135,12 @@ ul.token-input-list-facebook {
   width: 180px;
 }
 
+/*------- Modal -------*/
+.modal {
+    width: 800px;
+    margin-left: -400px;
+}
+
 /*------- Message Show View -------*/
 .message-box {
   border: 1px solid #ddd;

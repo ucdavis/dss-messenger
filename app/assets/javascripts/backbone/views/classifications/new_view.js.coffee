@@ -31,7 +31,6 @@ class DssMessenger.Views.Classifications.NewView extends Backbone.View
     @collection.create(@model.toJSON(),
       success: (classifications) =>
         @model = classifications
-        window.location.hash = "#/prefs"
 
       error: (classifications, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
