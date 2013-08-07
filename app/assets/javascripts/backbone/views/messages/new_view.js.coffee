@@ -19,9 +19,8 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
       $("#modifiers_select").html("<div class='loading'></div>")
       $("#impacted_services_select").html("<div class='loading'></div>")
       # load the single and multi select inputs laoded originally from the router
-      $("#classifications_select").empty()
-      DssMessenger.classifications.each (classification) ->
-        $("#classifications_select").append "<label class='radio'><input type='radio' name='classification_id[]' value='" + classification.get('id') + "'>" + classification.get('description') + "</label>"
+      view = new DssMessenger.Views.Classifications.FormIndexView(message: @model)
+      @$("#classifications_select").html(view.render().el)
 
       $("#modifiers_select").empty()
       DssMessenger.modifiers.each (modifier) ->
