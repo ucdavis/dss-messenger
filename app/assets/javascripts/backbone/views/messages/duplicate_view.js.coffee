@@ -31,16 +31,11 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
       view = new DssMessenger.Views.Classifications.FormIndexView(message: @model)
       @$("#classifications_select").html(view.render().el)
 
-      $("#modifiers_select").empty()
-      DssMessenger.modifiers.each (modifier) =>
-        @checked = @current_modifier is modifier.get('id')
-        $("#modifiers_select").append "<label class='radio'><input type='radio' name='modifier_id[]' value='" + modifier.get('id') + (if @checked then "' checked />" else "' />") + modifier.get('description') + "</label>"
+      view = new DssMessenger.Views.Modifiers.FormIndexView(message: @model)
+      @$("#modifiers_select").html(view.render().el)
 
-      $("#impacted_services_select").empty()
-      DssMessenger.impacted_services.each (impacted_service) =>
-        @checked = _.find @current_services, (current_service) =>
-          return current_service.id is impacted_service.get('id')
-        $("#impacted_services_select").append "<label class='checkbox'><input type='checkbox' name='impacted_service_ids[]' value='" + impacted_service.get('id') + (if @checked then "' checked />" else "' />") + impacted_service.get('name') + "</label>"
+      view = new DssMessenger.Views.impacted_services.FormIndexView(message: @model)
+      @$("#impacted_services_select").html(view.render().el)
 
     
   save: (e) ->
