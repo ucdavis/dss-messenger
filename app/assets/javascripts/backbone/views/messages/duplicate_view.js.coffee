@@ -9,6 +9,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
     "focus #Recipients"	:	"tokenInput"
     "mouseenter .control-group"   : "tooltip"
     "click .message-preview"  : "preview"
+    "click .config-link"  : "openConfig"
 
   initialize: ->
     Backbone.Validation.bind this
@@ -89,6 +90,11 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
   tooltip: (a) ->
     @$('#'+a.currentTarget.id).tooltip
       placement: "left"
+
+  openConfig: (e) ->
+    @tab = $(e.target).data('tab')
+    @view = new DssMessenger.Views.Settings.PrefsView(tab: @tab)
+    modal = new Backbone.BootstrapModal(content: @view, title: "Preferences").open()
 
   datetimePicker: ->
     $('.datetimepicker').datetimepicker

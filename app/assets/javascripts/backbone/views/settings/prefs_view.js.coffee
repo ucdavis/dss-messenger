@@ -3,11 +3,15 @@ DssMessenger.Views.Settings ||= {}
 class DssMessenger.Views.Settings.PrefsView extends Backbone.View
   template: JST["backbone/templates/settings/prefs"]
 
+  initialize: ->
+    _.defer =>
+      $("#configTabs a:first").tab "show"
+
   render: ->
     @$el.html(@template( ))
 
     _.defer =>
-      $("#configTabs a:first").tab "show"
+      $("#configTabs a[href=#" + @options.tab + "]").tab "show" unless @options.tab is null
       # display loading gif while loading content
       $("#classifications_prefs").html("<div class='loading'></div>")
       $("#modifiers_prefs").html("<div class='loading'></div>")

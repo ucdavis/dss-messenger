@@ -8,6 +8,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     "focus #Recipients"	:	"tokenInput"
     "mouseenter .control-group"   : "tooltip"
     "click .message-preview"  : "preview"
+    "click .config-link"  : "openConfig"
 
   initialize: ->
     _.defer =>
@@ -56,6 +57,11 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
   tooltip: (a) ->
     @$('#'+a.currentTarget.id).tooltip
       placement: "left"
+
+  openConfig: (e) ->
+    @tab = $(e.target).data('tab')
+    @view = new DssMessenger.Views.Settings.PrefsView(tab: @tab)
+    modal = new Backbone.BootstrapModal(content: @view, title: "Preferences").open()
 
   tokenInput: (e) ->
     $("input[name=recipient_uids]").tokenInput "/recipients",
