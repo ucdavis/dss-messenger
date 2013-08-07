@@ -13,17 +13,13 @@ class DssMessenger.Views.Settings.PrefsView extends Backbone.View
       $("#modifiers_prefs").html("<div class='loading'></div>")
       $("#impacted_services_prefs").html("<div class='loading'></div>")
       # load the inputs originally laoded from the router
-      view = new DssMessenger.Views.Classifications.EditIndexView(classifications: DssMessenger.classifications)
+      view = new DssMessenger.Views.Classifications.EditIndexView()
       @$("#classifications_prefs").html(view.render().el)
 
-      view = new DssMessenger.Views.Modifiers.EditIndexView(modifiers: DssMessenger.modifiers)
+      view = new DssMessenger.Views.Modifiers.EditIndexView()
       @$("#modifiers_prefs").html(view.render().el)
 
-      $("#impacted_services_prefs").empty()
-      DssMessenger.impacted_services.each (impacted_service) ->
-        view = new DssMessenger.Views.impacted_services.EditView({model : impacted_service})
-        @$("#impacted_services_prefs").append(view.render().el)
-      @view = new DssMessenger.Views.impacted_services.NewView(collection: DssMessenger.impacted_services)
-      $("#impacted_services_prefs").append(@view.render().el)
+      view = new DssMessenger.Views.impacted_services.EditIndexView()
+      @$("#impacted_services_prefs").html(view.render().el)
 
     return this
