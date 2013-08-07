@@ -9,6 +9,7 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
     DssMessenger.classifications = new DssMessenger.Collections.ClassificationsCollection(options.classifications)
     DssMessenger.modifiers = new DssMessenger.Collections.ModifiersCollection(options.modifiers)
     DssMessenger.impacted_services = new DssMessenger.Collections.impacted_servicesCollection(options.impacted_services)
+    DssMessenger.settings = new DssMessenger.Collections.SettingsCollection(options.settings)
     
   routes:
     "new"           : "newMessage"

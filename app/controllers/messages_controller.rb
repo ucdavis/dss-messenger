@@ -19,6 +19,7 @@ class MessagesController < ApplicationController
     @classifications = Classification.all
     @modifiers = Modifier.all
     @impacted_services = ImpactedService.all
+    @settings = Setting.all
 
     @open_messages = Message.where(closed: false)
     

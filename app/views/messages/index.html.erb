@@ -30,6 +30,7 @@
 				classifications: <%= @classifications.to_json.html_safe -%>,
 				modifiers: <%= @modifiers.to_json.html_safe -%>,
 				impacted_services: <%= @impacted_services.to_json.html_safe -%>,
+				settings: <%= @settings.to_json.html_safe -%>,
 			});
     Backbone.history.start();
   });

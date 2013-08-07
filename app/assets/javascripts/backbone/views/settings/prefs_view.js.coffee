@@ -26,4 +26,7 @@ class DssMessenger.Views.Settings.PrefsView extends Backbone.View
       view = new DssMessenger.Views.impacted_services.EditIndexView()
       @$("#impacted_services_prefs").html(view.render().el)
 
+      view = new DssMessenger.Views.Settings.EditFooterView(model: DssMessenger.settings.where({item_name: "footer"})[0])
+      @$("#email_footer").html(view.render().el)
+
     return this
