@@ -9,14 +9,14 @@ class DssMessenger.Views.Modifiers.IndexView extends Backbone.View
     "change"          : "filter"
   
   initialize: () ->
-    @options.modifiers.bind('reset', @addAll)
+    DssMessenger.modifiers.bind('reset', @addAll)
     _.defer =>
       @$el.selectpicker()
       @$el.selectpicker 'val', DssMessenger.filterModifier if DssMessenger.filterModifier > 0
 
   addAll: () =>
     @$el.append('<option></option>')
-    @options.modifiers.each(@addOne)
+    DssMessenger.modifiers.each(@addOne)
 
   addOne: (modifiers) =>
     view = new DssMessenger.Views.Modifiers.ModifiersView({model : modifiers})

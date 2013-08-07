@@ -16,12 +16,8 @@ class DssMessenger.Views.Settings.PrefsView extends Backbone.View
       view = new DssMessenger.Views.Classifications.EditIndexView(classifications: DssMessenger.classifications)
       @$("#classifications_prefs").html(view.render().el)
 
-      $("#modifiers_prefs").empty()
-      DssMessenger.modifiers.each (modifier) ->
-        view = new DssMessenger.Views.Modifiers.EditView({model : modifier})
-        @$("#modifiers_prefs").append(view.render().el)
-      @view = new DssMessenger.Views.Modifiers.NewView(collection: DssMessenger.modifiers)
-      $("#modifiers_prefs").append(@view.render().el)
+      view = new DssMessenger.Views.Modifiers.EditIndexView(modifiers: DssMessenger.modifiers)
+      @$("#modifiers_prefs").html(view.render().el)
 
       $("#impacted_services_prefs").empty()
       DssMessenger.impacted_services.each (impacted_service) ->
