@@ -4,6 +4,7 @@ class DssMessenger.Views.Classifications.FormIndexView extends Backbone.View
 
   initialize: () ->
     DssMessenger.classifications.bind('change', @render)
+    DssMessenger.classifications.bind('remove', @render)
 
   addAll: () =>
     DssMessenger.classifications.each(@addOne)
