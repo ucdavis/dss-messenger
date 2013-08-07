@@ -9,14 +9,14 @@ class DssMessenger.Views.Classifications.IndexView extends Backbone.View
   tagName: "select"
   
   initialize: () ->
-    @options.classifications.bind('reset', @addAll)
+    DssMessenger.classifications.bind('reset', @addAll)
     _.defer =>
       @$el.selectpicker()
       @$el.selectpicker 'val', DssMessenger.filterClassification if DssMessenger.filterClassification > 0
 
   addAll: () =>
     @$el.append('<option></option>')
-    @options.classifications.each(@addOne)
+    DssMessenger.classifications.each(@addOne)
 
   addOne: (classifications) =>
     view = new DssMessenger.Views.Classifications.ClassificationsView({model : classifications})
