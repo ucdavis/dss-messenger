@@ -5,6 +5,8 @@ class DssMessenger.Views.Messages.PreviewView extends Backbone.View
 
   render: ->
     @$el.html(@template(@model.toFullJSON() ))
+    @footer = DssMessenger.settings.where({item_name: "footer"})[0]
+    @$el.append(@footer.get('item_value'))
     
     _.defer =>
       _.each @model.get("impacted_services"), (impacted_service) ->
