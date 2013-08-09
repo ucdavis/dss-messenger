@@ -8,6 +8,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     "focus #Recipients"	:	"tokenInput"
     "mouseenter .control-group"   : "tooltip"
     "click .message-preview"  : "preview"
+    "click .config-link"  : "openConfig"
 
   initialize: ->
     _.defer =>
@@ -19,17 +20,14 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
       $("#modifiers_select").html("<div class='loading'></div>")
       $("#impacted_services_select").html("<div class='loading'></div>")
       # load the single and multi select inputs laoded originally from the router
-      $("#classifications_select").empty()
-      DssMessenger.classifications.each (classification) ->
-        $("#classifications_select").append "<label class='radio'><input type='radio' name='classification_id[]' value='" + classification.get('id') + "'>" + classification.get('description') + "</label>"
+      view = new DssMessenger.Views.Classifications.FormIndexView(message: @model)
+      @$("#classifications_select").html(view.render().el)
 
-      $("#modifiers_select").empty()
-      DssMessenger.modifiers.each (modifier) ->
-        $("#modifiers_select").append "<label class='radio'><input type='radio' name='modifier_id[]' value='" + modifier.get('id') + "'>" + modifier.get('description') + "</label>"
+      view = new DssMessenger.Views.Modifiers.FormIndexView(message: @model)
+      @$("#modifiers_select").html(view.render().el)
 
-      $("#impacted_services_select").empty()
-      DssMessenger.impacted_services.each (impacted_service) ->
-        $("#impacted_services_select").append "<label class='checkbox'><input type='checkbox' name='impacted_service_ids[]' value='" + impacted_service.get('id') + "'>" + impacted_service.get('name') + "</label>"
+      view = new DssMessenger.Views.impacted_services.FormIndexView(message: @model)
+      @$("#impacted_services_select").html(view.render().el)
 
     Backbone.Validation.bind this
 
@@ -59,6 +57,11 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
   tooltip: (a) ->
     @$('#'+a.currentTarget.id).tooltip
       placement: "left"
+
+  openConfig: (e) ->
+    @tab = $(e.target).data('tab')
+    @view = new DssMessenger.Views.Settings.PrefsView(tab: @tab)
+    modal = new Backbone.BootstrapModal(content: @view, title: "Preferences").open()
 
   tokenInput: (e) ->
     $("input[name=recipient_uids]").tokenInput "/recipients",

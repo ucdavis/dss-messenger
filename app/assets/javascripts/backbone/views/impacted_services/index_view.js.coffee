@@ -9,14 +9,14 @@ class DssMessenger.Views.impacted_services.IndexView extends Backbone.View
     "change"          : "filter"
   
   initialize: () ->
-    @options.impacted_services.bind('reset', @addAll)
+    DssMessenger.impacted_services.bind('reset', @addAll)
     _.defer =>
       @$el.selectpicker()
       @$el.selectpicker 'val', DssMessenger.filterService if DssMessenger.filterService > 0
 
   addAll: () =>
     @$el.append('<option></option>')
-    @options.impacted_services.each(@addOne)
+    DssMessenger.impacted_services.each(@addOne)
 
   addOne: (impacted_services) =>
     view = new DssMessenger.Views.impacted_services.impacted_servicesView({model : impacted_services})
