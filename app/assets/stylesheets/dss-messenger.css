@@ -181,6 +181,11 @@ ul.token-input-list-facebook {
   margin-top: -1px;
 }
 
+a.message-preview {
+  float: right;
+  margin-right: 180px;
+}
+
 /*--------- Delete Dialog ----------*/
 
 .confirm-name {
