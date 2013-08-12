@@ -109,9 +109,22 @@ ul.token-input-list-facebook {
     margin-bottom: 1em;
 }
 
+/*********** tables ************/
+
 td.nowrap {
     white-space: nowrap;
     font-size: 85%;
+}
+
+tr.archiving {
+  filter:alpha(opacity=40);
+  -moz-opacity:0.4;
+  -khtml-opacity: 0.4;
+  opacity: 0.4;
+}
+
+tr.archiving td:nth-child(3) {
+  background: url('loading-small.gif') 50% 50% no-repeat;
 }
 
 .accordion-heading .accordion-toggle {
