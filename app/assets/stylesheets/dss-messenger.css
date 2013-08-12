@@ -186,6 +186,15 @@ a.message-preview {
   margin-right: 180px;
 }
 
+.editable{
+  background: #f3f3f3;
+}
+
+.editable:focus {
+    outline-width: 0;
+}
+
+
 /*--------- Delete Dialog ----------*/
 
 .confirm-name {

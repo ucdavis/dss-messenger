@@ -6,6 +6,9 @@ class DssMessenger.Views.Settings.EditFooterView extends Backbone.View
   events:
     "change .pref_input": "update"
     "click .save": "update"
+    'mousedown .editable': 'editableClick'
+
+  editableClick: etch.editableInit
 
   update: (e) ->
     e.preventDefault()
@@ -22,7 +25,7 @@ class DssMessenger.Views.Settings.EditFooterView extends Backbone.View
       error: =>
         @$('button.save').addClass('btn-danger').text('Error')
     )
-
+    
   render: ->
     console.log @model
     @$el.html(@template(@model.toJSON() ))
