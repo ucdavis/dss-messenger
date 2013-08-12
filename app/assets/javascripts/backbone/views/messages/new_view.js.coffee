@@ -9,6 +9,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     "mouseenter .control-group"   : "tooltip"
     "click .message-preview"  : "preview"
     "click .config-link"  : "openConfig"
+    "keypress input"  : "preventSubmit"
 
   initialize: ->
     _.defer =>
@@ -42,6 +43,11 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
         $('#'+index).closest('.control-group').addClass('error')
         $('#'+index).closest('.control-group .controls').append('<p class="help-block error-message">' + error + '</p>')
     )
+
+  preventSubmit: (e) ->
+    if e.keyCode is 13
+      e.preventDefault()
+      false
 
   datetimePicker: ->
     $('.datetimepicker').datetimepicker
