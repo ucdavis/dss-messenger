@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SettingsControllerTest < ActionController::TestCase
   setup do
-    @setting = settings(:one)
+    @setting = settings(:footer)
   end
 
   test "should get index" do
