@@ -9,6 +9,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     "mouseenter .control-group"   : "tooltip"
     "click .message-preview"  : "preview"
     "click .config-link"  : "openConfig"
+    "keypress input"  : "preventSubmit"
 
   initialize: ->
     _.defer =>
@@ -43,6 +44,11 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
         $('#'+index).closest('.control-group .controls').append('<p class="help-block error-message">' + error + '</p>')
     )
 
+  preventSubmit: (e) ->
+    if e.keyCode is 13
+      e.preventDefault()
+      false
+
   datetimePicker: ->
     $('.datetimepicker').datetimepicker
       format: "yyyy/mm/dd HH:ii P"
@@ -61,7 +67,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
   openConfig: (e) ->
     @tab = $(e.target).data('tab')
     @view = new DssMessenger.Views.Settings.PrefsView(tab: @tab)
-    modal = new Backbone.BootstrapModal(content: @view, title: "Preferences").open()
+    modal = new Backbone.BootstrapModal(content: @view, title: "Preferences", cancelText: false, okText: "Dismiss").open()
 
   tokenInput: (e) ->
     $("input[name=recipient_uids]").tokenInput "/recipients",
@@ -115,7 +121,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     subject = modifier + classification + @model.get('subject')
 
     view = new DssMessenger.Views.Messages.PreviewView({model : @model})
-    modal = new Backbone.BootstrapModal(content: view, title: subject).open()
+    modal = new Backbone.BootstrapModal(content: view, title: subject, cancelText: false, okText: "Dismiss").open()
 
   render: ->
     @$el.html("<h1>New Message</h1>")

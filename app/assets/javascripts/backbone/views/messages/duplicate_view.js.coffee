@@ -10,6 +10,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
     "mouseenter .control-group"   : "tooltip"
     "click .message-preview"  : "preview"
     "click .config-link"  : "openConfig"
+    "keypress input"  : "preventSubmit"
 
   initialize: ->
     Backbone.Validation.bind this
@@ -39,6 +40,11 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
       @$("#impacted_services_select").html(view.render().el)
 
     
+  preventSubmit: (e) ->
+    if e.keyCode is 13
+      e.preventDefault()
+      false
+
   save: (e) ->
     e.preventDefault()
     e.stopPropagation()
@@ -94,7 +100,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
   openConfig: (e) ->
     @tab = $(e.target).data('tab')
     @view = new DssMessenger.Views.Settings.PrefsView(tab: @tab)
-    modal = new Backbone.BootstrapModal(content: @view, title: "Preferences").open()
+    modal = new Backbone.BootstrapModal(content: @view, title: "Preferences", cancelText: false, okText: "Dismiss").open()
 
   datetimePicker: ->
     $('.datetimepicker').datetimepicker
@@ -128,7 +134,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
     subject = modifier + classification + @model.get('subject')
 
     view = new DssMessenger.Views.Messages.PreviewView({model : @model})
-    modal = new Backbone.BootstrapModal(content: view, title: subject).open()
+    modal = new Backbone.BootstrapModal(content: view, title: subject, cancelText: false, okText: "Dismiss").open()
 
   render: ->
     @$el.html("<h1>Duplicate Message</h1>")

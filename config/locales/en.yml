@@ -2,4 +2,16 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  activerecord:
+      attributes:
+        message:
+          subject: "Message Subject"
+          impact_statement: "Impact Statement"
+      errors:
+        models:
+          message:
+            attributes:
+              subject:
+                blank: "Short Description may not be blank"
+              impact_statement:
+                blank: "Impact Statement may not be blank"

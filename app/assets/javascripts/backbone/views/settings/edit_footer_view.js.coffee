@@ -4,27 +4,30 @@ class DssMessenger.Views.Settings.EditFooterView extends Backbone.View
   template: JST["backbone/templates/settings/edit_footer"]
 
   events:
-    "change .pref_input": "update"
-    "click .save": "update"
+    "change #email-footer-text": "update"
+    'click .etch-save': 'update'
+    'mousedown .editable': 'editableClick'
 
-  update: (e) ->
-    e.preventDefault()
-    e.stopPropagation()
+  editableClick: etch.editableInit
 
+  initialize: ->
+    @model.bind('save', @update)
+
+  update: (e) =>
     @model.set
-      item_value: @$("textarea").val()
+      item_value: $("#email-footer-text").html()
 
     @model.save(null,
       timeout: 30000
       success: (settings) =>
         @model = settings
-        @$('button.save').addClass('btn-success').text('Saved')
+        @$('#save-status').addClass('text-success').text('Saved successfully!').delay(10000).queue -> $(this).empty()
+        
       error: =>
-        @$('button.save').addClass('btn-danger').text('Error')
+        @$('#save-status').addClass('text-error').text('Error saving').delay(10000).queue -> $(this).empty()
     )
-
+    
   render: ->
-    console.log @model
     @$el.html(@template(@model.toJSON() ))
 
     this.$("form").backboneLink(@model)

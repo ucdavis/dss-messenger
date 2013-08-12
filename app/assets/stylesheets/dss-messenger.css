@@ -109,9 +109,22 @@ ul.token-input-list-facebook {
     margin-bottom: 1em;
 }
 
+/*********** tables ************/
+
 td.nowrap {
     white-space: nowrap;
     font-size: 85%;
+}
+
+tr.archiving {
+  filter:alpha(opacity=40);
+  -moz-opacity:0.4;
+  -khtml-opacity: 0.4;
+  opacity: 0.4;
+}
+
+tr.archiving td:nth-child(3) {
+  background: url('loading-small.gif') 50% 50% no-repeat;
 }
 
 .accordion-heading .accordion-toggle {
@@ -133,6 +146,13 @@ ul.token-input-list-facebook {
 
 .bootstrap-select.btn-group, .bootstrap-select.btn-group[class*="span"] {
   width: 180px;
+}
+
+.actions a.label {
+  font-size: 12px;
+  font-weight: normal;
+  padding: 2px;
+  line-height: 10px;
 }
 
 /*------- Modal -------*/
@@ -159,6 +179,24 @@ ul.token-input-list-facebook {
 
 .radio input[type="radio"], .checkbox input[type="checkbox"] {
   margin-top: -1px;
+}
+
+a.message-preview {
+  float: right;
+  margin-right: 180px;
+}
+
+.editable{
+  background: #f3f3f3;
+}
+
+.editable:focus {
+    outline-width: 0;
+}
+
+#save-status {
+  float: right;
+  font-size: 12px;
 }
 
 /*--------- Delete Dialog ----------*/

@@ -18,6 +18,7 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
   archive: () ->
     bootbox.confirm "Are you sure you want to archive <span class='confirm-name'>" + @model.escape("subject") + "</span> without sending a message?", (result) =>
       if result
+        @$el.addClass('archiving')
         # archive the message
         @model.save(closed:true,
           timeout: 10000 # 10 seconds
@@ -25,6 +26,7 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
           success: (message) =>
             $("#archive-table, .table-title").show()
             $('#archive-table #mtable-head').after(@$el)
+            @$el.removeClass('archiving')
             @$el.effect( "highlight", "slow" )
             @$('.archive-only').show()
             @$('.active-only').hide()
