@@ -1,7 +1,7 @@
 	<form id="message-form" name="message" class="form-horizontal">
 
 		  <div class="control-group" id="recipients-group">
-		    <label class="control-label" for="Recipients"> Recipients</label>
+		    <label class="control-label" for="Recipients">Recipients</label>
 				<div class="controls">
 					<input type="text" name="recipient_uids" id="Recipients" />
 				</div>
@@ -9,7 +9,7 @@
 
 		  <div class="control-group" id="subject-group" data-toggle="tooltip"
 				title="Used in the subject line--should be 5 words or less and succinctly summarize the services that are unavailable or that will be unavailable. Examples: DSS file services (dss-filer1); DSS VPN service; CMB networks; campus wireless networks; Matlab network licensing.">
-		    <label class="control-label" for="subject"> Short Description</label>
+		    <label class="control-label" for="subject">Short Description</label>
 				<div class="controls">
 		    	<input type="text" name="subject" id="subject" value="<%= subject %>" 
 					placeholder="Example: DSS file services (dss-filer1)"></input>
@@ -39,7 +39,7 @@
 
 		  <div class="control-group" id="impact-statement-group" data-toggle="tooltip"
 				title="Short, customer-centric description of the issue. What does this problem look like from the customer's perspective?">
-		    <label class="control-label" for="impact_statement"> impact_statement</label>
+		    <label class="control-label" for="impact_statement">Impact Statement</label>
 				<div class="controls">
 		    	<textarea type="text" name="impact_statement" id="impact_statement" rows="7" 
 						placeholder="Examples:																										
@@ -53,7 +53,7 @@ No connectivity to any network services, the campus network, or the Internet dur
 		  </div>
 
 		  <div class="control-group" id="window-start-group">
-		    <label class="control-label" for="window_start"> window_start</label>
+		    <label class="control-label" for="window_start">Window Start</label>
 				<div class="controls">
 					<div id="datetimepicker" class="input-append date datetimepicker">
 				    <input type="text" name="window_start" id="window_start" value="<%= window_start %>" >
@@ -64,7 +64,7 @@ No connectivity to any network services, the campus network, or the Internet dur
 		  </div>
 
 		  <div class="control-group" id="window-end-group">
-		    <label class="control-label" for="window_end"> window_end</label>
+		    <label class="control-label" for="window_end">Window End</label>
 				<div class="controls">
 					<div id="datetimepicker" class="input-append date datetimepicker">
 				    <input type="text" name="window_end" id="window_end" value="<%= window_end %>" >
@@ -76,7 +76,7 @@ No connectivity to any network services, the campus network, or the Internet dur
 
 		  <div class="control-group" id="purpose-group" data-toggle="tooltip"
 				title="For PLANNED events only, brief description of the reason for the event.">
-		    <label class="control-label" for="purpose"> purpose</label>
+		    <label class="control-label" for="purpose">Purpose</label>
 				<div class="controls">
 		    	<textarea type="text" name="purpose" id="purpose" rows="5"
 						placeholder="Examples:																																														
@@ -88,7 +88,7 @@ No connectivity to any network services, the campus network, or the Internet dur
 
 		  <div class="control-group" id="resolution-group" data-toggle="tooltip"
 				title='For any RESOLVED items, a short description of the resolution, e.g., "Servers were restarted and services have been restored" or "The upgrade was successfully completed"'>
-		    <label class="control-label" for="resolution"> resolution</label>
+		    <label class="control-label" for="resolution">Resolution</label>
 				<div class="controls">
 		    	<textarea type="text" name="resolution" id="resolution" rows="5"><%= resolution %></textarea>
 				</div>
@@ -96,7 +96,7 @@ No connectivity to any network services, the campus network, or the Internet dur
 
 		  <div class="control-group" id="workaround-group" data-toggle="tooltip"
 				title="If a workaround is available, provide concise directions (or links to more thorough directions) here.">
-		    <label class="control-label" for="workaround"> workaround</label>
+		    <label class="control-label" for="workaround">Workaround</label>
 				<div class="controls">
 		    	<textarea type="text" name="workaround" id="workaround" rows="5"><%= workaround %></textarea>
 				</div>
@@ -104,7 +104,7 @@ No connectivity to any network services, the campus network, or the Internet dur
 
 		  <div class="control-group" id="other-services-group" data-toggle="tooltip"
 				title="Name the service based on the customers' perspective. Provide the scope (building, network, DSS-wide, campus-wide, service, etc.)">
-		    <label class="control-label" for="other_services"> other_services</label>
+		    <label class="control-label" for="other_services">Other Services</label>
 				<div class="controls">
 		    	<textarea type="text" name="other_services" id="other_services" rows="5"
 						placeholder="Examples:																																														
