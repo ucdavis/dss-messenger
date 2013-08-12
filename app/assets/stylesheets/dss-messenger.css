@@ -148,6 +148,13 @@ ul.token-input-list-facebook {
   width: 180px;
 }
 
+.actions a.label {
+  font-size: 12px;
+  font-weight: normal;
+  padding: 2px;
+  line-height: 10px;
+}
+
 /*------- Modal -------*/
 .modal {
     width: 800px;
