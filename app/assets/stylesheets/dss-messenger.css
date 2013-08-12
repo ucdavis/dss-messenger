@@ -194,6 +194,10 @@ a.message-preview {
     outline-width: 0;
 }
 
+#save-status {
+  float: right;
+  font-size: 12px;
+}
 
 /*--------- Delete Dialog ----------*/
 
