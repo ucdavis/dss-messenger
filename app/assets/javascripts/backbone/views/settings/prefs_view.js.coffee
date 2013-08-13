@@ -4,8 +4,12 @@ class DssMessenger.Views.Settings.PrefsView extends Backbone.View
   template: JST["backbone/templates/settings/prefs"]
 
   initialize: ->
+    @bind("cancel", @removeFromDOM)
     _.defer =>
       $("#configTabs a:first").tab "show"
+
+  removeFromDOM: (modal) ->
+    modal.remove()
 
   render: ->
     @$el.html(@template( ))

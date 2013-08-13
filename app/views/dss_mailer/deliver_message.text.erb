@@ -52,7 +52,4 @@ Dear <%= @member.first %>,
 	<%= @message.other_services %>
 <% end %>
 
-Please contact the DSS IT Service Desk with any questions or concerns:
-Via web: http://it.dss.ucdavis.edu/selfserve
-Via phone: 530-752-8800
-Via email: ithelp@dss.ucdavis.edu
+<%= strip_tags @footer %>

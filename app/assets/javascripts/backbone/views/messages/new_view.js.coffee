@@ -63,6 +63,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
   tooltip: (a) ->
     @$('#'+a.currentTarget.id).tooltip
       placement: "left"
+    @$('#'+a.currentTarget.id).tooltip('show')
 
   openConfig: (e) ->
     @tab = $(e.target).data('tab')
