@@ -161,6 +161,10 @@ ul.token-input-list-facebook {
     margin-left: -400px;
 }
 
+.modal-header {
+  text-align: center;
+}
+
 /*------- Message Show View -------*/
 .message-box {
   border: 1px solid #ddd;
