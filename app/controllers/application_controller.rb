@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include Authentication
   
-  before_filter :authenticate, :except => [:open]
+  before_filter :authenticate, :except => [:open, :show]
   
   protect_from_forgery
   

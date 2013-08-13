@@ -1,50 +1,56 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Subject:</b>
-  <%= @message.subject %>
-</p>
-
-<p>
-  <b>Impact statement:</b>
-  <%= @message.impact_statement %>
-</p>
-
-<p>
-  <b>Window start:</b>
-  <%= @message.window_start %>
-</p>
-
-<p>
-  <b>Window end:</b>
-  <%= @message.window_end %>
-</p>
-
-<p>
-  <b>Purpose:</b>
-  <%= @message.purpose %>
-</p>
-
-<p>
-  <b>Resolution:</b>
-  <%= @message.resolution %>
-</p>
-
-<p>
-  <b>Workaround:</b>
-  <%= @message.workaround %>
-</p>
-
-<p>
-  <b>Other services:</b>
-  <%= @message.other_services %>
-</p>
-
-<p>
-  <b>Sender uid:</b>
-  <%= @message.sender_uid %>
-</p>
-
-
-<%= link_to 'Edit', edit_message_path(@message) %> |
-<%= link_to 'Back', messages_path %>
+<div id="messages" class="span12">
+	<table class="table table-striped table-bordered table-condensed">
+		<tr>
+			<td>
+				<dl class="dl-horizontal">
+				  <dt>Date</dt>
+				  <dd><%= @message.created_at.strftime("%A, %B %d, %Y at %l:%M %p") %></dd>
+				  <dt>Subject</dt>
+				  <dd>
+						<% if @message.classification %>
+						  <%= @message.classification.description.slice(0..(@message.classification.description.index(':')))  %>
+						<% end %>
+						<% if @message.modifier %>
+						  <%= @message.modifier.description.slice(0..(@message.modifier.description.index(':'))) %>
+						<% end %>
+					  <%= @message.subject %>
+					</dd>
+				  <dt>Summary</dt>
+				  <dd><%= @message.impact_statement %></dd>
+				<% if @message.window_start %>
+				  <dt>Start of window</dt>
+				  <dd><%= @message.window_start.strftime("%A, %B %d, %Y at %l:%M %p") %></dd>
+				<% end %>
+				<% if @message.window_end %>
+				  <dt>End of window</dt>
+				  <dd><%= @message.window_end.strftime("%A, %B %d, %Y at %l:%M %p") %></dd>
+				<% end %>
+				<% if @message.purpose %>
+				  <dt>Purpose</dt>
+				  <dd><%= @message.purpose %></dd>
+				<% end %>
+				<% if @message.resolution %>
+				  <dt>Resolution</dt>
+				  <dd><%= @message.resolution %></dd>
+				<% end %>
+				<% if @message.workaround %>
+				  <dt>Workaround</dt>
+				  <dd><%= @message.workaround %></dd>
+				<% end %>
+				<% if @message.other_services %>
+				  <dt>Other Services</dt>
+				  <dd><%= @message.other_services %></dd>
+				<% end %>
+				<% if @message.impacted_services.length > 0 %>
+				  <dt>Impacted Services</dt>
+				  <dd>
+						<% @message.impacted_services.each do |is| %>
+							<li><%= is.name %></li>
+						<% end %>
+					</dd>
+				<% end %>
+				</dl>
+			</td>
+		</tr>
+	</table>
+</div>
