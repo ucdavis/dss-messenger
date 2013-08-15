@@ -81,9 +81,7 @@ class Message < ActiveRecord::Base
       :recipient_uids => self.recipients.map(&:uid).join(","),
       :impacted_services => self.impacted_services,
       :impacted_service_ids => self.impacted_services.pluck(:impacted_service_id),
-      :created_at => self.created_at.strftime("%A, %B %d, %Y at %l:%M %p"),
-      :pages => options[:pages],
-      :current => options[:current]
+      :created_at => self.created_at.strftime("%A, %B %d, %Y at %l:%M %p")
     }
     
   end
