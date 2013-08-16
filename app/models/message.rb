@@ -77,10 +77,8 @@ class Message < ActiveRecord::Base
       :modifier_id => self.modifier_id,
       :modifier => self.modifier,
       :recipients => self.recipients,
-      :recipient_ids => self.recipients.pluck(:recipient_id),
       :recipient_uids => self.recipients.map(&:uid).join(","),
       :impacted_services => self.impacted_services,
-      :impacted_service_ids => self.impacted_services.pluck(:impacted_service_id),
       :created_at => self.created_at.strftime("%A, %B %d, %Y at %l:%M %p")
     }
     

@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message
+    @messages = Message.includes(:recipients,:classification,:modifier,:impacted_services)
       .order('created_at DESC')
       .by_classification(params[:cl])
       .by_modifier(params[:mo])
