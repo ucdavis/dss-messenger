@@ -198,9 +198,13 @@ a.message-preview {
     outline-width: 0;
 }
 
+button.save {
+  float:left;
+}
+
 #save-status {
   float: right;
-  font-size: 12px;
+  margin-right: 3em;
 }
 
 /*--------- Delete Dialog ----------*/
