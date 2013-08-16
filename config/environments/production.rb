@@ -69,7 +69,7 @@ DssMessenger::Application.configure do
   ActionMailer::Base.smtp_settings = {
     :address              => "smtp.ucdavis.edu",
     :port                 => 587,
-    :domain               => "ucdavis.edu",
+    :domain               => "dss.ucdavis.edu",
     :enable_starttls_auto => true
   }
 
