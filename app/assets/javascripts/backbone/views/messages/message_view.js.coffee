@@ -16,34 +16,28 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
   tagName: "tr"
 
   archive: () ->
-    bootbox.confirm "Are you sure you want to archive <span class='confirm-name'>" + @model.escape("subject") + "</span> without sending a message?", (result) =>
-      if result
-        @$el.addClass('archiving')
-        # archive the message
-        @model.save(closed:true,
-          timeout: 10000 # 10 seconds
-          wait:true
-          success: (message) =>
-            $("#archive-table, .table-title").show()
-            $('#archive-table #mtable-head').after(@$el)
-            @$el.removeClass('archiving')
-            @$el.effect( "highlight", "slow" )
-            @$('.archive-only').show()
-            @$('.active-only').hide()
-            #Hide the table titles if no more active messages
-            @active = DssMessenger.messages.filter (messages) ->
-              messages.get("closed") is false
-            if @active.length is 0
-              $("#active-table, .table-title").fadeOut()
-          
-            
-          error: (message, jqXHR) =>
-            message.set({errors: $.parseJSON(jqXHR.responseText)})
-          )
-          
+    @$el.addClass('archiving')
+    # archive the message
+    @model.save(closed:true,
+      timeout: 10000 # 10 seconds
+      wait:true
+      success: (message) =>
+        $("#archive-table, .table-title").show()
+        $('#archive-table #mtable-head').after(@$el)
+        @$el.removeClass('archiving')
+        @$el.effect( "highlight", "slow" )
+        @$('.archive-only').show()
+        @$('.active-only').hide()
+        #Hide the table titles if no more active messages
+        @active = DssMessenger.messages.filter (messages) ->
+          messages.get("closed") is false
+        if @active.length is 0
+          $("#active-table, .table-title").fadeOut()
+      
         
-    # dismiss the dialog
-    @$(".modal-header a.close").trigger "click"
+      error: (message, jqXHR) =>
+        message.set({errors: $.parseJSON(jqXHR.responseText)})
+      )
 
     return false
 

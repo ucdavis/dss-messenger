@@ -69,7 +69,7 @@ DssMessenger::Application.configure do
   ActionMailer::Base.smtp_settings = {
     :address              => "smtp.ucdavis.edu",
     :port                 => 587,
-    :domain               => "ucdavis.edu",
+    :domain               => "dss.ucdavis.edu",
     :enable_starttls_auto => true
   }
 
@@ -78,7 +78,7 @@ DssMessenger::Application.configure do
     :email => {
       :email_prefix => "[DSS Messenger] ",
       :sender_address => %{no-reply@messenger.dss.ucdavis.edu},
-      :exception_recipients => %w{okadri@ucdavis.edu}
+      :exception_recipients => %w{dssit-devs-exceptions@ucdavis.edu}
     }  
 
 end

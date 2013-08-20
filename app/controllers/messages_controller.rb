@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message
+    @messages = Message.includes(:recipients,:classification,:modifier,:impacted_services)
       .order('created_at DESC')
       .by_classification(params[:cl])
       .by_modifier(params[:mo])
@@ -21,8 +21,6 @@ class MessagesController < ApplicationController
     @impacted_services = ImpactedService.all
     @settings = Setting.all
 
-    @open_messages = Message.where(closed: false)
-    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @messages.to_json(pages: @messages.total_pages, current: @messages.current_page) }

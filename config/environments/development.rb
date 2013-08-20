@@ -37,21 +37,12 @@ DssMessenger::Application.configure do
   
   #SMTP Settings
   ActionMailer::Base.smtp_settings = {
-    :address              => "smtp.ucdavis.edu",
-    :port                 => 587,
-    :domain               => "ucdavis.edu",
-    :enable_starttls_auto => true
+    address:              'smtp.gmail.com',
+    port:                 587,
+    enable_starttls_auto: true
   }
 
   require 'development_mail_interceptor'
   Mail.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?
   
-  # Send e-mail on exceptions
-  config.middleware.use ExceptionNotification::Rack,
-    :email => {
-      :email_prefix => "[DSS Messenger] ",
-      :sender_address => %{no-reply@messenger.dss.ucdavis.edu},
-      :exception_recipients => %w{okadri@ucdavis.edu}
-    }  
-
 end
