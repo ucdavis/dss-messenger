@@ -42,7 +42,7 @@ class Message < ActiveRecord::Base
         end
       elsif @entity.type == "Person"
         # Send the e-mail
-        @member = Person.find(@entity.id)
+        @member = Person.find(r.uid)
         DssMailer.delay.deliver_message(self,@member)
       end
     end
