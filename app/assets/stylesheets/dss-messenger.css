@@ -207,6 +207,12 @@ button.save {
   margin-right: 3em;
 }
 
+span.section-head {
+  display: block;
+  margin-top: 12px;
+  text-transform:uppercase;
+}
+
 /*--------- Delete Dialog ----------*/
 
 .confirm-name {

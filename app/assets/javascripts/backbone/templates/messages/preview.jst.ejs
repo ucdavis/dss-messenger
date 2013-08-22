@@ -1,21 +1,21 @@
 <p>Dear [Firstname],</p>
 
-	<dl class="dl-horizontal">
-		<dt>Summary</dt>
-		<dd><%= impact_statement %></dd>
-		<dt class="window_start">Window Start</dt>
-		<dd class="window_start"><%= window_start %></dd>
-		<dt class="window_end">Window End</dt>
-		<dd class="window_end"><%= window_end %></dd>
-		<dt class="purpose">Purpose</dt>
-		<dd class="purpose"><%= purpose %></dd>
-		<dt class="resolution">Resolution</dt>
-		<dd class="resolution"><%= resolution %></dd>
-		<dt class="workaround">Workaround</dt>
-		<dd class="workaround"><%= workaround %></dd>
-		<dt class="impacted_services">Impacted Services</dt>
-		<dd class="impacted_services" id="impacted_services_list">
-		</dd>
-		<dt class="other_services">Other Services</dt>
-		<dd class="other_services"><%= other_services %></dd>
-	</dl>
+	<p>
+		<span class="section-head">Summary:</span>
+		<span><%= impact_statement %></span>
+		<span class="window_start section-head">Start of window:</span>
+		<span class="window_start"><%= window_start %></span>
+		<span class="window_end section-head">End of window:</span>
+		<span class="window_end"><%= window_end %></span>
+		<span class="purpose section-head">Purpose:</span>
+		<span class="purpose"><%= purpose %></span>
+		<span class="resolution section-head">Resolution:</span>
+		<span class="resolution"><%= resolution %></span>
+		<span class="workaround section-head">Workaround:</span>
+		<span class="workaround"><%= workaround %></span>
+		<span class="impacted_services section-head">Impacted Services:</span>
+		<span class="impacted_services" id="impacted_services_list">
+		</span>
+		<span class="other_services section-head">Other Services:</span>
+		<span class="other_services"><%= other_services %></span>
+	</p>
