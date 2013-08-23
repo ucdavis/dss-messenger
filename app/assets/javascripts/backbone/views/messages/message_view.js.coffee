@@ -61,6 +61,8 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
       @$('.actions').append('<a href="#/'+@model.get('id')+'/duplicate/'+modifier.id+'" class="label label-'+colors[index%5]+'">'+description+'</a> ')
     
     _.defer =>
+      modifier = @model.get('modifier')
+      @$('.modifier-label').addClass('label-'+colors[(modifier.id-1)%5]).text(modifier.description.split(':')[0])
       if @model.get('closed')
         @$('.active-only').hide()
       else
