@@ -4,6 +4,7 @@ gem 'rails', '3.2.14'
 
 
 gem 'rubycas-client'
+gem 'rake'
 gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'unicorn'
