@@ -9,16 +9,19 @@ namespace :message do
       @entity = Entity.find(r.uid)
       if @entity.type == "Group"
         # get unique memberships of the group
+        puts "Sending to group recipient: " + @entity.name
         memberships = @entity.memberships.map(&:entity_id).uniq
         memberships.each do |m|
           # Send the e-mail
           @member = Person.find(m)
-          DssMailer.delay.deliver_message(@message,@member)
+          puts " --- Sending to recipient: " + @member.name
+          DssMailer.deliver_message(@message,@member).deliver
         end
       elsif @entity.type == "Person"
         # Send the e-mail
         @member = Person.find(r.uid)
-        DssMailer.delay.deliver_message(@message,@member)
+        puts "Sending to single recipient: " + @member.name
+        DssMailer.deliver_message(@message,@member).deliver
       end
     end
   end
