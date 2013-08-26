@@ -27,16 +27,6 @@ END OF WINDOW:
 <%= @message.window_end.strftime("%A, %B %d, %Y at %l:%M %p") %>
 
 <% end %>
-<% if @message.classification %>
-CLASSIFICATION:
-<%= @message.classification.description %>
-
-<% end %>
-<% if @message.modifier %>
-MODIFIER:
-<%= @message.modifier.description %>
-
-<% end %>
 <% if @message.impacted_services %>
 IMPACTED SERVICES:
 <% @message.impacted_services.each do |i| %>
