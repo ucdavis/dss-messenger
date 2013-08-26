@@ -62,7 +62,7 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
     
     _.defer =>
       modifier = @model.get('modifier')
-      @$('.modifier-label').addClass('label-'+colors[(modifier.id-1)%5]).text(modifier.description.split(':')[0])
+      @$('.modifier-label').addClass('label-'+colors[(modifier.id-1)%5]).text(modifier.description.split(':')[0]) unless modifier is null
       if @model.get('closed')
         @$('.active-only').hide()
       else
