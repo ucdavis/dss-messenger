@@ -28,26 +28,6 @@ class Message < ActiveRecord::Base
     end
   end
   
-  def send_mass_email()
-    self.recipients.each do |r|
-      # Look up e-mail address for r.uid
-      @entity = Entity.find(r.uid)
-      if @entity.type == "Group"
-        # get unique memberships of the group
-        memberships = @entity.memberships.map(&:entity_id).uniq
-        memberships.each do |m|
-          # Send the e-mail
-          @member = Person.find(m)
-          DssMailer.delay.deliver_message(self,@member)
-        end
-      elsif @entity.type == "Person"
-        # Send the e-mail
-        @member = Person.find(@entity.id)
-        DssMailer.delay.deliver_message(self,@member)
-      end
-    end
-  end
-  
   def as_json(options = {})
     {
       :id => self.id,

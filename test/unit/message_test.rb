@@ -25,14 +25,4 @@ class MessageTest < ActiveSupport::TestCase
     message = Message.first
     assert message.recipient_uids="13907", " |||||ERROR||||| Could not find or create individual recipient"
   end
-  test "Should send email to group recipients" do
-    message = Message.first
-    message.recipient_uids="57"
-    assert message.send_mass_email, " |||||ERROR||||| Could not send email to group recipients"
-  end
-  test "Should send email to individual recipient" do
-    message = Message.first
-    message.recipient_uids="13907"
-    assert message.send_mass_email, " |||||ERROR||||| Could not send email to individual recipient"
-  end
 end

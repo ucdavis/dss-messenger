@@ -1,50 +1,41 @@
 <% if @message.impact_statement %>
-Summary:
+SUMMARY:
 <%= @message.impact_statement %>
 
 <% end %>
 <% if @message.purpose %>
-Purpose:
+PURPOSE:
 <%= @message.purpose %>
 
 <% end %>
 <% if @message.resolution %>
-Resolution:
+RESOLUTION:
 <%= @message.resolution %>
 
 <% end %>
 <% if @message.workaround %>
-Workaround:
+WORKAROUND:
 <%= @message.workaround %>
 
 <% end %>
 <% if @message.window_start %>
-Window Start:
+START OF WINDOW:
 <%= @message.window_start.strftime("%A, %B %d, %Y at %l:%M %p") %>
 <% end %>
 <% if @message.window_end %>
-Window End:
+END OF WINDOW:
 <%= @message.window_end.strftime("%A, %B %d, %Y at %l:%M %p") %>
-<% end %>
-<% if @message.classification %>
-Classification:
-<%= @message.classification.description %>
-
-<% end %>
-<% if @message.modifier %>
-Modifier:
-<%= @message.modifier.description %>
 
 <% end %>
 <% if @message.impacted_services %>
-Impacted Services:
+IMPACTED SERVICES:
 <% @message.impacted_services.each do |i| %>
  - <%= i.name %>
 <% end %>
 
 <% end %>
 <% if @message.other_services %>
-Other Services:
+OTHER SERVICES:
 <%= @message.other_services %>
 
 <% end %>

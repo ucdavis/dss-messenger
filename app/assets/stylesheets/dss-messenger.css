@@ -148,7 +148,7 @@ ul.token-input-list-facebook {
   width: 180px;
 }
 
-.actions a.label {
+.label {
   font-size: 10px;
   font-weight: normal;
   padding: 2px;
@@ -205,6 +205,12 @@ button.save {
 #save-status {
   float: right;
   margin-right: 3em;
+}
+
+span.section-head {
+  display: block;
+  margin-top: 12px;
+  text-transform:uppercase;
 }
 
 /*--------- Delete Dialog ----------*/
