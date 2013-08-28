@@ -9,7 +9,11 @@ xml.rss :version => "2.0" do
       xml.item do
         xml.title m.subject
         xml.description m.impact_statement
-        xml.pubDate m.created_at.to_s(:rfc822)
+        unless m.window_start.nil?
+          xml.pubDate m.window_start.to_s(:rfc822)
+        else
+          xml.pubDate m.created_at.to_s(:rfc822)
+        end
         xml.link message_url(m)
         xml.guid message_url(m)
       end
