@@ -5,10 +5,6 @@ class Entity < ActiveResource::Base
   headers['Accept'] = "application/vnd.roles-management.v1"
 
   def as_json(options = {})
-    {
-      :id => self.id,
-      :name => self.name
-    }
-    
+    { :id => self.id, :name => self.name }
   end
 end
