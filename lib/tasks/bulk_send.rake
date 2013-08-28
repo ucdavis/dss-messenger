@@ -51,7 +51,7 @@ namespace :message do
     
       # Deliver the message to each recipient
       members.each do |m|
-        DssMailer.delay.deliver_message(subject, message, m, footer)
+        DssMailer.deliver_message(subject, message, m, footer).deliver
       end
       
       Rails.logger.info "Enqueueing message ##{args.message_id} for #{members.length} recipients took #{Time.now - timestamp_start} seconds"
