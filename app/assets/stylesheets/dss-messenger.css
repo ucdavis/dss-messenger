@@ -75,6 +75,10 @@ label.radio, label.checkbox {
   cursor:pointer;
 }
 
+a.close {
+  font-size:12px;
+}
+
 .frameless {
     border: none;
 }

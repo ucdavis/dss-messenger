@@ -9,6 +9,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     "mouseenter .control-group"   : "tooltip"
     "click .message-preview"  : "preview"
     "click .config-link"  : "openConfig"
+    "click .close"  : "resetGroup"
     "keypress input"  : "preventSubmit"
 
   initialize: ->
@@ -64,6 +65,10 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     @$('#'+a.currentTarget.id).tooltip
       placement: "left"
     @$('#'+a.currentTarget.id).tooltip('show')
+
+  resetGroup: (e) ->
+    group = $(e.target).data('group')
+    $("#"+group+" input").attr('checked', false)
 
   openConfig: (e) ->
     @tab = $(e.target).data('tab')
