@@ -7,32 +7,46 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
   events:
     "mouseenter .tooltip-archive"   : "tooltipArchive"
     "mouseenter .actions"           : "tooltipAction"
-    "click      .tooltip-archive"   : "archive"
+    "click      .tooltip-archive"   : "toggleArchive"
+    "click      .tooltip-open"      : "toggleArchive"
     "click      .accordion-heading" : "toggleAccordion"
+    "mouseenter .tooltip-open"      : "tooltipOpen"
     "mouseenter .tooltip-duplicate" : "tooltipDuplicate"
     "mouseenter .tooltip-destroy"   : "tooltipDestroy"
     "click      .tooltip-destroy"   : "destroy"
 
   tagName: "tr"
 
-  archive: () ->
+  toggleArchive: () ->
     @$el.addClass('archiving')
+    newStatus = !@model.get('closed')
     # archive the message
-    @model.save(closed:true,
+    @model.save(closed:newStatus,
       timeout: 10000 # 10 seconds
       wait:true
       success: (message) =>
-        $("#archive-table, .table-title").show()
-        $('#archive-table #mtable-head').after(@$el)
+        if newStatus
+          $("#archive-table, .table-title").show()
+          $('#archive-table #mtable-head').after(@$el)
+          @$('.archive-only').show()
+          @$('.active-only').hide()
+        else
+          $("#active-table, .table-title").show()
+          $('#active-table tr:last').after(@$el)
+          @$('.archive-only').hide()
+          @$('.active-only').show()
+
         @$el.removeClass('archiving')
         @$el.effect( "highlight", "slow" )
-        @$('.archive-only').show()
-        @$('.active-only').hide()
         #Hide the table titles if no more active messages
         @active = DssMessenger.messages.filter (messages) ->
           messages.get("closed") is false
+        @archive = DssMessenger.messages.filter (messages) ->
+          messages.get("closed") is true
         if @active.length is 0
           $("#active-table, .table-title").fadeOut()
+        if @archive.length is 0
+          $("#archive-table, .table-title").fadeOut()
       
         
       error: (message, jqXHR) =>
@@ -82,6 +96,12 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
       title:"Archive without sending an email"
       placement: "top"
     @$('.tooltip-archive').tooltip('show')
+
+  tooltipOpen: ->
+    @$('.tooltip-open').tooltip
+      title:"Make Active"
+      placement: "top"
+    @$('.tooltip-open').tooltip('show')
 
   tooltipAction: ->
     @$('.actions').tooltip
