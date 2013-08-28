@@ -1,28 +1,52 @@
 require 'rake'
 
 namespace :message do
-  desc 'Send the passed message to the recipients'
+  desc 'Send a message'
   task :send, [:message_id] => :environment do |t, args|
-    @message = Message.find(args.message_id)
-    @message.recipients.each do |r|
-      # Look up e-mail address for r.uid
-      @entity = Entity.find(r.uid)
-      if @entity.type == "Group"
-        # get unique memberships of the group
-        puts "Sending to group recipient: " + @entity.name
-        memberships = @entity.memberships.map(&:entity_id).uniq
-        memberships.each do |m|
-          # Send the e-mail
-          @member = Person.find(m)
-          puts " --- Sending to recipient: " + @member.name
-          DssMailer.deliver_message(@message,@member).deliver
-        end
-      elsif @entity.type == "Person"
-        # Send the e-mail
-        @member = Person.find(r.uid)
-        puts "Sending to single recipient: " + @member.name
-        DssMailer.deliver_message(@message,@member).deliver
+    Rails.logger.tagged('task:message:send') do
+      message = Message.find(args.message_id)
+    
+      unless message
+        Rails.logger.error "Unable to find message with ID #{args.message_id}"
+        next # used in rake to abort a rake task (as well as in loops)
       end
+      
+      timestamp_start = Time.now
+    
+      members = []
+    
+      # Resolve e-mail addresses for message recipients
+      message.recipients.each do |r|
+        entity = Entity.find(r.uid)
+      
+        unless entity
+          Rails.logger.warning "Could not find entity with UID #{r.id}"
+          next
+        end
+      
+        # If entity is a group, resolve individual group members
+        if entity.type == "Group"
+          entity.members.map(&:id).uniq.each do |m|
+            p = Person.find(m)
+          
+            unless p
+              Rails.logger.warning "Could not find Person with ID #{m}"
+              next
+            end
+          
+            members << p
+          end
+        elsif entity.type == "Person"
+          members << entity
+        end
+      end
+    
+      # Deliver the message to each recipient
+      members.each do |m|
+        DssMailer.delay.deliver_message(message, m)
+      end
+      
+      Rails.logger.info "Enqueueing message ##{args.message_id} for #{members.length} recipients took #{Time.now - timestamp_start} seconds"
     end
   end
 end
