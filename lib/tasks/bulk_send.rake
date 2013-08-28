@@ -5,6 +5,14 @@ namespace :message do
   task :send, [:message_id] => :environment do |t, args|
     Rails.logger.tagged('task:message:send') do
       message = Message.find(args.message_id)
+      
+      # Construct the subject
+      modifier = message.modifier.description.slice(0..(message.modifier.description.index(':'))) if message.modifier
+      classification = message.classification.description.slice(0..(message.classification.description.index(':'))) if message.classification
+      subject = "#{modifier} #{classification} #{message.subject}"
+      
+      # Get the footer
+      footer = Setting.where(:item_name => 'footer').first.item_value
     
       unless message
         Rails.logger.error "Unable to find message with ID #{args.message_id}"
@@ -43,7 +51,7 @@ namespace :message do
     
       # Deliver the message to each recipient
       members.each do |m|
-        DssMailer.delay.deliver_message(message, m)
+        DssMailer.delay.deliver_message(subject, message, m, footer)
       end
       
       Rails.logger.info "Enqueueing message ##{args.message_id} for #{members.length} recipients took #{Time.now - timestamp_start} seconds"
