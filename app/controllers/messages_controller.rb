@@ -33,7 +33,7 @@ class MessagesController < ApplicationController
     @message = Message.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html {render layout: 'public' } # show.html.erb
       # format.json { render json: @message }
     end
   end
