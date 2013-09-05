@@ -14,5 +14,8 @@
 /log/*.log
 /tmp
 
+# Ignore Mac hidden meta-data files
+*.DS_Store
+
 # Ignore API keys
 config/dss_rm.yml
