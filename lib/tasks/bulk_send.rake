@@ -7,9 +7,9 @@ namespace :message do
       message = Message.find(args.message_id)
       
       # Construct the subject
-      modifier = message.modifier.description.slice(0..(message.modifier.description.index(':'))) if message.modifier
-      classification = message.classification.description.slice(0..(message.classification.description.index(':'))) if message.classification
-      subject = "#{modifier} #{classification} #{message.subject}"
+      modifier = message.modifier.description.slice(0..(message.modifier.description.index(':')))+" " if message.modifier
+      classification = message.classification.description.slice(0..(message.classification.description.index(':')))+" " if message.classification
+      subject = "#{modifier}#{classification}#{message.subject}"
       
       # Get the footer
       footer = Setting.where(:item_name => 'footer').first.item_value
