@@ -20,14 +20,17 @@ WORKAROUND:
 <% end %>
 <% if @message.window_start %>
 START OF WINDOW:
-<%= @message.window_start.strftime("%A, %B %d, %Y at %l:%M %p") %>
+<%= @message.window_start.strftime("%A, %B %d, %Y at %l:%M %p") %><% if @message.window_end.nil? %>, ONGOING
+
+<% end %>
+
 <% end %>
 <% if @message.window_end %>
 END OF WINDOW:
 <%= @message.window_end.strftime("%A, %B %d, %Y at %l:%M %p") %>
 
 <% end %>
-<% if @message.impacted_services %>
+<% if @message.impacted_services.length > 0 %>
 IMPACTED SERVICES:
 <% @message.impacted_services.each do |i| %>
  - <%= i.name %>
