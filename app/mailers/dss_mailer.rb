@@ -1,5 +1,5 @@
 class DssMailer < ActionMailer::Base
-  default :from => "DSS IT Service Center <ithelp@dss.ucdavis.edu>"
+  default :from => "DSS IT Service Center <noreply@dss.ucdavis.edu>"
   
   def deliver_message(subject, message, member, footer)
     @message = message
