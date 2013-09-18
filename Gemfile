@@ -9,6 +9,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'unicorn'
 gem 'mail'
+gem 'whenever'
 
 gem 'declarative_authorization'
 
