@@ -1,5 +1,9 @@
 require "bundler/capistrano"
 
+# 'whenever' setup
+set :whenever_command, "bundle exec whenever"
+require "whenever/capistrano"
+
 # 'delayed_job' setup
 require "delayed/recipes"
 before "deploy:restart", "delayed_job:stop"
