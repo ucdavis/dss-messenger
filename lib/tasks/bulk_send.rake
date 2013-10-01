@@ -4,7 +4,12 @@ namespace :message do
   desc 'Send a message'
   task :send, [:message_id] => :environment do |t, args|
     Rails.logger.tagged('task:message:send') do
-      message = Message.find(args.message_id)
+      message = Message.find_by_id(args.message_id)
+
+      unless message
+        Rails.logger.error "Unable to find message with ID #{args.message_id}"
+        next # used in rake to abort a rake task (as well as in loops)
+      end
       
       # Construct the subject
       modifier = message.modifier.description.slice(0..(message.modifier.description.index(':')))+" " if message.modifier
@@ -14,11 +19,6 @@ namespace :message do
       # Get the footer
       footer = Setting.where(:item_name => 'footer').first.item_value
     
-      unless message
-        Rails.logger.error "Unable to find message with ID #{args.message_id}"
-        next # used in rake to abort a rake task (as well as in loops)
-      end
-      
       timestamp_start = Time.now
     
       members = []
