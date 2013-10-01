@@ -71,12 +71,14 @@ class MessagesController < ApplicationController
       
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
-        format.json { render json: @message, status: :created, location: @message }
-
         require 'rake'
         load File.join(Rails.root, 'lib', 'tasks', 'bulk_send.rake')
         Delayed::Job.enqueue(DelayedRake.new("message:send[#{@message.id}]"))
+        
+        Rails.logger.info "Enqueued new message ##{@message.id} for sending. message:send:[#{@message.id}] should pick it up."
+
+        format.html { redirect_to @message, notice: 'Message was successfully created.' }
+        format.json { render json: @message, status: :created, location: @message }
       else
         format.html { render action: "new" }
         format.json { render json: @message.errors, status: :unprocessable_entity }
