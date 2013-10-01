@@ -25,20 +25,25 @@ namespace :message do
     
       # Resolve e-mail addresses for message recipients
       message.recipients.each do |r|
-        entity = Entity.find(r.uid)
-      
+        begin
+          entity = Entity.find(r.uid)
+        rescue Exception => e
+          Rails.logger.error "ActiveResource error while fetching entity with UID #{r.id}: '#{e}'. Skipping to next."
+          next
+        end
+        
         unless entity
-          Rails.logger.warning "Could not find entity with UID #{r.id}"
+          Rails.logger.warning "Could not find entity with UID #{r.id}. Skipping to next."
           next
         end
       
         # If entity is a group, resolve individual group members
         if entity.type == "Group"
           entity.members.map(&:id).uniq.each do |m|
-            p = Person.find(m)
-          
-            unless p
-              Rails.logger.warning "Could not find Person with ID #{m}"
+            begin
+              p = Person.find(m)
+            rescue Exception => e
+              Rails.logger.error "ActiveResource error while fetching group member with UID #{m}: '#{e}'. Skipping to next group member."
               next
             end
           
