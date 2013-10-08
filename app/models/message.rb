@@ -11,6 +11,8 @@ class Message < ActiveRecord::Base
   
   belongs_to :classification
   belongs_to :modifier
+  
+  has_one :log, :class_name => "MessageLog"
 
   # Validations
   validates :subject, presence: true
@@ -62,7 +64,19 @@ class Message < ActiveRecord::Base
       :recipient_uids => self.recipients.map(&:uid).join(","),
       :impacted_services => self.impacted_services,
       :created_at => self.created_at.strftime("%A, %B %d, %Y at %l:%M %p"),
-      :created_at_in_words => time_ago_in_words(self.created_at) + ' ago'
+      :created_at_in_words => time_ago_in_words(self.created_at) + ' ago',
+      :recipient_count =>
+        if self.log
+          self.log.recipient_count ? self.log.recipient_count : 'Calculating'
+        else
+          'Unavailable'
+        end,
+      :send_status =>
+        if self.log
+          self.log.send_status.to_s.capitalize
+        else
+          'Unavailable'
+        end
     }
     
   end
