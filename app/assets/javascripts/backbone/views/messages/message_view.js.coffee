@@ -20,10 +20,11 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
   toggleArchive: () ->
     @$el.addClass('archiving')
     newStatus = !@model.get('closed')
-    # archive the message
+    
+    # Archive the message
     @model.save(closed:newStatus,
       timeout: 10000 # 10 seconds
-      wait:true
+      wait: true
       success: (message) =>
         if newStatus
           $("#archive-table, .table-title").show()
@@ -38,7 +39,8 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
 
         @$el.removeClass('archiving')
         @$el.effect( "highlight", "slow" )
-        #Hide the table titles if no more active messages
+        
+        # Hide the table titles if there are no more active messages
         @active = DssMessenger.messages.filter (messages) ->
           messages.get("closed") is false
         @archive = DssMessenger.messages.filter (messages) ->
@@ -48,7 +50,6 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
         if @archive.length is 0
           $("#archive-table, .table-title").fadeOut()
       
-        
       error: (message, jqXHR) =>
         message.set({errors: $.parseJSON(jqXHR.responseText)})
       )
@@ -58,25 +59,29 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
   destroy: () ->
     bootbox.confirm "Are you sure you want to delete <span class='confirm-name'>" + @model.escape("subject") + "</span>?", (result) =>
       if result
-        # delete the message and remove from log
+        # Delete the message and remove it from the log
         @model.destroy()
         @$el.toggle("highlight", {color: "#700000"}, 1000)
 
-    # dismiss the dialog
+    # Dismiss the dialog
     @$(".modal-header a.close").trigger "click"
 
     return false
 
   render: ->
-    @$el.html(@template(@model.toFullJSON() )).fadeIn()
-    colors = ['info','success','inverse','important','warning']
+    @$el.html(@template(@model.toFullJSON())).fadeIn()
+    
+    colors = ['info', 'success', 'inverse', 'important', 'warning']
+
     _.each DssMessenger.modifiers.models, (modifier,index) =>
       description = modifier.get('description').split(':')[0] # get part before the colon
-      @$('.actions').append('<a href="#/'+@model.get('id')+'/duplicate/'+modifier.id+'" class="label label-'+colors[index%5]+'">'+description+'</a> ')
+      @$('.actions').append('<a href="#/' + @model.get('id') + '/duplicate/' + modifier.id + '" class="label label-' + colors[index % 5] + '">' + description + '</a>')
     
     _.defer =>
       modifier = @model.get('modifier')
-      @$('.modifier-label').addClass('label-'+colors[(modifier.id-1)%5]).text(modifier.description.split(':')[0]) unless modifier is null
+      
+      @$('.modifier-label').addClass('label-' + colors[(modifier.id - 1) % 5]).text(modifier.description.split(':')[0]) unless modifier is null
+      
       if @model.get('closed')
         @$('.active-only').hide()
       else
@@ -86,37 +91,23 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
 
   toggleAccordion: ->
     @$(".accordion-toggle-icon").toggleClass('icon-arrow-down')
-    if $('#collapse'+@model.get('id')).length
-      $('#collapse'+@model.get('id')).remove()
+    
+    if $('#collapse' + @model.get('id')).length
+      $('#collapse' + @model.get('id')).remove()
     else
       @$el.after(@show(@model.toFullJSON() ))
 
   tooltipArchive: ->
-    @$('.tooltip-archive').tooltip
-      title:"Archive without sending an email"
-      placement: "top"
     @$('.tooltip-archive').tooltip('show')
 
   tooltipOpen: ->
-    @$('.tooltip-open').tooltip
-      title:"Make Active"
-      placement: "top"
     @$('.tooltip-open').tooltip('show')
 
   tooltipAction: ->
-    @$('.actions').tooltip
-      title:"Compose new message with the selected status filled in"
-      placement: "top"
     @$('.actions').tooltip('show')
 
   tooltipDuplicate: ->
-    @$('.tooltip-duplicate').tooltip
-      title:"Duplicate"
-      placement: "top"
     @$('.tooltip-duplicate').tooltip('show')
 
   tooltipDestroy: ->
-    @$('.tooltip-destroy').tooltip
-      title:"Delete"
-      placement: "top"
     @$('.tooltip-destroy').tooltip('show')
