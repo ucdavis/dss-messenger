@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130806213433) do
+ActiveRecord::Schema.define(:version => 20131007195112) do
 
   create_table "audiences", :force => true do |t|
     t.integer  "message_id"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(:version => 20130806213433) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  add_index "classifications", ["id"], :name => "index_classifications_on_id"
 
   create_table "damages", :force => true do |t|
     t.integer  "message_id"
@@ -62,6 +64,28 @@ ActiveRecord::Schema.define(:version => 20130806213433) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "impacted_services", ["id"], :name => "index_impacted_services_on_id"
+
+  create_table "message_log_entries", :force => true do |t|
+    t.integer  "message_log_id"
+    t.string   "recipient_name"
+    t.string   "recipient_email"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "message_logs", :force => true do |t|
+    t.integer  "message_id"
+    t.datetime "send_start"
+    t.datetime "send_finish"
+    t.integer  "send_status"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "recipient_count"
+  end
+
+  add_index "message_logs", ["message_id"], :name => "index_message_logs_on_message_id"
+
   create_table "messages", :force => true do |t|
     t.string   "subject"
     t.text     "impact_statement"
@@ -79,12 +103,16 @@ ActiveRecord::Schema.define(:version => 20130806213433) do
     t.boolean  "closed"
   end
 
+  add_index "messages", ["id"], :name => "index_messages_on_id"
+
   create_table "modifiers", :force => true do |t|
     t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.boolean  "open_ended"
   end
+
+  add_index "modifiers", ["id"], :name => "index_modifiers_on_id"
 
   create_table "recipients", :force => true do |t|
     t.string   "uid"
@@ -93,11 +121,16 @@ ActiveRecord::Schema.define(:version => 20130806213433) do
     t.string   "name"
   end
 
+  add_index "recipients", ["id"], :name => "index_recipients_on_id"
+  add_index "recipients", ["uid"], :name => "index_recipients_on_uid"
+
   create_table "settings", :force => true do |t|
     t.string   "item_name"
     t.text     "item_value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "settings", ["id"], :name => "index_settings_on_id"
 
 end

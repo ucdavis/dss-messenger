@@ -11,6 +11,8 @@ namespace :message do
         next # used in rake to abort a rake task (as well as in loops)
       end
       
+      ml = MessageLog.find_or_create_by_message_id(message.id)
+      
       # Construct the subject
       modifier = message.modifier.description.slice(0..(message.modifier.description.index(':')))+" " if message.modifier
       classification = message.classification.description.slice(0..(message.classification.description.index(':')))+" " if message.classification
@@ -53,10 +55,15 @@ namespace :message do
           members << entity
         end
       end
-    
+      
+      ml.send_status = :sending
+      ml.send_start = Time.now
+      ml.recipient_count = members.length
+      ml.save!
+      
       # Deliver the message to each recipient
       members.each do |m|
-        DssMailer.delay.deliver_message(subject, message, OpenStruct.new(:name => m.name, :email => m.email), footer)
+        DssMailer.delay.deliver_message(subject, message, ml, OpenStruct.new(:name => m.name, :email => m.email), footer)
       end
       
       Rails.logger.info "Enqueueing message ##{args.message_id} for #{members.length} recipients took #{Time.now - timestamp_start} seconds"
