@@ -88,7 +88,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25)
-    multi_json (1.8.0)
+    multi_json (1.8.1)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -132,7 +132,7 @@ GEM
       json (~> 1.4)
     rubycas-client (2.3.9)
       activesupport
-    sass (3.2.11)
+    sass (3.2.12)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
