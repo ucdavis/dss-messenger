@@ -71,8 +71,14 @@ class MessagesController < ApplicationController
       
     respond_to do |format|
       if @message.save
+        # The following two lines are required for Delayed::Job.enqueue to work from a controller
         require 'rake'
         load File.join(Rails.root, 'lib', 'tasks', 'bulk_send.rake')
+        
+        ml = MessageLog.find_or_create_by_message_id(@message.id)
+        ml.send_status = :queued
+        ml.save!
+        
         Delayed::Job.enqueue(DelayedRake.new("message:send[#{@message.id}]"))
         
         Rails.logger.info "Enqueued new message ##{@message.id} for sending. message:send:[#{@message.id}] should pick it up."

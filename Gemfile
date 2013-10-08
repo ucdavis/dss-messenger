@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.14'
 
-
 gem 'rubycas-client'
 gem 'rake'
 gem 'delayed_job_active_record'
@@ -13,11 +12,11 @@ gem 'whenever'
 
 gem 'declarative_authorization'
 
-#for automatic inline css in mailer
+# For automatic inline CSS for mailer
 gem 'hpricot'
 gem 'premailer-rails' 
 
-#for pagination
+# For pagination
 gem 'kaminari'
 
 gem 'capistrano'
@@ -27,10 +26,6 @@ gem 'capistrano'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
   gem 'uglifier', '>= 1.0.3'
 end
 

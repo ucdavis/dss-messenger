@@ -10,6 +10,12 @@ h1 {
   -moz-box-shadow: none;
 }
 
+.actions a {
+  margin-right: 4px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
 #messages {
 	/*position: relative;   *** uncomment to have the overlay only on the messages table**/
 	float: right;
@@ -94,7 +100,7 @@ div.token-input-dropdown-facebook {
 
 input[type="text"], textarea {
     width: 400px;
-    padding: 0;
+    padding: 0.25em;
 }
 
 input[type="text"].pref_input {
