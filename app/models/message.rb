@@ -1,4 +1,6 @@
 class Message < ActiveRecord::Base
+  include ActionView::Helpers::DateHelper
+  
   attr_accessible :impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround, :classification_id, :modifier_id, :recipient_uids, :impacted_service_ids, :closed
   
   has_many :damages
@@ -59,7 +61,8 @@ class Message < ActiveRecord::Base
       :recipients => self.recipients,
       :recipient_uids => self.recipients.map(&:uid).join(","),
       :impacted_services => self.impacted_services,
-      :created_at => self.created_at.strftime("%A, %B %d, %Y at %l:%M %p")
+      :created_at => self.created_at.strftime("%A, %B %d, %Y at %l:%M %p"),
+      :created_at_in_words => time_ago_in_words(self.created_at) + ' ago'
     }
     
   end

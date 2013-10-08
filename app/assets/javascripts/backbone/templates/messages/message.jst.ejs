@@ -1,16 +1,16 @@
 <td>
-	<div class="accordion-group frameless">
-	  <div class="accordion-heading collapsed">
-	    <a class="accordion-toggle" data-toggle="collapse" href="#collapse<%= id %>">
-				<i class="icon-arrow-right accordion-toggle-icon"></i>
-				<span class="modifier-label label"></span>
-	      <%= subject %>
-	    </a>
-	  </div>
-	</div>
+  <div class="accordion-group frameless">
+    <div class="accordion-heading collapsed">
+      <a class="accordion-toggle" data-toggle="collapse" href="#collapse<%= id %>">
+        <i class="icon-arrow-right accordion-toggle-icon"></i>
+        <span class="modifier-label label"></span>
+        <%= subject %>
+      </a>
+    </div>
+  </div>
 </td>
 <td class="nowrap"><%= sender_name %></td>
-<td class="nowrap"><%= created_at %></td>
+<td class="nowrap"><%= created_at_in_words %></td>
 <td class="active-only"><div class="actions" data-toggle="tooltip" title="Compose new message with selected status"></div></td>
 <td class="active-only"><a href="#/<%= id %>/archive" class="tooltip-archive" data-toggle="tooltip" title="Archive without sending"><i class="icon-inbox"></i></a></td>
 <td class="archive-only"><a href="#/<%= id %>/duplicate" class="tooltip-open" data-toggle="tooltip" title="Re-Activate"><i class="icon-chevron-up"></i></td>
