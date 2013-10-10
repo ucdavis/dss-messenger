@@ -1,46 +1,6 @@
 class ImpactedServicesController < ApplicationController
   filter_resource_access
-  
-  # GET /impacted_services
-  # GET /impacted_services.json
-  def index
-    @impacted_services = ImpactedService.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @impacted_services }
-    end
-  end
-
-  # GET /impacted_services/1
-  # GET /impacted_services/1.json
-  def show
-    @impacted_service = ImpactedService.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @impacted_service }
-    end
-  end
-
-  # GET /impacted_services/new
-  # GET /impacted_services/new.json
-  def new
-    @impacted_service = ImpactedService.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @impacted_service }
-    end
-  end
-
-  # GET /impacted_services/1/edit
-  def edit
-    @impacted_service = ImpactedService.find(params[:id])
-  end
-
-  # POST /impacted_services
-  # POST /impacted_services.json
   def create
     @impacted_service = ImpactedService.new(params[:impacted_service])
 
@@ -55,8 +15,6 @@ class ImpactedServicesController < ApplicationController
     end
   end
 
-  # PUT /impacted_services/1
-  # PUT /impacted_services/1.json
   def update
     @impacted_service = ImpactedService.find(params[:id])
 
@@ -71,8 +29,6 @@ class ImpactedServicesController < ApplicationController
     end
   end
 
-  # DELETE /impacted_services/1
-  # DELETE /impacted_services/1.json
   def destroy
     @impacted_service = ImpactedService.find(params[:id])
     @impacted_service.destroy

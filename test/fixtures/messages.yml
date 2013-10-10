@@ -9,7 +9,7 @@ one:
   resolution: Resolution 1
   workaround: Workaround 1
   other_services: Other Services 1
-  sender_uid: Sender1
+  sender_uid: 13907
   classification_id: 1
   modifier_id: 1
 
@@ -22,6 +22,6 @@ two:
   resolution: Resolution 2
   workaround: Workaround 2
   other_services: Other Services 2
-  sender_uid: Sender2
+  sender_uid: 13688
   classification_id: 2
   modifier_id: 2

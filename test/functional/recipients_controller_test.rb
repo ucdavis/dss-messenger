@@ -6,15 +6,10 @@ class RecipientsControllerTest < ActionController::TestCase
     @recipient = recipients(:one)
   end
 
-  test "should get index" do
-    get :index
+  test "should get index when queried" do
+    get :index, format: :json, get: {'q' => 'dss'}
     assert_response :success
     assert_not_nil assigns(:recipients)
-  end
-
-  test "should get new" do
-    get :new
-    assert_response :success
   end
 
   test "should create recipient" do
@@ -23,16 +18,6 @@ class RecipientsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to recipient_path(assigns(:recipient))
-  end
-
-  # test "should show recipient" do
-  #   get :show, id: @recipient
-  #   assert_response :success
-  # end
-
-  test "should get edit" do
-    get :edit, id: @recipient
-    assert_response :success
   end
 
   test "should update recipient" do
