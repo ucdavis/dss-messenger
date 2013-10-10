@@ -6,6 +6,12 @@ class RecipientsControllerTest < ActionController::TestCase
     @recipient = recipients(:one)
   end
 
+  test "should get index when queried" do
+    get :index, format: :json, get: {'q' => 'dss'}
+    assert_response :success
+    assert_not_nil assigns(:recipients)
+  end
+
   test "should create recipient" do
     assert_difference('Recipient.count') do
       post :create, recipient: { uid: @recipient.uid }

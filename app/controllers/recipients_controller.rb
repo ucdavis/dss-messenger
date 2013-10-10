@@ -1,6 +1,15 @@
 class RecipientsController < ApplicationController
   filter_resource_access
   
+  def index
+    @recipients = Entity.find(:all, :params => {:q => params[:q]}) #Recipient.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @recipients }
+    end
+  end
+
   def create
     @recipient = Recipient.new(params[:recipient])
 
