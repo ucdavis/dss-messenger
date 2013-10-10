@@ -5,45 +5,8 @@ class SettingsControllerTest < ActionController::TestCase
     @setting = settings(:footer)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:settings)
-  end
-
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should create setting" do
-    assert_difference('Setting.count') do
-      post :create, setting: { item_name: @setting.item_name, item_value: @setting.item_value }
-    end
-
-    assert_redirected_to setting_path(assigns(:setting))
-  end
-
-  test "should show setting" do
-    get :show, id: @setting
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, id: @setting
-    assert_response :success
-  end
-
   test "should update setting" do
     put :update, id: @setting, setting: { item_name: @setting.item_name, item_value: @setting.item_value }
     assert_redirected_to setting_path(assigns(:setting))
-  end
-
-  test "should destroy setting" do
-    assert_difference('Setting.count', -1) do
-      delete :destroy, id: @setting
-    end
-
-    assert_redirected_to settings_path
   end
 end
