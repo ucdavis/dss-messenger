@@ -21,6 +21,9 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
     @$el.addClass('archiving')
     newStatus = !@model.get('closed')
     
+    # Collapse show view if visible
+    @toggleAccordion() if $('#collapse' + @model.get('id')).length
+    
     # Archive the message
     @model.save(closed:newStatus,
       timeout: 10000 # 10 seconds
