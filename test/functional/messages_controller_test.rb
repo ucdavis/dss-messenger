@@ -37,6 +37,11 @@ class MessagesControllerTest < ActionController::TestCase
     assert_redirected_to message_path(assigns(:message))
   end
 
+  test "should update message" do
+    put :update, id: @message, message: { closed: true }
+    assert_equal true, assigns(:message).closed
+  end
+
   test "should not create message in case of missing required fields" do
     assert_no_difference('Message.count') do
       post :create, message: { impact_statement: @message.impact_statement, recipient_uids: @recipient.uid}
