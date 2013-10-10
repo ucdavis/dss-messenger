@@ -22,50 +22,63 @@
               <td><b>Status</b></td>
               <td><%= send_status %></td>
             </tr>
+            <% if (classification) { %>
             <tr>
               <td><b>Classification</b></td>
               <td>
-              <% if (classification) { %>
                 <%= classification.description %></td>
-              <% } %>
               </td>
             </tr>
+            <% } %>
+            <% if (modifier) { %>
             <tr>
               <td><b>Modifier</b></td>
               <td>
-              <% if (modifier) { %>
                 <%= modifier.description %></td>
-              <% } %>
               </td>
             </tr>
+            <% } %>
             <tr>
               <td><b>Impact statement</b></td>
               <td><%= impact_statement %></td>
             </tr>
+            <% if (window_start) { %>
             <tr>
               <td><b>Window start</b></td>
               <td><%= window_start %></td>
             </tr>
+            <% } %>
+            <% if (window_end) { %>
             <tr>
               <td><b>Window end</b></td>
               <td><%= window_end %></td>
             </tr>
+            <% } %>
+            <% if (purpose) { %>
             <tr>
               <td><b>Purpose</b></td>
               <td><%= purpose %></td>
             </tr>
+            <% } %>
+            <% if (resolution) { %>
             <tr>
               <td><b>Resolution</b></td>
               <td><%= resolution %></td>
             </tr>
+            <% } %>
+            <% if (workaround) { %>
             <tr>
               <td><b>Workaround</b></td>
               <td><%= workaround %></td>
             </tr>
+            <% } %>
+            <% if (other_services) { %>
             <tr>
               <td><b>Other services</b></td>
               <td><%= other_services %></td>
             </tr>
+            <% } %>
+            <% if (impacted_services.length) { %>
             <tr>
               <td><b>Impacted Services</b></td>
               <td>
@@ -76,6 +89,7 @@
                 </ul>
               </td>
             </tr>
+            <% } %>
             <tr>
               <td><b>Created</b></td>
               <td><%= created_at %></td>
