@@ -1,46 +1,6 @@
 class ModifiersController < ApplicationController
   filter_resource_access
   
-  # GET /modifiers
-  # GET /modifiers.json
-  def index
-    @modifiers = Modifier.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @modifiers }
-    end
-  end
-
-  # GET /modifiers/1
-  # GET /modifiers/1.json
-  def show
-    @modifier = Modifier.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @modifier }
-    end
-  end
-
-  # GET /modifiers/new
-  # GET /modifiers/new.json
-  def new
-    @modifier = Modifier.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @modifier }
-    end
-  end
-
-  # GET /modifiers/1/edit
-  def edit
-    @modifier = Modifier.find(params[:id])
-  end
-
-  # POST /modifiers
-  # POST /modifiers.json
   def create
     @modifier = Modifier.new(params[:modifier])
 
@@ -55,8 +15,6 @@ class ModifiersController < ApplicationController
     end
   end
 
-  # PUT /modifiers/1
-  # PUT /modifiers/1.json
   def update
     @modifier = Modifier.find(params[:id])
 
@@ -71,8 +29,6 @@ class ModifiersController < ApplicationController
     end
   end
 
-  # DELETE /modifiers/1
-  # DELETE /modifiers/1.json
   def destroy
     @modifier = Modifier.find(params[:id])
     @modifier.destroy
