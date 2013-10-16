@@ -20,7 +20,7 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
   toggleArchive: () ->
     @$el.addClass('archiving')
     newStatus = !@model.get('closed')
-    
+
     # Collapse show view if visible
     @toggleAccordion() if $('#collapse' + @model.get('id')).length
     
@@ -65,6 +65,9 @@ class DssMessenger.Views.Messages.MessageView extends Backbone.View
         # Delete the message and remove it from the log
         @model.destroy()
         @$el.toggle("highlight", {color: "#700000"}, 1000)
+
+        # Collapse show view if visible
+        @toggleAccordion() if $('#collapse' + @model.get('id')).length
 
     # Dismiss the dialog
     @$(".modal-header a.close").trigger "click"
