@@ -17,8 +17,19 @@ xml.rss :version => "2.0" do
     end
       
     for m in @open_messages
+      mTitle = ''
+      unless m.classification.nil?
+        mTitle += m.classification.description.slice(0..(m.classification.description.index(':'))) + ' '
+      end
+      mTitle += m.subject
+      unless m.window_start.nil?
+        mTitle += ', ' + m.window_start.strftime("%a %-m/%-d %-l:%M%p")
+      else
+        mTitle += ', ' + m.created_at.strftime("%a %-m/%-d %-l:%M%p")
+      end
+
       xml.item do
-        xml.title m.subject
+        xml.title mTitle
         xml.description m.impact_statement
         unless m.window_start.nil?
           xml.pubDate m.window_start.to_s(:rfc822)
