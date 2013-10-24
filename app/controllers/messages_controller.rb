@@ -22,7 +22,15 @@ class MessagesController < ApplicationController
       format.json { render json: @messages.to_json(pages: @messages.total_pages, current: @messages.current_page) }
     end
   end
-  
+
+  def show
+    @message = Message.find(params[:id])
+
+    respond_to do |format|
+      format.html {render layout: 'public' }
+    end
+  end
+
   def create
     @message = Message.new(params[:message])
     @message.sender_uid = Person.find(session[:cas_user]).id #get the full name of the currently logged in user.
