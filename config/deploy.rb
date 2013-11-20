@@ -31,7 +31,7 @@ default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
 after "deploy", "deploy:cleanup" # keep only the last 5 releases
-after "deploy", "deploy:migrations" # run any pending migrations
+after "deploy:update_code", "deploy:migrate" # run any pending migrations
 
 namespace :deploy do
   before 'deploy:update_code' do
