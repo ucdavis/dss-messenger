@@ -45,11 +45,9 @@ namespace :deploy do
     end
   end
 
-  %w[start stop restart].each do |command|
-    desc "#{command} unicorn server"
-    task command, roles: :app, except: {no_release: true} do
-      run "/etc/init.d/unicorn_#{application} #{command}"
-    end
+  desc "Restart Passenger server"
+  task :restart, roles: :app, except: {no_release: true} do
+    run "touch #{current_path}/tmp/restart.txt"
   end
 
   task :setup_config, roles: :app do
