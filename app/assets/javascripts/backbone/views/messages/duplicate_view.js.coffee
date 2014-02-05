@@ -30,6 +30,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
         recipients_tokeninput.tokenInput "add",
         id: recipient.uid
         name: recipient.name
+
       # load the single and multi select inputs laoded originally from the router
       view = new DssMessenger.Views.Classifications.FormIndexView(message: @model)
       @$("#classifications_select").html(view.render().el)
@@ -122,6 +123,15 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
   tokenInput: (e) ->
     $("input[name=recipient_uids]").tokenInput "/recipients",
       theme: "facebook"
+      resultsFormatter: (item) ->
+        extra = ''
+        extra = "<div><small>#{item.member_count} members</small></div>" if item.member_count
+        "<li>" + "<div>" + item.name + "</div>#{extra}</li>"
+      tokenFormatter: (item) ->
+        extra = ''
+        extra = " (#{item.member_count} members)" if item.member_count
+        "<li><p>" + item.name + extra + "</p></li>"
+
       onAdd: (item) =>
         # console.log @model
 

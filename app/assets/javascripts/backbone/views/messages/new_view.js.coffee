@@ -79,17 +79,13 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     $("input[name=recipient_uids]").tokenInput "/recipients",
       theme: "facebook"
       resultsFormatter: (item) ->
-        if item.members is null
-          members_count = ''
-        else
-          members_count = "<div><small>#{item.members} members</small></div>"
-        "<li>" + "<div>" + item.name + "</div>#{members_count}</li>"
+        extra = ''
+        extra = "<div><small>#{item.member_count} members</small></div>" if item.member_count
+        "<li title='" + item.name + "'>" + "<div>" + item.name + "</div>#{extra}</li>"
       tokenFormatter: (item) ->
-        if item.members is null
-          members_count = ""
-        else
-          members_count = " (#{item.members} members)"
-        "<li><p>" + item.name + members_count + "</p></li>"
+        extra = ''
+        extra = " (#{item.member_count} members)" if item.member_count
+        "<li title='" + item.name + "'><p>" + item.name + extra + "</p></li>"
 
       onAdd: (item) =>
         #console.log @model

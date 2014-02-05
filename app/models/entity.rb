@@ -8,13 +8,7 @@ class Entity < ActiveResource::Base
     {
       :id => self.id,
       :name => self.name,
-      :members =>
-        if self.type == 'Group'
-          entity = Entity.find(self.id)
-          entity.members.count
-        else
-          nil
-        end
+      :member_count => self.member_count
     }
   end
 end
