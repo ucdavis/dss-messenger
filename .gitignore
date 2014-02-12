@@ -19,3 +19,4 @@
 
 # Ignore API keys
 config/dss_rm.yml
+config/initializers/secret_token.rb
