@@ -4,7 +4,7 @@ class DssMessenger.Views.Classifications.FormView extends Backbone.View
   template: JST["backbone/templates/classifications/form"]
 
   initialize: (options) ->
-    @options = options
+    @options = options or {}
 
   render: ->
     @$el.html(@template(@model.toJSON() ))

@@ -4,7 +4,7 @@ class DssMessenger.Views.Modifiers.FormView extends Backbone.View
   template: JST["backbone/templates/modifiers/form"]
 
   initialize: (options) ->
-    @options = options
+    @options = options or {}
 
   render: ->
     @$el.html(@template(@model.toJSON() ))

@@ -3,7 +3,8 @@ DssMessenger.Views.Settings ||= {}
 class DssMessenger.Views.Settings.PrefsView extends Backbone.View
   template: JST["backbone/templates/settings/prefs"]
 
-  initialize: ->
+  initialize: (options) ->
+    @options = options or {}
     @bind("cancel", @removeFromDOM)
     _.defer =>
       $("#configTabs a:first").tab "show"

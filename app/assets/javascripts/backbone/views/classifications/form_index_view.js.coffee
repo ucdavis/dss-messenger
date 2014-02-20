@@ -3,7 +3,7 @@ DssMessenger.Views.Classifications ||= {}
 class DssMessenger.Views.Classifications.FormIndexView extends Backbone.View
 
   initialize: (options) ->
-    @options = options
+    @options = options or {}
     DssMessenger.classifications.bind('change', @render)
     DssMessenger.classifications.bind('remove', @render)
 
