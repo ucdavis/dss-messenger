@@ -2,7 +2,8 @@ DssMessenger.Views.impacted_services ||= {}
 
 class DssMessenger.Views.impacted_services.FormIndexView extends Backbone.View
 
-  initialize: () ->
+  initialize: (options) ->
+    @options = options
     DssMessenger.impacted_services.bind('change', @render)
     DssMessenger.impacted_services.bind('remove', @render)
 

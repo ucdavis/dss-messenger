@@ -2,7 +2,8 @@ DssMessenger.Views.Modifiers ||= {}
 
 class DssMessenger.Views.Modifiers.FormIndexView extends Backbone.View
 
-  initialize: () ->
+  initialize: (options) ->
+    @options = options
     DssMessenger.modifiers.bind('change', @render)
     DssMessenger.modifiers.bind('remove', @render)
 
