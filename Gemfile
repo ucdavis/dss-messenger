@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.17'
+gem 'rails', '3.2.18'
 
 gem 'rubycas-client'
 gem 'rake'
@@ -14,7 +14,7 @@ gem 'declarative_authorization'
 
 # For automatic inline CSS for mailer
 gem 'hpricot'
-gem 'premailer-rails' 
+gem 'premailer-rails'
 
 # For pagination
 gem 'kaminari'
