@@ -6,8 +6,9 @@ class DssMessenger.Views.Messages.PreviewView extends Backbone.View
   render: ->
     @$el.html(@template(@model.toFullJSON() ))
     @footer = DssMessenger.settings.where({item_name: "footer"})[0]
-    @$el.append(@footer.get('item_value').replace(/\r\n|\n|\r/g, '<br />'))
-    
+
+    @$el.append(@footer.get('item_value').replace(/\r\n|\n|\r/g, '<br />')) if @footer
+
     _.defer =>
       _.each @model.get("impacted_services"), (impacted_service) ->
         @$('#impacted_services_list').append('<li>' + impacted_service.name + '</li>')
@@ -16,5 +17,5 @@ class DssMessenger.Views.Messages.PreviewView extends Backbone.View
           @$('.'+b).hide()
         else
           @$('.'+b).hide() if a.length is 0
-    
+
     return this
