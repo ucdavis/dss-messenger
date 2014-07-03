@@ -4,7 +4,7 @@ class DssMessenger.Views.Messages.PreviewView extends Backbone.View
   template: JST["backbone/templates/messages/preview"]
 
   render: ->
-    @$el.html(@template(@model.toFullJSON() ))
+    @$el.html(@template(@model.toPreviewJSON()))
     @footer = DssMessenger.settings.where({item_name: "footer"})[0]
 
     @$el.append(@footer.get('item_value').replace(/\r\n|\n|\r/g, '<br />')) if @footer

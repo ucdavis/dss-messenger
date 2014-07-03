@@ -31,7 +31,27 @@ class DssMessenger.Models.Message extends Backbone.Model
   toFullJSON: () ->
     json = _.omit(this.attributes, 'updated_at')
     json
-    
+
+  # Similar to toFullJSON but preserves text area formatting by converting certain
+  # aspects to HTML
+  toPreviewJSON: () ->
+    json = _.omit(this.attributes, 'updated_at')
+    json.impact_statement = this.preserveFormattingAsHTML(json.impact_statement)
+    json.purpose = this.preserveFormattingAsHTML(json.purpose)
+    json.resolution = this.preserveFormattingAsHTML(json.resolution)
+    json.workaround = this.preserveFormattingAsHTML(json.workaround)
+    json.other_services = this.preserveFormattingAsHTML(json.other_services)
+    json
+
+  preserveFormattingAsHTML: (str) ->
+    return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/\r?\n/g, '<br/>') # line breaks
+            .replace(/\s/g, '&nbsp;')   # whitespace
 
 class DssMessenger.Collections.MessagesCollection extends Backbone.Collection
   model: DssMessenger.Models.Message

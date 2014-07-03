@@ -60,7 +60,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
       todayHighlight: true
       showMeridian: true
       pickerPosition: "bottom-left"
-    
+
   tooltip: (a) ->
     @$('#'+a.currentTarget.id).tooltip
       placement: "left"
@@ -92,11 +92,11 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
       onDelete: (item) =>
         #console.log @model
-    
+
   save: (e) ->
     e.preventDefault()
     e.stopPropagation()
-    
+
     # Disable the submit button
     $('input[type="submit"]').val('Sending...').attr('disabled', 'disabled');
 
@@ -135,16 +135,18 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
     classification = DssMessenger.classifications.get(classification_id).get('description').split(':')[0] + ": " if classification_id > 0
     subject = modifier + classification + @model.get('subject')
 
+    subject = "No Subject" if subject == 'null'
+
     view = new DssMessenger.Views.Messages.PreviewView({model : @model})
     modal = new Backbone.BootstrapModal(content: view, title: subject, cancelText: false, okText: "Dismiss").open()
 
   render: ->
     @$el.html("<h1>New Message</h1>")
     @$el.append(@template(@model.toJSON() ))
-    
+
     this.$("form").backboneLink(@model)
 
     _.defer =>
       @datetimePicker()
-    
+
     return this
