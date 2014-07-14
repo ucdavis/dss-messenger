@@ -67,7 +67,8 @@ namespace :message do
       ml.save!
 
       # Deliver the message to each recipient
-      members.each do |m|
+      unique_members = members.uniq { |p| p.email }
+      unique_members.each do |m|
         DssMailer.delay.deliver_message(subject, message, ml, OpenStruct.new(:name => m.name, :email => m.email), footer)
       end
 
