@@ -180,7 +180,7 @@ DEPENDENCIES
   mail
   pg
   premailer-rails
-  rails (~> 3.2.19)
+  rails (~> 3.2.20)
   rails-backbone!
   rake
   rubycas-client
