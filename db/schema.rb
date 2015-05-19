@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131007195112) do
+ActiveRecord::Schema.define(:version => 20150518235112) do
 
   create_table "audiences", :force => true do |t|
     t.integer  "message_id"
@@ -66,13 +66,8 @@ ActiveRecord::Schema.define(:version => 20131007195112) do
 
   add_index "impacted_services", ["id"], :name => "index_impacted_services_on_id"
 
-  create_table "message_log_entries", :force => true do |t|
-    t.integer  "message_log_id"
-    t.string   "recipient_name"
-    t.string   "recipient_email"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
+# Could not dump table "message_log_entries" because of following StandardError
+#   Unknown type 'bool' for column 'viewed'
 
   create_table "message_logs", :force => true do |t|
     t.integer  "message_id"

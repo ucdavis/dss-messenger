@@ -5,12 +5,14 @@ class DssMailer < ActionMailer::Base
     @message = message
     @footer = footer
     
-    mail(:to => "#{member.name} <#{member.email}>", :subject => subject)
-    
     mle = MessageLogEntry.new
     mle.recipient_name = member.name
     mle.recipient_email = member.email
     message_log.entries << mle
+
+    @mle_id = mle.id
+
+    mail(:to => "#{member.name} <#{member.email}>", :subject => subject)
     
     if message_log.entries.length == message_log.recipient_count
       message_log.send_status = :completed
