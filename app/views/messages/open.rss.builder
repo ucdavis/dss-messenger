@@ -8,7 +8,8 @@ xml.rss :version => "2.0" do
     for m in @open_messages
       mTitle = ''
       unless m.classification.nil?
-        mTitle += m.classification.description.slice(0..(m.classification.description.index(':'))) + ' '
+        classification = m.classification.description + ":"
+        mTitle += classification.slice(0..(classification.index(':'))) + ' '
       end
       mTitle += m.subject
       unless m.window_start.nil?

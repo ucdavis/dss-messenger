@@ -102,6 +102,9 @@ class MessagesController < ApplicationController
 
   def track
     message_entry = MessageLogEntry.find_by_id(params[:id])
+    message_entry.message_log.viewed_count += 1  unless message_entry.viewed
+    message_entry.message_log.save!
+
     message_entry.viewed = true
     message_entry.save!
 

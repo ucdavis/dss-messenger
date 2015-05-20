@@ -67,7 +67,7 @@ class Message < ActiveRecord::Base
       :created_at_in_words => time_ago_in_words(self.created_at) + ' ago',
       :recipient_count =>
         if self.log
-          self.log.recipient_count ? self.log.recipient_count : 'Calculating'
+          self.log.recipient_count ? self.log.recipient_count.to_s + " (" + self.log.viewed_count.to_s + " viewed)" : 'Calculating'
         else
           'Unavailable'
         end,
