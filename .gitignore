@@ -19,4 +19,5 @@
 
 # Ignore API keys
 config/dss_rm.yml
+config/aggie_feed.yml
 config/initializers/secret_token.rb

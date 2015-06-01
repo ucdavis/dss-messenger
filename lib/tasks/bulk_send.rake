@@ -71,8 +71,24 @@ namespace :message do
       ml.recipient_count = members.length
       ml.save!
 
-      # Deliver the message to each recipient
       unique_members = members.uniq { |p| p.email }
+
+      # Deliver message via AggieFeed
+      aggie_feed_mesg = Activity.new
+      aggie_feed_mesg.title = subject
+      aggie_feed_mesg.object = {
+        content: message.impact_statement,
+        ucdEdusModel: {
+          urlDisplayName: "View Message"
+        }
+      }
+      # TODO: Figure out how to use kerberos loginid instead of email. Entity
+      # only has email, name, and type as attributes.
+      aggie_feed_mesg.to = unique_members.map { |m| { id: m.email, g: false, i: false } }
+      aggie_feed_mesg.save
+
+      # Deliver the message (via e-mail) to each recipient
+      # unique_members = members.uniq { |p| p.email }
       unique_members.each do |m|
         DssMailer.delay.deliver_message(subject, message, ml, OpenStruct.new(:name => m.name, :email => m.email), footer)
       end

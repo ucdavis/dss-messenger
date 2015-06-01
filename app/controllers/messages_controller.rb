@@ -32,6 +32,7 @@ class MessagesController < ApplicationController
   end
 
   def create
+    # Include distribution channels through which to send messages in model
     @message = Message.new(params[:message])
     @message.sender_uid = Person.find(session[:cas_user]).id #get the full name of the currently logged in user.
     

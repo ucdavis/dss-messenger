@@ -1,0 +1,5 @@
+# Rename this file to aggie_feed.example.yml and set appropriate values below.
+
+HOST: http://example.com/
+SOURCE_ID: your-given-source-id
+KEY: an-api-key
