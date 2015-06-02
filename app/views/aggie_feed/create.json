@@ -1,0 +1,30 @@
+{
+  "activity" : {
+    "icon": "icon-comment-alt",
+    "actor": {
+      "id" : "<%= id %>",
+      "objectType": "department",
+      "displayName": "DSS",
+      "author" : {
+        "id" : "darthvader1971",
+        "displayName" : "Sith Lord"
+      }
+    },
+    "verb": "post",
+    "title": "<%= title %>",
+    "object": {
+      "ucdSrcId": "13484535",
+      "objectType": "notification",
+      "content": "<%= message %>",
+      "ucdEdusModel": {
+        "urlDisplayName": "View Message",
+        "url": "<%= url %>"
+      }
+    },
+    "to": [ {"id": "public", "g": true, "i": false } ],
+    "published": "2015-05-26T22:02:00.000Z",
+    "ucdEdusMeta": {
+      "labels": [ "~campus-messages", "test" ]
+    }
+  }
+}
