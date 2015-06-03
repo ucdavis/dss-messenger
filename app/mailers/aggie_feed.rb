@@ -14,10 +14,15 @@ class AggieFeed < AbstractController::Base
   append_view_path Rails.root + 'app/views'
 
   def create(title, message, url, recipients)
-    id = $AGGIE_FEED_SETTINGS['SOURCE_ID']
+    @id = $AGGIE_FEED_SETTINGS['SOURCE_ID']
+    @title = title
+    @message = message
+    @url = url
 
     # TODO: Figure out how to use kerberos loginid instead of email. Entity
     @recipients = recipients.map { |m| { id: m.email, g: false, i: false } }
+    current_time = Time.now.utc
+    @published = current_time.strftime("%Y-%m-%dT%H:%M:%S.000Z")
     
     uri = URI.parse($AGGIE_FEED_SETTINGS['HOST'])
     http = Net::HTTP.new(uri.host, uri.port)
@@ -29,20 +34,10 @@ class AggieFeed < AbstractController::Base
     headers['Content-Type'] = "application/json"
 
     request = Net::HTTP::Post.new('/api/v1/activity', headers)
-    request.body = ActionView::Base.new(Rails.configuration.paths['app/views'])
-      .render(
-        template: 'aggie_feed/create.json',
-        locals: {
-          title: title,
-          message: message,
-          url: url,
-          id: id 
-        }
-      )
-     response = http.request(request)
+    request.body = render(template: 'aggie_feed/create', formats: [:json], handlers: [:jbuilder])
+    response = http.request(request)
 
-     response.body
-#    request.body = render(template: 'aggie_feed/create', formats: [:json], handlers: [:builder])
+    response.body
   end
 
   def content_type
