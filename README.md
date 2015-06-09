@@ -32,3 +32,4 @@ config/deploy.rb You'll likely want to set this to your own Capistrano setup or 
 # Authors
 
 Obada Kadri (okadri@ucdavis.edu)
+Eric Lin (ericflin@ucdavis.edu)
