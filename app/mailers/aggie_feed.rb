@@ -27,6 +27,7 @@ class AggieFeed < AbstractController::Base
     uri = URI.parse($AGGIE_FEED_SETTINGS['HOST'])
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
+    # TODO: get certificate
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
     headers = Hash.new

@@ -17,11 +17,12 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
     Backbone.Validation.bind this
 
     _.defer =>
+      console.log @model
       @current_classification = @model.get('classification_id')
       @current_modifier = @model.get('modifier_id')
       @current_services = @model.get('impacted_services')
 
-      $("html, body").animate({ scrollTop: "0px" });
+      $("html, body").animate({ scrollTop: "0px" })
       # initialise recipients token input and load duplicated recipients
       @tokenInput()
       recipients_tokeninput = @$("input[name=recipient_uids]")
@@ -52,13 +53,15 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
     e.stopPropagation()
     
     # Disable the submit button
-    $('input[type="submit"]').val('Sending...').attr('disabled', 'disabled');
+    $('input[type="submit"]').val('Sending...').attr('disabled', 'disabled')
 
     @model.unset("errors")
     @model.set
       impacted_service_ids: _.map($("input[name='impacted_service_ids[]']:checked"), (a) -> a.value )
       classification_id: $("input[name='classification_id[]']:checked").val()
       modifier_id: $("input[name='modifier_id[]']:checked").val()
+
+    console.log @model
 
     @collection.create(@model.toJSON(),
       timeout: 30000
@@ -71,12 +74,12 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
         @original.save(closed:true)
         
         window.location.hash = "#/index"
-        $("html, body").animate({ scrollTop: "0px" });
+        $("html, body").animate({ scrollTop: "0px" })
 
       error: (message, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
         unless jqXHR.status >= 200 and jqXHR.status < 300
-          $("html, body").animate({ scrollTop: "0px" });
+          $("html, body").animate({ scrollTop: "0px" })
           $('input[type="submit"]').val('Try Sending Again').removeAttr('disabled').addClass('btn-danger');
     )
 
