@@ -13,9 +13,14 @@ namespace :message do
 
       ml = MessageLog.find_or_create_by_message_id(message.id)
 
+      # Add a colon to the modifier and classification if one doesn't exist
+      # already.
+      modifier = message.modifier.description + ":" if message.modifier
+      classification = message.classification.description + ":" if message.classification
+
       # Construct the subject
-      modifier = message.modifier.description.slice(0..(message.modifier.description.index(':')))+" " if message.modifier
-      classification = message.classification.description.slice(0..(message.classification.description.index(':')))+" " if message.classification
+      modifier = modifier.slice(0..(modifier.index(':')))+" " if message.modifier
+      classification = classification.slice(0..(classification.index(':')))+" " if message.classification
       subject = "#{modifier}#{classification}#{message.subject}"
 
       # Get the footer (if one is set)

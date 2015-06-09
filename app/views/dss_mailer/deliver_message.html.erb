@@ -1,0 +1,53 @@
+<% if @message.impact_statement %>
+<p><b>SUMMARY:</b></p>
+<%= simple_format(@message.impact_statement, {}, sanitize: false) %>
+
+<% end %>
+<% if @message.purpose %>
+<p><b>PURPOSE:</b></p>
+<%= simple_format(@message.purpose, {}, sanitize: false) %>
+
+<% end %>
+<% if @message.resolution %>
+<p><b>RESOLUTION:</b></p>
+<%= simple_format(@message.resolution, {}, sanitize: false) %>
+
+<% end %>
+<% if @message.workaround %>
+<p><b>WORKAROUND:</b></p>
+<%= simple_format(@message.workaround, {}, sanitize: false) %>
+
+<% end %>
+<% if @message.window_start %>
+<p><b>START OF WINDOW:</b></p>
+<p>
+<%= @message.window_start.strftime("%A, %B %d, %Y at %l:%M %p") %><% if @message.window_end.nil? %>, ONGOING
+</p>
+
+<% end %>
+
+<% end %>
+<% if @message.window_end %>
+<p><b>END OF WINDOW:</b></p>
+<p>
+<%= @message.window_end.strftime("%A, %B %d, %Y at %l:%M %p") %>
+</p>
+
+<% end %>
+<% if @message.impacted_services.length > 0 %>
+<p><b>IMPACTED SERVICES:</b></p>
+<ul>
+<% @message.impacted_services.each do |i| %>
+<li><%= i.name %></li>
+<% end %>
+</ul>
+
+<% end %>
+<% if @message.other_services %>
+<p><b>OTHER SERVICES:</b></p>
+<%= simple_format(@message.other_services, {}, sanitize: false) %>
+
+<% end %>
+
+<%= @footer %>
+<%= image_tag url_for(action: :track, controller: :messages, id: @mle_id, only_path: false, host: '127.0.0.1:3000') %>

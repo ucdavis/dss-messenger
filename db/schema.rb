@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131007195112) do
+ActiveRecord::Schema.define(:version => 20150520205121) do
 
   create_table "audiences", :force => true do |t|
     t.integer  "message_id"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20131007195112) do
     t.string   "recipient_email"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.boolean  "viewed"
   end
 
   create_table "message_logs", :force => true do |t|
@@ -79,9 +80,10 @@ ActiveRecord::Schema.define(:version => 20131007195112) do
     t.datetime "send_start"
     t.datetime "send_finish"
     t.integer  "send_status"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "recipient_count"
+    t.integer  "viewed_count",    :default => 0
   end
 
   add_index "message_logs", ["message_id"], :name => "index_message_logs_on_message_id"
