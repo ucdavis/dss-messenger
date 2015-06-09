@@ -17,7 +17,6 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
     Backbone.Validation.bind this
 
     _.defer =>
-      console.log @model
       @current_classification = @model.get('classification_id')
       @current_modifier = @model.get('modifier_id')
       @current_services = @model.get('impacted_services')
@@ -60,8 +59,6 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
       impacted_service_ids: _.map($("input[name='impacted_service_ids[]']:checked"), (a) -> a.value )
       classification_id: $("input[name='classification_id[]']:checked").val()
       modifier_id: $("input[name='modifier_id[]']:checked").val()
-
-    console.log @model
 
     @collection.create(@model.toJSON(),
       timeout: 30000
