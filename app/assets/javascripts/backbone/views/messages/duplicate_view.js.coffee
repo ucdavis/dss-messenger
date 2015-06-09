@@ -21,7 +21,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
       @current_modifier = @model.get('modifier_id')
       @current_services = @model.get('impacted_services')
 
-      $("html, body").animate({ scrollTop: "0px" });
+      $("html, body").animate({ scrollTop: "0px" })
       # initialise recipients token input and load duplicated recipients
       @tokenInput()
       recipients_tokeninput = @$("input[name=recipient_uids]")
@@ -52,7 +52,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
     e.stopPropagation()
     
     # Disable the submit button
-    $('input[type="submit"]').val('Sending...').attr('disabled', 'disabled');
+    $('input[type="submit"]').val('Sending...').attr('disabled', 'disabled')
 
     @model.unset("errors")
     @model.set
@@ -71,12 +71,12 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
         @original.save(closed:true)
         
         window.location.hash = "#/index"
-        $("html, body").animate({ scrollTop: "0px" });
+        $("html, body").animate({ scrollTop: "0px" })
 
       error: (message, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
         unless jqXHR.status >= 200 and jqXHR.status < 300
-          $("html, body").animate({ scrollTop: "0px" });
+          $("html, body").animate({ scrollTop: "0px" })
           $('input[type="submit"]').val('Try Sending Again').removeAttr('disabled').addClass('btn-danger');
     )
 
