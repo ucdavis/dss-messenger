@@ -13,14 +13,14 @@ class AggieFeed < AbstractController::Base
 
   append_view_path Rails.root + 'app/views'
 
-  def create(title, message, url, recipients)
+  def create(title, message, url, recipient)
     @id = $AGGIE_FEED_SETTINGS['SOURCE_ID']
     @title = title
     @message = message
     @url = url
 
     # TODO: Figure out how to use kerberos loginid instead of email. Entity
-    @recipients = recipients.map { |m| { id: m.email, g: false, i: false } }
+    @recipient = [ { id: recipient.email, g: false, i: false } ]
     current_time = Time.now.utc
     @published = current_time.strftime("%Y-%m-%dT%H:%M:%S.000Z")
     

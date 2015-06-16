@@ -20,7 +20,7 @@ json.activity do
       json.url @url
     end
   end
-  json.to @recipients
+  json.to @recipient
   json.published @published
   json.ucdEdusMeta do
     json.labels do

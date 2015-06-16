@@ -1,7 +1,7 @@
 class Message < ActiveRecord::Base
   include ActionView::Helpers::DateHelper
   
-  attr_accessible :impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround, :classification_id, :modifier_id, :recipient_uids, :impacted_service_ids, :closed
+  attr_accessible :impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround, :classification_id, :modifier_id, :recipient_uids, :impacted_service_ids, :closed, :publisher_ids
   
   has_many :damages
   has_many :impacted_services, :through => :damages
@@ -12,7 +12,8 @@ class Message < ActiveRecord::Base
   belongs_to :classification
   belongs_to :modifier
   
-  has_one :log, :class_name => "MessageLog"
+  has_many :logs, :class_name => "MessageLog"
+  has_many :publishers, :through => :logs
 
   # Validations
   validates :subject, presence: true
@@ -65,18 +66,18 @@ class Message < ActiveRecord::Base
       :impacted_services => self.impacted_services,
       :created_at => self.created_at.strftime("%A, %B %d, %Y at %l:%M %p"),
       :created_at_in_words => time_ago_in_words(self.created_at) + ' ago',
-      :recipient_count =>
-        if self.log
-          self.log.recipient_count ? self.log.recipient_count.to_s + " (" + self.log.viewed_count.to_s + " viewed)" : 'Calculating'
-        else
-          'Unavailable'
-        end,
-      :send_status =>
-        if self.log
-          self.log.send_status.to_s.capitalize
-        else
-          'Unavailable'
-        end
+#      :recipient_count =>
+#        if self.log
+#          self.log.recipient_count ? self.log.recipient_count.to_s + " (" + self.log.viewed_count.to_s + " viewed)" : 'Calculating'
+#        else
+#          'Unavailable'
+#        end,
+#      :send_status =>
+#        if self.log
+#          self.log.send_status.to_s.capitalize
+#        else
+#          'Unavailable'
+#        end
     }
     
   end

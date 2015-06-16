@@ -107,6 +107,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
       modifier_id: $("input[name='modifier_id[]']:checked").val()
       window_start: $("input[name='window_start']").val()
       window_end: $("input[name='window_end']").val()
+      publisher_ids: _.map($("input[name='publisher_ids[]']:checked"), (a) -> a.value )
 
     @collection.create(@model.toJSON(),
       timeout: 30000

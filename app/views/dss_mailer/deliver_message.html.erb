@@ -50,4 +50,4 @@
 <% end %>
 
 <%= @footer %>
-<%= image_tag url_for(action: :track, controller: :messages, id: @mle_id, only_path: false, host: '127.0.0.1:3000') %>
+<%= image_tag url_for(action: :track, controller: :messages, id: @mle_id, only_path: false, host: @hostname) %>
