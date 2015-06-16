@@ -5,8 +5,7 @@ class DssMailer < ActionMailer::Base
     @message = message
     @footer = footer
     @mle_id = message_receipt_id
-    @hostname = ""
 
-    mail(:to => "#{member.name} <#{member.email}>", :subject => subject)
+    mail(:to => "#{member.name} <#{member.email}>", :subject => subject).deliver
   end
 end

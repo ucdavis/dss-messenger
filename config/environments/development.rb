@@ -47,5 +47,5 @@ DssMessenger::Application.configure do
   # 
   # require 'development_mail_interceptor'
   # Mail.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?
-  
+  ActiveResource::Base.logger = Logger.new(STDERR)
 end
