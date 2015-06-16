@@ -5,6 +5,7 @@ class MessagesControllerTest < ActionController::TestCase
     CASClient::Frameworks::Rails::Filter.fake("okadri")
     @message = messages(:one)
     @recipient = recipients(:one)
+    @publisher = publishers(:one)
   end
 
   test "unauthorized users redirected to CAS" do
@@ -31,7 +32,7 @@ class MessagesControllerTest < ActionController::TestCase
 
   test "should create message" do
     assert_difference('Message.count') do
-      post :create, message: { subject: @message.subject, impact_statement: @message.impact_statement, recipient_uids: @recipient.uid}
+      post :create, message: { subject: @message.subject, impact_statement: @message.impact_statement, recipient_uids: @recipient.uid, publisher_ids: [ @publisher.id ] }
     end
 
     assert_redirected_to message_path(assigns(:message))
@@ -43,6 +44,9 @@ class MessagesControllerTest < ActionController::TestCase
   end
 
   test "should not create message in case of missing required fields" do
+    assert_no_difference('Message.count') do
+      post :create, message: { subject: @message.subject, impact_statement: @message.impact_statement, recipient_uids: @recipient.uid }
+    end
     assert_no_difference('Message.count') do
       post :create, message: { impact_statement: @message.impact_statement, recipient_uids: @recipient.uid}
     end

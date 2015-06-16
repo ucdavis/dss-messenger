@@ -47,7 +47,7 @@ class MessagesController < ApplicationController
     end
 
     respond_to do |format|
-      if @message.save
+      if params[:message][:publisher_ids] != nil && @message.save
         # The following two lines are required for Delayed::Job.enqueue to work from a controller
         require 'rake'
         load File.join(Rails.root, 'lib', 'tasks', 'bulk_send.rake')
@@ -102,16 +102,4 @@ class MessagesController < ApplicationController
       format.rss { render layout: false } #open.rss.builder
     end
   end
-
-  def track
-    message_entry = MessageReceipt.find_by_id(params[:id])
-    message_entry.message_log.viewed_count += 1  unless message_entry.viewed
-    message_entry.message_log.save!
-
-    message_entry.viewed = true
-    message_entry.save!
-
-    send_file Rails.root.join("app/assets/images/1x1.gif"), :type => 'image/gif', :diposition => 'inline'
-  end
-  
 end

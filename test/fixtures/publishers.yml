@@ -2,10 +2,10 @@
 
 one:
   name: MyString
-  class: MyString
+  class_name: MyString
   default: false
 
 two:
   name: MyString
-  class: MyString
+  class_name: MyString
   default: false
