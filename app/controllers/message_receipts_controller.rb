@@ -11,9 +11,9 @@ class MessageReceiptsController < ApplicationController
     # Make sure the things we need actually exist (for example, if a module
     # returns nil, none of these should work). These can be part of an object or
     # Struct, and not necessarily part of an ActionDispatch::Response object.
-    self.response.headers = callback_response.headers if response_options.find_index(:headers)
-    self.response.content_type = callback_response.content_type if response_options.find_index(:content_type)
-    if response_options.find_index(:body)
+    self.response.headers = callback_response.headers if response_options.include? :headers
+    self.response.content_type = callback_response.content_type if response_options.include? :content_type
+    if response_options.include? :body
       self.response_body = callback_response.body 
     else
       # Return nothing if no response

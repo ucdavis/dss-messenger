@@ -58,7 +58,10 @@ namespace :message do
 
       unique_members = members.uniq { |p| p.email }
 
-      # TODO: Add a whitelist to constantize
+      # TODO: Find a better way to add a whitelist to constantize
+      def String.constantize(camel_cased_word)
+        super  if camel_cased_word == "AggieFeedPublisher" || camel_cased_word == "DssMailerPublisher"
+      end
       message_log.publisher.class_name.constantize.schedule(message_log, message, unique_members)
 
 #      feed_poster = AggieFeed.new()
