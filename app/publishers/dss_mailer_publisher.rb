@@ -26,7 +26,7 @@ class DssMailerPublisher < Publisher
 
     # Keeping viewed_count as a column because it can be used as a hit counter
     # for RSS, AggieFeed, and other services
-    receipt.message_log.viewed_count += 1  unless message_entry.viewed
+    receipt.message_log.viewed_count += 1  unless receipt.viewed
     receipt.message_log.save!
 
     receipt.viewed = true
