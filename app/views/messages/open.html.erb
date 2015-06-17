@@ -12,10 +12,18 @@
 					  <dt>Subject</dt>
 					  <dd>
 							<% if om.classification %>
-							  <%= om.classification.description.slice(0..(om.classification.description.index(':')))  %>
+                              <% if om.classification.description.include? ":" %> 
+								<%= om.classification.description.slice(0..(om.classification.description.index(':'))) %>
+                              <% else %>
+								<%= om.classification.description %>:
+                              <% end %>
 							<% end %>
 							<% if om.modifier %>
-							  <%= om.modifier.description.slice(0..(om.modifier.description.index(':'))) %>
+                              <% if om.modifier.description.include? ":" %> 
+								<%= om.modifier.description.slice(0..(om.modifier.description.index(':'))) %>
+                              <% else %>
+								<%= om.modifier.description %>:
+                              <% end %>
 							<% end %>
 						  <%= om.subject %>
 						</dd>

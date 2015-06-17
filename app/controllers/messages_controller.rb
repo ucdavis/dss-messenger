@@ -27,6 +27,10 @@ class MessagesController < ApplicationController
   def show
     @message = Message.find(params[:id])
 
+    # Add colons if necessary
+    @message.classification.description = @message.classification.description + ":"  unless @message.classification.description.include? ":"
+    @message.modifier.description = @message.modifier.description + ":"  unless @message.modifier.description.include? ":"
+
     respond_to do |format|
       format.html {render layout: 'public' }
     end
