@@ -12,7 +12,7 @@ class Publisher < ActiveRecord::Base
     receipt = MessageReceipt.new
     receipt.recipient_name = recipient.name
     receipt.recipient_email = recipient.email
-    receipt.login_id = recipient.loginid or nil
+    receipt.login_id = recipient.loginid?
     message_log.entries << receipt
 
     self.publish(receipt.id, message, recipient)
@@ -28,5 +28,6 @@ class Publisher < ActiveRecord::Base
   end
 
   def self.callback(message_receipt_id)
+    ActionDispatch::Response.new
   end
 end

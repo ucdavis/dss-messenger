@@ -32,6 +32,11 @@ class DssMailerPublisher < Publisher
     receipt.viewed = true
     receipt.save!
 
-    send_file Rails.root.join("app/assets/images/1x1.gif"), :type => 'image/gif', :diposition => 'inline'
+    response = ActionDispatch::Response.new
+    controller = ActionController::Base.new
+    controller.response = response
+
+    controller.send_file Rails.root.join("app/assets/images/1x1.gif"), :type => 'image/gif', :diposition => 'inline'
+    response
   end
 end
