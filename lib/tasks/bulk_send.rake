@@ -87,8 +87,8 @@ namespace :message do
 #      aggie_feed_mesg.to = unique_members.map { |m| { id: m.email, g: false, i: false } }
 #      aggie_feed_mesg.save
 
-      feed_poster = AggieFeed.new()
-      feed_poster.delay.create(subject, message.impact_statement, "", unique_members)
+      # feed_poster = AggieFeed.new()
+      # feed_poster.delay.create(subject, message.impact_statement, "", unique_members)
 
       # Deliver the message (via e-mail) to each recipient
       # unique_members = members.uniq { |p| p.email }
