@@ -1,8 +1,8 @@
 class MessagesController < ApplicationController
   filter_resource_access
 
-  filter_access_to [:index, :show, :create, :update, :destroy], :attribute_check => true # 'track' should not be on this list
-  filter_access_to :open, :attribute_check => false
+  filter_access_to [:show, :update, :destroy], :attribute_check => true
+  filter_access_to [:index, :create, :open], :attribute_check => false
 
   def index
     @messages = Message.includes(:recipients,:classification,:modifier,:impacted_services)
@@ -101,6 +101,7 @@ class MessagesController < ApplicationController
     end
   end
 
+  # This method should be publicly visible.
   def track
     message_entry = MessageLogEntry.find_by_id(params[:id])
     message_entry.message_log.viewed_count += 1 unless message_entry.viewed
