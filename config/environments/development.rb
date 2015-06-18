@@ -34,9 +34,9 @@ DssMessenger::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
-  
+
   ActionMailer::Base.delivery_method = :file
-  
+
   # #SMTP Settings
   # ActionMailer::Base.smtp_settings = {
   #   :address              => "smtp.ucdavis.edu",
@@ -44,8 +44,10 @@ DssMessenger::Application.configure do
   #   :domain               => "dss.ucdavis.edu",
   #   :enable_starttls_auto => true
   # }
-  # 
+  #
   # require 'development_mail_interceptor'
   # Mail.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?
-  
+
+  config.host_url = 'localhost:3000'
+
 end

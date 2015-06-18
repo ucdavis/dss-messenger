@@ -64,7 +64,7 @@ DssMessenger::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
-  
+
   #SMTP Settings
   ActionMailer::Base.smtp_settings = {
     :address              => "smtp.ucdavis.edu",
@@ -79,6 +79,8 @@ DssMessenger::Application.configure do
       :email_prefix => "[DSS Messenger] ",
       :sender_address => %{no-reply@messenger.dss.ucdavis.edu},
       :exception_recipients => %w{dssit-devs-exceptions@ucdavis.edu}
-    }  
+    }
+
+  config.host_url = 'messenger.dss.ucdavis.edu'
 
 end
