@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
   filter_resource_access
 
-  filter_access_to :all, :attribute_check => true, :except => :track
+  filter_access_to [:index, :show, :create, :update, :destroy], :attribute_check => true # 'track' should not be on this list
   filter_access_to :open, :attribute_check => false
 
   def index
@@ -96,8 +96,8 @@ class MessagesController < ApplicationController
     @open_messages = Message.where(closed: false).order('created_at DESC')
 
     respond_to do |format|
-      format.html {render layout: 'public' }# open.html.erb
-      format.rss { render layout: false } #open.rss.builder
+      format.html { render layout: 'public' } # open.html.erb
+      format.rss { render layout: false }     # open.rss.builder
     end
   end
 
@@ -111,5 +111,4 @@ class MessagesController < ApplicationController
 
     send_file Rails.root.join("app/assets/images/1x1.gif"), :type => 'image/gif', :diposition => 'inline'
   end
-
 end
