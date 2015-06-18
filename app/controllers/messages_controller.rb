@@ -1,6 +1,4 @@
 class MessagesController < ApplicationController
-  filter_resource_access
-
   filter_access_to [:show, :update, :destroy], :attribute_check => true
   filter_access_to [:index, :create, :open], :attribute_check => false
 
