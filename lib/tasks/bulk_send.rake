@@ -58,9 +58,19 @@ namespace :message do
 
       unique_members = members.uniq { |p| p.email }
 
-      # TODO: Find a better way to add a whitelist to constantize
+      # TODO: Find a better way to add a whitelist to constantize. Monkey
+      # patching probably not the best way.
       def String.constantize(camel_cased_word)
-        super  if camel_cased_word == "AggieFeedPublisher" || camel_cased_word == "DssMailerPublisher"
+        super  if Dir.entries(Rails.root + "app/publishers")
+          .map do |x| 
+            unless x.starts_with? "."
+              # Possible bug: Won't catch files that don't start with class XYZ < Publisher
+              class_line = File.open(Rails.root + "app/publishers/" + x, &:readline)
+              class_line.gsub(/.* (.*) < Publisher/, '\1')  if class_line.include? "< Publisher"
+            end
+          end
+          .delete_if { |x| x.nil? }
+          .include? camel_cased_word
       end
       message_log.publisher.class_name.constantize.schedule(message_log, message, unique_members)
 
