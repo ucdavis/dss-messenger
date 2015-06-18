@@ -22,21 +22,18 @@ class DssMailerPublisher < Publisher
   end
 
   def self.callback(message_receipt_id) 
-    receipt = MessageReceipt.find_by_id(message_receipt_id)
+    Proc.new { |scope|
+      receipt = MessageReceipt.find_by_id(message_receipt_id)
 
-    # Keeping viewed_count as a column because it can be used as a hit counter
-    # for RSS, AggieFeed, and other services
-    receipt.message_log.viewed_count += 1  unless receipt.viewed
-    receipt.message_log.save!
+      # Keeping viewed_count as a column because it can be used as a hit counter
+      # for RSS, AggieFeed, and other services
+      receipt.message_log.viewed_count += 1  unless receipt.viewed
+      receipt.message_log.save!
 
-    receipt.viewed = true
-    receipt.save!
+      receipt.viewed = true
+      receipt.save!
 
-    response = ActionDispatch::Response.new
-    controller = ActionController::Base.new
-    controller.response = response
-
-    controller.send_file Rails.root.join("app/assets/images/1x1.gif"), :type => 'image/gif', :diposition => 'inline'
-    response
+      scope.send_file Rails.root.join("app/assets/images/1x1.gif"), :type => 'image/gif', :diposition => 'inline'
+    }
   end
 end
