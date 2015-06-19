@@ -1,8 +1,6 @@
 class MessagesController < ApplicationController
-  filter_resource_access
-  
-  filter_access_to :all, :attribute_check => true, :except => :track
-  filter_access_to :open, :attribute_check => false
+  filter_access_to [:show, :update, :destroy], :attribute_check => true
+  filter_access_to [:index, :create, :open], :attribute_check => false
 
   def index
     @messages = Message.includes(:recipients,:classification,:modifier,:impacted_services)
@@ -40,13 +38,13 @@ class MessagesController < ApplicationController
     # Include distribution channels through which to send messages in model
     @message = Message.new(params[:message])
     @message.sender_uid = Person.find(session[:cas_user]).id #get the full name of the currently logged in user.
-    
+
     # The message is open or closed depending on the selected modifier
     unless @message.modifier.nil?
       if @message.modifier.open_ended
-        @message.closed = false 
+        @message.closed = false
       else
-        @message.closed = true 
+        @message.closed = true
       end
     end
 
@@ -97,13 +95,13 @@ class MessagesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def open
     @open_messages = Message.where(closed: false).order('created_at DESC')
-    
+
     respond_to do |format|
-      format.html {render layout: 'public' }# open.html.erb
-      format.rss { render layout: false } #open.rss.builder
+      format.html { render layout: 'public' } # open.html.erb
+      format.rss { render layout: false }     # open.rss.builder
     end
   end
 end
