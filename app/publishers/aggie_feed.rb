@@ -3,6 +3,8 @@ require 'net/http'
 # See Rails' actionmailer/lib/action_mailer/base.rb for manually rendering views
 class AggieFeed < AbstractController::Base
   include ActionController::Rendering
+  include ActionDispatch::Routing::UrlFor
+  include Rails.application.routes.url_helpers
 
   include AbstractController::Logger
   include AbstractController::Helpers
@@ -13,11 +15,12 @@ class AggieFeed < AbstractController::Base
 
   append_view_path Rails.root + 'app/views'
 
-  def create(title, message, url, recipient)
+  def create(message_receipt_id, title, message, url, recipient)
     @id = $AGGIE_FEED_SETTINGS['SOURCE_ID']
     @title = title
     @message = message
-    @url = url
+    @message_id = message_receipt_id
+    @url = if url.empty? then url_for controller: :message_receipts, action: :show, id: message_receipt_id, host: Rails.application.config.host_url else url end
 
     # TODO: Figure out how to use kerberos loginid instead of email. Entity
     @recipient = [ { id: recipient.email, g: false, i: false } ]

@@ -48,4 +48,4 @@
 
 <%= simple_format(@footer, {}, sanitize: false) %>
 
-<%= image_tag url_for(action: :track, controller: :messages, id: @mle_id, only_path: false, host: Rails.application.config.host_url) %>
+<%= image_tag url_for(action: :show, controller: :message_receipts, id: @mle_id, only_path: false, host: Rails.application.config.host_url) %>

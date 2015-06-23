@@ -21,19 +21,18 @@ class DssMailerPublisher < Publisher
     DssMailer.deliver_message(subject, message, message_receipt_id, recipient, footer)
   end
 
-  def self.callback(message_receipt_id) 
-    Proc.new { |scope|
-      receipt = MessageReceipt.find_by_id(message_receipt_id)
+  def self.callback(message_receipt_id, scope) 
+    receipt = MessageReceipt.find_by_id(message_receipt_id)
 
-      # Keeping viewed_count as a column because it can be used as a hit counter
-      # for RSS, AggieFeed, and other services
-      receipt.message_log.viewed_count += 1  unless receipt.viewed
-      receipt.message_log.save!
+    # Keeping viewed_count as a column because it can be used as a hit counter
+    # for RSS, AggieFeed, and other services
+    receipt.message_log.viewed_count += 1  unless receipt.viewed
+    receipt.message_log.save!
 
-      receipt.viewed = true
-      receipt.save!
+    receipt.viewed = true
+    receipt.save!
 
-      scope.send_file Rails.root.join("app/assets/images/1x1.gif"), :type => 'image/gif', :diposition => 'inline'
-    }
+    scope.send_file Rails.root.join("app/assets/images/1x1.gif"), :type => 'image/gif', :diposition => 'inline'
+    scope.headers['Content-Disposition'] = "inline; filename=\"pixel.gif\""
   end
 end

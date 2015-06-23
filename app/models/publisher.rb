@@ -27,7 +27,6 @@ class Publisher < ActiveRecord::Base
   def self.publish(message_receipt_id, message, recipient)
   end
 
-  def self.callback(message_receipt_id)
-    ActionDispatch::Response.new
+  def self.callback(message_receipt_id, scope)
   end
 end

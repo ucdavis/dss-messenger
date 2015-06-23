@@ -64,7 +64,8 @@ namespace :message do
         super  if Dir.entries(Rails.root + "app/publishers")
           .map do |x| 
             unless x.starts_with? "."
-              # Possible bug: Won't catch files that don't start with class XYZ < Publisher
+              # Possible bug: Won't catch files that don't start with 
+              # class XYZ < Publisher on the first line
               class_line = File.open(Rails.root + "app/publishers/" + x, &:readline)
               class_line.gsub(/.* (.*) < Publisher/, '\1')  if class_line.include? "< Publisher"
             end
@@ -73,15 +74,6 @@ namespace :message do
           .include? camel_cased_word
       end
       message_log.publisher.class_name.constantize.schedule(message_log, message, unique_members)
-
-#      feed_poster = AggieFeed.new()
-#      feed_poster.delay.create(subject, message.impact_statement, "", unique_members)
-#
-#      # Deliver the message (via e-mail) to each recipient
-#      # unique_members = members.uniq { |p| p.email }
-#      unique_members.each do |m|
-#        DssMailer.delay.deliver_message(subject, message, message_log, OpenStruct.new(:name => m.name, :email => m.email), footer)
-#      end
 
       Rails.logger.info "Enqueueing message ##{args.message_id} for #{members.length} recipients took #{Time.now - timestamp_start} seconds"
     end
