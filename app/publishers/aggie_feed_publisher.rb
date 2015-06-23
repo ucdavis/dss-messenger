@@ -9,7 +9,15 @@ class AggieFeedPublisher < Publisher
     receipt.message_log.viewed_count += 1
     receipt.message_log.save!
 
-    super
+    scope.instance_eval do
+      @message = receipt.message
+
+      # Add colons if necessary
+      @message.classification.description = @message.classification.description + ":"  unless @message.classification.description.include? ":"
+      @message.modifier.description = @message.modifier.description + ":"  unless @message.modifier.description.include? ":"
+
+      render 'messages/show'
+    end
   end
 end
 
