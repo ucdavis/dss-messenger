@@ -2,6 +2,9 @@ class Publisher < ActiveRecord::Base
   attr_accessible :class_name, :default, :name
 
   def self.schedule(message_log, message, recipient_list)
+    message_log.send_status = :queued
+    message_log.save!
+
     recipient_list.each do |recipient|
         self.delay.perform(message_log, message, recipient)
     end
@@ -18,8 +21,11 @@ class Publisher < ActiveRecord::Base
     self.publish(receipt.id, message, recipient)
 
     if message_log.entries.length == message_log.recipient_count
-      message_log.status = :completed
+      message_log.send_status = :completed
       message_log.finish = Time.now
+      message_log.save!
+    else
+      message_log.send_status = :sending
       message_log.save!
     end
   end

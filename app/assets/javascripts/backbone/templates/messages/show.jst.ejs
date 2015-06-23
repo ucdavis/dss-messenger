@@ -14,10 +14,14 @@
                 </ul>
               </td>
             </tr>
+          <% _.each(recipient_counts, function(recipient_count) { %>
             <tr>
-              <td><b>Recipient Count</b></td>
-              <td><%= recipient_count %></td>
+              <td><b>Recipient Count (<%= recipient_count.publisher %>)</b></td>
+              <td>
+                <%= recipient_count.count %> <% if(recipient_count.viewed) { %> (viewed <%= recipient_count.viewed %> times)<% } %>
+              </td>
             </tr>
+          <% }); %>
             <tr>
               <td><b>Status</b></td>
               <td><%= send_status %></td>

@@ -66,13 +66,17 @@ class Message < ActiveRecord::Base
       :impacted_services => self.impacted_services,
       :created_at => self.created_at.strftime("%A, %B %d, %Y at %l:%M %p"),
       :created_at_in_words => time_ago_in_words(self.created_at) + ' ago',
-      :recipient_count =>
+      :recipient_counts =>
         if self.logs
           self.logs.map do |log|
-            log.recipient_count ? log.recipient_count.to_s + " (" + log.viewed_count.to_s + " viewed)" : 'Calculating'
+            {
+              :publisher => log.publisher ? log.publisher.name : 'E-mail',
+              :count => log.recipient_count,
+              :viewed => log.viewed_count
+            }
           end
         else
-          'Unavailable'
+          []
         end,
       :send_status =>
         if self.logs
