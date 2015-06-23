@@ -31,6 +31,9 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
       view = new DssMessenger.Views.impacted_services.FormIndexView(message: @model)
       @$("#impacted_services_select").html(view.render().el)
 
+      view = new DssMessenger.Views.Publishers.FormIndexView()
+      @$("#publishers_select").html(view.render().el)
+
     Backbone.Validation.bind this
 
   constructor: (options) ->
