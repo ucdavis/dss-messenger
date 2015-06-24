@@ -119,6 +119,29 @@ ul.token-input-list-facebook {
     margin-bottom: 1em;
 }
 
+.control-group.error ul.token-input-list-facebook {
+    border-color: #b94a48;
+    margin-bottom: 0;
+}
+
+/* publishers is special because it goes beneath the Send Message button, so
+ * apply special styling: */
+#publishers-group {
+    position: relative;
+    padding-left: 30px;
+    left: -30px;
+    top: 0;
+}
+
+#publishers-group .control-label {
+    float: none;
+    text-align: left;
+}
+
+#publishers-group .controls {
+    margin-left: 0;
+}
+
 /*********** tables ************/
 
 td.nowrap {

@@ -15,3 +15,7 @@ en:
                 blank: "Short Description may not be blank"
               impact_statement:
                 blank: "Impact Statement may not be blank"
+              recipients:
+                blank: "Recipients must be specified"
+              publishers:
+                blank: "Select at least one publisher"

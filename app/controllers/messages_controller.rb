@@ -49,7 +49,7 @@ class MessagesController < ApplicationController
     end
 
     respond_to do |format|
-      if params[:message][:publisher_ids] != nil && @message.save
+      if @message.save
         # The following two lines are required for Delayed::Job.enqueue to work from a controller
         require 'rake'
         load File.join(Rails.root, 'lib', 'tasks', 'bulk_send.rake')

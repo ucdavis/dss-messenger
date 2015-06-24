@@ -6,7 +6,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
 
   events:
     "submit #message-form": "save"
-    "focus #Recipients"	:	"tokenInput"
+    "focus #recipients"	:	"tokenInput"
     "mouseenter .control-group"   : "tooltip"
     "click .message-preview"  : "preview"
     "click .config-link"  : "openConfig"
@@ -42,7 +42,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
       @$("#impacted_services_select").html(view.render().el)
 
       view = new DssMessenger.Views.Publishers.FormIndexView(message: @model)
-      @$("#publishers_select").html(view.render().el)
+      @$("#publishers").html(view.render().el)
 
     
   preventSubmit: (e) ->

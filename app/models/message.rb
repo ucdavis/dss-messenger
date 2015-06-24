@@ -19,6 +19,7 @@ class Message < ActiveRecord::Base
   validates :subject, presence: true
   validates :impact_statement, presence: true
   validates_presence_of :recipients
+  validates_presence_of :publishers
 
   # Filters to limit the result to specified criterion
   scope :by_classification, lambda { |classification| where(classification_id: classification) unless classification.nil? }
