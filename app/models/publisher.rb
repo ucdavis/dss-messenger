@@ -35,4 +35,21 @@ class Publisher < ActiveRecord::Base
 
   def self.callback(message_receipt_id, scope)
   end
+
+  def classify
+    self.class_name.constantize  if # the specified class name is in one of the
+                                    # files in app/publishers
+      Dir.entries(Rails.root + "app/publishers")
+      .map do |x| 
+        unless x.starts_with? "." or File.directory?(x)
+          # Won't catch files that don't start with class XYZ < Publisher 
+          # on the first line
+          class_line = File.open(Rails.root + "app/publishers/" + x, &:readline)
+          class_line.gsub(/.* (.*) < Publisher/, '\1').strip  if class_line.include? "< Publisher"
+        end
+      end
+      .delete_if { |x| x.nil? }
+      .uniq
+      .include? self.class_name
+  end
 end

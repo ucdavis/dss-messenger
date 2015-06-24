@@ -22,10 +22,14 @@
               </td>
             </tr>
           <% }); %>
+          <% _.each(send_statuses, function(send_status) { %>
             <tr>
-              <td><b>Status</b></td>
-              <td><%= send_status %></td>
+              <td><b>Status (<%= send_status.publisher %>)</b></td>
+              <td>
+                <%= send_status.status %>
+              </td>
             </tr>
+          <% }); %>
             <% if (classification) { %>
             <tr>
               <td><b>Classification</b></td>

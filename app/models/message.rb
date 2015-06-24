@@ -73,20 +73,23 @@ class Message < ActiveRecord::Base
           self.logs.map do |log|
             {
               :publisher => log.publisher ? log.publisher.name : 'E-mail',
-              :count => log.recipient_count,
+              :count => log.recipient_count || 'Unavailable',
               :viewed => log.viewed_count
             }
           end
         else
           []
         end,
-      :send_status =>
+      :send_statuses =>
         if self.logs
           self.logs.map do |log|
-            log.send_status.to_s.capitalize
+            {
+              :publisher => (log.publisher ? log.publisher.name : 'E-mail'),
+              :status => log.send_status.to_s.capitalize
+            }
           end
         else
-          'Unavailable'
+          []
         end
     }
     
