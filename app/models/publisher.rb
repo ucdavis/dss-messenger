@@ -41,7 +41,7 @@ class Publisher < ActiveRecord::Base
                                     # files in app/publishers
       Dir.entries(Rails.root + "app/publishers")
       .map do |x| 
-        unless x.starts_with? "." or File.directory?(x)
+        unless x.starts_with? "." || File.directory?(x)
           # Won't catch files that don't start with class XYZ < Publisher 
           # on the first line
           class_line = File.open(Rails.root + "app/publishers/" + x, &:readline)

@@ -85,7 +85,19 @@ class Message < ActiveRecord::Base
           self.logs.map do |log|
             {
               :publisher => (log.publisher ? log.publisher.name : 'E-mail'),
-              :status => log.send_status.to_s.capitalize
+              :status =>
+#                if log.send_status.to_s.capitalize == 'Queued' && 
+#                   Delayed::Job.where('locked_by is not null').count == 0 &&
+#                   File.file?(Rails.root + "tmp/pids/delayed_job.pid")  
+#                    'Mail sender might not be working...'
+#                elsif log.send_status.to_s.capitalize == "Sending" &&
+#                        Delayed::Job.where('locked_by is not null').count == 0
+#                    log.send_status = :error
+#                    log.save!
+#                    log.send_status.to_s.capitalize
+#                else
+                   log.send_status.to_s.capitalize
+#                end
             }
           end
         else
