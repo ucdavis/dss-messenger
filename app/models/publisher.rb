@@ -1,6 +1,9 @@
 class Publisher < ActiveRecord::Base
   attr_accessible :class_name, :default, :name
 
+  has_many :message_logs
+  has_many :messages, :through => :message_logs
+
   def self.schedule(message_log, message, recipient_list)
     message_log.send_status = :queued
     message_log.save!

@@ -98,6 +98,10 @@ class MessagesController < ApplicationController
 
   def open
     @open_messages = Message.where(closed: false).order('created_at DESC')
+    # SELECT * FROM messages INNER JOIN message_logs ON messages.id =
+    # message_logs.message_id LEFT JOIN publishers ON publishers.id =
+    # message_logs.publisher_id WHERE publishers.class_name = 'RSSPublisher';
+    @open_messages = Publisher.where(class_name: 'RSSPublisher').first.messages
 
     respond_to do |format|
       format.html { render layout: 'public' } # open.html.erb
