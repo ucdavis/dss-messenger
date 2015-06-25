@@ -103,6 +103,22 @@ input[type="text"], textarea {
     padding: 0.25em;
 }
 
+#edit_publishers input[type="text"] {
+    width: 100%;
+}
+
+#edit_publishers b, #edit_publishers .code-name {
+    display: block;
+    padding: 2px;
+    margin: 2px;
+}
+
+#edit_publishers .code-name {
+    /* font families copied from Stackoverflow's CSS sheet */
+    font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+    font-size: 12px;
+}
+
 input[type="text"].pref_input {
   padding: 2px;
   margin: 2px;
