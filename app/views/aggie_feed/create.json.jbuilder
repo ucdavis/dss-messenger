@@ -12,7 +12,7 @@ json.activity do
   json.verb "post"
   json.title @title
   json.object do
-    json.ucdSrcId @message_id
+    json.ucdSrcId @message_id.to_s
     json.objectType "notification"
     json.content @message
     json.ucdEdusModel do

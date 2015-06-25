@@ -22,8 +22,10 @@ class AggieFeed < AbstractController::Base
     @message_id = message_receipt_id
     @url = if url.empty? then url_for controller: :message_receipts, action: :show, id: message_receipt_id, host: Rails.application.config.host_url else url end
 
-    # TODO: Figure out how to use kerberos loginid instead of email. Entity
-    @recipient = [ { id: recipient.email, g: false, i: false } ]
+    # For people who don't have loginids stored for some reason.
+    recipient_login_id = ((recipient.respond_to? :loginid and recipient.loginid) or
+                           recipient.email.split('@')[0])
+    @recipient = [ { id: recipient_login_id, g: false, i: false } ]
     current_time = Time.now.utc
     @published = current_time.strftime("%Y-%m-%dT%H:%M:%S.000Z")
     
@@ -39,6 +41,7 @@ class AggieFeed < AbstractController::Base
 
     request = Net::HTTP::Post.new('/api/v1/activity', headers)
     request.body = render(template: 'aggie_feed/create', formats: [:json], handlers: [:jbuilder])
+
     response = http.request(request)
 
     response.body
