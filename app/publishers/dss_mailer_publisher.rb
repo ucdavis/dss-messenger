@@ -1,4 +1,6 @@
+# Sends e-mails via +DssMailer+.
 class DssMailerPublisher < Publisher
+  # Constructs the necessary parts of the e-mail and sends it via +DssMailer+.
   def self.publish(message_receipt_id, message, recipient)
      # Add a colon to the modifier and classification if one doesn't exist
     # already.
@@ -21,6 +23,8 @@ class DssMailerPublisher < Publisher
     DssMailer.deliver_message(subject, message, message_receipt_id, recipient, footer)
   end
 
+  # Keeps track of how many people have viewed their e-mails, assuming their
+  # e-mail viewer can request images. Sends a pixel-sized gif as a reply.
   def self.callback(message_receipt_id, scope) 
     receipt = MessageReceipt.find_by_id(message_receipt_id)
 

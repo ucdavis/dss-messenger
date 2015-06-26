@@ -1,3 +1,4 @@
+# Sends e-mails. 
 class DssMailer < ActionMailer::Base
   default :from => "DSS IT Service Center <noreply@dss.ucdavis.edu>"
   

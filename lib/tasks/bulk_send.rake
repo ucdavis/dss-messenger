@@ -58,7 +58,7 @@ namespace :message do
 
       unique_members = members.uniq { |p| p.email }
 
-      message_log.publisher.classify.schedule(message_log, message, unique_members)
+      message_log.publisher.classify.schedule(message_log, unique_members)
 
       Rails.logger.info "Enqueueing message ##{args.message_id} for #{members.length} recipients took #{Time.now - timestamp_start} seconds"
     end

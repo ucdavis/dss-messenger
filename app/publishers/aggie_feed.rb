@@ -1,6 +1,8 @@
 require 'net/http'
 
-# See Rails' actionmailer/lib/action_mailer/base.rb for manually rendering views
+# Handles publishing to Aggie Feed's API. Renders the appropriate JSON for the
+# API using the help of +AbstractController::Base+ and Jbuilder. See Rails'
+# +actionmailer/lib/action_mailer/base.rb+ for manually rendering views
 class AggieFeed < AbstractController::Base
   include ActionController::Rendering
   include ActionDispatch::Routing::UrlFor
@@ -15,6 +17,16 @@ class AggieFeed < AbstractController::Base
 
   append_view_path Rails.root + 'app/views'
 
+  # Publishes a message to Aggie Feed for a single recipient. Generally called
+  # from +AggieFeedPublisher+'s +publish+ method.  
+  # Params:  
+  # [+message_receipt_id+] Id of the +MessageReceipt+ for the message being
+  #                        sent.
+  # [+title+] Title of the Aggie Feed post.
+  # [+message+] Content of the Aggie Feed post.
+  # [+url+] _Optional_. URL to use for the link that says "View Message."
+  #         Defaults to the callback URL for the given +MessageReceipt+.
+  # [+recipient+] +Person+ object representing the recipient.
   def create(message_receipt_id, title, message, url, recipient)
     @id = $AGGIE_FEED_SETTINGS['SOURCE_ID']
     @title = title
@@ -22,13 +34,19 @@ class AggieFeed < AbstractController::Base
     @message_id = message_receipt_id
     @url = if url.empty? then url_for controller: :message_receipts, action: :show, id: message_receipt_id, host: Rails.application.config.host_url else url end
 
-    # For people who don't have loginids stored for some reason.
+    # Use the first part of the e-mail address for people who don't have
+    # loginids stored for some reason.
     recipient_login_id = ((recipient.respond_to? :loginid and recipient.loginid) or
                            recipient.email.split('@')[0])
+    
+    # Set the recipient. id is ideally the Kerberos id for the recipient.
     @recipient = [ { id: recipient_login_id, g: false, i: false } ]
+
+    # Time of publication.
     current_time = Time.now.utc
     @published = current_time.strftime("%Y-%m-%dT%H:%M:%S.000Z")
     
+    # Publish the message
     uri = URI.parse($AGGIE_FEED_SETTINGS['HOST'])
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
@@ -47,10 +65,12 @@ class AggieFeed < AbstractController::Base
     response.body
   end
 
+  # Sets the content type to +application/json+
   def content_type
     'application/json'
   end
 
+  # Sets the MIME format to +JSON+
   def rendered_format
     Mime::JSON
   end
