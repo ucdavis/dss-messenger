@@ -1,69 +1,69 @@
 <div id="messages" class="span12">
-	<table class="table table-striped table-bordered table-condensed">
-		<% if @open_messages.length == 0 %>
-			<tr><td><p class="text-center">No active notices.</p></td></tr>
-		<% end %>
-		<% @open_messages.each do |om| %>
-			<tr>
-				<td>
-					<dl class="dl-horizontal">
-					  <dt>Date</dt>
-					  <dd><%= om.created_at.strftime("%A, %B %d, %Y at %l:%M %p") %></dd>
-					  <dt>Subject</dt>
-					  <dd>
-							<% if om.classification %>
+    <table class="table table-striped table-bordered table-condensed">
+        <% if @open_messages.length == 0 %>
+            <tr><td><p class="text-center">No active notices.</p></td></tr>
+        <% end %>
+        <% @open_messages.each do |om| %>
+            <tr>
+                <td>
+                    <dl class="dl-horizontal">
+                      <dt>Date</dt>
+                      <dd><%= om.created_at.strftime("%A, %B %d, %Y at %l:%M %p") %></dd>
+                      <dt>Subject</dt>
+                      <dd>
+                            <% if om.classification %>
                               <% if om.classification.description.include? ":" %> 
-								<%= om.classification.description.slice(0..(om.classification.description.index(':'))) %>
+                                <%= om.classification.description.slice(0..(om.classification.description.index(':'))) %>
                               <% else %>
-								<%= om.classification.description %>:
+                                <%= om.classification.description %>:
                               <% end %>
-							<% end %>
-							<% if om.modifier %>
+                            <% end %>
+                            <% if om.modifier %>
                               <% if om.modifier.description.include? ":" %> 
-								<%= om.modifier.description.slice(0..(om.modifier.description.index(':'))) %>
+                                <%= om.modifier.description.slice(0..(om.modifier.description.index(':'))) %>
                               <% else %>
-								<%= om.modifier.description %>:
+                                <%= om.modifier.description %>:
                               <% end %>
-							<% end %>
-						  <%= om.subject %>
-						</dd>
-					  <dt>Summary</dt>
-					  <dd><%= om.impact_statement %></dd>
-					<% if om.window_start %>
-					  <dt>Start of window</dt>
-					  <dd><%= om.window_start.strftime("%A, %B %d, %Y at %l:%M %p") %></dd>
-					<% end %>
-					<% if om.window_end %>
-					  <dt>End of window</dt>
-					  <dd><%= om.window_end.strftime("%A, %B %d, %Y at %l:%M %p") %></dd>
-					<% end %>
-					<% if om.purpose %>
-					  <dt>Purpose</dt>
-					  <dd><%= om.purpose %></dd>
-					<% end %>
-					<% if om.resolution %>
-					  <dt>Resolution</dt>
-					  <dd><%= om.resolution %></dd>
-					<% end %>
-					<% if om.workaround %>
-					  <dt>Workaround</dt>
-					  <dd><%= om.workaround %></dd>
-					<% end %>
-					<% if om.other_services %>
-					  <dt>Other Services</dt>
-					  <dd><%= om.other_services %></dd>
-					<% end %>
-					<% if om.impacted_services.length > 0 %>
-					  <dt>Impacted Services</dt>
-					  <dd>
-							<% om.impacted_services.each do |is| %>
-								<li><%= is.name %></li>
-							<% end %>
-						</dd>
-					<% end %>
-					</dl>
-				</td>
-			</tr>
-		<% end %>
-	</table>
+                            <% end %>
+                          <%= om.subject %>
+                        </dd>
+                      <dt>Summary</dt>
+                      <dd><%= om.impact_statement %></dd>
+                    <% if om.window_start %>
+                      <dt>Start of window</dt>
+                      <dd><%= om.window_start.strftime("%A, %B %d, %Y at %l:%M %p") %></dd>
+                    <% end %>
+                    <% if om.window_end %>
+                      <dt>End of window</dt>
+                      <dd><%= om.window_end.strftime("%A, %B %d, %Y at %l:%M %p") %></dd>
+                    <% end %>
+                    <% if om.purpose %>
+                      <dt>Purpose</dt>
+                      <dd><%= om.purpose %></dd>
+                    <% end %>
+                    <% if om.resolution %>
+                      <dt>Resolution</dt>
+                      <dd><%= om.resolution %></dd>
+                    <% end %>
+                    <% if om.workaround %>
+                      <dt>Workaround</dt>
+                      <dd><%= om.workaround %></dd>
+                    <% end %>
+                    <% if om.other_services %>
+                      <dt>Other Services</dt>
+                      <dd><%= om.other_services %></dd>
+                    <% end %>
+                    <% if om.impacted_services.length > 0 %>
+                      <dt>Impacted Services</dt>
+                      <dd>
+                            <% om.impacted_services.each do |is| %>
+                                <li><%= is.name %></li>
+                            <% end %>
+                        </dd>
+                    <% end %>
+                    </dl>
+                </td>
+            </tr>
+        <% end %>
+    </table>
 </div>
