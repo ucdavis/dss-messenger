@@ -58,7 +58,10 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
     $('.overlay,.loading,.error').addClass('hidden')
     @$el.html(@template(messages: DssMessenger.messages.toJSON() ))
     @addAll()
-    
+
+    view = new DssMessenger.Views.DelayedJobStatus.IndexView()
+    @$("#delayed-jobs-info").html(view.render().el)
+
     @active = DssMessenger.messages.filter (messages) ->
       messages.get("closed") is false
     @archive = DssMessenger.messages.filter (messages) ->

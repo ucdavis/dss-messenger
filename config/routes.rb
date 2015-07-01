@@ -19,6 +19,8 @@ DssMessenger::Application.routes.draw do
 
   resources :publishers
 
+  resources :delayed_job_status
+
   get "/messages/open" => 'messages#open'
   resources :messages
   
