@@ -1,7 +1,7 @@
 class Message < ActiveRecord::Base
   include ActionView::Helpers::DateHelper
   
-  attr_accessible :impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround, :classification_id, :modifier_id, :recipient_uids, :impacted_service_ids, :closed
+  attr_accessible :impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround, :classification_id, :modifier_id, :recipient_uids, :impacted_service_ids, :closed, :publisher_ids
   
   has_many :damages
   has_many :impacted_services, :through => :damages
@@ -12,12 +12,14 @@ class Message < ActiveRecord::Base
   belongs_to :classification
   belongs_to :modifier
   
-  has_one :log, :class_name => "MessageLog"
+  has_many :logs, :class_name => "MessageLog"
+  has_many :publishers, :through => :logs
 
   # Validations
   validates :subject, presence: true
   validates :impact_statement, presence: true
   validates_presence_of :recipients
+  validates_presence_of :publishers
 
   # Filters to limit the result to specified criterion
   scope :by_classification, lambda { |classification| where(classification_id: classification) unless classification.nil? }
@@ -65,17 +67,41 @@ class Message < ActiveRecord::Base
       :impacted_services => self.impacted_services,
       :created_at => self.created_at.strftime("%A, %B %d, %Y at %l:%M %p"),
       :created_at_in_words => time_ago_in_words(self.created_at) + ' ago',
-      :recipient_count =>
-        if self.log
-          self.log.recipient_count ? self.log.recipient_count.to_s + " (" + self.log.viewed_count.to_s + " viewed)" : 'Calculating'
+      :publishers => self.publishers,
+      :recipient_counts =>
+        if self.logs
+          self.logs.map do |log|
+            {
+              :publisher => log.publisher ? log.publisher.name : 'E-mail',
+              :count => log.recipient_count || 'Unavailable',
+              :viewed => log.viewed_count
+            }
+          end
         else
-          'Unavailable'
+          []
         end,
-      :send_status =>
-        if self.log
-          self.log.send_status.to_s.capitalize
+      :send_statuses =>
+        if self.logs
+          self.logs.map do |log|
+            {
+              :publisher => (log.publisher ? log.publisher.name : 'E-mail'),
+              :status =>
+#                if log.send_status.to_s.capitalize == 'Queued' && 
+#                   Delayed::Job.where('locked_by is not null').count == 0 &&
+#                   File.file?(Rails.root + "tmp/pids/delayed_job.pid")  
+#                    'Mail sender might not be working...'
+#                elsif log.send_status.to_s.capitalize == "Sending" &&
+#                        Delayed::Job.where('locked_by is not null').count == 0
+#                    log.send_status = :error
+#                    log.save!
+#                    log.send_status.to_s.capitalize
+#                else
+                   log.send_status.to_s.capitalize
+#                end
+            }
+          end
         else
-          'Unavailable'
+          []
         end
     }
     

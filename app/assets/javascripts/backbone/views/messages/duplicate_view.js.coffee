@@ -6,7 +6,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
 
   events:
     "submit #message-form": "save"
-    "focus #Recipients"	:	"tokenInput"
+    "focus #recipients"	:	"tokenInput"
     "mouseenter .control-group"   : "tooltip"
     "click .message-preview"  : "preview"
     "click .config-link"  : "openConfig"
@@ -41,6 +41,9 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
       view = new DssMessenger.Views.impacted_services.FormIndexView(message: @model)
       @$("#impacted_services_select").html(view.render().el)
 
+      view = new DssMessenger.Views.Publishers.FormIndexView(message: @model)
+      @$("#publishers").html(view.render().el)
+
     
   preventSubmit: (e) ->
     if e.keyCode is 13
@@ -57,6 +60,7 @@ class DssMessenger.Views.Messages.DuplicateView extends Backbone.View
     @model.unset("errors")
     @model.set
       impacted_service_ids: _.map($("input[name='impacted_service_ids[]']:checked"), (a) -> a.value )
+      publisher_ids: _.pluck($("input[name='publisher_id[]']:checked"), "value")
       classification_id: $("input[name='classification_id[]']:checked").val()
       modifier_id: $("input[name='modifier_id[]']:checked").val()
 

@@ -1,20 +1,20 @@
 <div class="span3 affix" id="filters-sidebar">
-	<div class="well invisible-well">
-		<a href="#/new" class="btn btn-primary btn-large btn-block">New Message</a>
-	</div>
-	<div class="well filters-well hidden-phone">
-		<form id="filters-form">
-			<h3>Filters:</h3>
-			<h5>Classifications</h5>
-			<div id="filter_classifications"></div>
-			<h5>Modifiers</h5>
-			<div id="filter_modifiers"></div>
-			<h5>Impacted Services</h5>
-			<div id="filter_impacted_services"></div>
-			<br />
-			<div id="reset_filters"></div>
-		</form>
-	</div>
+    <div class="well invisible-well">
+        <a href="#/new" class="btn btn-primary btn-large btn-block">New Message</a>
+    </div>
+    <div class="well filters-well hidden-phone">
+        <form id="filters-form">
+            <h3>Filters:</h3>
+            <h5>Classifications</h5>
+            <div id="filter_classifications"></div>
+            <h5>Modifiers</h5>
+            <div id="filter_modifiers"></div>
+            <h5>Impacted Services</h5>
+            <div id="filter_impacted_services"></div>
+            <br />
+            <div id="reset_filters"></div>
+        </form>
+    </div>
 </div>
 
 <div id="messages" class="span9"></div>
@@ -23,15 +23,16 @@
   $(function() {
     // DssMessenger is the app name
     window.router = new DssMessenger.Routers.MessagesRouter(
-			{
-				messages: <%= @messages.to_json.html_safe -%>,
-				pages: <%= @messages.total_pages -%>,
-				current: <%= @messages.current_page -%>,
-				classifications: <%= @classifications.to_json.html_safe -%>,
-				modifiers: <%= @modifiers.to_json.html_safe -%>,
-				impacted_services: <%= @impacted_services.to_json.html_safe -%>,
-				settings: <%= @settings.to_json.html_safe -%>,
-			});
+            {
+                messages: <%= @messages.to_json.html_safe -%>,
+                pages: <%= @messages.total_pages -%>,
+                current: <%= @messages.current_page -%>,
+                classifications: <%= @classifications.to_json.html_safe -%>,
+                modifiers: <%= @modifiers.to_json.html_safe -%>,
+                impacted_services: <%= @impacted_services.to_json.html_safe -%>,
+                settings: <%= @settings.to_json.html_safe -%>,
+                publishers: <%= @publishers.to_json.html_safe -%>
+            });
     Backbone.history.start();
   });
 </script>

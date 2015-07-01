@@ -49,5 +49,7 @@ DssMessenger::Application.configure do
   # Mail.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?
 
   config.host_url = 'localhost:3000'
-
+  
+  # Set default url for ActionMailer
+  config.action_mailer.default_url_options = { :host => "localhost:3000" }
 end

@@ -14,6 +14,7 @@ class MessagesController < ApplicationController
     @modifiers = Modifier.all
     @impacted_services = ImpactedService.all
     @settings = Setting.all
+    @publishers = Publisher.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -23,6 +24,10 @@ class MessagesController < ApplicationController
 
   def show
     @message = Message.find(params[:id])
+
+    # Add colons if necessary
+    @message.classification.description = @message.classification.description + ":"  unless @message.classification.description.include? ":"
+    @message.modifier.description = @message.modifier.description + ":"  unless @message.modifier.description.include? ":"
 
     respond_to do |format|
       format.html {render layout: 'public' }
@@ -48,14 +53,15 @@ class MessagesController < ApplicationController
         # The following two lines are required for Delayed::Job.enqueue to work from a controller
         require 'rake'
         load File.join(Rails.root, 'lib', 'tasks', 'bulk_send.rake')
-
-        ml = MessageLog.find_or_create_by_message_id(@message.id)
-        ml.send_status = :queued
-        ml.save!
-
-        Delayed::Job.enqueue(DelayedRake.new("message:send[#{@message.id}]"))
-
-        Rails.logger.info "Enqueued new message ##{@message.id} for sending. message:send:[#{@message.id}] should pick it up."
+        
+        params[:message][:publisher_ids].each do |publisher_id|
+          ml = MessageLog.find_or_create_by_message_id_and_publisher_id(@message.id, publisher_id)
+          ml.send_status = :queued
+          ml.save!
+          
+          Delayed::Job.enqueue(DelayedRake.new("message:publish[#{ml.id}]"))
+          Rails.logger.info "Enqueued new message ##{@message.id} for sending via #{Publisher.find(publisher_id).name}. message:publish:[#{ml.id}] should pick it up."
+        end
 
         format.html { redirect_to @message, notice: 'Message was successfully created.' }
         format.json { render json: @message, status: :created, location: @message }
@@ -91,23 +97,18 @@ class MessagesController < ApplicationController
   end
 
   def open
-    @open_messages = Message.where(closed: false).order('created_at DESC')
+    rss_publisher = Publisher.where(class_name: 'RSSPublisher').first
+
+    # Return a blank Message object for the view to use when nothing has been
+    # published to RSS. In Rails 4, the proper way to do this would be
+    # Message.none (to get an ActiveRecord::NullRelation), but there's no good
+    # way to do this (that I found) in Rails 3.
+    @open_messages = ((rss_publisher.nil? and Message.where('1 = 2')) or
+                       rss_publisher.messages.order('created_at DESC').take(20))
 
     respond_to do |format|
       format.html { render layout: 'public' } # open.html.erb
       format.rss { render layout: false }     # open.rss.builder
     end
-  end
-
-  # This method should be publicly visible.
-  def track
-    message_entry = MessageLogEntry.find_by_id(params[:id])
-    message_entry.message_log.viewed_count += 1 unless message_entry.viewed
-    message_entry.message_log.save!
-
-    message_entry.viewed = true
-    message_entry.save!
-
-    send_file Rails.root.join("app/assets/images/1x1.gif"), :type => 'image/gif', :diposition => 'inline'
   end
 end

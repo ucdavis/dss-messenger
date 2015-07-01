@@ -1,9 +1,9 @@
     <form id="message-form" name="message" class="form-horizontal">
 
           <div class="control-group" id="recipients-group">
-            <label class="control-label" for="Recipients">Recipients</label>
+            <label class="control-label" for="recipients">Recipients</label>
                 <div class="controls">
-                    <input type="text" name="recipient_uids" id="Recipients" />
+                    <input type="text" name="recipient_uids" id="recipients" />
                 </div>
           </div>
 
@@ -140,25 +140,17 @@ No connectivity to any network services, the campus network, or the Internet dur
           <input type="submit" name="Send" class="btn btn-primary" value="Send Message" />
           <a class="btn" href="#/index">Cancel</a>
           <a class="btn btn-info message-preview">Preview</a>
-          <div style='margin-top: 10px;'>
-              Distribution Channels
-          </div>
-          <!--
-          <div id="channels_select" style="margin: 7px 0 0 10px;">
-            <div>
-              <label class='checkbox'>
-                <input type="checkbox" value="email" name="channel_ids[]" checked="checked">
-                E-mail
-              </label>
-            </div>
-            <div>
-              <label class='checkbox'>
-                <input type="checkbox" value="aggiefeed" name="channel_ids[]">
-                Aggie Feed
-              </label>
+          <div class="control-group" id="publishers-group"
+          data-toggle="tooltip" title="Select the distribution channels through 
+          which this message should be published">
+            <label class="control-label" for="publishers" style='margin-top: 10px;'>
+                Distribution Channels
+            </label>
+            <div class="controls">
+                  <div id="publishers" style="margin: 7px 0 0 10px;">
+                  </div>
             </div>
           </div>
-          -->
         </div>
         
     </form>

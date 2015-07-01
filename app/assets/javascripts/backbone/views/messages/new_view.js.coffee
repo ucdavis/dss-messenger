@@ -5,7 +5,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
   events:
     "submit #message-form": "save"
-    "focus #Recipients"	:	"tokenInput"
+    "focus #recipients"	:	"tokenInput"
     "mouseenter .control-group"   : "tooltip"
     "click .message-preview"  : "preview"
     "click .config-link"  : "openConfig"
@@ -30,6 +30,9 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
 
       view = new DssMessenger.Views.impacted_services.FormIndexView(message: @model)
       @$("#impacted_services_select").html(view.render().el)
+
+      view = new DssMessenger.Views.Publishers.FormIndexView()
+      @$("#publishers").html(view.render().el)
 
     Backbone.Validation.bind this
 
@@ -107,6 +110,7 @@ class DssMessenger.Views.Messages.NewView extends Backbone.View
       modifier_id: $("input[name='modifier_id[]']:checked").val()
       window_start: $("input[name='window_start']").val()
       window_end: $("input[name='window_end']").val()
+      publisher_ids: _.map($("input[name='publisher_id[]']:checked"), (a) -> a.value )
 
     @collection.create(@model.toJSON(),
       timeout: 30000

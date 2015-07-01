@@ -1,5 +1,8 @@
 DssMessenger::Application.routes.draw do
 
+  resources :message_receipts
+
+
   resources :settings
 
 
@@ -14,8 +17,9 @@ DssMessenger::Application.routes.draw do
 
   resources :recipients
 
+  resources :publishers
+
   get "/messages/open" => 'messages#open'
-  get "/messages/track/:id" => 'messages#track'
   resources :messages
   
   root :to => 'messages#index'

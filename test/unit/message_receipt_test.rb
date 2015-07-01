@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class MessageLogEntryTest < ActiveSupport::TestCase
+class MessageReceiptTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

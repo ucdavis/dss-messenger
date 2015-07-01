@@ -83,4 +83,6 @@ DssMessenger::Application.configure do
 
   config.host_url = 'messenger.dss.ucdavis.edu'
 
+  # Set default url for ActionMailer
+  config.action_mailer.default_url_options = { :host => "messenger.dss.ucdavis.edu" }
 end

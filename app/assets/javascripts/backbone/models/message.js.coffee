@@ -23,9 +23,12 @@ class DssMessenger.Models.Message extends Backbone.Model
     impact_statement:
       required: true
       msg: "Please enter an impact statement"
+    publisher_ids:
+      required: true
+      msg: "Please use at least one publisher"
 
   toJSON: () ->
-    json = _.omit(this.attributes, 'updated_at','created_at','classification','modifier','recipients','impacted_services','pages','current','sender_name', 'created_at_in_words', 'recipient_count', 'send_status', 'channel_ids[]')
+    json = _.omit(this.attributes, 'updated_at','created_at','classification','modifier','recipients','impacted_services','pages','current','sender_name', 'created_at_in_words', 'recipient_counts', 'send_statuses', 'channel_ids[]', 'publishers')
     json
 
   toFullJSON: () ->

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150520205121) do
+ActiveRecord::Schema.define(:version => 20150615231537) do
 
   create_table "audiences", :force => true do |t|
     t.integer  "message_id"
@@ -66,27 +66,30 @@ ActiveRecord::Schema.define(:version => 20150520205121) do
 
   add_index "impacted_services", ["id"], :name => "index_impacted_services_on_id"
 
-  create_table "message_log_entries", :force => true do |t|
+  create_table "message_logs", :force => true do |t|
+    t.integer  "message_id"
+    t.datetime "start"
+    t.datetime "finish"
+    t.integer  "status"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.integer  "recipient_count"
+    t.integer  "viewed_count",    :default => 0
+    t.integer  "publisher_id"
+  end
+
+  add_index "message_logs", ["message_id"], :name => "index_message_logs_on_message_id"
+  add_index "message_logs", ["publisher_id"], :name => "index_message_logs_on_publisher_id"
+
+  create_table "message_receipts", :force => true do |t|
     t.integer  "message_log_id"
     t.string   "recipient_name"
     t.string   "recipient_email"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.boolean  "viewed"
+    t.string   "login_id"
   end
-
-  create_table "message_logs", :force => true do |t|
-    t.integer  "message_id"
-    t.datetime "send_start"
-    t.datetime "send_finish"
-    t.integer  "send_status"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-    t.integer  "recipient_count"
-    t.integer  "viewed_count",    :default => 0
-  end
-
-  add_index "message_logs", ["message_id"], :name => "index_message_logs_on_message_id"
 
   create_table "messages", :force => true do |t|
     t.string   "subject"
@@ -115,6 +118,14 @@ ActiveRecord::Schema.define(:version => 20150520205121) do
   end
 
   add_index "modifiers", ["id"], :name => "index_modifiers_on_id"
+
+  create_table "publishers", :force => true do |t|
+    t.string   "name"
+    t.string   "class_name"
+    t.boolean  "default"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "recipients", :force => true do |t|
     t.string   "uid"

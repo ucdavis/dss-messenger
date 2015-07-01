@@ -103,6 +103,22 @@ input[type="text"], textarea {
     padding: 0.25em;
 }
 
+#edit_publishers input[type="text"] {
+    width: 100%;
+}
+
+#edit_publishers b, #edit_publishers .code-name {
+    display: block;
+    padding: 2px;
+    margin: 2px;
+}
+
+#edit_publishers .code-name {
+    /* font families copied from Stackoverflow's CSS sheet */
+    font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+    font-size: 12px;
+}
+
 input[type="text"].pref_input {
   padding: 2px;
   margin: 2px;
@@ -117,6 +133,29 @@ ul.token-input-list-facebook {
     -moz-border-radius: 4px;
     border-radius: 4px;
     margin-bottom: 1em;
+}
+
+.control-group.error ul.token-input-list-facebook {
+    border-color: #b94a48;
+    margin-bottom: 0;
+}
+
+/* publishers is special because it goes beneath the Send Message button, so
+ * apply special styling: */
+#publishers-group {
+    position: relative;
+    padding-left: 30px;
+    left: -30px;
+    top: 0;
+}
+
+#publishers-group .control-label {
+    float: none;
+    text-align: left;
+}
+
+#publishers-group .controls {
+    margin-left: 0;
 }
 
 /*********** tables ************/

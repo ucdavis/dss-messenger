@@ -21,6 +21,7 @@ class DssMessenger.Views.Settings.PrefsView extends Backbone.View
       $("#classifications_prefs").html("<div class='loading'></div>")
       $("#modifiers_prefs").html("<div class='loading'></div>")
       $("#impacted_services_prefs").html("<div class='loading'></div>")
+      $("#publishers_prefs").html("<div class='loading'></div>")
       # load the inputs originally laoded from the router
       view = new DssMessenger.Views.Classifications.EditIndexView()
       @$("#classifications_prefs").html(view.render().el)
@@ -30,6 +31,9 @@ class DssMessenger.Views.Settings.PrefsView extends Backbone.View
 
       view = new DssMessenger.Views.impacted_services.EditIndexView()
       @$("#impacted_services_prefs").html(view.render().el)
+
+      view = new DssMessenger.Views.Publishers.EditIndexView(el: "#publishers_prefs")
+      view.render()
 
       view = new DssMessenger.Views.Settings.EditFooterView(model: DssMessenger.settings.where({item_name: "footer"})[0])
       @$("#email_footer").html(view.render().el)
