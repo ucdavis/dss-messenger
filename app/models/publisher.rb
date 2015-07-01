@@ -37,6 +37,8 @@ class Publisher < ActiveRecord::Base
     receipt = MessageReceipt.new
     receipt.recipient_name = recipient.name
     receipt.recipient_email = recipient.email
+    # Save the person's login id or nil if it doesn't exist in the database for
+    # some reason.
     receipt.login_id = recipient.loginid?
     message_log.entries << receipt
 

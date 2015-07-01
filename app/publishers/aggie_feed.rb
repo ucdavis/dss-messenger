@@ -39,7 +39,10 @@ class AggieFeed < AbstractController::Base
     recipient_login_id = ((recipient.respond_to? :loginid and recipient.loginid) or
                            recipient.email.split('@')[0])
     
-    # Set the recipient. id is ideally the Kerberos id for the recipient.
+    # Set the recipient. id is ideally the Kerberos id for the recipient. (g:
+    # and i: are required by the AggieFeed API. AggieFeed's documentation says
+    # to use false for both when posting to one person, but doesn't specify what
+    # they mean).
     @recipient = [ { id: recipient_login_id, g: false, i: false } ]
 
     # Time of publication.
