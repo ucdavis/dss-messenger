@@ -19,7 +19,7 @@ class Message < ActiveRecord::Base
   validates :subject, presence: true
   validates :impact_statement, presence: true
   validates_presence_of :recipients
-  validates_presence_of :publishers
+  validates_presence_of :publishers, :on => :create
 
   # Filters to limit the result to specified criterion
   scope :by_classification, lambda { |classification| where(classification_id: classification) unless classification.nil? }
@@ -85,19 +85,7 @@ class Message < ActiveRecord::Base
           self.logs.map do |log|
             {
               :publisher => (log.publisher ? log.publisher.name : 'E-mail'),
-              :status =>
-#                if log.send_status.to_s.capitalize == 'Queued' && 
-#                   Delayed::Job.where('locked_by is not null').count == 0 &&
-#                   File.file?(Rails.root + "tmp/pids/delayed_job.pid")  
-#                    'Mail sender might not be working...'
-#                elsif log.send_status.to_s.capitalize == "Sending" &&
-#                        Delayed::Job.where('locked_by is not null').count == 0
-#                    log.send_status = :error
-#                    log.save!
-#                    log.send_status.to_s.capitalize
-#                else
-                   log.send_status.to_s.capitalize
-#                end
+              :status => log.send_status.to_s.capitalize
             }
           end
         else
