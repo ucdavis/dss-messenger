@@ -5,9 +5,9 @@ class DelayedJobStatusController < ApplicationController
 
     case @status
     when 0b00
-      render :plain => "Yes", :status => :ok
+      render :text => "Yes", :status => :ok
     when 0b01, 0b10
-      render :plain => "Maybe", :status => :ok
+      render :text => "Maybe", :status => :ok
     else
       render :nothing => true, :status => :"i'm_a_teapot"
     end
