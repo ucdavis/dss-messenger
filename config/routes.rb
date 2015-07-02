@@ -19,11 +19,12 @@ DssMessenger::Application.routes.draw do
 
   resources :publishers
 
-  get "/delayed_job_status" => 'delayed_job_status#index'
-
   get "/messages/open" => 'messages#open'
   resources :messages
   
   root :to => 'messages#index'
+
   get "/logout" => 'application#logout'
+  get "/status" => 'application#status'
+  get "/delayed_job_status" => 'delayed_job_status#index'
 end
