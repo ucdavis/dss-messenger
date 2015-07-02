@@ -4,8 +4,8 @@ class DssMessenger.Views.DelayedJobStatus.IndexView extends Backbone.View
   template: JST["backbone/templates/delayed_job_status/index"]
 
   initialize: ->
-    $.get('/delayed_job_status', () ->
-      @status = true
+    $.get('/delayed_job_status', (data) ->
+      @status = data
     ).fail(() ->
       @status = false
     )
