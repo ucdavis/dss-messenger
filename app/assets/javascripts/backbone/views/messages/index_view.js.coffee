@@ -59,9 +59,6 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
     @$el.html(@template(messages: DssMessenger.messages.toJSON() ))
     @addAll()
 
-    view = new DssMessenger.Views.DelayedJobStatus.IndexView()
-    @$("#delayed-jobs-info").html(view.render().el)
-
     @active = DssMessenger.messages.filter (messages) ->
       messages.get("closed") is false
     @archive = DssMessenger.messages.filter (messages) ->
@@ -78,5 +75,7 @@ class DssMessenger.Views.Messages.IndexView extends Backbone.View
         $("#archive-table, .pagination").hide()
         @$el.html('<h2 class="text-center">No Messages</h2>')
 
+      view = new DssMessenger.Views.DelayedJobStatus.IndexView()
+      @$("#delayed-jobs-info").html(view.render().el)
 
     return this
