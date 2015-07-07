@@ -13,6 +13,6 @@ class DssMessenger.Views.Settings.AboutView extends Backbone.View
     @$el.html(@template())
 
     _.defer =>
-      $("span#last_updated").html DssMessenger.last_updated
+      $("span#last_updated").html "N/A"
 
     return this
