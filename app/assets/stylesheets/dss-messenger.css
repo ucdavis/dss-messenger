@@ -142,7 +142,7 @@ ul.token-input-list-facebook {
 
 /* publishers is special because it goes beneath the Send Message button, so
  * apply special styling: */
-#publishers-group {
+/*#publishers-group {
     position: relative;
     padding-left: 30px;
     left: -30px;
@@ -156,7 +156,7 @@ ul.token-input-list-facebook {
 
 #publishers-group .controls {
     margin-left: 0;
-}
+}*/
 
 /*********** tables ************/
 
@@ -287,10 +287,10 @@ span.section-head {
 	  width: auto;
 	  top: 0;
 	}
-	
+
 	tr#mtable-head.affix {
       position: fixed;
       top: 0px;
   }
-  
+
 }

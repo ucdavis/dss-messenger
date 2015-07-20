@@ -11,11 +11,11 @@
                 title="Used in the subject line--should be 5 words or less and succinctly summarize the services that are unavailable or that will be unavailable. Examples: DSS file services (dss-filer1); DSS VPN service; CMB networks; campus wireless networks; Matlab network licensing.">
             <label class="control-label" for="subject">Short Description</label>
                 <div class="controls">
-                <input type="text" name="subject" id="subject" value="<%= subject %>" 
+                <input type="text" name="subject" id="subject" value="<%= subject %>"
                     placeholder="Example: DSS file services (dss-filer1)"></input>
                 </div>
           </div>
-        
+
           <div class="control-group" id="classifications-group">
             <label class="control-label" for="classifications">
                     Classification<br />
@@ -47,12 +47,12 @@
                 title="Short, customer-centric description of the issue. What does this problem look like from the customer's perspective?">
             <label class="control-label" for="impact_statement">Impact Statement</label>
                 <div class="controls">
-                <textarea type="text" name="impact_statement" id="impact_statement" rows="7" 
-                        placeholder="Examples:                                                                                                      
-Some users are reporting slow Internet connectivity and problems reaching specific websites, including XYZ.com.                                                                                     
-We have been notified about a campus-wide network outage.                                                                                                                                               
-Some users are reporting that they are not able to get on the Moobilenet wireless network.                                                                          
-uConnect Exchange users are unable to connect to shared calendars.                                                                                                                                  
+                <textarea type="text" name="impact_statement" id="impact_statement" rows="7"
+                        placeholder="Examples:
+Some users are reporting slow Internet connectivity and problems reaching specific websites, including XYZ.com.
+We have been notified about a campus-wide network outage.
+Some users are reporting that they are not able to get on the Moobilenet wireless network.
+uConnect Exchange users are unable to connect to shared calendars.
 No connectivity to any network services, the campus network, or the Internet during firewall maintenance window."
                         ><%= impact_statement %></textarea>
                 </div>
@@ -85,8 +85,8 @@ No connectivity to any network services, the campus network, or the Internet dur
             <label class="control-label" for="purpose">Purpose</label>
                 <div class="controls">
                 <textarea type="text" name="purpose" id="purpose" rows="5"
-                        placeholder="Examples:                                                                                                                                                                                      
-                        Performing vendor-recommended maintenance on the storage array.                                                                                                     
+                        placeholder="Examples:
+                        Performing vendor-recommended maintenance on the storage array.
                         Rebooting firewall to apply security patches.
                         " ><%= purpose %></textarea>
                 </div>
@@ -113,12 +113,12 @@ No connectivity to any network services, the campus network, or the Internet dur
             <label class="control-label" for="other_services">Other Services</label>
                 <div class="controls">
                 <textarea type="text" name="other_services" id="other_services" rows="5"
-                        placeholder="Examples:                                                                                                                                                                                      
-                        Kerr Hall Wireless Network                                                                                                                                                                                      
-                        DSS File Shares                                                                                                                                                                                                         
-                        Campus Network Connectivity                                                                                                                                                                                 
-                        Economics Department Network                                                                                                                                                                            
-                        uConnect Email and Calendars                                                                                                                                                                            
+                        placeholder="Examples:
+                        Kerr Hall Wireless Network
+                        DSS File Shares
+                        Campus Network Connectivity
+                        Economics Department Network
+                        uConnect Email and Calendars
                         Philosophy Department Website" ><%= other_services %></textarea>
                 </div>
           </div>
@@ -134,23 +134,21 @@ No connectivity to any network services, the campus network, or the Internet dur
                 </div>
           </div>
 
+          <div class="control-group" id="publishers-group" data-toggle="tooltip" title="Select the distribution channels through which this message should be published">
+            <label class="control-label" for="publishers">
+                Distribution Channels<br />
+            </label>
+            <div class="controls">
+                  <div id="publishers"></div>
+            </div>
+          </div>
+
       </div>
 
         <div class="form-actions">
           <input type="submit" name="Send" class="btn btn-primary" value="Send Message" />
           <a class="btn" href="#/index">Cancel</a>
           <a class="btn btn-info message-preview">Preview</a>
-          <div class="control-group" id="publishers-group"
-          data-toggle="tooltip" title="Select the distribution channels through 
-          which this message should be published">
-            <label class="control-label" for="publishers" style='margin-top: 10px;'>
-                Distribution Channels
-            </label>
-            <div class="controls">
-                  <div id="publishers" style="margin: 7px 0 0 10px;">
-                  </div>
-            </div>
-          </div>
-        </div>
-        
+        </div> <!-- .form-actions -->
+
     </form>
