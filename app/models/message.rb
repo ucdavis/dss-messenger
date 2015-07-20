@@ -1,17 +1,17 @@
 class Message < ActiveRecord::Base
   include ActionView::Helpers::DateHelper
-  
+
   attr_accessible :impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround, :classification_id, :modifier_id, :recipient_uids, :impacted_service_ids, :closed, :publisher_ids
-  
+
   has_many :damages
   has_many :impacted_services, :through => :damages
-  
+
   has_many :audiences
   has_many :recipients, :through => :audiences
-  
+
   belongs_to :classification
   belongs_to :modifier
-  
+
   has_many :logs, :class_name => "MessageLog"
   has_many :publishers, :through => :logs
 
@@ -25,15 +25,20 @@ class Message < ActiveRecord::Base
   scope :by_classification, lambda { |classification| where(classification_id: classification) unless classification.nil? }
   scope :by_modifier, lambda { |modifier| where(modifier_id: modifier) unless modifier.nil? }
   scope :by_service, lambda { |service| joins(:impacted_services).where('impacted_services.id = ?', service) unless service.nil? }
-  
+
   def recipient_uids=(ids_str)
     ids_str.split(",").each do |r|
-      name = Entity.find(r).name
-      recipient = Recipient.find_or_create_by_uid(uid: r, name: name)
-      self.recipients << recipient unless self.recipients.include?(recipient) # Avoid duplicates
+      begin
+        name = Entity.find(r).name
+        recipient = Recipient.find_or_create_by_uid(uid: r, name: name)
+
+        self.recipients << recipient unless self.recipients.include?(recipient) # Avoid duplicates
+      rescue ActiveResource::ResourceNotFound => e
+        # Nothing we can do about this
+      end
     end
   end
-  
+
   def as_json(options = {})
     {
       :id => self.id,
@@ -45,7 +50,7 @@ class Message < ActiveRecord::Base
       :sender_uid => self.sender_uid,
       :sender_name => Person.find(self.sender_uid).name,
       :subject => self.subject,
-      :window_start => 
+      :window_start =>
         if self.window_start
           self.window_start.strftime("%Y/%m/%d %I:%M %p")
         else
@@ -92,6 +97,6 @@ class Message < ActiveRecord::Base
           []
         end
     }
-    
+
   end
 end
