@@ -8,4 +8,3 @@ class RSSPublisher < Publisher
     message_log.save!
   end
 end
-
