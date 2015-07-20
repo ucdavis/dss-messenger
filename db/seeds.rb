@@ -1,4 +1,5 @@
 require 'active_record/fixtures'
+
 unless Classification.exists?
   ActiveRecord::Fixtures.create_fixtures("#{Rails.root}/test/fixtures", "classifications")
 end
@@ -20,7 +21,7 @@ Dir.entries(Rails.root + "app/publishers")
     until class_file.eof()
       class_line = class_file.readline()
       break class_line.gsub(/.* (.*) < Publisher/, '\1').strip  if class_line.include? "< Publisher"
-      break if class_line.start_with? "class" 
+      break if class_line.start_with? "class"
     end
   end
 end

@@ -1,15 +1,15 @@
 class DelayedJobStatusController < ApplicationController
 
   def index
-    @status = DelayedJobWorker.status
+    status = DelayedJobWorker.status
 
-    case @status
-    when 0b00
+    case status
+    when DelayedJobWorker::RUNNING
       render :text => "Yes", :status => :ok
-    when 0b01, 0b10
+    when DelayedJobWorker::NO_PROCESS, DelayedJobWorker::NO_LOCKED_JOBS
       render :text => "Maybe", :status => :ok
     else
-      render :nothing => true, :status => :"i'm_a_teapot"
+      render :nothing => true, :status => :error
     end
   end
 end
