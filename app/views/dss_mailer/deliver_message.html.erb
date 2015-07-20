@@ -21,7 +21,7 @@
 <% if @message.window_start %>
   <p><b>START OF WINDOW:</b></p>
   <p>
-  <%= @message.window_start.strftime("%A, %B %d, %Y at %l:%M %p") %><%= @message.window_end.nil? ? '' : ', ONGOING' %>
+  <%= @message.window_start.strftime("%A, %B %d, %Y at %l:%M %p") %><%= @message.window_end.nil? ? ', ONGOING' : '' %>
   </p>
 <% end %>
 
