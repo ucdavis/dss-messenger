@@ -26,8 +26,14 @@ class MessagesController < ApplicationController
     @message = Message.find(params[:id])
 
     # Add colons if necessary
-    @message.classification.description = @message.classification.description + ":"  unless @message.classification.description.include? ":"
-    @message.modifier.description = @message.modifier.description + ":"  unless @message.modifier.description.include? ":"
+    if @message.classification
+      # classification is not required
+      @message.classification.description = @message.classification.description + ":"  unless @message.classification.description.include? ":"
+    end
+    if @message.modifier
+      # modifier is not required
+      @message.modifier.description = @message.modifier.description + ":"  unless @message.modifier.description.include? ":"
+    end
 
     respond_to do |format|
       format.html {render layout: 'public' }
@@ -53,12 +59,12 @@ class MessagesController < ApplicationController
         # The following two lines are required for Delayed::Job.enqueue to work from a controller
         require 'rake'
         load File.join(Rails.root, 'lib', 'tasks', 'bulk_send.rake')
-        
+
         params[:message][:publisher_ids].each do |publisher_id|
           ml = MessageLog.find_or_create_by_message_id_and_publisher_id(@message.id, publisher_id)
           ml.send_status = :queued
           ml.save!
-          
+
           Delayed::Job.enqueue(DelayedRake.new("message:publish[#{ml.id}]"))
           Rails.logger.info "Enqueued new message ##{@message.id} for sending via #{Publisher.find(publisher_id).name}. message:publish:[#{ml.id}] should pick it up."
         end
