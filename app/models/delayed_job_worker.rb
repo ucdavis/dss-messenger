@@ -12,14 +12,14 @@ class DelayedJobWorker
 
   # Checks the status of Delayed::Job and returns a status code.
   def self.status
-    process_is_dead + jobs_not_locked
+    process_is_dead #+ jobs_not_locked
   end
 
-  # Checks to see if there are jobs that need working on and none are locked.
-  def self.jobs_not_locked
-    return NO_LOCKED_JOBS if Delayed::Job.where('locked_by is not null').count == 0 && Delayed::Job.count > 0
-    return RUNNING
-  end
+  # # Checks to see if there are jobs that need working on and none are locked.
+  # def self.jobs_not_locked
+  #   return NO_LOCKED_JOBS if Delayed::Job.where('locked_by is not null').count == 0 && Delayed::Job.count > 0
+  #   return RUNNING
+  # end
 
   # Checks the status of Delayed::Job process and returns a status code.
   def self.process_is_dead

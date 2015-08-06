@@ -1,5 +1,4 @@
 class DelayedJobStatusController < ApplicationController
-
   def index
     status = DelayedJobWorker.status
 
