@@ -1,7 +1,7 @@
 class ClassificationsController < ApplicationController
   before_action :set_classification, only: [:show, :edit, :update, :destroy]
 
-  filter_resource_access
+  filter_access_to :all
 
   def create
     @classification = Classification.new(classification_params)

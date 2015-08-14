@@ -1,7 +1,7 @@
 class ImpactedServicesController < ApplicationController
   before_action :set_impacted_service, only: [:show, :edit, :update, :destroy]
 
-  filter_resource_access
+  filter_access_to :all
 
   def create
     @impacted_service = ImpactedService.new(impacted_service_params)

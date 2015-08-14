@@ -1,7 +1,7 @@
 class RecipientsController < ApplicationController
   before_action :set_recipient, only: [:show, :edit, :update, :destroy]
 
-  filter_resource_access
+  filter_access_to :all
 
   def index
     @recipients = Entity.search(params[:q])

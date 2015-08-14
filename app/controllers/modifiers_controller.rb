@@ -1,7 +1,7 @@
 class ModifiersController < ApplicationController
   before_action :set_modifier, only: [:show, :edit, :update, :destroy]
 
-  filter_resource_access
+  filter_access_to :all
 
   def create
     @modifier = Modifier.new(modifier_params)

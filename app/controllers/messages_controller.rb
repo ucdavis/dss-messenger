@@ -5,12 +5,12 @@ class MessagesController < ApplicationController
   filter_access_to [:index, :create, :open], :attribute_check => false
 
   def index
-    @messages = Message.includes(:recipients,:classification,:modifier,:impacted_services)
+    @messages = Message.includes(:recipients, :classification, :modifier, :impacted_services)
       .order('messages.created_at DESC')
       .by_classification(params[:cl])
       .by_modifier(params[:mo])
       .by_service(params[:is])
-      .page(params[:page]).per(20) #paginate with 'page' param being the page number, and 20 as the items per page
+      .page(params[:page]).per(20) # paginate with 'page' param as page number, 20 items per page
 
     @classifications = Classification.all
     @modifiers = Modifier.all

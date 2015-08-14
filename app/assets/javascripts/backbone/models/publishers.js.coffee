@@ -1,5 +1,5 @@
 class DssMessenger.Models.Publishers extends Backbone.Model
-  paramRoot: 'publishers'
+  paramRoot: 'publisher'
 
   defaults:
     name: null
