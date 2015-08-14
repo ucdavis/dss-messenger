@@ -69,7 +69,7 @@ GEM
     exception_notification (4.1.1)
       actionmailer (>= 3.0.4)
       activesupport (>= 3.0.4)
-    execjs (2.5.2)
+    execjs (2.6.0)
     highline (1.7.3)
     hike (1.2.3)
     hpricot (0.8.6)
@@ -184,7 +184,7 @@ DEPENDENCIES
   mail
   pg
   premailer-rails
-  rails (~> 3.2.21)
+  rails (~> 3.2.22)
   rails-backbone!
   rake
   rubycas-client
