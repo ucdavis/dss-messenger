@@ -4,7 +4,7 @@ namespace :message do
   desc 'Publish a message'
   task :publish, [:message_log_id] => :environment do |t, args|
     Rails.logger.tagged('task:message:publish') do
-      message_log = MessageLog.find_by_id(args.message_log_id)
+      message_log = MessageLog.find_by(id: args.message_log_id)
       unless message_log
         Rails.logger.error "Unable to find message log with ID #{args.message_log_id}"
         next # used in rake to abort a rake task (as well as in loops)

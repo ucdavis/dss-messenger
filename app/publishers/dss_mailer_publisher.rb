@@ -3,7 +3,7 @@ class DssMailerPublisher < Publisher
   # Constructs the necessary parts of the e-mail and sends it via +DssMailer+.
   def self.publish(message_receipt_id, message, recipient)
     Rails.logger.debug "DssMailer is publishing for message receipt ##{message_receipt_id} ..."
-    
+
      # Add a colon to the modifier and classification if one doesn't exist
     # already.
     modifier = message.modifier.description + ":" if message.modifier
@@ -28,7 +28,7 @@ class DssMailerPublisher < Publisher
   # Keeps track of how many people have viewed their e-mails, assuming their
   # e-mail viewer can request images. Sends a pixel-sized gif as a reply.
   def self.callback(message_receipt_id, scope)
-    receipt = MessageReceipt.find_by_id(message_receipt_id)
+    receipt = MessageReceipt.find_by(id: message_receipt_id)
 
     # Keeping viewed_count as a column because it can be used as a hit counter
     # for RSS, AggieFeed, and other services

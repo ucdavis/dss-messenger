@@ -6,12 +6,12 @@ class AggieFeedPublisher < Publisher
   end
 
   # Increments the count of number of views this message has received and
-  # displays the message.  
+  # displays the message.
   # *Note:* Unlike DssMailerPublisher, the count is increased regardless of
   # whether or not the same person has viewed this message multiple times, even
   # though everyone gets a unique URL for each Aggie Feed message.
   def self.callback(message_receipt_id, scope)
-    receipt = MessageReceipt.find_by_id(message_receipt_id)
+    receipt = MessageReceipt.find_by(id: message_receipt_id)
 
     receipt.message_log.viewed_count += 1
     receipt.message_log.save!
@@ -27,4 +27,3 @@ class AggieFeedPublisher < Publisher
     end
   end
 end
-
