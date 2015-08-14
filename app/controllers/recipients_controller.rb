@@ -4,7 +4,7 @@ class RecipientsController < ApplicationController
   filter_resource_access
 
   def index
-    @recipients = Entity.find(:all, :params => {:q => params[:q]})
+    @recipients = Entity.search(params[:q])
 
     respond_to do |format|
       format.html # index.html.erb
