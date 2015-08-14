@@ -3,6 +3,8 @@ DssMessenger::Application.routes.draw do
   # This action must come before 'resources :messages'
   get "/messages/open" => 'messages#open'
 
+  get "/messages/raise_exception" => 'messages#raise_exception'
+
   resources :message_receipts
   resources :settings
   resources :impacted_services

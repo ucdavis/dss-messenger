@@ -117,4 +117,8 @@ class MessagesController < ApplicationController
       format.rss { render layout: false }     # open.rss.builder
     end
   end
+
+  def raise_exception
+    raise "This is a test exception."
+  end
 end
