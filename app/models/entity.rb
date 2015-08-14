@@ -1,5 +1,5 @@
 class Entity
-  attr_accessor :id, :name, :member_count
+  attr_accessor :id, :name, :member_count, :type, :members
 
   # While self.find mimics ActiveRecord.find, we've chosen to simply make a
   # separate method call instead of implementing ActiveRecord.find(:all, :params ...)
@@ -20,14 +20,8 @@ class Entity
 
     entities = []
 
-    json.each do |entity|
-      e = Entity.new
-
-      e.id = entity["id"]
-      e.name = entity["name"]
-      e.member_count = entity["member_count"]
-      
-      entities << e
+    json.each do |entity_json|
+      entities << new_entity(entity_json)
     end
 
     return entities
@@ -47,13 +41,7 @@ class Entity
 
     json = JSON.parse(response)
 
-    e = Entity.new
-
-    e.id = json["id"]
-    e.name = json["name"]
-    e.member_count = json["member_count"]
-
-    return e
+    return new_entity(json)
   end
 
   def as_json(options = {})
@@ -63,4 +51,24 @@ class Entity
       :member_count => self.member_count
     }
   end
+
+  private
+
+    def self.new_entity(json)
+      e = Entity.new
+
+      e.id = json["id"]
+      e.name = json["name"]
+      e.member_count = json["member_count"]
+      e.type = json["type"]
+      e.members = []
+
+      if json["members"]
+        json["members"].each do |member|
+          e.members << { id: member["id"], type: member["type"] }
+        end
+      end
+
+      return e
+    end
 end

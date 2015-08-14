@@ -36,7 +36,7 @@ namespace :message do
 
         # If entity is a group, resolve individual group members
         if entity.type == "Group"
-          entity.members.map(&:id).uniq.each do |m|
+          entity.members.map{ |m| m[:id] }.uniq.each do |m|
             begin
               p = Person.find(m)
             rescue Exception => e

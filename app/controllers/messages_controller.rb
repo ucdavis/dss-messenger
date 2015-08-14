@@ -61,7 +61,7 @@ class MessagesController < ApplicationController
         load File.join(Rails.root, 'lib', 'tasks', 'bulk_send.rake')
 
         params[:message][:publisher_ids].each do |publisher_id|
-          ml = MessageLog.find_or_create_by_message_id_and_publisher_id(@message.id, publisher_id)
+          ml = MessageLog.find_or_create_by(message_id: @message.id, publisher_id: publisher_id)
           ml.status = :queued
           ml.save!
 
@@ -123,6 +123,6 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround, :classification_id, :modifier_id, :recipient_uids, :impacted_service_ids, :closed, :publisher_ids)
+      params.require(:message).permit(:impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround, :classification_id, :modifier_id, :recipient_uids, :impacted_service_ids, :closed, :publisher_ids => [])
     end
 end
