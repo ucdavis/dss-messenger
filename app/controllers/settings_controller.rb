@@ -1,10 +1,9 @@
 class SettingsController < ApplicationController
+  before_action :set_setting, only: [:show, :edit, :update, :destroy]
 
   def update
-    @setting = Setting.find(params[:id])
-
     respond_to do |format|
-      if @setting.update_attributes(params[:setting])
+      if @setting.update_attributes(setting_params)
         format.html { redirect_to @setting, notice: 'Setting was successfully updated.' }
         format.json { head :no_content }
       else
@@ -13,4 +12,15 @@ class SettingsController < ApplicationController
       end
     end
   end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_setting
+      @setting = Setting.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def setting_params
+      params.require(:setting).permit(:item_name, :item_value)
+    end
 end

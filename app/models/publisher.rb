@@ -2,8 +2,6 @@
 # sending e-mails or posting messages to third-party services). All publishers
 # should inherit off of this class in order to be called from +Delayed::Job+.
 class Publisher < ActiveRecord::Base
-  attr_accessible :class_name, :default, :name
-
   has_many :message_logs
   has_many :messages, :through => :message_logs
 

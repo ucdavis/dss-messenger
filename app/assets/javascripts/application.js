@@ -1,31 +1,19 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// the compiled file.
-//
-// WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
-// GO AFTER THE REQUIRES BELOW.
-//
 //= require jquery
 //= require jquery_ujs
-//= require ../../../vendor/assets/javascripts/jquery-ui-1.10.0.custom.min
-//= require ../../../vendor/assets/javascripts/bootstrap-datetimepicker
-//= require ../../../vendor/assets/javascripts/jquery.tokeninput
-//= require ../../../vendor/assets/javascripts/moment.min
-//= require ../../../vendor/assets/javascripts/bootbox.min
-//= require ../../../vendor/assets/javascripts/bootstrap-select
+//= require jquery-ui-1.10.0.custom.min
+//= require bootstrap-datetimepicker
+//= require jquery.tokeninput
+//= require moment.min
+//= require bootbox.min
+//= require bootstrap-select
 //= require twitter/bootstrap
 //= require underscore
 //= require backbone
 //= require backbone_rails_sync
 //= require backbone_datalink
-//= require ../../../vendor/assets/javascripts/backbone-validation
-//= require ../../../vendor/assets/javascripts/backbone.validation.bootstrap
-//= require ../../../vendor/assets/javascripts/backbone.bootstrap-modal
-//= require ../../../vendor/assets/javascripts/etch
+//= require backbone-validation
+//= require backbone.validation.bootstrap
+//= require backbone.bootstrap-modal
+//= require etch
 //= require backbone/dss_messenger
 //= require dss-messenger

@@ -1,8 +1,10 @@
 class RecipientsController < ApplicationController
+  before_action :set_recipient, only: [:show, :edit, :update, :destroy]
+
   filter_resource_access
-  
+
   def index
-    @recipients = Entity.find(:all, :params => {:q => params[:q]}) #Recipient.all
+    @recipients = Entity.find(:all, :params => {:q => params[:q]})
 
     respond_to do |format|
       format.html # index.html.erb
@@ -11,7 +13,7 @@ class RecipientsController < ApplicationController
   end
 
   def create
-    @recipient = Recipient.new(params[:recipient])
+    @recipient = Recipient.new(recipient_params)
 
     respond_to do |format|
       if @recipient.save
@@ -25,10 +27,8 @@ class RecipientsController < ApplicationController
   end
 
   def update
-    @recipient = Recipient.find(params[:id])
-
     respond_to do |format|
-      if @recipient.update_attributes(params[:recipient])
+      if @recipient.update_attributes(recipient_params)
         format.html { redirect_to @recipient, notice: 'Recipient was successfully updated.' }
         format.json { head :no_content }
       else
@@ -39,7 +39,6 @@ class RecipientsController < ApplicationController
   end
 
   def destroy
-    @recipient = Recipient.find(params[:id])
     @recipient.destroy
 
     respond_to do |format|
@@ -47,4 +46,15 @@ class RecipientsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_recipient
+      @recipient = Recipient.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def recipient_params
+      params.require(:recipient).permit(:uid, :name)
+    end
 end

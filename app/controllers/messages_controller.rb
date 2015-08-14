@@ -1,4 +1,6 @@
 class MessagesController < ApplicationController
+  before_action :set_message, only: [:show, :edit, :update, :destroy]
+
   filter_access_to [:show, :update, :destroy], :attribute_check => true
   filter_access_to [:index, :create, :open], :attribute_check => false
 
@@ -23,8 +25,6 @@ class MessagesController < ApplicationController
   end
 
   def show
-    @message = Message.find(params[:id])
-
     # Add colons if necessary
     if @message.classification
       # classification is not required
@@ -42,7 +42,7 @@ class MessagesController < ApplicationController
 
   def create
     # Include distribution channels through which to send messages in model
-    @message = Message.new(params[:message])
+    @message = Message.new(message_params)
     @message.sender_uid = Person.find(session[:cas_user]).id # get the full name of the currently logged in user
 
     # The message is open or closed depending on the selected modifier
@@ -79,10 +79,8 @@ class MessagesController < ApplicationController
   end
 
   def update
-    @message = Message.find(params[:id])
-
     respond_to do |format|
-      if @message.update_attributes(params[:message])
+      if @message.update_attributes(message_params)
         format.html { redirect_to @message, notice: 'Message was successfully updated.' }
         format.json { head :no_content }
       else
@@ -93,7 +91,6 @@ class MessagesController < ApplicationController
   end
 
   def destroy
-    @message = Message.find(params[:id])
     @message.destroy
 
     respond_to do |format|
@@ -117,4 +114,15 @@ class MessagesController < ApplicationController
       format.rss { render layout: false }     # open.rss.builder
     end
   end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_message
+      @message = Message.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def message_params
+      params.require(:message).permit(:impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround, :classification_id, :modifier_id, :recipient_uids, :impacted_service_ids, :closed, :publisher_ids)
+    end
 end

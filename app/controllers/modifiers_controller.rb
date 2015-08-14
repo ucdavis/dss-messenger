@@ -1,8 +1,10 @@
 class ModifiersController < ApplicationController
+  before_action :set_modifier, only: [:show, :edit, :update, :destroy]
+
   filter_resource_access
-  
+
   def create
-    @modifier = Modifier.new(params[:modifier])
+    @modifier = Modifier.new(modifier_params)
 
     respond_to do |format|
       if @modifier.save
@@ -16,10 +18,8 @@ class ModifiersController < ApplicationController
   end
 
   def update
-    @modifier = Modifier.find(params[:id])
-
     respond_to do |format|
-      if @modifier.update_attributes(params[:modifier])
+      if @modifier.update_attributes(modifier_params)
         format.html { redirect_to @modifier, notice: 'Modifier was successfully updated.' }
         format.json { head :no_content }
       else
@@ -30,7 +30,6 @@ class ModifiersController < ApplicationController
   end
 
   def destroy
-    @modifier = Modifier.find(params[:id])
     @modifier.destroy
 
     respond_to do |format|
@@ -38,4 +37,15 @@ class ModifiersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_modifier
+      @modifier = Modifier.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def modifier_params
+      params.require(:modifier).permit(:description, :open_ended)
+    end
 end

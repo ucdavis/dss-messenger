@@ -1,8 +1,10 @@
 class ClassificationsController < ApplicationController
+  before_action :set_classification, only: [:show, :edit, :update, :destroy]
+
   filter_resource_access
 
   def create
-    @classification = Classification.new(params[:classification])
+    @classification = Classification.new(classification_params)
 
     respond_to do |format|
       if @classification.save
@@ -16,10 +18,8 @@ class ClassificationsController < ApplicationController
   end
 
   def update
-    @classification = Classification.find(params[:id])
-
     respond_to do |format|
-      if @classification.update_attributes(params[:classification])
+      if @classification.update_attributes(classification_params)
         format.html { redirect_to @classification, notice: 'Classification was successfully updated.' }
         format.json { head :no_content }
       else
@@ -30,7 +30,6 @@ class ClassificationsController < ApplicationController
   end
 
   def destroy
-    @classification = Classification.find(params[:id])
     @classification.destroy
 
     respond_to do |format|
@@ -38,4 +37,15 @@ class ClassificationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_classification
+      @classification = Classification.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def classification_params
+      params.require(:classification).permit(:description)
+    end
 end

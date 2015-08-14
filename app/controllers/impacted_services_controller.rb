@@ -1,8 +1,10 @@
 class ImpactedServicesController < ApplicationController
+  before_action :set_impacted_service, only: [:show, :edit, :update, :destroy]
+
   filter_resource_access
 
   def create
-    @impacted_service = ImpactedService.new(params[:impacted_service])
+    @impacted_service = ImpactedService.new(impacted_service_params)
 
     respond_to do |format|
       if @impacted_service.save
@@ -16,10 +18,8 @@ class ImpactedServicesController < ApplicationController
   end
 
   def update
-    @impacted_service = ImpactedService.find(params[:id])
-
     respond_to do |format|
-      if @impacted_service.update_attributes(params[:impacted_service])
+      if @impacted_service.update_attributes(impacted_service_params)
         format.html { redirect_to @impacted_service, notice: 'Impacted service was successfully updated.' }
         format.json { head :no_content }
       else
@@ -30,7 +30,6 @@ class ImpactedServicesController < ApplicationController
   end
 
   def destroy
-    @impacted_service = ImpactedService.find(params[:id])
     @impacted_service.destroy
 
     respond_to do |format|
@@ -38,4 +37,15 @@ class ImpactedServicesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_impacted_service
+      @impacted_service = ImpactedService.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def impacted_service_params
+      params.require(:impacted_service).permit(:name)
+    end
 end
