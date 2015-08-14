@@ -64,6 +64,8 @@ GEM
     delayed_job_active_record (4.0.3)
       activerecord (>= 3.0, < 5.0)
       delayed_job (>= 3.0, < 4.1)
+    domain_name (0.5.24)
+      unf (>= 0.0.5, < 1.0.0)
     ejs (1.1.1)
     erubis (2.7.0)
     exception_notification (4.1.1)
@@ -74,6 +76,8 @@ GEM
     hike (1.2.3)
     hpricot (0.8.6)
     htmlentities (4.3.4)
+    http-cookie (1.0.2)
+      domain_name (~> 0.5)
     i18n (0.7.0)
     jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)
@@ -99,6 +103,7 @@ GEM
     net-ssh (2.9.2)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
+    netrc (0.10.3)
     pg (0.18.2)
     polyglot (0.3.5)
     premailer (1.8.4)
@@ -133,6 +138,10 @@ GEM
     rake (10.4.2)
     rdoc (3.12.2)
       json (~> 1.4)
+    rest-client (1.8.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     rubycas-client (2.3.9)
       activesupport
     sass (3.4.16)
@@ -160,6 +169,9 @@ GEM
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.1)
     unicorn (4.9.0)
       kgio (~> 2.6)
       rack
@@ -187,6 +199,7 @@ DEPENDENCIES
   rails (~> 3.2.22)
   rails-backbone!
   rake
+  rest-client
   rubycas-client
   sass-rails (~> 3.2.3)
   sqlite3

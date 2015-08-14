@@ -85,12 +85,12 @@ class Message < ActiveRecord::Base
         else
           []
         end,
-      :send_statuses =>
+      :statuses =>
         if self.logs
           self.logs.map do |log|
             {
               :publisher => (log.publisher ? log.publisher.name : 'E-mail'),
-              :status => log.send_status.to_s.capitalize
+              :status => log.status.to_s.capitalize
             }
           end
         else

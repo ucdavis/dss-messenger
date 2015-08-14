@@ -43,7 +43,7 @@ class MessagesController < ApplicationController
   def create
     # Include distribution channels through which to send messages in model
     @message = Message.new(params[:message])
-    @message.sender_uid = Person.find(session[:cas_user]).id #get the full name of the currently logged in user.
+    @message.sender_uid = Person.find(session[:cas_user]).id # get the full name of the currently logged in user
 
     # The message is open or closed depending on the selected modifier
     unless @message.modifier.nil?
@@ -62,11 +62,11 @@ class MessagesController < ApplicationController
 
         params[:message][:publisher_ids].each do |publisher_id|
           ml = MessageLog.find_or_create_by_message_id_and_publisher_id(@message.id, publisher_id)
-          ml.send_status = :queued
+          ml.status = :queued
           ml.save!
 
           Delayed::Job.enqueue(DelayedRake.new("message:publish[#{ml.id}]"))
-          Rails.logger.info "Enqueued new message ##{@message.id} for sending via #{Publisher.find(publisher_id).name}. message:publish:[#{ml.id}] should pick it up."
+          Rails.logger.info "Enqueued new message ##{@message.id} for sending via #{Publisher.find(publisher_id).name}. message:publish[#{ml.id}] should pick it up."
         end
 
         format.html { redirect_to @message, notice: 'Message was successfully created.' }

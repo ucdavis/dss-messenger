@@ -22,11 +22,11 @@
               </td>
             </tr>
           <% }); %>
-          <% _.each(send_statuses, function(send_status) { %>
+          <% _.each(statuses, function(status) { %>
             <tr>
-              <td><b>Status (<%= send_status.publisher %>)</b></td>
+              <td><b>Status (<%= status.publisher %>)</b></td>
               <td>
-                <%= send_status.status %>
+                <%= status.status %>
               </td>
             </tr>
           <% }); %>

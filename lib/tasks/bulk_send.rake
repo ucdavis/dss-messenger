@@ -60,7 +60,7 @@ namespace :message do
 
       message_log.publisher.classify.schedule(message_log, unique_members)
 
-      Rails.logger.info "Enqueueing message ##{args.message_id} for #{members.length} recipients took #{Time.now - timestamp_start} seconds"
+      Rails.logger.info "Enqueueing message ##{message.id} for #{members.length} recipients took #{Time.now - timestamp_start} seconds"
     end
   end
 end

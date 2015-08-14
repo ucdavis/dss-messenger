@@ -28,7 +28,7 @@ class DssMessenger.Models.Message extends Backbone.Model
       msg: "Please use at least one publisher"
 
   toJSON: () ->
-    json = _.omit(this.attributes, 'updated_at','created_at','classification','modifier','recipients','impacted_services','pages','current','sender_name', 'created_at_in_words', 'recipient_counts', 'send_statuses', 'channel_ids[]', 'publishers')
+    json = _.omit(this.attributes, 'updated_at','created_at','classification','modifier','recipients','impacted_services','pages','current','sender_name', 'created_at_in_words', 'recipient_counts', 'statuses', 'channel_ids[]', 'publishers')
     json.publisher_ids = _.pluck(this.attributes.publishers, "id") unless json.publisher_ids
     json
 

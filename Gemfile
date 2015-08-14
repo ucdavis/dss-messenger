@@ -46,3 +46,6 @@ gem "twitter-bootstrap-rails"
 gem 'rails-backbone', :git => 'git://github.com/codebrew/backbone-rails.git'
 
 gem 'exception_notification'
+
+# For loading remote JSON
+gem 'rest-client'
