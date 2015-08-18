@@ -1,19 +1,11 @@
 //= require jquery
 //= require jquery_ujs
+//= require turbolinks
+
 //= require jquery-ui-1.10.0.custom.min
 //= require bootstrap-datetimepicker
 //= require jquery.tokeninput
-//= require moment.min
-//= require bootbox.min
 //= require bootstrap-select
 //= require twitter/bootstrap
-//= require underscore
-//= require backbone
-//= require backbone_rails_sync
-//= require backbone_datalink
-//= require backbone-validation
-//= require backbone.validation.bootstrap
-//= require backbone.bootstrap-modal
-//= require etch
-//= require backbone/dss_messenger
+
 //= require dss-messenger

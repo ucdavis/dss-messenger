@@ -31,17 +31,17 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
     @view = new DssMessenger.Views.Messages.IndexView(messages: DssMessenger.messages, pages: DssMessenger.pages, current: DssMessenger.current)
     $("#messages").html(@view.render().el)
 
-    @view = new DssMessenger.Views.Classifications.IndexView(classifications: DssMessenger.classifications)
-    $("#filter_classifications").html(@view.render().el)
-
-    @view = new DssMessenger.Views.Modifiers.IndexView(modifiers: DssMessenger.modifiers)
-    $("#filter_modifiers").html(@view.render().el)
-
-    @view = new DssMessenger.Views.impacted_services.IndexView(impacted_services: DssMessenger.impacted_services)
-    $("#filter_impacted_services").html(@view.render().el)
-    
-    @view = new DssMessenger.Views.Messages.ResetFiltersView()
-    $("#reset_filters").html(@view.render().el)
+    # @view = new DssMessenger.Views.Classifications.IndexView(classifications: DssMessenger.classifications)
+    # $("#filter_classifications").html(@view.render().el)
+    #
+    # @view = new DssMessenger.Views.Modifiers.IndexView(modifiers: DssMessenger.modifiers)
+    # $("#filter_modifiers").html(@view.render().el)
+    #
+    # @view = new DssMessenger.Views.impacted_services.IndexView(impacted_services: DssMessenger.impacted_services)
+    # $("#filter_impacted_services").html(@view.render().el)
+    #
+    # @view = new DssMessenger.Views.Messages.ResetFiltersView()
+    # $("#reset_filters").html(@view.render().el)
 
   show: (id) ->
     message = DssMessenger.messages.get(id)

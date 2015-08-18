@@ -13,6 +13,8 @@ gem 'whenever'
 gem 'spring', group: :development
 gem 'web-console', '~> 2.0', group: :development
 
+gem 'turbolinks'
+
 gem 'declarative_authorization'
 
 # For automatic inline CSS for mailer
@@ -37,8 +39,6 @@ end
 gem 'jquery-rails'
 
 gem "twitter-bootstrap-rails"
-
-gem 'rails-backbone', :git => 'git://github.com/codebrew/backbone-rails.git'
 
 gem 'exception_notification'
 

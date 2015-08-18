@@ -1,38 +1,40 @@
-<div class="span3 affix" id="filters-sidebar">
-    <div class="well invisible-well">
-        <a href="#/new" class="btn btn-primary btn-large btn-block">New Message</a>
-    </div>
-    <div class="well filters-well hidden-phone">
-        <form id="filters-form">
-            <h3>Filters:</h3>
-            <h5>Classifications</h5>
-            <div id="filter_classifications"></div>
-            <h5>Modifiers</h5>
-            <div id="filter_modifiers"></div>
-            <h5>Impacted Services</h5>
-            <div id="filter_impacted_services"></div>
-            <br />
-            <div id="reset_filters"></div>
-        </form>
-    </div>
+<div class="row">
+  <div id="messages" class="col-md-12">
+
+    <div id="delayed-jobs-info"></div>
+
+    <ol class="breadcrumb">
+      <li>Messages</li>
+      <li class="active"><%= @display_archived ? "Archived" : "Active" %> Messages</li>
+    </ol>
+
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Sender</th>
+          <th>Created</th>
+          <th colspan="<%= @display_archived ? 3 : 2 %>"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @messages.each do |message| %>
+          <tr>
+            <td><%= message.subject %></td>
+            <td><%= Person.find(message.sender_uid).name %></td>
+            <td><%= time_ago_in_words(message.created_at) %></td>
+            <% if @display_archived %>
+            <td><a href="#/1/duplicate" class="tooltip-open" data-toggle="tooltip" title="Re-Activate"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></td>
+            <td><a href="#/1/duplicate" class="tooltip-duplicate" data-toggle="tooltip" title="Duplicate"><i class="icon-retweet"></i></td>
+            <td><a href="#/1/destroy" class="tooltip-destroy" data-toggle="tooltip" title="Delete"><i class="icon-trash"></i></a></td>
+            <% else %>
+            <td><div class="actions" data-toggle="tooltip" title="Compose new message with selected status"></div></td>
+            <td><a href="#/1/archive" class="tooltip-archive" data-toggle="tooltip" title="Archive without sending"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span></i></a></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div> <!-- #messages -->
 </div>
-
-<div id="messages" class="span9"></div>
-
-<script type="text/javascript">
-  $(function() {
-    // DssMessenger is the app name
-    window.router = new DssMessenger.Routers.MessagesRouter(
-            {
-                messages: <%= @messages.to_json.html_safe -%>,
-                pages: <%= @messages.total_pages -%>,
-                current: <%= @messages.current_page -%>,
-                classifications: <%= @classifications.to_json.html_safe -%>,
-                modifiers: <%= @modifiers.to_json.html_safe -%>,
-                impacted_services: <%= @impacted_services.to_json.html_safe -%>,
-                settings: <%= @settings.to_json.html_safe -%>,
-                publishers: <%= @publishers.to_json.html_safe -%>
-            });
-    Backbone.history.start();
-  });
-</script>

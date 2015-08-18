@@ -5,18 +5,9 @@ class MessagesController < ApplicationController
   filter_access_to [:index, :create, :open], :attribute_check => false
 
   def index
-    @messages = Message.includes(:recipients, :classification, :modifier, :impacted_services)
-      .order('messages.created_at DESC')
-      .by_classification(params[:cl])
-      .by_modifier(params[:mo])
-      .by_service(params[:is])
-      .page(params[:page]).per(20) # paginate with 'page' param as page number, 20 items per page
-
-    @classifications = Classification.all
-    @modifiers = Modifier.all
-    @impacted_services = ImpactedService.all
-    @settings = Setting.all
-    @publishers = Publisher.all
+    @display_archived = (params[:display] and params[:display] == 'archived') ? true : false
+    
+    @messages = Message.where(:closed => @display_archived).order('messages.created_at DESC')
 
     respond_to do |format|
       format.html # index.html.erb

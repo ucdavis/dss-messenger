@@ -13,7 +13,10 @@ DssMessenger::Application.routes.draw do
   resources :messages
 
   get "/logout" => 'application#logout'
+  get "/preferences" => 'application#preferences'
+
   get "/status" => 'application#status'
+
   get "/delayed_job_status" => 'delayed_job_status#index'
 
   root :to => 'messages#index'

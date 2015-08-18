@@ -3,11 +3,5 @@
 
   Use Font Awesome icons (default)
   To use Glyphicons sprites instead of Font Awesome, replace with "require twitter-bootstrap-static/sprites"
-  =require twitter-bootstrap-static/fontawesome
+  =require twitter-bootstrap-static/sprites
   */
-  
-  
-.input-append .add-on, .input-prepend .add-on {
-  height: 12px;
-  line-height: 0px;
-}
