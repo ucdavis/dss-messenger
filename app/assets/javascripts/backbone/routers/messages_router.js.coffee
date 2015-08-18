@@ -11,7 +11,7 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
     DssMessenger.impacted_services = new DssMessenger.Collections.impacted_servicesCollection(options.impacted_services)
     DssMessenger.settings = new DssMessenger.Collections.SettingsCollection(options.settings)
     DssMessenger.publishers = new DssMessenger.Collections.PublishersCollection(options.publishers)
-    
+
   routes:
     "new"           : "newMessage"
     "index"         : "index"
@@ -27,14 +27,19 @@ class DssMessenger.Routers.MessagesRouter extends Backbone.Router
 
   index: ->
     $("#filters-sidebar").fadeIn()
+
     @view = new DssMessenger.Views.Messages.IndexView(messages: DssMessenger.messages, pages: DssMessenger.pages, current: DssMessenger.current)
     $("#messages").html(@view.render().el)
+
     @view = new DssMessenger.Views.Classifications.IndexView(classifications: DssMessenger.classifications)
     $("#filter_classifications").html(@view.render().el)
+
     @view = new DssMessenger.Views.Modifiers.IndexView(modifiers: DssMessenger.modifiers)
     $("#filter_modifiers").html(@view.render().el)
+
     @view = new DssMessenger.Views.impacted_services.IndexView(impacted_services: DssMessenger.impacted_services)
     $("#filter_impacted_services").html(@view.render().el)
+    
     @view = new DssMessenger.Views.Messages.ResetFiltersView()
     $("#reset_filters").html(@view.render().el)
 
