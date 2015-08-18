@@ -22,7 +22,7 @@ class DssMailerPublisher < Publisher
       footer = "" # set Footer text to empty if unset
     end
 
-    DssMailer.deliver_message(subject, message, message_receipt_id, recipient, footer)
+    DssMailer.deliver_message(subject, message, message_receipt_id, recipient, footer).deliver_now
   end
 
   # Keeps track of how many people have viewed their e-mails, assuming their

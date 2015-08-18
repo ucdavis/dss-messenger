@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.0.13'
+gem 'rails', '~> 4.2.3'
 
 gem 'rubycas-client'
 gem 'rake'
@@ -9,6 +9,9 @@ gem 'daemons'
 gem 'unicorn'
 gem 'mail'
 gem 'whenever'
+
+gem 'spring', group: :development
+gem 'web-console', '~> 2.0', group: :development
 
 gem 'declarative_authorization'
 
