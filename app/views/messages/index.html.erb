@@ -11,25 +11,34 @@
     <table class="table table-striped table-hover">
       <thead>
         <tr>
-          <th>Subject</th>
-          <th>Sender</th>
-          <th>Created</th>
-          <th colspan="<%= @display_archived ? 3 : 2 %>"></th>
+          <th width="10%">Sent</th>
+          <th width="<%= @display_archived ? '60%' : '40%' %>">Subject</th>
+          <th width="20%">Author</th>
+          <th colspan="<%= @display_archived ? 1 : 2 %>"></th>
         </tr>
       </thead>
       <tbody>
         <% @messages.each do |message| %>
           <tr>
-            <td><%= message.subject %></td>
-            <td><%= Person.find(message.sender_uid).name %></td>
             <td><%= time_ago_in_words(message.created_at) %></td>
+            <td><%= link_to message.subject, message %></td>
+            <td><%= Person.find(message.sender_uid).name %></td>
             <% if @display_archived %>
-            <td><a href="#/1/duplicate" class="tooltip-open" data-toggle="tooltip" title="Re-Activate"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></td>
-            <td><a href="#/1/duplicate" class="tooltip-duplicate" data-toggle="tooltip" title="Duplicate"><i class="icon-retweet"></i></td>
-            <td><a href="#/1/destroy" class="tooltip-destroy" data-toggle="tooltip" title="Delete"><i class="icon-trash"></i></a></td>
+            <td>
+              <a href="#/1/duplicate" class="tooltip-open" data-toggle="tooltip" title="Re-Activate"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true" style="margin-right: 1em;"></span></a>
+              <a href="#/1/duplicate" class="tooltip-duplicate" data-toggle="tooltip" title="Duplicate"><span class="glyphicon glyphicon-retweet" aria-hidden="true" style="margin-right: 1em;"></span></a>
+              <a href="#/1/destroy" class="tooltip-destroy" data-toggle="tooltip" title="Delete"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: red;"></span></a>
+            </td>
             <% else %>
-            <td><div class="actions" data-toggle="tooltip" title="Compose new message with selected status"></div></td>
-            <td><a href="#/1/archive" class="tooltip-archive" data-toggle="tooltip" title="Archive without sending"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span></i></a></td>
+            <td>
+              <div class="actions" data-toggle="tooltip" title="Compose new message with selected status" data-original-title="Compose new message with selected status">
+                <% colors = ['primary', 'success', 'info', 'warning', 'danger'] %>
+                <% @modifiers.each_with_index do |modifier, i| %>
+                  <%= link_to modifier.description.slice(0..modifier.description.index(':')-1), message_duplicate_path(message, :modifier => modifier.id ), :class => 'label label-' + colors[i % 5] %>
+                <% end %>
+              </div>
+            </td>
+            <td><a href="<%= message_archive_path(message) %>" class="tooltip-archive" data-toggle="tooltip" title="Archive without sending"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span></a></td>
             <% end %>
           </tr>
         <% end %>

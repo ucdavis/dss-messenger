@@ -6,8 +6,10 @@ class MessagesController < ApplicationController
 
   def index
     @display_archived = (params[:display] and params[:display] == 'archived') ? true : false
-    
+
     @messages = Message.where(:closed => @display_archived).order('messages.created_at DESC')
+
+    @modifiers = Modifier.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -27,7 +29,7 @@ class MessagesController < ApplicationController
     end
 
     respond_to do |format|
-      format.html {render layout: 'public' }
+      format.html
     end
   end
 

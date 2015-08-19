@@ -10,7 +10,10 @@ DssMessenger::Application.routes.draw do
   resources :modifiers
   resources :recipients
   resources :publishers
-  resources :messages
+  resources :messages do
+    get "duplicate"
+    get "archive"
+  end
 
   get "/logout" => 'application#logout'
   get "/preferences" => 'application#preferences'

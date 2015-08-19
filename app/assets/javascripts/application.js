@@ -1,4 +1,5 @@
 //= require jquery
+//= require bootstrap-sprockets
 //= require jquery_ujs
 //= require turbolinks
 
@@ -6,6 +7,5 @@
 //= require bootstrap-datetimepicker
 //= require jquery.tokeninput
 //= require bootstrap-select
-//= require twitter/bootstrap
 
 //= require dss-messenger

@@ -38,7 +38,9 @@ end
 
 gem 'jquery-rails'
 
-gem "twitter-bootstrap-rails"
+# For Bootstrap support
+gem 'bootstrap-sass', '~> 3.3.5'
+gem 'sass-rails', '>= 3.2'
 
 gem 'exception_notification'
 
