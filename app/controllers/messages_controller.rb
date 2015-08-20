@@ -6,31 +6,11 @@ class MessagesController < ApplicationController
 
   def index
     @display_archived = (params[:display] and params[:display] == 'archived') ? true : false
-
     @messages = Message.where(:closed => @display_archived).order('messages.created_at DESC')
-
     @modifiers = Modifier.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @messages.to_json(pages: @messages.total_pages, current: @messages.current_page) }
-    end
   end
 
   def show
-    # Add colons if necessary
-    if @message.classification
-      # classification is not required
-      @message.classification.description = @message.classification.description + ":"  unless @message.classification.description.include? ":"
-    end
-    if @message.modifier
-      # modifier is not required
-      @message.modifier.description = @message.modifier.description + ":"  unless @message.modifier.description.include? ":"
-    end
-
-    respond_to do |format|
-      format.html
-    end
   end
 
   def new
@@ -43,9 +23,17 @@ class MessagesController < ApplicationController
   end
 
   def create
+    # Recipients comes in as a JSON string, so convert it.
+    # The Message model class also has an override of "recipients=" to handle
+    # additional concerns.
+    # We create 'posted_recipients' in case the form has errors and it needs
+    # to be displayed again.
+    @posted_recipients = params[:message][:recipients]
+    params[:message][:recipients] = JSON.parse(params[:message][:recipients])
+
     # Include distribution channels through which to send messages in model
     @message = Message.new(message_params)
-    @message.sender_uid = Person.find(session[:cas_user]).id # get the full name of the currently logged in user
+    @message.sender = Person.find(session[:cas_user]).name
 
     # The message is open or closed depending on the selected modifier
     unless @message.modifier.nil?
@@ -71,9 +59,15 @@ class MessagesController < ApplicationController
           Rails.logger.info "Enqueued new message ##{@message.id} for sending via #{Publisher.find(publisher_id).name}. message:publish[#{ml.id}] should pick it up."
         end
 
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
+        format.html { redirect_to @message, notice: 'Message was successfully queued.' }
         format.json { render json: @message, status: :created, location: @message }
       else
+        # If we're rendering the 'new' form again, we'll need these again ...
+        @classifications = Classification.all
+        @modifiers = Modifier.all
+        @impacted_services = ImpactedService.all
+        @publishers = Publisher.all
+
         format.html { render action: "new" }
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
@@ -125,6 +119,6 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround, :classification_id, :modifier_id, :recipient_uids, :impacted_service_ids, :closed, :publisher_ids => [])
+      params.require(:message).permit(:impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround, :classification_id, :modifier_id, :impacted_service_ids, :closed, :publisher_ids => [], :recipients => [:uid, :name])
     end
 end

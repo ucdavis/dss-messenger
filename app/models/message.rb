@@ -19,82 +19,9 @@ class Message < ActiveRecord::Base
   validates_presence_of :recipients
   validates_presence_of :publishers, :on => :create
 
-  # Filters to limit the result to specified criterion
-  scope :by_classification, lambda { |classification| where(classification_id: classification) unless classification.nil? }
-  scope :by_modifier, lambda { |modifier| where(modifier_id: modifier) unless modifier.nil? }
-  scope :by_service, lambda { |service| joins(:impacted_services).where('impacted_services.id = ?', service) unless service.nil? }
-
-  def recipient_uids=(ids_str)
-    ids_str.split(",").each do |r|
-      begin
-        name = Entity.find(r).name
-        recipient = Recipient.find_or_create_by(uid: r, name: name)
-
-        self.recipients << recipient unless self.recipients.include?(recipient) # Avoid duplicates
-      rescue ActiveResource::ResourceNotFound => e
-        # Nothing we can do about this
-      end
+  def recipients=(recipient_list)
+    recipient_list.each do |r|
+      self.recipients << Recipient.find_or_create_by(r)
     end
-  end
-
-  def as_json(options = {})
-    {
-      :id => self.id,
-      :closed => self.closed,
-      :impact_statement => self.impact_statement,
-      :other_services => self.other_services,
-      :purpose => self.purpose,
-      :resolution => self.resolution,
-      :sender_uid => self.sender_uid,
-      :sender_name => Person.find(self.sender_uid).name,
-      :subject => self.subject,
-      :window_start =>
-        if self.window_start
-          self.window_start.strftime("%Y/%m/%d %I:%M %p")
-        else
-          self.window_start
-        end,
-      :window_end =>
-        if self.window_end
-          self.window_end.strftime("%Y/%m/%d %I:%M %p")
-        else
-          self.window_end
-        end,
-      :workaround => self.workaround,
-      :classification_id => self.classification_id,
-      :classification => self.classification,
-      :modifier_id => self.modifier_id,
-      :modifier => self.modifier,
-      :recipients => self.recipients,
-      :recipient_uids => self.recipients.map(&:uid).join(","),
-      :impacted_services => self.impacted_services,
-      :created_at => self.created_at.strftime("%A, %B %d, %Y at %l:%M %p"),
-      :created_at_in_words => time_ago_in_words(self.created_at) + ' ago',
-      :publishers => self.publishers,
-      :recipient_counts =>
-        if self.logs
-          self.logs.map do |log|
-            {
-              :publisher => log.publisher ? log.publisher.name : 'E-mail',
-              :count => log.recipient_count || 'Unavailable',
-              :viewed => log.viewed_count
-            }
-          end
-        else
-          []
-        end,
-      :statuses =>
-        if self.logs
-          self.logs.map do |log|
-            {
-              :publisher => (log.publisher ? log.publisher.name : 'E-mail'),
-              :status => log.status.to_s.capitalize
-            }
-          end
-        else
-          []
-        end
-    }
-
   end
 end

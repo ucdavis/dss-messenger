@@ -11,7 +11,6 @@ $("input.datetimepicker").datetimepicker
 # Initialize the recipients typeahead field
 recipientList = new Bloodhound
   datumTokenizer: (d) ->
-    debugger
     Bloodhound.tokenizers.obj.whitespace('value')
   queryTokenizer: Bloodhound.tokenizers.whitespace
   remote:
@@ -20,6 +19,5 @@ recipientList = new Bloodhound
 
 recipientList.initialize()
 
-$('input.typeahead').tokenfield({
-  typeahead: [null, { source: recipientList.ttAdapter(), displayKey: 'value' }]
-});
+$('input.typeahead').tokenfield
+  typeahead: [null, { source: recipientList.ttAdapter(), displayKey: 'label' }]

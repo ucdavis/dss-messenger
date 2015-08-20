@@ -1,10 +1,54 @@
-<%= form_for(@message) do |f| %>
+<script type="text/javascript">
+  function prepareRecipientList() {
+    var tokens = $('input.typeahead').tokenfield('getTokens');
+
+    if(tokens) {
+      var recipients = [];
+
+      for (var i = 0; i < tokens.length; i++) {
+        recipients.push({ uid: tokens[i].value, name: tokens[i].label });
+      }
+
+      $('input.typeahead').val(JSON.stringify(recipients));
+    }
+  }
+
+  <% unless @posted_recipients.nil? %>
+  $(document).ready(function() {
+    var recipients = JSON.parse("<%= escape_javascript(@posted_recipients).html_safe %>");
+    var tokens = [];
+
+    for (var i = 0; i < recipients.length; i++) {
+      tokens.push({ value: recipients[i].uid, label: recipients[i].name });
+    }
+
+    $('input.typeahead').tokenfield('setTokens', tokens);
+  });
+  <% end %>
+</script>
+
+<%= form_for(@message, :html => { :onsubmit => "prepareRecipientList()" }) do |f| %>
+
+<% if @message.errors.any? %>
+<div class="row">
+	<div class="col-md-12">
+    <div class="alert alert-danger" role="alert" style="width: 40%; margin: auto auto;">
+      <ul style="padding-left: 0;">
+      <% @message.errors.full_messages.each do |message| %>
+        <li style="list-style: none;"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> <%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+<% end %>
+
 <div class="row">
 	<div class="col-md-9">
 
     <div class="form-group">
-      <%= label_tag(:recipient_uids, "Recipients") %>
-      <input type="text" class="typeahead form-control" name="recipient_uids" />
+      <%= label_tag(:recipients, "Recipients") %>
+      <%= f.text_field :recipients, class: "typeahead form-control", value: "" %>
     </div>
 
     <div class="form-group">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150615231537) do
+ActiveRecord::Schema.define(version: 20150820220102) do
 
   create_table "audiences", force: :cascade do |t|
     t.integer  "message_id"
@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 20150615231537) do
     t.text     "resolution"
     t.text     "workaround"
     t.text     "other_services"
-    t.string   "sender_uid",        limit: 255
+    t.string   "sender",            limit: 255
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.integer  "classification_id"

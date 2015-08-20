@@ -22,7 +22,7 @@
           <tr>
             <td><%= time_ago_in_words(message.created_at) %></td>
             <td><%= link_to message.subject, message %></td>
-            <td><%= Person.find(message.sender_uid).name %></td>
+            <td><%= message.sender %></td>
             <% if @display_archived %>
             <td>
               <%= link_to(message_duplicate_path(message), class: 'tooltip-open', data: { toogle: 'tooltip' }, title: 'Re-Activate' ) do %> <span class="glyphicon glyphicon-chevron-up" aria-hidden="true" style="margin-right: 1em;"></span> <% end %>
