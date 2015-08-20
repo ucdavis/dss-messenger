@@ -1,5 +1,5 @@
 <div class="row">
-  <div id="messages" class="col-md-12">
+  <div class="col-md-12">
 
     <div id="delayed-jobs-info"></div>
 
@@ -25,9 +25,9 @@
             <td><%= Person.find(message.sender_uid).name %></td>
             <% if @display_archived %>
             <td>
-              <a href="#/1/duplicate" class="tooltip-open" data-toggle="tooltip" title="Re-Activate"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true" style="margin-right: 1em;"></span></a>
-              <a href="#/1/duplicate" class="tooltip-duplicate" data-toggle="tooltip" title="Duplicate"><span class="glyphicon glyphicon-retweet" aria-hidden="true" style="margin-right: 1em;"></span></a>
-              <a href="#/1/destroy" class="tooltip-destroy" data-toggle="tooltip" title="Delete"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: red;"></span></a>
+              <%= link_to(message_duplicate_path(message), class: 'tooltip-open', data: { toogle: 'tooltip' }, title: 'Re-Activate' ) do %> <span class="glyphicon glyphicon-chevron-up" aria-hidden="true" style="margin-right: 1em;"></span> <% end %>
+              <%= link_to(message_duplicate_path(message), class: 'tooltip-duplicate', data: { toogle: 'tooltip' }, title: 'Duplicate' ) do %> <span class="glyphicon glyphicon-retweet" aria-hidden="true" style="margin-right: 1em;"></span> <% end %>
+              <%= link_to(message_path(message), method: :delete, class: 'tooltip-destroy', data: { toogle: 'tooltip' }, title: 'Delete' ) do %> <span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: red;"></span> <% end %>
             </td>
             <% else %>
             <td>
