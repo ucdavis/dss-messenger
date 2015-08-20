@@ -33,6 +33,15 @@ class MessagesController < ApplicationController
     end
   end
 
+  def new
+    @message = Message.new
+
+    @classifications = Classification.all
+    @modifiers = Modifier.all
+    @impacted_services = ImpactedService.all
+    @publishers = Publisher.all
+  end
+
   def create
     # Include distribution channels through which to send messages in model
     @message = Message.new(message_params)
