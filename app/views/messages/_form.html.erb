@@ -1,145 +1,113 @@
 <%= form_for(@message) do |f| %>
+<div class="row">
+	<div class="col-md-9">
 
-          <div class="control-group" id="recipients-group">
-            <label class="control-label" for="recipients">Recipients</label>
-                <div class="controls">
-                    <input type="text" name="recipient_uids" id="recipients" />
-                </div>
-          </div>
+    <div class="form-group">
+      <%= label_tag(:recipient_uids, "Recipients") %>
+      <%= text_field :recipient_uids, 'recipient_uids', class: "form-control" %>
+    </div>
 
-          <div class="control-group" id="subject-group" data-toggle="tooltip"
-                title="Used in the subject line--should be 5 words or less and succinctly summarize the services that are unavailable or that will be unavailable. Examples: DSS file services (dss-filer1); DSS VPN service; CMB networks; campus wireless networks; Matlab network licensing.">
-            <label class="control-label" for="subject">Short Description</label>
-                <div class="controls">
-                <input type="text" name="subject" id="subject" value=""
-                    placeholder="Example: DSS file services (dss-filer1)"></input>
-                </div>
-          </div>
+    <div class="form-group">
+      <%= label_tag(:subject, "Subject") %>
+      <%= f.text_field :subject, class: "form-control", placeholder: "Example: DSS file services (dss-filer1)" %>
+    </div>
 
-          <div class="control-group" id="classifications-group">
-            <label class="control-label" for="classifications">
-                    Classification<br />
-                    <small>
-                        <a data-tab="Classifications" class="config-link">Add/Edit&hellip;</a><br />
-                        <a class="close icon-remove" data-group="classifications_select"> Reset</a>
-                    </small>
-                </label>
-                <div class="controls">
-                    <div id="classifications_select"></div>
-                </div>
-          </div>
+    <div class="form-group">
+      <%= label_tag(:impact_statement, "Impact Statement") %>
+      <%= f.text_area :impact_statement, class: "form-control", placeholder: "Example: Some users are reporting trouble accessing Moobilenet", rows: 7 %>
+    </div>
 
-          <div class="control-group" id="modifiers-group" data-toggle="tooltip"
-                title="Used for updates and cancellations.">
-            <label class="control-label" for="modifiers">
-                    Modifier<br />
-                    <small>
-                        <a data-tab="Modifiers" class="config-link">Add/Edit&hellip;</a><br />
-                        <a class="close icon-remove" data-group="modifiers_select"> Reset</a>
-                    </small>
-                </label>
-                <div class="controls">
-                    <div id="modifiers_select"></div>
-                </div>
-          </div>
+    <div class="form-group">
+      <%= label_tag(:purpose, "Purpose") %>
+      <%= f.text_area :purpose, class: "form-control", placeholder: "Example: Rebooting firewall to apply security patches", rows: 5 %>
+    </div>
 
-          <div class="control-group" id="impact-statement-group" data-toggle="tooltip"
-                title="Short, customer-centric description of the issue. What does this problem look like from the customer's perspective?">
-            <label class="control-label" for="impact_statement">Impact Statement</label>
-                <div class="controls">
-                <textarea type="text" name="impact_statement" id="impact_statement" rows="7"
-                        placeholder="e.g. Some users are reporting that they are not able to get on the Moobilenet wireless network."></textarea>
-                </div>
-          </div>
+    <div class="form-group">
+      <%= label_tag(:resolution, "Resolution") %>
+      <%= f.text_area :resolution, class: "form-control", placeholder: "Example: Servers were restarted and services have been restored", rows: 5 %>
+    </div>
 
-          <div class="control-group" id="window-start-group">
-            <label class="control-label" for="window_start">Window Start</label>
-                <div class="controls">
-                    <div id="datetimepicker" class="input-append date datetimepicker">
-                    <input type="text" name="window_start" id="window_start" value="">
-                        <span class="add-on"><i class="icon-remove"></i></span>
-                        <span class="add-on"><i class="icon-calendar"></i></span>
-                    </div>
-                </div>
-          </div>
+    <div class="form-group">
+      <%= label_tag(:workaround, "Workaround") %>
+      <%= f.text_area :workaround, class: "form-control", placeholder: "", rows: 5 %>
+    </div>
 
-          <div class="control-group" id="window-end-group">
-            <label class="control-label" for="window_end">Window End</label>
-                <div class="controls">
-                    <div id="datetimepicker" class="input-append date datetimepicker">
-                    <input type="text" name="window_end" id="window_end" value="">
-                        <span class="add-on"><i class="icon-remove"></i></span>
-                        <span class="add-on"><i class="icon-calendar"></i></span>
-                    </div>
-                </div>
-          </div>
+    <div class="form-group">
+      <%= label_tag(:other_services, "Other Services") %>
+      <%= f.text_area :other_services, class: "form-control", placeholder: "Example: Kerr Hall Wireless Network", rows: 5 %>
+    </div>
+  </div> <!-- .col-md-9 -->
 
-          <div class="control-group" id="purpose-group" data-toggle="tooltip"
-                title="For PLANNED events only, brief description of the reason for the event.">
-            <label class="control-label" for="purpose">Purpose</label>
-                <div class="controls">
-                <textarea type="text" name="purpose" id="purpose" rows="5"
-                        placeholder="e.g. Rebooting firewall to apply security patches."></textarea>
-                </div>
-          </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <%= label_tag(:window_start, "Window Start") %>
+      <input type="text" class="form-control" name="window_start" id="window_start" value="">
+      <div id="datetimepicker" style="margin: 0; padding: 0;" class="input-append date datetimepicker"></div>
+    </div>
 
-          <div class="control-group" id="resolution-group" data-toggle="tooltip"
-                title='For any RESOLVED items, a short description of the resolution, e.g., "Servers were restarted and services have been restored" or "The upgrade was successfully completed"'>
-            <label class="control-label" for="resolution">Resolution</label>
-                <div class="controls">
-                <textarea type="text" name="resolution" id="resolution" rows="5"></textarea>
-                </div>
-          </div>
+    <div class="form-group">
+      <%= label_tag(:window_end, "Window End") %>
+      <input type="text" class="form-control" name="window_end" id="window_end" value="">
+      <div id="datetimepicker" style="margin: 0; padding: 0;" class="input-append date datetimepicker"></div>
+    </div>
 
-          <div class="control-group" id="workaround-group" data-toggle="tooltip"
-                title="If a workaround is available, provide concise directions (or links to more thorough directions) here.">
-            <label class="control-label" for="workaround">Workaround</label>
-                <div class="controls">
-                <textarea type="text" name="workaround" id="workaround" rows="5"></textarea>
-                </div>
-          </div>
+    <div class="form-group">
+      <%= label_tag(:classifications, "Classifications") %><br />
+      <% @classifications.each do |classification| %>
+        <div class="radio">
+          <label>
+            <%= f.radio_button(:classification, classification.short_description) %>
+            <%= classification.short_description %><br />
+          </label>
+        </div>
+      <% end %>
+    </div>
 
-          <div class="control-group" id="other-services-group" data-toggle="tooltip"
-                title="Name the service based on the customers' perspective. Provide the scope (building, network, DSS-wide, campus-wide, service, etc.)">
-            <label class="control-label" for="other_services">Other Services</label>
-                <div class="controls">
-                <textarea type="text" name="other_services" id="other_services" rows="5"
-                        placeholder="Examples:
-                        Kerr Hall Wireless Network
-                        DSS File Shares
-                        Campus Network Connectivity
-                        Economics Department Network
-                        uConnect Email and Calendars
-                        Philosophy Department Website" ></textarea>
-                </div>
-          </div>
+    <div class="form-group">
+      <%= label_tag(:modifiers, "Modifiers") %><br />
+      <% @modifiers.each do |modifier| %>
+        <div class="radio">
+          <label>
+            <%= f.radio_button(:modifier, modifier.short_description) %>
+            <%= modifier.short_description %><br />
+          </label>
+        </div>
+      <% end %>
+    </div>
 
-          <div class="control-group" id="impacted-services-group" data-toggle="tooltip"
-                title="Select the services that are impacted by maintenance or outage.">
-            <label class="control-label" for="impacted_services">
-                    Impacted Services<br />
-                    <small><a data-tab="Services" class="config-link">Add/Edit&hellip;</a></small>
-                </label>
-                <div class="controls">
-                    <div id="impacted_services_select"></div>
-                </div>
-          </div>
+    <div class="form-group">
+      <%= label_tag(:impacted_services, "Impacted Services") %><br />
+      <% @impacted_services.each do |impacted_service| %>
+        <div class="checkbox">
+          <label>
+            <%= check_box_tag(:impacted_service, impacted_service.name) %>
+            <%= impacted_service.name %><br />
+          </label>
+        </div>
+      <% end %>
+    </div>
 
-          <div class="control-group" id="publishers-group" data-toggle="tooltip" title="Select the distribution channels through which this message should be published">
-            <label class="control-label" for="publishers">
-                Distribution Channels<br />
-            </label>
-            <div class="controls">
-                  <div id="publishers"></div>
-            </div>
-          </div>
+    <div class="form-group">
+      <%= label_tag(:publishers, "Publishers") %><br />
+      <% @publishers.each do |publisher| %>
+        <div class="checkbox">
+          <label>
+            <%= check_box_tag(:publisher, publisher.name) %>
+            <%= publisher.name %><br />
+          </label>
+        </div>
+      <% end %>
+    </div>
+  </div> <!-- .col-md-3 -->
+</div> <!-- .row -->
 
-      </div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-actions" style="text-align: center; padding: 1.15em;">
+      <input type="submit" name="Send" class="btn btn-primary" value="Send Message" />&nbsp;
+      <%= link_to 'Discard Message', messages_path, class: 'btn btn-default' %>
+    </div> <!-- .form-actions -->
+  </div> <!-- .col-md-12 -->
+</div> <!-- .row -->
 
-        <div class="form-actions">
-          <input type="submit" name="Send" class="btn btn-primary" value="Send Message" />
-          <a class="btn" href="#/index">Cancel</a>
-          <a class="btn btn-info message-preview">Preview</a>
-        </div> <!-- .form-actions -->
-
-    <% end %>
+<% end %>
