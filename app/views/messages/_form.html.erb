@@ -4,7 +4,7 @@
 
     <div class="form-group">
       <%= label_tag(:recipient_uids, "Recipients") %>
-      <%= text_field :recipient_uids, 'recipient_uids', class: "form-control" %>
+      <input type="text" class="typeahead form-control" name="recipient_uids" />
     </div>
 
     <div class="form-group">
@@ -41,14 +41,12 @@
   <div class="col-md-3">
     <div class="form-group">
       <%= label_tag(:window_start, "Window Start") %>
-      <input type="text" class="form-control" name="window_start" id="window_start" value="">
-      <div id="datetimepicker" style="margin: 0; padding: 0;" class="input-append date datetimepicker"></div>
+      <input type="text" class="form-control datetimepicker" name="window_start" id="window_start" value="">
     </div>
 
     <div class="form-group">
       <%= label_tag(:window_end, "Window End") %>
-      <input type="text" class="form-control" name="window_end" id="window_end" value="">
-      <div id="datetimepicker" style="margin: 0; padding: 0;" class="input-append date datetimepicker"></div>
+      <input type="text" class="form-control datetimepicker" name="window_end" id="window_end" value="">
     </div>
 
     <div class="form-group">

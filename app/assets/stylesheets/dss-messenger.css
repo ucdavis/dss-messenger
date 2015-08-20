@@ -61,11 +61,6 @@ div.token-input-dropdown-facebook {
     z-index: 1100;
 }
 
-input[type="text"], textarea {
-    width: 400px;
-    padding: 0.25em;
-}
-
 #edit_publishers input[type="text"] {
     width: 100%;
 }
@@ -85,17 +80,6 @@ input[type="text"], textarea {
 input[type="text"].pref_input {
   padding: 2px;
   margin: 2px;
-}
-
-ul.token-input-list-facebook {
-    border: 1px solid #cccccc;
-    webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    margin-bottom: 1em;
 }
 
 .control-group.error ul.token-input-list-facebook {
@@ -121,19 +105,6 @@ tr.archiving td:nth-child(3) {
   background: url('loading-small.gif') 50% 50% no-repeat;
 }
 
-.accordion-heading .accordion-toggle {
-  padding: 0px;
-}
-
-.accordion-heading a.accordion-toggle:hover {
-  text-decoration:none;
-}
-
-.accordion-heading .accordion-toggle-icon {
-  font-size: 70%;
-  margin-right: 5px;
-}
-
 ul.token-input-list-facebook {
   clear: none;
 }
@@ -149,16 +120,6 @@ ul.token-input-list-facebook {
   line-height: 10px;
 }
 
-// Modal
-.modal {
-    width: 800px;
-    margin-left: -400px;
-}
-
-.modal-header {
-  text-align: center;
-}
-
 // Message Show View
 .message-box {
   border: 1px solid #ddd;
@@ -170,14 +131,6 @@ ul.token-input-list-facebook {
 }
 
 // Forms
-
-.form-horizontal .control-label {
-  padding: 0px;
-}
-
-.radio input[type="radio"], .checkbox input[type="checkbox"] {
-  margin-top: -1px;
-}
 
 a.message-preview {
   float: right;
@@ -239,3 +192,36 @@ span.section-head {
   }
 
 }*/
+
+/* The vendor stylesheet has a margin we do not want. */
+.datetimepicker {
+	margin-top: 0;
+}
+
+/* Adjust Token Input to look more like Bootstrap */
+ul.token-input-list-facebook {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  padding-bottom: 6px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 6px;
+}

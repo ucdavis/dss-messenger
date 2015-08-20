@@ -7,8 +7,7 @@ class RecipientsController < ApplicationController
     @recipients = Entity.search(params[:q])
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @recipients }
+      format.json
     end
   end
 

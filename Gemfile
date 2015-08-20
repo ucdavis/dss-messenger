@@ -21,10 +21,11 @@ gem 'declarative_authorization'
 gem 'hpricot'
 gem 'premailer-rails'
 
-# For pagination
-gem 'kaminari'
-
+# For deployment
 gem 'capistrano', '< 3.0.0'
+
+# For JS-accessible routes
+gem "js-routes"
 
 gem 'jbuilder'
 
