@@ -54,7 +54,7 @@ class MessagesController < ApplicationController
           Rails.logger.info "Enqueued new message ##{@message.id} for sending via #{Publisher.find(publisher_id).name}. message:publish[#{ml.id}] should pick it up."
         end
 
-        format.html { redirect_to @message, notice: 'Message was successfully queued.' }
+        format.html { redirect_to messages_path(:display => 'active'), notice: 'Message was successfully queued.' }
         format.json { render json: @message, status: :created, location: @message }
       else
         format.html { render action: "new" }
