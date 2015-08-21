@@ -68,8 +68,6 @@
 	</div>
 </div> <!-- .row -->
 
-<script src="http://code.highcharts.com/highcharts.js"></script>
-
 <script type="text/javascript">
 	ready = function() {
 		// Make monochrome colors and set them as default for all pies
@@ -116,7 +114,6 @@
         }]
     });
 
-
     $('#send_status').highcharts({
         chart: {
             plotBackgroundColor: null,
@@ -151,6 +148,5 @@
     });
 	};
 
-	$(document).ready(ready);
-	$(document).on('page:load', ready);
+	$(document).on('ready page:load', ready);
 </script>
