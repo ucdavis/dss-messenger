@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150820220102) do
+ActiveRecord::Schema.define(version: 20150821165800) do
 
   create_table "audiences", force: :cascade do |t|
     t.integer  "message_id"
@@ -101,11 +101,11 @@ ActiveRecord::Schema.define(version: 20150820220102) do
     t.text     "workaround"
     t.text     "other_services"
     t.string   "sender",            limit: 255
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
     t.integer  "classification_id"
     t.integer  "modifier_id"
-    t.boolean  "closed"
+    t.boolean  "closed",                        default: false
   end
 
   add_index "messages", ["id"], name: "index_messages_on_id"
