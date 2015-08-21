@@ -13,6 +13,7 @@ recipientList = new Bloodhound
   datumTokenizer: (d) ->
     Bloodhound.tokenizers.obj.whitespace('value')
   queryTokenizer: Bloodhound.tokenizers.whitespace
+  limit: 12 # max number of results to display
   remote:
     url: Routes.recipients_path() + '.json?q=%QUERY'
     wildcard: '%QUERY'
