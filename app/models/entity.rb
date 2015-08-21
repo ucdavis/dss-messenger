@@ -1,5 +1,5 @@
 class Entity
-  attr_accessor :id, :name, :member_count, :type, :members
+  attr_accessor :id, :name, :member_count, :type, :members, :email, :loginid
 
   # While self.find mimics ActiveRecord.find, we've chosen to simply make a
   # separate method call instead of implementing ActiveRecord.find(:all, :params ...)
@@ -59,6 +59,8 @@ class Entity
 
       e.id = json["id"]
       e.name = json["name"]
+      e.email = json["email"]
+      e.loginid = json["loginid"]
       e.member_count = json["member_count"]
       e.type = json["type"]
       e.members = []
