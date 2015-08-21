@@ -1,4 +1,9 @@
 <script type="text/javascript">
+  // The following two snippets of code convert to- and from- the $.tokenfield's
+  // API to something better understood by Rails.
+  // The Message#create controller also has some code to handle the receiving
+  // end of this data transmission.
+
   function prepareRecipientList() {
     var tokens = $('input.typeahead').tokenfield('getTokens');
 
@@ -95,7 +100,7 @@
 
     <div class="form-group">
       <%= label_tag(:classifications, "Classifications") %><br />
-      <% @classifications.each do |classification| %>
+      <% Classification.all.each do |classification| %>
         <div class="radio">
           <label>
             <%= f.radio_button(:classification, classification.short_description) %>
@@ -107,7 +112,7 @@
 
     <div class="form-group">
       <%= label_tag(:modifiers, "Modifiers") %><br />
-      <% @modifiers.each do |modifier| %>
+      <% Modifier.all.each do |modifier| %>
         <div class="radio">
           <label>
             <%= f.radio_button(:modifier, modifier.short_description) %>
@@ -119,10 +124,10 @@
 
     <div class="form-group">
       <%= label_tag(:impacted_services, "Impacted Services") %><br />
-      <% @impacted_services.each do |impacted_service| %>
+      <% ImpactedService.all.each do |impacted_service| %>
         <div class="checkbox">
           <label>
-            <%= check_box_tag(:impacted_service, impacted_service.name) %>
+            <%= check_box_tag "message[impacted_service_ids][]", impacted_service.id %>
             <%= impacted_service.name %><br />
           </label>
         </div>
@@ -131,10 +136,10 @@
 
     <div class="form-group">
       <%= label_tag(:publishers, "Publishers") %><br />
-      <% @publishers.each do |publisher| %>
+      <% Publisher.all.each do |publisher| %>
         <div class="checkbox">
           <label>
-            <%= check_box_tag(:publisher, publisher.name) %>
+            <%= check_box_tag "message[publisher_ids][]", publisher.id %>
             <%= publisher.name %><br />
           </label>
         </div>

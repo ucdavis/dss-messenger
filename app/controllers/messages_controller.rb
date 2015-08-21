@@ -15,11 +15,6 @@ class MessagesController < ApplicationController
 
   def new
     @message = Message.new
-
-    @classifications = Classification.all
-    @modifiers = Modifier.all
-    @impacted_services = ImpactedService.all
-    @publishers = Publisher.all
   end
 
   def create
@@ -62,12 +57,6 @@ class MessagesController < ApplicationController
         format.html { redirect_to @message, notice: 'Message was successfully queued.' }
         format.json { render json: @message, status: :created, location: @message }
       else
-        # If we're rendering the 'new' form again, we'll need these again ...
-        @classifications = Classification.all
-        @modifiers = Modifier.all
-        @impacted_services = ImpactedService.all
-        @publishers = Publisher.all
-
         format.html { render action: "new" }
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
