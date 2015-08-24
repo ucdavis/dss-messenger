@@ -100,6 +100,19 @@ class MessagesController < ApplicationController
     end
   end
 
+  def archive
+    @message = Message.find_by_id(params[:message_id])
+
+    if @message
+      @message.closed = true
+      @message.save!
+
+      redirect_to messages_path, notice: 'Message was successfully archived.'
+    else
+      raise 'No such message to archive.'
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_message

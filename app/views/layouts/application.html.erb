@@ -24,12 +24,6 @@
   <![endif]-->
 </head>
 <body>
-	<div class="overlay hidden">
-		<div class="loading hidden">
-			<div class="error hidden">Loading Error</div>
-		</div>
-	</div> <!-- .overlay .hidden -->
-
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
@@ -68,7 +62,32 @@
   </nav>
 
 	<div class="container">
-    <%= content_for?(:content) ? yield(:content) : yield %>
+
+    <% if content_for?(:breadcrumb) %>
+      <ol class="breadcrumb">
+        <%= yield(:breadcrumb) %>
+      </ol>
+    <% end %>
+
+    <div id="delayed-jobs-info"></div>
+
+    <% if notice %>
+      <div class="row alert-message">
+      	<div class="col-md-12">
+          <div class="alert alert-info" role="alert" style="width: 40%; margin: auto auto; margin-bottom: 1em;">
+            <ul style="padding-left: 0; text-align: center;">
+              <%= notice %>
+            </ul>
+          </div>
+        </div>
+      </div> <!-- .row -->
+
+      <script type="text/javascript">
+        window.setTimeout(function() { $(".alert-message").fadeOut('slow'); }, 3000);
+      </script>
+    <% end %>
+
+    <%= content_for?(:content) ? yield(:content) : '' %>
 		<%= yield %>
 	</div> <!-- .container -->
 

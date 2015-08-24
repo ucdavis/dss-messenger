@@ -1,12 +1,10 @@
+<% content_for :breadcrumb do %>
+  <li>Messages</li>
+  <li class="active"><%= @display_archived ? "Archived" : "Active" %> Messages</li>
+<% end %>
+
 <div class="row">
   <div class="col-md-12">
-
-    <div id="delayed-jobs-info"></div>
-
-    <ol class="breadcrumb">
-      <li>Messages</li>
-      <li class="active"><%= @display_archived ? "Archived" : "Active" %> Messages</li>
-    </ol>
 
     <table class="table table-striped table-hover">
       <thead>
