@@ -1,4 +1,4 @@
-class PublishersController < ApplicationController
+class Preferences::PublishersController < ApplicationController
   before_action :set_publisher, only: [:show, :edit, :update, :destroy]
 
   filter_access_to :all
@@ -6,15 +6,13 @@ class PublishersController < ApplicationController
   def index
     @publishers = Publisher.all
 
-    respond_to do |format|
-      format.html
-      format.json { render json: @publishers }
-    end
+    render layout: 'preferences'
   end
 
   def update
     respond_to do |format|
       if @publisher.update_attributes(publisher_params)
+        format.html { redirect_to preferences_publishers_url, notice: 'Publisher was successfully updated.' }
         format.json { head :no_content }
       else
         format.json { render json: @publisher.errors, status: :unprocessable_entity }

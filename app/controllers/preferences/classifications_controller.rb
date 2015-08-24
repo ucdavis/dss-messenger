@@ -1,14 +1,20 @@
-class ClassificationsController < ApplicationController
+class Preferences::ClassificationsController < ApplicationController
   before_action :set_classification, only: [:show, :edit, :update, :destroy]
 
   filter_access_to :all
+
+  def index
+    @classifications = Classification.all
+
+    render layout: 'preferences'
+  end
 
   def create
     @classification = Classification.new(classification_params)
 
     respond_to do |format|
       if @classification.save
-        format.html { redirect_to @classification, notice: 'Classification was successfully created.' }
+        format.html { redirect_to preferences_classifications_url, notice: 'Classification was successfully created.' }
         format.json { render json: @classification, status: :created, location: @classification }
       else
         format.html { render action: "new" }
@@ -20,7 +26,7 @@ class ClassificationsController < ApplicationController
   def update
     respond_to do |format|
       if @classification.update_attributes(classification_params)
-        format.html { redirect_to @classification, notice: 'Classification was successfully updated.' }
+        format.html { redirect_to preferences_classifications_url, notice: 'Classification was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -33,7 +39,7 @@ class ClassificationsController < ApplicationController
     @classification.destroy
 
     respond_to do |format|
-      format.html { redirect_to classifications_url }
+      format.html { redirect_to preferences_classifications_url }
       format.json { head :no_content }
     end
   end

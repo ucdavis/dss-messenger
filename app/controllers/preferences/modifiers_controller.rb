@@ -1,14 +1,20 @@
-class ModifiersController < ApplicationController
+class Preferences::ModifiersController < ApplicationController
   before_action :set_modifier, only: [:show, :edit, :update, :destroy]
 
   filter_access_to :all
+
+  def index
+    @modifiers = Modifier.all
+
+    render layout: 'preferences'
+  end
 
   def create
     @modifier = Modifier.new(modifier_params)
 
     respond_to do |format|
       if @modifier.save
-        format.html { redirect_to @modifier, notice: 'Modifier was successfully created.' }
+        format.html { redirect_to preferences_modifiers_url, notice: 'Modifier was successfully created.' }
         format.json { render json: @modifier, status: :created, location: @modifier }
       else
         format.html { render action: "new" }
@@ -20,7 +26,7 @@ class ModifiersController < ApplicationController
   def update
     respond_to do |format|
       if @modifier.update_attributes(modifier_params)
-        format.html { redirect_to @modifier, notice: 'Modifier was successfully updated.' }
+        format.html { redirect_to preferences_modifiers_url, notice: 'Modifier was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -33,7 +39,7 @@ class ModifiersController < ApplicationController
     @modifier.destroy
 
     respond_to do |format|
-      format.html { redirect_to modifiers_url }
+      format.html { redirect_to preferences_modifiers_url }
       format.json { head :no_content }
     end
   end

@@ -60,7 +60,7 @@
           </div>
         </form>
         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "Preferences", preferences_path %></li>
+          <li><%= link_to "Preferences", preferences_classifications_path %></li>
           <li><%= link_to "Logout", logout_path %></li>
         </ul>
       </div> <!--/.nav-collapse -->
@@ -68,6 +68,7 @@
   </nav>
 
 	<div class="container">
+    <%= content_for?(:content) ? yield(:content) : yield %>
 		<%= yield %>
 	</div> <!-- .container -->
 

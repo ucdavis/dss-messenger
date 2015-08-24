@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-12">
+
+    <table class="table table-striped table-hover">
+      <tbody>
+        <% @settings.each do |setting| %>
+          <tr>
+            <%= form_for [:preferences, setting] do |f| %>
+              <td>
+                <%#= label_tag(:item_name, "E-Mail Footer") %>
+                <%= f.text_area :item_value, class: "typeahead form-control", rows: 7 %><br />
+                <%= f.submit "Save", class: "btn btn-primary" %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div> <!-- .col-md-12 -->
+</div> <!-- .row -->

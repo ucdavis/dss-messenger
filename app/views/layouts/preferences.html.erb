@@ -1,0 +1,27 @@
+<% content_for :content do %>
+  <div class="row">
+    <div class="col-md-12">
+
+      <ol class="breadcrumb">
+        <li class="active">Preferences</li>
+      </ol>
+
+      <ul class="nav nav-tabs">
+        <%
+          nav_array = {
+            'Classifications' => preferences_classifications_path,
+            'Modifiers' => preferences_modifiers_path,
+            'Impacted Services' => preferences_impacted_services_path,
+            'Publishers' => preferences_publishers_path,
+            'E-Mail Footer' => preferences_settings_path
+          }
+        %>
+        <% nav_array.each do |title, url| %>
+          <li role="presentation"<%= controller_name == title.downcase.tr(" ", "_") ? ' class="active"'.html_safe : '' %> ><%= link_to title, url %></li>
+        <% end %>
+      </ul>
+
+    </div> <!-- .col-md-12 -->
+  </div> <!-- .row -->
+<% end %>
+<%= render template: "layouts/application" %>

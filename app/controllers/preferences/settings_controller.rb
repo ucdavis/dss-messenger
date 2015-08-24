@@ -1,10 +1,16 @@
-class SettingsController < ApplicationController
+class Preferences::SettingsController < ApplicationController
   before_action :set_setting, only: [:show, :edit, :update, :destroy]
+
+  def index
+    @settings = Setting.all
+
+    render layout: 'preferences'
+  end
 
   def update
     respond_to do |format|
       if @setting.update_attributes(setting_params)
-        format.html { redirect_to @setting, notice: 'Setting was successfully updated.' }
+        format.html { redirect_to preferences_settings_url, notice: 'Setting was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
