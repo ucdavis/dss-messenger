@@ -24,6 +24,9 @@ gem 'premailer-rails'
 # For deployment
 gem 'capistrano', '< 3.0.0'
 
+# For debugging
+gem 'byebug', group: [:development, :test]
+
 # For JS-accessible routes
 gem "js-routes"
 

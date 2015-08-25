@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-  before_action :set_message, only: [:show, :edit, :update, :destroy, :archive]
+  before_action :set_message, only: [:show, :edit, :update, :destroy, :archive, :duplicate]
 
   filter_access_to [:show, :update, :destroy], :attribute_check => true
   filter_access_to [:index, :create, :open], :attribute_check => false
@@ -18,12 +18,8 @@ class MessagesController < ApplicationController
   end
 
   def create
-    # Recipients comes in as a JSON string, so convert it.
-    # The Message model class also has an override of "recipients=" to handle
-    # additional concerns.
-    # We create 'posted_recipients' in case the form has errors and it needs
-    # to be displayed again.
-    @posted_recipients = params[:message][:recipients]
+    # Recipients comes in as a JSON string, so convert it. (model has
+    # added recipients= support)
     params[:message][:recipients] = JSON.parse(params[:message][:recipients])
 
     # Include distribution channels through which to send messages in model
@@ -100,6 +96,7 @@ class MessagesController < ApplicationController
     end
   end
 
+  # archive (and re-activate) merely toggle the 'closed' flag on a message
   def archive
     @message.closed = true
 
@@ -108,6 +105,24 @@ class MessagesController < ApplicationController
     else
       raise "Error while archiving message ##{@message.id}."
     end
+  end
+
+  # 'duplicate' is essentially 'new' but we fill in many fields based on the
+  # elder message being duplicated.
+  def duplicate
+    original_message = @message
+
+    @message = @message.dup
+
+    # .dup does not handle associations currently
+    @message.recipient_ids = original_message.recipient_ids
+    @message.impacted_service_ids = original_message.impacted_service_ids
+    @message.publisher_ids = original_message.publisher_ids
+
+    # duplicate may be given a modifier via params
+    @message.modifier_id = params[:modifier] if params[:modifier]
+
+    render 'new'
   end
 
   private
@@ -119,6 +134,6 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround, :classification_id, :modifier_id, :impacted_service_ids, :closed, :publisher_ids => [], :recipients => [:uid, :name])
+      params.require(:message).permit(:impact_statement, :other_services, :purpose, :resolution, :sender_uid, :subject, :window_end, :window_start, :workaround, :classification_id, :modifier_id, :closed, :impacted_service_ids => [], :publisher_ids => [], :recipients => [:uid, :name])
     end
 end

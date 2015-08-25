@@ -1,10 +1,56 @@
 <script type="text/javascript">
-  // The following two snippets of code convert to- and from- the $.tokenfield's
-  // API to something better understood by Rails.
-  // The Message#create controller also has some code to handle the receiving
-  // end of this data transmission.
+  $(document).ready(function() {
+    // Initialize the date-time picker fields
+    $("input.datetimepicker").datetimepicker({
+      format: "yyyy/mm/dd HH:ii P",
+      minuteStep: 30,
+      autoclose: true,
+      todayBtn: true,
+      todayHighlight: true,
+      showMeridian: true,
+      pickerPosition: "bottom-left"
+    });
 
-  function prepareRecipientList() {
+    // Initialize the recipients typeahead field
+    var recipientList = new Bloodhound({
+      datumTokenizer: function(d) {
+        return Bloodhound.tokenizers.obj.whitespace('value');
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      limit: 12,
+      remote: {
+        url: Routes.recipients_path() + '.json?q=%QUERY',
+        wildcard: '%QUERY'
+      }
+    });
+
+    recipientList.initialize();
+
+    $('input.typeahead').tokenfield({
+      typeahead: [
+        null, {
+          source: recipientList.ttAdapter(),
+          displayKey: 'label'
+        }
+      ]
+    });
+
+    <% if @message.recipients %>
+    // If message has validation errors or is a duplicate of another message,
+    // we may already have recipients to add to the token list.
+    var tokens = [];
+
+    <% @message.recipients.each do |recipient| %>
+    tokens.push({ value: '<%= escape_javascript(recipient.uid) %>', label: '<%= escape_javascript(recipient.name) %>' });
+    <% end %>
+
+    $('input.typeahead').tokenfield('setTokens', tokens);
+    <% end %>
+  });
+
+  // Called by the form's onSubmit to convert tokenfield's API data into
+  // something readable by the backend.
+  function saveRecipientList() {
     var tokens = $('input.typeahead').tokenfield('getTokens');
 
     if(tokens) {
@@ -17,22 +63,9 @@
       $('input.typeahead').val(JSON.stringify(recipients));
     }
   }
-
-  <% unless @posted_recipients.nil? %>
-  $(document).ready(function() {
-    var recipients = JSON.parse("<%= escape_javascript(@posted_recipients).html_safe %>");
-    var tokens = [];
-
-    for (var i = 0; i < recipients.length; i++) {
-      tokens.push({ value: recipients[i].uid, label: recipients[i].name });
-    }
-
-    $('input.typeahead').tokenfield('setTokens', tokens);
-  });
-  <% end %>
 </script>
 
-<%= form_for(@message, :html => { :onsubmit => "prepareRecipientList()" }) do |f| %>
+<%= form_for(@message, :html => { :onsubmit => "saveRecipientList()" }) do |f| %>
 
 <% if @message.errors.any? %>
 <div class="row">
@@ -103,7 +136,7 @@
       <% Classification.all.each do |classification| %>
         <div class="radio">
           <label>
-            <%= f.radio_button(:classification, classification.short_description) %>
+            <%= f.radio_button(:classification_id, classification.id, :checked => (classification == @message.classification)) %>
             <%= classification.short_description %><br />
           </label>
         </div>
@@ -115,7 +148,7 @@
       <% Modifier.all.each do |modifier| %>
         <div class="radio">
           <label>
-            <%= f.radio_button(:modifier, modifier.short_description) %>
+            <%= f.radio_button(:modifier_id, modifier.id, :checked => (modifier == @message.modifier)) %>
             <%= modifier.short_description %><br />
           </label>
         </div>
@@ -127,7 +160,7 @@
       <% ImpactedService.all.each do |impacted_service| %>
         <div class="checkbox">
           <label>
-            <%= check_box_tag "message[impacted_service_ids][]", impacted_service.id %>
+            <%= check_box_tag "message[impacted_service_ids][]", impacted_service.id, @message.impacted_service_ids.include?(impacted_service.id) %>
             <%= impacted_service.name %><br />
           </label>
         </div>
@@ -140,7 +173,13 @@
       <% Publisher.all.each do |publisher| %>
         <div class="checkbox">
           <label>
+            <% if action_name == 'new' %>
             <%= check_box_tag "message[publisher_ids][]", publisher.id, publisher.default %>
+            <% elsif action_name == 'duplicate' %>
+            <%= check_box_tag "message[publisher_ids][]", publisher.id, @message.publisher_ids.include?(publisher.id) %>
+            <% else %>
+            <% raise 'Unsupported action for Publishers checkbox!' %>
+            <% end %>
             <%= publisher.name %><br />
           </label>
         </div>
