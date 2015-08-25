@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-  before_action :set_message, only: [:show, :edit, :update, :destroy]
+  before_action :set_message, only: [:show, :edit, :update, :destroy, :archive]
 
   filter_access_to [:show, :update, :destroy], :attribute_check => true
   filter_access_to [:index, :create, :open], :attribute_check => false
@@ -66,7 +66,7 @@ class MessagesController < ApplicationController
   def update
     respond_to do |format|
       if @message.update_attributes(message_params)
-        format.html { redirect_to @message, notice: 'Message was successfully updated.' }
+        format.html { redirect_to @message, notice: 'Message successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -79,7 +79,7 @@ class MessagesController < ApplicationController
     @message.destroy
 
     respond_to do |format|
-      format.html { redirect_to messages_url(display: 'archived') }
+      format.html { redirect_to messages_url(display: 'archived'), notice: 'Message successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -101,22 +101,20 @@ class MessagesController < ApplicationController
   end
 
   def archive
-    @message = Message.find_by_id(params[:message_id])
+    @message.closed = true
 
-    if @message
-      @message.closed = true
-      @message.save!
-
+    if @message.save
       redirect_to messages_path, notice: 'Message was successfully archived.'
     else
-      raise 'No such message to archive.'
+      raise "Error while archiving message ##{@message.id}."
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_message
-      @message = Message.find(params[:id])
+      @message = Message.find(params[:id]) if params[:id]
+      @message = Message.find(params[:message_id]) unless @message
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

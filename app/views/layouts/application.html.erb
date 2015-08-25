@@ -72,18 +72,8 @@
     <div id="delayed-jobs-info"></div>
 
     <% if notice %>
-      <div class="row alert-message">
-      	<div class="col-md-12">
-          <div class="alert alert-info" role="alert" style="width: 40%; margin: auto auto; margin-bottom: 1em;">
-            <ul style="padding-left: 0; text-align: center;">
-              <%= notice %>
-            </ul>
-          </div>
-        </div>
-      </div> <!-- .row -->
-
       <script type="text/javascript">
-        window.setTimeout(function() { $(".alert-message").fadeOut('slow'); }, 3000);
+        toastr["success"]("<%= escape_javascript(notice) %>")
       </script>
     <% end %>
 

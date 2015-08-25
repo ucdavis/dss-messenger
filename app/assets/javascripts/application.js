@@ -10,6 +10,8 @@
 //= require typeahead.bundle.min
 //= require bootstrap-tokenfield
 
+//= require toastr.min
+
 //= require highcharts
 
 //= require dss-messenger

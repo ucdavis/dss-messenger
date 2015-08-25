@@ -9,6 +9,7 @@ DssMessenger::Application.routes.draw do
   resources :messages do
     get "duplicate"
     get "archive"
+    get "reactivate"
   end
 
   namespace :preferences do
