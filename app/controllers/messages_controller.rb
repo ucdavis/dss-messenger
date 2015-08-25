@@ -1,12 +1,27 @@
 class MessagesController < ApplicationController
-  before_action :set_message, only: [:show, :edit, :update, :destroy, :archive, :duplicate]
+  before_action :set_message, only: [:show, :edit, :update, :destroy, :archive, :duplicate, :reactivate]
 
   filter_access_to [:show, :update, :destroy], :attribute_check => true
   filter_access_to [:index, :create, :open], :attribute_check => false
 
   def index
     @display_archived = (params[:display] and params[:display] == 'archived') ? true : false
-    @messages = Message.where(:closed => @display_archived).order('messages.created_at DESC')
+
+    if params[:q]
+      messages_table = Message.arel_table
+
+      @messages = Message.where(
+        messages_table[:subject].matches("%#{params[:q]}%")
+        .or(messages_table[:impact_statement].matches("%#{params[:q]}%"))
+        .or(messages_table[:purpose].matches("%#{params[:q]}%"))
+        .or(messages_table[:resolution].matches("%#{params[:q]}%"))
+        .or(messages_table[:workaround].matches("%#{params[:q]}%"))
+        .or(messages_table[:other_services].matches("%#{params[:q]}%"))
+      )
+    else
+      @messages = Message.where(:closed => @display_archived).order('messages.created_at DESC')
+    end
+
     @modifiers = Modifier.all
   end
 
@@ -104,6 +119,16 @@ class MessagesController < ApplicationController
       redirect_to messages_path, notice: 'Message was successfully archived.'
     else
       raise "Error while archiving message ##{@message.id}."
+    end
+  end
+
+  def reactivate
+    @message.closed = false
+
+    if @message.save
+      redirect_to messages_path, notice: 'Message was successfully re-activated.'
+    else
+      raise "Error while re-activating message ##{@message.id}."
     end
   end
 

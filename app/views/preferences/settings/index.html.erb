@@ -1,3 +1,8 @@
+<% content_for :breadcrumb do %>
+  <li>Preferences</li>
+  <li class="active">E-Mail Footer</li>
+<% end %>
+
 <div class="row">
   <div class="col-md-12">
 
@@ -7,7 +12,6 @@
           <tr>
             <%= form_for [:preferences, setting] do |f| %>
               <td>
-                <%#= label_tag(:item_name, "E-Mail Footer") %>
                 <%= f.text_area :item_value, class: "typeahead form-control", rows: 7 %><br />
                 <%= f.submit "Save", class: "btn btn-primary" %>
               </td>

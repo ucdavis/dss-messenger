@@ -18,3 +18,22 @@ toastr.options =
   "hideEasing": "linear"
   "showMethod": "fadeIn"
   "hideMethod": "fadeOut"
+
+$(document).ready () ->
+  # Configure site-wide message search
+  messageList = new Bloodhound
+    datumTokenizer: (d) =>
+      Bloodhound.tokenizers.obj.whitespace('value')
+    queryTokenizer: Bloodhound.tokenizers.whitespace
+    limit: 12
+    remote:
+      url: Routes.messages_path() + '.json?q=%QUERY'
+      wildcard: '%QUERY'
+
+  messageList.initialize()
+
+  $('#message_search').typeahead(null,
+    name: 'messages'
+    display: 'value'
+    source: messageList
+  )
