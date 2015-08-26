@@ -229,4 +229,9 @@ ul.token-input-list-facebook {
 /* Needed to ensure our text-align: center input search has left-aligned results */
 span.twitter-typeahead {
 	text-align: left;
+	pointer-events: auto;
+}
+
+.tt-suggestion.tt-cursor {
+	cursor: pointer;
 }

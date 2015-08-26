@@ -19,7 +19,7 @@ toastr.options =
   "showMethod": "fadeIn"
   "hideMethod": "fadeOut"
 
-$(document).ready () ->
+ready = ->
   # Configure site-wide message search
   messageList = new Bloodhound
     datumTokenizer: Bloodhound.tokenizers.whitespace('value')
@@ -35,3 +35,10 @@ $(document).ready () ->
     displayKey: 'label'
     source: messageList.ttAdapter()
   )
+
+  $('#message_search').bind('typeahead:selected', (obj, datum, name) ->
+    Turbolinks.visit(Routes.message_path(datum.value))
+  ) 
+
+$(document).ready(ready)
+$(document).on('page:load', ready)
