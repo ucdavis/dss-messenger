@@ -22,10 +22,9 @@ toastr.options =
 $(document).ready () ->
   # Configure site-wide message search
   messageList = new Bloodhound
-    datumTokenizer: (d) =>
-      Bloodhound.tokenizers.obj.whitespace('value')
+    datumTokenizer: Bloodhound.tokenizers.whitespace('value')
     queryTokenizer: Bloodhound.tokenizers.whitespace
-    limit: 12
+    limit: 8
     remote:
       url: Routes.messages_path() + '.json?q=%QUERY'
       wildcard: '%QUERY'
@@ -33,7 +32,6 @@ $(document).ready () ->
   messageList.initialize()
 
   $('#message_search').typeahead(null,
-    name: 'messages'
-    display: 'value'
-    source: messageList
+    displayKey: 'label'
+    source: messageList.ttAdapter()
   )

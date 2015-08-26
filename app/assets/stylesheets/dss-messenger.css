@@ -225,3 +225,8 @@ ul.token-input-list-facebook {
   padding-right: 12px;
   padding-top: 6px;
 }
+
+/* Needed to ensure our text-align: center input search has left-aligned results */
+span.twitter-typeahead {
+	text-align: left;
+}
