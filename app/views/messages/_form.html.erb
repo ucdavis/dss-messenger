@@ -175,7 +175,7 @@
           <label>
             <% if action_name == 'new' %>
             <%= check_box_tag "message[publisher_ids][]", publisher.id, publisher.default %>
-            <% elsif action_name == 'duplicate' %>
+            <% elsif (action_name == 'duplicate') || (action_name == 'create') %>
             <%= check_box_tag "message[publisher_ids][]", publisher.id, @message.publisher_ids.include?(publisher.id) %>
             <% else %>
             <% raise 'Unsupported action for Publishers checkbox!' %>
