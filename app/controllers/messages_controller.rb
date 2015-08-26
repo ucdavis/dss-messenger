@@ -26,6 +26,34 @@ class MessagesController < ApplicationController
   end
 
   def show
+    # Determine the number of sent/unsent as well as read/unread
+    # Note: This calculation is only valid if they're using the E-Mail publisher
+    email_log = @message.logs.find{ |l| l.publisher.class_name = "DssMailerPublisher"}
+
+    # Our charts only show percentages so, in the case of an unknown number of
+    # recipients, we can get away with, e.g. a read percentage of "0 / 1"
+    @sent = 0
+    @unsent = 1
+    @read = 0
+    @unread = 1
+
+    if email_log
+      # :queued (ignore), :error (?)
+      if (email_log.status == :sending) || (email_log.status == :completed)
+        @read = email_log.viewed_count
+        @unread = email_log.recipient_count - @read
+        @sent = email_log.entries.length
+        @unsent = email_log.recipient_count - @sent
+      end
+    end
+
+    # Calculate the e-mail footer for the message preview section
+    @footer = Setting.where(:item_name => 'footer').first
+    if @footer
+      @footer = @footer.item_value
+    else
+      @footer = ""
+    end
   end
 
   def new

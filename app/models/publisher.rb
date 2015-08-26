@@ -13,9 +13,6 @@ class Publisher < ActiveRecord::Base
   # [+recipient_list+] Array of +Persons+ representing the list of all
   #                    recipients of this message.
   def self.schedule(message_log, recipient_list)
-    message_log.status = :queued
-    message_log.save!
-
     message = message_log.message
 
     Rails.logger.debug "Publisher will schedule for message log ##{message_log.id} with #{recipient_list.count} recipients"
@@ -49,9 +46,6 @@ class Publisher < ActiveRecord::Base
     if message_log.entries.length == message_log.recipient_count
       message_log.status = :completed
       message_log.finish = Time.now
-      message_log.save!
-    else
-      message_log.status = :sending
       message_log.save!
     end
   end
@@ -96,21 +90,23 @@ class Publisher < ActiveRecord::Base
   # Safely turns the stored class name into a constant that can be used to call
   # the appropriate methods for the given publisher.
   def classify
-    self.class_name.constantize  if # the specified class name is in one of the
-                                    # files in app/publishers
-      Dir.entries(Rails.root + "app/publishers")
-      .map do |x|
-        unless x.start_with?(".") || File.directory?(x) || ! x.end_with?(".rb")
-          class_file = File.open(Rails.root + "app/publishers/" + x)
-          until class_file.eof()
-            class_line = class_file.readline()
-            break class_line.gsub(/.* (.*) < Publisher/, '\1').strip  if class_line.include? "< Publisher"
-            break if class_line.start_with? "class"
-          end
+    self.class_name.constantize if Publisher.valid_publisher?(self.class_name)
+  end
+
+  # Returns true if the class_name is one found in Rails.root.join('app', 'publishers')
+  def self.valid_publisher?(class_name)
+    Dir.entries(Rails.root.join('app', 'publishers')).map do |x|
+      unless x.start_with?(".") || File.directory?(x) || ! x.end_with?(".rb")
+        class_file = File.open(Rails.root + "app/publishers/" + x)
+        until class_file.eof()
+          class_line = class_file.readline()
+          break class_line.gsub(/.* (.*) < Publisher/, '\1').strip  if class_line.include? "< Publisher"
+          break if class_line.start_with? "class"
         end
       end
-      .delete_if { |x| x.nil? }
-      .uniq
-      .include? self.class_name
+    end
+    .delete_if { |x| x.nil? }
+    .uniq
+    .include? class_name
   end
 end
