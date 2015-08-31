@@ -14,9 +14,10 @@ class Message < ActiveRecord::Base
   has_many :publishers, :through => :logs
 
   # Validations
+  # Note: We don't validate the presence of recipients as a sender
+  #       may not use recipients, e.g. RSS.
   validates :subject, presence: true
   validates :impact_statement, presence: true
-  validates_presence_of :recipients
   validates_presence_of :publishers, :on => :create
 
   def recipients=(recipient_list)

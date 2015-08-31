@@ -19,6 +19,18 @@ class Publisher < ActiveRecord::Base
 
     recipient_list.each do |recipient|
       Rails.logger.debug "Publisher is scheduling for message log ##{message_log.id}, recipient (#{recipient.name}) ..."
+
+      # Generate a message receipt for each recipient.
+      # Note that the existence of a receipt does not mean a message
+      # was sent - check the 'performed_at' column for that information.
+      receipt = MessageReceipt.new
+
+      receipt.recipient_name = recipient.name
+      receipt.recipient_email = recipient.email
+      receipt.login_id = recipient.loginid
+
+      message_log.entries << receipt
+
       self.delay.perform(message_log, message, recipient)
     end
   end
@@ -30,17 +42,6 @@ class Publisher < ActiveRecord::Base
   # message, and publication medium combination, unless +schedule+ is overriden
   # not to create +MessageReceipts+.
   def self.perform(message_log, message, recipient)
-    receipt = MessageReceipt.new
-
-    Rails.logger.debug "Publisher is performing for message log ##{message_log.id}, recipient (#{recipient.name}) ..."
-
-    receipt.recipient_name = recipient.name
-    receipt.recipient_email = recipient.email
-
-    # Save the person's login id or nil if it doesn't exist
-    receipt.login_id = recipient.loginid
-    message_log.entries << receipt
-
     self.publish(receipt.id, message, recipient)
 
     if message_log.entries.length == message_log.recipient_count

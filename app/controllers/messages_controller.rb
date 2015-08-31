@@ -28,7 +28,7 @@ class MessagesController < ApplicationController
   def show
     # Determine the number of sent/unsent as well as read/unread
     # Note: This calculation is only valid if they're using the E-Mail publisher
-    email_log = @message.logs.find{ |l| l.publisher.class_name = "DssMailerPublisher"}
+    email_log = @message.logs.find{ |l| l.publisher.class_name == "DssMailerPublisher"}
 
     # Our charts only show percentages so, in the case of an unknown number of
     # recipients, we can get away with, e.g. a read percentage of "0 / 1"
@@ -37,8 +37,10 @@ class MessagesController < ApplicationController
     @read = 0
     @unread = 1
 
+    # Recipient list needs to know if message is mail-based (as opposed to e.g. RSS-only)
+    @email_based = email_log.present?
+
     if email_log
-      # :queued (ignore), :error (?)
       if (email_log.status == :sending) || (email_log.status == :completed)
         @read = email_log.viewed_count
         @unread = email_log.recipient_count - @read
@@ -49,7 +51,7 @@ class MessagesController < ApplicationController
 
     if params[:tab] == 'recipients'
       if email_log
-        @recipients = email_log.entries.map{ |e| { name: e.recipient_name, email: e.recipient_email } }
+        @recipients = email_log.entries.map{ |e| { name: e.recipient_name, email: e.recipient_email, viewed: e.viewed } }
       else
         @recipients = []
       end
@@ -149,9 +151,7 @@ class MessagesController < ApplicationController
 
   # archive (and re-activate) merely toggle the 'closed' flag on a message
   def archive
-    @message.closed = true
-
-    if @message.save
+    if @message.update_attribute('closed', true)
       redirect_to messages_path, notice: 'Message was successfully archived.'
     else
       raise "Error while archiving message ##{@message.id}."
@@ -159,9 +159,7 @@ class MessagesController < ApplicationController
   end
 
   def reactivate
-    @message.closed = false
-
-    if @message.save
+    if @message.update_attribute('closed', false)
       redirect_to messages_path, notice: 'Message was successfully re-activated.'
     else
       raise "Error while re-activating message ##{@message.id}."

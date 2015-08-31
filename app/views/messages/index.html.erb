@@ -16,29 +16,39 @@
         </tr>
       </thead>
       <tbody>
-        <% @messages.each do |message| %>
+        <% if @messages.count == 0 %>
           <tr>
-            <td><%= time_ago_in_words(message.created_at) %></td>
-            <td><%= link_to message.subject, message %></td>
-            <td><%= message.sender %></td>
             <% if @display_archived %>
-            <td>
-              <%= link_to(message_reactivate_path(message), class: 'tooltip-open', data: { toogle: 'tooltip' }, title: 'Re-Activate' ) do %> <span class="glyphicon glyphicon-chevron-up" aria-hidden="true" style="margin-right: 1em;"></span> <% end %>
-              <%= link_to(message_duplicate_path(message), class: 'tooltip-duplicate', data: { toogle: 'tooltip' }, title: 'Duplicate' ) do %> <span class="glyphicon glyphicon-retweet" aria-hidden="true" style="margin-right: 1em;"></span> <% end %>
-              <%= link_to(message_path(message), method: :delete, class: 'tooltip-destroy', data: { toogle: 'tooltip', confirm: 'Are you sure?' }, title: 'Delete' ) do %> <span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: red;"></span> <% end %>
-            </td>
+              <td colspan="5" style="text-align: center;">No archived messages</td>
             <% else %>
-            <td>
-              <div class="actions" data-toggle="tooltip" title="Compose new message with selected status" data-original-title="Compose new message with selected status">
-                <% colors = ['primary', 'success', 'info', 'warning', 'danger'] %>
-                <% @modifiers.each_with_index do |modifier, i| %>
-                  <%= link_to modifier.description.slice(0..modifier.description.index(':')-1), message_duplicate_path(message, :modifier => modifier.id ), :class => 'label label-' + colors[i % 5] %>
-                <% end %>
-              </div>
-            </td>
-            <td><a href="<%= message_archive_path(message) %>" class="tooltip-archive" data-toggle="tooltip" title="Archive without sending"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span></a></td>
+              <td colspan="4" style="text-align: center;">No active messages</td>
             <% end %>
           </tr>
+        <% else %>
+          <% @messages.each do |message| %>
+            <tr>
+              <td><%= time_ago_in_words(message.created_at) %></td>
+              <td><%= link_to message.subject, message %></td>
+              <td><%= message.sender %></td>
+              <% if @display_archived %>
+              <td>
+                <%= link_to(message_reactivate_path(message), class: 'tooltip-open', data: { toogle: 'tooltip' }, title: 'Re-Activate' ) do %> <span class="glyphicon glyphicon-chevron-up" aria-hidden="true" style="margin-right: 1em;"></span> <% end %>
+                <%= link_to(message_duplicate_path(message), class: 'tooltip-duplicate', data: { toogle: 'tooltip' }, title: 'Duplicate' ) do %> <span class="glyphicon glyphicon-retweet" aria-hidden="true" style="margin-right: 1em;"></span> <% end %>
+                <%= link_to(message_path(message), method: :delete, class: 'tooltip-destroy', data: { toogle: 'tooltip', confirm: 'Are you sure?' }, title: 'Delete' ) do %> <span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: red;"></span> <% end %>
+              </td>
+              <% else %>
+              <td>
+                <div class="actions" data-toggle="tooltip" title="Compose new message with selected status" data-original-title="Compose new message with selected status">
+                  <% colors = ['primary', 'success', 'info', 'warning', 'danger'] %>
+                  <% @modifiers.each_with_index do |modifier, i| %>
+                    <%= link_to modifier.description.slice(0..modifier.description.index(':')-1), message_duplicate_path(message, :modifier => modifier.id ), :class => 'label label-' + colors[i % 5] %>
+                  <% end %>
+                </div>
+              </td>
+              <td><a href="<%= message_archive_path(message) %>" class="tooltip-archive" data-toggle="tooltip" title="Archive without sending"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span></a></td>
+              <% end %>
+            </tr>
+          <% end %>
         <% end %>
       </tbody>
     </table>

@@ -3,6 +3,10 @@ class AggieFeedPublisher < Publisher
   def self.publish(message_receipt_id, message, recipient)
     aggie_feed_message = AggieFeed.new()
     aggie_feed_message.create(message_receipt_id, message.subject, message.impact_statement, "", recipient)
+
+    receipt = MessageReceipt.find_by(id: message_receipt_id)
+    receipt.performed_at = Time.now
+    receipt.save!
   end
 
   # Increments the count of number of views this message has received and

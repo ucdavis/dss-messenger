@@ -14,7 +14,7 @@
 </ul>
 
 <div class="row">
-	<div class="col-md-8">
+	<div class="col-md-<%= @email_based ? "8" : "12" %>">
     <% if params[:tab].nil? or params[:tab] != 'recipients' %>
   		<table class="table table-striped table-bordered">
         <tbody>
@@ -94,24 +94,38 @@
           <tr>
             <th>Name</th>
             <th>E-Mail</th>
+            <th>Viewed</th>
           </tr>
         </thead>
         <tbody>
-          <% @recipients.each do |r| %>
+          <% if @recipients.length == 0 %>
             <tr>
-              <td><%= r[:name] %></td>
-              <td><%= r[:email] %></td>
+              <% if @email_based %>
+                <td colspan="3" style="text-align: center;">No recipients yet, message is still processing.</td>
+              <% else %>
+                <td colspan="3" style="text-align: center;">Recipient list only supported for e-mail-based messages.</td>
+              <% end %>
             </tr>
+          <% else %>
+            <% @recipients.each do |r| %>
+              <tr>
+                <td><%= r[:name] %></td>
+                <td><%= r[:email] %></td>
+                <td><%= r[:viewed] == true ? 'Yes' : '<span style="color: #999;">Unknown</span>'.html_safe %></td>
+              </tr>
+            <% end %>
           <% end %>
         </tbody>
       </table>
     <% end %>
 	</div>
-	<div class="col-md-4">
-		<div id="send_status" style="min-width: 300px; height: 300px; max-width: 300px; margin: 0 auto"></div>
+  <% if @email_based %>
+  	<div class="col-md-4">
+  		<div id="send_status" style="min-width: 300px; height: 300px; max-width: 300px; margin: 0 auto"></div>
 
-		<div id="read_status" style="min-width: 300px; height: 300px; max-width: 300px; margin: 0 auto"></div>
-	</div>
+  		<div id="read_status" style="min-width: 300px; height: 300px; max-width: 300px; margin: 0 auto"></div>
+  	</div>
+  <% end %>
 </div> <!-- .row -->
 
 <script type="text/javascript">
