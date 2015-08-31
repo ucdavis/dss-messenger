@@ -94,6 +94,7 @@
           <tr>
             <th>Name</th>
             <th>E-Mail</th>
+            <th>Sent At</th>
             <th>Viewed</th>
           </tr>
         </thead>
@@ -101,9 +102,9 @@
           <% if @recipients.length == 0 %>
             <tr>
               <% if @email_based %>
-                <td colspan="3" style="text-align: center;">No recipients yet, message is still processing.</td>
+                <td colspan="4" style="text-align: center;">No recipients yet, message is still processing.</td>
               <% else %>
-                <td colspan="3" style="text-align: center;">Recipient list only supported for e-mail-based messages.</td>
+                <td colspan="4" style="text-align: center;">Recipient list only supported for e-mail-based messages.</td>
               <% end %>
             </tr>
           <% else %>
@@ -111,6 +112,7 @@
               <tr>
                 <td><%= r[:name] %></td>
                 <td><%= r[:email] %></td>
+                <td><%= r[:sent].nil? ? 'Unsent' : r[:sent].strftime("%b %d, %Y %l:%M:%S %p") %></td>
                 <td><%= r[:viewed] == true ? 'Yes' : '<span style="color: #999;">Unknown</span>'.html_safe %></td>
               </tr>
             <% end %>

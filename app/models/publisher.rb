@@ -31,7 +31,7 @@ class Publisher < ActiveRecord::Base
 
       message_log.entries << receipt
 
-      self.delay.perform(message_log, message, recipient)
+      self.delay.perform(receipt, recipient)
     end
   end
 
@@ -41,13 +41,13 @@ class Publisher < ActiveRecord::Base
   # recipient, there is a unique +MessageReceipt+ associated with each recipient,
   # message, and publication medium combination, unless +schedule+ is overriden
   # not to create +MessageReceipts+.
-  def self.perform(message_log, message, recipient)
-    self.publish(receipt.id, message, recipient)
+  def self.perform(receipt, recipient)
+    self.publish(receipt.id, receipt.message, recipient)
 
-    if message_log.entries.length == message_log.recipient_count
-      message_log.status = :completed
-      message_log.finish = Time.now
-      message_log.save!
+    if receipt.message_log.entries.where('performed_at is not null').length == receipt.message_log.recipient_count
+      receipt.message_log.status = :completed
+      receipt.message_log.finish = Time.now
+      receipt.message_log.save!
     end
   end
 

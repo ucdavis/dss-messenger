@@ -44,14 +44,14 @@ class MessagesController < ApplicationController
       if (email_log.status == :sending) || (email_log.status == :completed)
         @read = email_log.viewed_count
         @unread = email_log.recipient_count - @read
-        @sent = email_log.entries.length
+        @sent = email_log.entries.where('performed_at is not null').length
         @unsent = email_log.recipient_count - @sent
       end
     end
 
     if params[:tab] == 'recipients'
       if email_log
-        @recipients = email_log.entries.map{ |e| { name: e.recipient_name, email: e.recipient_email, viewed: e.viewed } }
+        @recipients = email_log.entries.map{ |e| { name: e.recipient_name, email: e.recipient_email, viewed: e.viewed, sent: e.performed_at } }
       else
         @recipients = []
       end
