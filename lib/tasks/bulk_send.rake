@@ -34,15 +34,16 @@ namespace :message do
           next
         end
 
-        # If entity is a group, resolve individual group members
+        # If entity is a group, determine its individual members
         if entity.type == "Group"
-          entity.members.map{ |m| m[:id] }.uniq.each do |m|
-            begin
-              p = Person.find(m)
-            rescue Exception => e
-              Rails.logger.error "ActiveResource error while fetching group member with UID #{m}: '#{e}'. Skipping to next group member."
-              next
-            end
+          g = Group.find(entity.id)
+
+          g.members.each do |m|
+            p = Person.new
+
+            p.name = m[:name]
+            p.email = m[:email]
+            p.id = m[:id]
 
             members << p
           end
