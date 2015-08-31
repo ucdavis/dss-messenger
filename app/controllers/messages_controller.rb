@@ -47,12 +47,20 @@ class MessagesController < ApplicationController
       end
     end
 
-    # Calculate the e-mail footer for the message preview section
-    @footer = Setting.where(:item_name => 'footer').first
-    if @footer
-      @footer = @footer.item_value
+    if params[:tab] == 'recipients'
+      if email_log
+        @recipients = email_log.entries.map{ |e| { name: e.recipient_name, email: e.recipient_email } }
+      else
+        @recipients = []
+      end
     else
-      @footer = ""
+      # Calculate the e-mail footer for the message preview section
+      @footer = Setting.where(:item_name => 'footer').first
+      if @footer
+        @footer = @footer.item_value
+      else
+        @footer = ""
+      end
     end
   end
 
