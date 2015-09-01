@@ -235,3 +235,7 @@ span.twitter-typeahead {
 .tt-suggestion.tt-cursor {
 	cursor: pointer;
 }
+
+td.actions>a:hover {
+	text-decoration: none;
+}

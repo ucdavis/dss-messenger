@@ -31,7 +31,7 @@
               <td><%= link_to message.subject, message %></td>
               <td><%= message.sender %></td>
               <% if @display_archived %>
-              <td>
+              <td class="actions">
                 <%= link_to(message_reactivate_path(message), class: 'tooltip-open', data: { toogle: 'tooltip' }, title: 'Re-Activate' ) do %> <span class="glyphicon glyphicon-chevron-up" aria-hidden="true" style="margin-right: 1em;"></span> <% end %>
                 <%= link_to(message_duplicate_path(message), class: 'tooltip-duplicate', data: { toogle: 'tooltip' }, title: 'Duplicate' ) do %> <span class="glyphicon glyphicon-retweet" aria-hidden="true" style="margin-right: 1em;"></span> <% end %>
                 <%= link_to(message_path(message), method: :delete, class: 'tooltip-destroy', data: { toogle: 'tooltip', confirm: 'Are you sure?' }, title: 'Delete' ) do %> <span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: red;"></span> <% end %>
@@ -45,7 +45,7 @@
                   <% end %>
                 </div>
               </td>
-              <td><a href="<%= message_archive_path(message) %>" class="tooltip-archive" data-toggle="tooltip" title="Archive without sending"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span></a></td>
+              <td class="actions"><a href="<%= message_archive_path(message) %>" class="tooltip-archive" data-toggle="tooltip" title="Archive without sending"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span></a></td>
               <% end %>
             </tr>
           <% end %>
