@@ -181,6 +181,9 @@ class MessagesController < ApplicationController
     # duplicate may be given a modifier via params
     @message.modifier_id = params[:modifier] if params[:modifier]
 
+    # duplicate is a new message, do not auto-close
+    @message.closed = false
+
     render 'new'
   end
 
