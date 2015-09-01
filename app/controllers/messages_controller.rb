@@ -178,8 +178,12 @@ class MessagesController < ApplicationController
     @message.impacted_service_ids = original_message.impacted_service_ids
     @message.publisher_ids = original_message.publisher_ids
 
-    # duplicate may be given a modifier via params
-    @message.modifier_id = params[:modifier] if params[:modifier]
+    # duplicate should use a modifier if given, else clear the field
+    if params[:modifier]
+      @message.modifier_id = params[:modifier]
+    else
+      @message.modifier = nil
+    end
 
     # duplicate is a new message, do not auto-close
     @message.closed = false
