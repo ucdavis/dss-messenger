@@ -12,14 +12,15 @@ class AggieFeed < AbstractController::Base
   include AbstractController::Helpers
   include AbstractController::Translation
   include AbstractController::AssetPaths
+  include ActionView::ViewPaths
 
   helper ApplicationHelper
 
-  append_view_path Rails.root + 'app/views'
+  append_view_path Rails.root.join('app', 'views')
 
   # Publishes a message to Aggie Feed for a single recipient. Generally called
-  # from +AggieFeedPublisher+'s +publish+ method.  
-  # Params:  
+  # from +AggieFeedPublisher+'s +publish+ method.
+  # Params:
   # [+message_receipt_id+] Id of the +MessageReceipt+ for the message being
   #                        sent.
   # [+title+] Title of the Aggie Feed post.
@@ -38,7 +39,7 @@ class AggieFeed < AbstractController::Base
     # loginids stored for some reason.
     recipient_login_id = ((recipient.respond_to? :loginid and recipient.loginid) or
                            recipient.email.split('@')[0])
-    
+
     # Set the recipient. id is ideally the Kerberos id for the recipient. (g:
     # and i: are required by the AggieFeed API. AggieFeed's documentation says
     # to use false for both when posting to one person, but doesn't specify what
@@ -48,7 +49,7 @@ class AggieFeed < AbstractController::Base
     # Time of publication.
     current_time = Time.now.utc
     @published = current_time.strftime("%Y-%m-%dT%H:%M:%S.000Z")
-    
+
     # Publish the message
     uri = URI.parse($AGGIE_FEED_SETTINGS['HOST'])
     http = Net::HTTP.new(uri.host, uri.port)
