@@ -41,7 +41,7 @@
     var tokens = [];
 
     <% @message.recipients.each do |recipient| %>
-    tokens.push({ value: '<%= escape_javascript(recipient.uid) %>', label: '<%= escape_javascript(recipient.name) %>' });
+    tokens.push({ value: '<%= escape_javascript(recipient.uid) %>', label: '<%= raw escape_javascript(recipient.name) %>' });
     <% end %>
 
     $('input.typeahead').tokenfield('setTokens', tokens);
@@ -133,6 +133,12 @@
 
     <div class="form-group">
       <%= label_tag(:classifications, "Classifications") %><br />
+      <div class="radio">
+        <label>
+          <input type="radio" value="" name="message[classification_id]" id="message_classification_id_" <%= @message.classification.nil? ? 'checked="checked"' : '' %>>
+          None<br />
+        </label>
+      </div>
       <% Classification.all.each do |classification| %>
         <div class="radio">
           <label>
@@ -145,6 +151,12 @@
 
     <div class="form-group">
       <%= label_tag(:modifiers, "Modifiers") %><br />
+      <div class="radio">
+        <label>
+          <input type="radio" value="" name="message[modifier_id]" id="message_modifier_id_" <%= @message.modifier.nil? ? 'checked="checked"' : '' %>>
+          None<br />
+        </label>
+      </div>
       <% Modifier.all.each do |modifier| %>
         <div class="radio">
           <label>
