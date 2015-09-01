@@ -10,6 +10,9 @@ gem 'unicorn'
 gem 'mail'
 gem 'whenever'
 
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+
 gem 'spring', group: :development
 gem 'web-console', '~> 2.0', group: :development
 
@@ -22,7 +25,14 @@ gem 'hpricot'
 gem 'premailer-rails'
 
 # For deployment
-gem 'capistrano', '< 3.0.0'
+group :development do
+  gem 'capistrano', '~> 3.1', require: false
+  gem 'capistrano-rails',   '~> 1.1', require: false
+  gem 'capistrano-bundler', '~> 1.1', require: false
+  gem 'capistrano-passenger', require: false
+  # gem 'capistrano-npm', require: false
+  gem 'capistrano3-delayed-job', '~> 1.0'
+end
 
 # For debugging
 gem 'byebug', group: [:development, :test]

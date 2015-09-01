@@ -1,87 +1,54 @@
-require "bundler/capistrano"
+# config valid only for current version of Capistrano
+lock '3.4.0'
 
-# 'whenever' setup
-set :whenever_command, "bundle exec whenever"
-require "whenever/capistrano"
+set :application, 'dss-messenger'
+set :repo_url, 'git@github.com:dssit/dss-messenger.git'
 
-# 'delayed_job' setup
-require "delayed/recipes"
-before "deploy:restart", "delayed_job:stop"
-after  "deploy:restart", "delayed_job:start"
-after "deploy:stop",  "delayed_job:stop"
-after "deploy:start", "delayed_job:start"
-after "deploy:restart", "deploy:prime_cache"
+# Temporary fix for restarting the application until Passenger v5.0.10
+set :passenger_restart_with_touch, true
 
-server "169.237.120.176", :web, :app, :db, primary: true
+# Default branch is :master
+# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
-set :application, "dss-messenger"
-set :url, "https://messenger.dss.ucdavis.edu/"
-set :user, "deployer"
-set :deploy_to, "/home/#{user}/apps/#{application}"
-set :deploy_via, :remote_cache
-set :use_sudo, false
+# Default deploy_to directory is /var/www/my_app_name
+set :deploy_to, "/home/deployer/apps/#{fetch(:application)}"
 
-set :scm, "git"
-set :repository, "git@github.com:okadri/#{application}.git"
-set :branch, "master"
+# Default value for :scm is :git
+set :scm, :git
 
-set :test_log, "log/capistrano.test.log"
+# Default value for :format is :pretty
+set :format, :pretty
 
-default_run_options[:pty] = true
-ssh_options[:forward_agent] = true
+# Default value for :log_level is :debug
+set :log_level, :debug
 
-after "deploy", "deploy:cleanup" # keep only the last 5 releases
-after "deploy:update_code", "deploy:migrate" # run any pending migrations
+# Default value for :pty is false
+# set :pty, true
+
+# Default value for :linked_files is []
+set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml', 'config/dss_rm.yml', 'config/aggie_feed.yml')
+
+# Default value for linked_dirs is []
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
+
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+# Default value for keep_releases is 5
+set :keep_releases, 5
+
+set :delayed_job_workers, 5
+set :delayed_job_prefix, :messenger
 
 namespace :deploy do
-  before 'deploy:update_code' do
-    puts "--> Running tests, please wait ..."
-    unless system "bundle exec rake > #{test_log} 2>&1" #' > /dev/null'
-      puts "--> Tests failed. Run `cat #{test_log}` to see what went wrong."
-      exit
-    else
-      puts "--> Tests passed"
-      system "rm #{test_log}"
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
     end
   end
 
-  desc "Restart Passenger server"
-  task :restart, roles: :app, except: {no_release: true} do
-    run "touch #{current_path}/tmp/restart.txt"
-  end
-
-  task :setup_config, roles: :app do
-    sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
-    sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
-    run "mkdir -p #{shared_path}/config"
-    put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
-    put File.read("config/dss_rm.example.yml"), "#{shared_path}/config/dss_rm.yml"
-    put File.read("config/aggie_feed.example.yml"), "#{shared_path}/config/aggie_feed.yml"
-    put File.read("config/secrets.example.yml"), "#{shared_path}/config/secrets.yml"
-    puts "Now edit the config files in #{shared_path}."
-  end
-  after "deploy:setup", "deploy:setup_config"
-
-  task :symlink_config, roles: :app do
-    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-    run "ln -nfs #{shared_path}/config/dss_rm.yml #{release_path}/config/dss_rm.yml"
-    run "ln -nfs #{shared_path}/config/aggie_feed.yml #{release_path}/config/aggie_feed.yml"
-    run "ln -nfs #{shared_path}/config/secrets.yml #{release_path}/config/secrets.yml"
-  end
-  after "deploy:finalize_update", "deploy:symlink_config"
-
-  desc "Make sure local git is in sync with remote."
-  task :check_revision, roles: :web do
-    unless `git rev-parse HEAD` == `git rev-parse origin/master`
-      puts "WARNING: HEAD is not the same as origin/master"
-      puts "Run `git push` to sync changes."
-      exit
-    end
-  end
-  before "deploy", "deploy:check_revision"
-
-  desc "Prime cache using curl"
-    task :prime_cache, roles: :web do
-      run "curl #{url} >/dev/null 2>&1; true"
-    end
 end
