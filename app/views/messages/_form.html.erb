@@ -123,12 +123,12 @@
   <div class="col-md-3">
     <div class="form-group">
       <%= label_tag(:window_start, "Window Start") %>
-      <%= f.text_field :window_start, class: "form-control datetimepicker" %>
+      <%= f.text_field :window_start, class: "form-control datetimepicker", value: (@message.window_start.present? ? @message.window_start.strftime("%Y/%m/%d %I:%M %p") : nil) %>
     </div>
 
     <div class="form-group">
       <%= label_tag(:window_end, "Window End") %>
-      <%= f.text_field :window_end, class: "form-control datetimepicker" %>
+      <%= f.text_field :window_end, class: "form-control datetimepicker", value: (@message.window_end.present? ? @message.window_end.strftime("%Y/%m/%d %I:%M %p") : nil) %>
     </div>
 
     <div class="form-group">
