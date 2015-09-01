@@ -17,12 +17,12 @@ class MessageTest < ActiveSupport::TestCase
   #   m.impact_statement = "Some Impact Statement"
   #   assert m.save, " |||||ERROR||||| Could not save the message with a Subject & Impact Statement"
   # end
-  test "Should find or create group recipient" do
-    message = Message.first
-    assert message.recipient_uids="57", " |||||ERROR||||| Could not find or create group recipient"
-  end
-  test "Should find or create individual recipient" do
-    message = Message.first
-    assert message.recipient_uids="13907", " |||||ERROR||||| Could not find or create individual recipient"
-  end
+  # test "Should find or create group recipient" do
+  #   message = Message.first
+  #   assert message.recipient_uids="57", " |||||ERROR||||| Could not find or create group recipient"
+  # end
+  # test "Should find or create individual recipient" do
+  #   message = Message.first
+  #   assert message.recipient_uids="13907", " |||||ERROR||||| Could not find or create individual recipient"
+  # end
 end
