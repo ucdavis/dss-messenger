@@ -57,9 +57,9 @@ namespace :message do
       message_log.recipient_count = members.length
       message_log.save!
 
-      unique_members = members.uniq { |p| p.email }
+      recipient_list = members.uniq { |p| p.email }
 
-      message_log.publisher.classify.schedule(message_log, unique_members)
+      message_log.publisher.classify.schedule(message_log, recipient_list)
 
       Rails.logger.info "Enqueueing message ##{message.id} for #{members.length} recipients took #{Time.now - timestamp_start} seconds"
     end
