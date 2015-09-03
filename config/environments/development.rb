@@ -26,17 +26,6 @@ DssMessenger::Application.configure do
 
   ActionMailer::Base.delivery_method = :file
 
-  # #SMTP Settings
-  # ActionMailer::Base.smtp_settings = {
-  #   :address              => "smtp.ucdavis.edu",
-  #   :port                 => 587,
-  #   :domain               => "dss.ucdavis.edu",
-  #   :enable_starttls_auto => true
-  # }
-  #
-  # require 'development_mail_interceptor'
-  # Mail.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?
-
   config.host_url = 'localhost:3000'
 
   # Set default url for ActionMailer
