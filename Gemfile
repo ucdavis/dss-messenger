@@ -31,7 +31,9 @@ group :development do
   gem 'capistrano-bundler', '~> 1.1', require: false
   gem 'capistrano-passenger', require: false
   # gem 'capistrano-npm', require: false
-  gem 'capistrano3-delayed-job', '~> 1.0'
+  # We use our fork of capistrano3-delayed-job due to a bug in 'daemons' where delayed_job
+  # will not stop correctly if not passed the number of workers in the 'stop' command
+  gem 'capistrano3-delayed-job', git: 'git@github.com:cthielen/capistrano3-delayed-job.git'
 end
 
 # For debugging
