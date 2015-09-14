@@ -11,6 +11,26 @@
     <li role="presentation"><%= link_to 'Summary', message_path(@message.id) %></li>
     <li role="presentation" class="active"><%= link_to 'Recipients', message_path(@message.id, tab: 'recipients') %></li>
   <% end %>
+
+  <li role="presentation" style="float: right;">
+    <div style="padding-top: 10px;">
+      <% if @message.closed == true %>
+        <%= link_to(message_reactivate_path(@message), class: 'tooltip-open', data: { toogle: 'tooltip' }, title: 'Re-Activate' ) do %> <span class="glyphicon glyphicon-chevron-up" aria-hidden="true" style="margin-right: 1em;"></span> <% end %>
+        <%= link_to(message_duplicate_path(@message), class: 'tooltip-duplicate', data: { toogle: 'tooltip' }, title: 'Duplicate' ) do %> <span class="glyphicon glyphicon-retweet" aria-hidden="true" style="margin-right: 1em;"></span> <% end %>
+        <%= link_to(message_path(@message), method: :delete, class: 'tooltip-destroy', data: { toogle: 'tooltip', confirm: 'Are you sure?' }, title: 'Delete' ) do %> <span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: red;"></span> <% end %>
+      <% else %>
+        <div class="actions" data-toggle="tooltip" title="Compose new message with selected status" data-original-title="Compose new message with selected status">
+          <% colors = ['primary', 'success', 'info', 'warning', 'danger'] %>
+          <% Modifier.all.each_with_index do |modifier, i| %>
+            <%= link_to modifier.description.slice(0..modifier.description.index(':')-1), message_duplicate_path(@message, :modifier => modifier.id ), :class => 'label label-' + colors[i % 5] %>
+          <% end %>
+          <div style="display: inline-block; margin-left: 3.0em;">
+            <a href="<%= message_archive_path(@message) %>" class="tooltip-archive" data-toggle="tooltip" title="Archive without sending"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span></a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </li>
 </ul>
 
 <div class="row">
