@@ -136,16 +136,11 @@ class MessagesController < ApplicationController
   def open
     rss_publisher = Publisher.where(class_name: 'RSSPublisher').first
 
-    # Return a blank Message object for the view to use when nothing has been
-    # published to RSS. In Rails 4, the proper way to do this would be
-    # Message.none (to get an ActiveRecord::NullRelation), but there's no good
-    # way to do this (that I found) in Rails 3.
-    @open_messages = ((rss_publisher.nil? and Message.where('1 = 2')) or
-                       rss_publisher.messages.order('created_at DESC').take(20))
+    @open_messages = rss_publisher.nil? ? Message.none : rss_publisher.messages.where(closed: false).order('created_at DESC').take(20))
 
     respond_to do |format|
-      format.html { render layout: 'public' } # open.html.erb
-      format.rss { render layout: false }     # open.rss.builder
+      format.html { render layout: 'public' }
+      format.rss { render layout: false }
     end
   end
 
