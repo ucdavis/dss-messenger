@@ -136,7 +136,7 @@ class MessagesController < ApplicationController
   def open
     rss_publisher = Publisher.where(class_name: 'RSSPublisher').first
 
-    @open_messages = rss_publisher.nil? ? Message.none : rss_publisher.messages.where(closed: false).order('created_at DESC').take(20))
+    @open_messages = rss_publisher.nil? ? Message.none : rss_publisher.messages.where(closed: false).order('created_at DESC').take(20)
 
     respond_to do |format|
       format.html { render layout: 'public' }
