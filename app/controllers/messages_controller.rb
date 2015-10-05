@@ -28,7 +28,7 @@ class MessagesController < ApplicationController
   def show
     # Determine the number of sent/unsent as well as read/unread
     # Note: This calculation is only valid if they're using the E-Mail publisher
-    email_log = @message.logs.find{ |l| l.publisher.class_name == "DssMailerPublisher"}
+    email_log = @message.logs.find{ |l| l.publisher.present? && (l.publisher.class_name == "DssMailerPublisher")}
 
     # Our charts only show percentages so, in the case of an unknown number of
     # recipients, we can get away with, e.g. a read percentage of "0 / 1"
