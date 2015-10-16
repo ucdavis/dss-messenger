@@ -23,5 +23,5 @@ job_type :envcommand, 'cd :path && RAILS_ENV=:environment :task'
 
 # Ensure our background processor starts up on reboot
 every :reboot do
-  envcommand 'script/delayed_job -n 10 -p messenger restart'
+  envcommand 'bin/delayed_job -n 10 -p messenger restart'
 end
