@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate, :except => [:open, :show, :status]
 
-  protect_from_forgery
-
+  protect_from_forgery with: :exception
+  
   def logout
       CASClient::Frameworks::Rails::Filter.logout(self)
   end
