@@ -1,6 +1,24 @@
 require 'rake'
 
 namespace :message do
+  desc 'Auto-archive messages after their close window'
+  task :auto_archive => :environment do |t, args|
+    Message.all.each do |message|
+      # If they message isn't closed ...
+      unless message.closed
+        # and has a defined end window ...
+        if message.window_end
+          # and the end window is in the past ...
+          if message.window_end < Time.now
+            # close the message.
+            message.closed = true
+            message.save!
+          end
+        end
+      end
+    end
+  end
+
   desc 'Publish a message'
   task :publish, [:message_log_id] => :environment do |t, args|
     Rails.logger.tagged('task:message:publish') do

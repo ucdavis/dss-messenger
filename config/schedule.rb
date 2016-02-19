@@ -25,3 +25,7 @@ job_type :envcommand, 'cd :path && RAILS_ENV=:environment :task'
 every :reboot do
   envcommand 'bin/delayed_job -n 10 -p messenger restart'
 end
+
+every 1.hour do
+  rake "message:auto_archive"
+end
