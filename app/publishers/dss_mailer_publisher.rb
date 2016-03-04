@@ -4,7 +4,6 @@ class DssMailerPublisher < Publisher
   def self.publish(message_receipt_id, message, recipient)
     Rails.logger.debug "DssMailer is publishing for message receipt ##{message_receipt_id} ..."
 
-
     # Add a colon to the modifier and classification if one doesn't exist
     # already.
     modifier = message.modifier.description + ":" if message.modifier
