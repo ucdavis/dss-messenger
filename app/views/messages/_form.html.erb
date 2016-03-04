@@ -90,12 +90,12 @@
     </div>
 
     <div class="form-group">
-      <%= label_tag(:subject, "Subject") %>
+      <%= label_tag(:subject, "Subject") %> <span style="color: rgb(169, 68, 66); font-weight: bold;">*</span>
       <%= f.text_field :subject, class: "form-control", placeholder: "Example: DSS file services (dss-filer1)" %>
     </div>
 
     <div class="form-group">
-      <%= label_tag(:impact_statement, "Impact Statement") %>
+      <%= label_tag(:impact_statement, "Impact Statement") %> <span style="color: rgb(169, 68, 66); font-weight: bold;">*</span>
       <%= f.text_area :impact_statement, class: "form-control", placeholder: "Example: Some users are reporting trouble accessing Moobilenet", rows: 7 %>
     </div>
 
