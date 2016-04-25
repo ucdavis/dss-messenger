@@ -17,11 +17,8 @@
 # Ignore Mac hidden meta-data files
 *.DS_Store
 
-# Ignore API keys
-config/dss_rm.yml
-config/aggie_feed.yml
-config/initializers/secret_token.rb
-config/secrets.yml
+# dockercompose file contains API keys and secret token
 docker-compose.yml
 
+# SSL Certificates
 certs/

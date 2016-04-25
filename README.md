@@ -23,6 +23,16 @@ config/environment.rb Recode the cas.ucdavis.edu URL to your CAS server, or remo
 
 config/deploy.rb You'll likely want to set this to your own Capistrano setup or delete it if you do not use Capistrano.
 
+## Docker-compose depoloyment
+
+docker-compose.example.yml Move this file to docker-compose.yml and set the appropriate values.
+
+Run this command from project root to deploy to active docker-machine
+`docker-compose up -d`
+
+After initial deployment of the app you need to migrate and seed the database:
+`docker-compose run -e RAILS_ENV=production web rake db:migrate db:seed`
+
 # Screenshots
 
 ![Compose New Message View](app/assets/images/new_message_screen.png "Compose New Message View")
@@ -31,5 +41,5 @@ config/deploy.rb You'll likely want to set this to your own Capistrano setup or 
 
 # Authors
 
-Obada Kadri (okadri@ucdavis.edu)  
+Obada Kadri (okadri@ucdavis.edu)
 Eric Lin (ericflin@ucdavis.edu)
