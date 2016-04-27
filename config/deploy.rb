@@ -2,7 +2,7 @@
 lock '3.4.0'
 
 set :application, 'dss-messenger'
-set :repo_url, 'git@github.com:dssit/dss-messenger.git'
+set :repo_url, 'https://github.com/dssit/dss-messenger.git'
 
 # Temporary fix for restarting the application until Passenger v5.0.10
 set :passenger_restart_with_touch, true
