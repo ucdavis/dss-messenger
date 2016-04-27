@@ -1,5 +1,3 @@
-require 'active_record/fixtures'
-
 # Not sure it's a good idea to mingle test data with real data. Maybe.
 # unless Classification.exists?
 #   ActiveRecord::Fixtures.create_fixtures("#{Rails.root}/test/fixtures", "classifications")
