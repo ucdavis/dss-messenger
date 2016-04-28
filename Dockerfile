@@ -11,13 +11,14 @@ RUN apt-get update -qq && \
 # Copy the Gemfile and Gemfile.lock into the image.
 # Temporarily set the working directory to where they are.
 WORKDIR /tmp
+ENV BUNDLE_PATH /bundle
 ADD Gemfile Gemfile
 ADD Gemfile.lock Gemfile.lock
-RUN bundle install
+RUN bundle check || bundle install
 
 # Configure nginx
-ADD ./certs/sandbox_dss_ucdavis_edu.cer /etc/ssl/certs/sandbox_dss_ucdavis_edu.cer
-ADD ./certs/sandbox_dss_ucdavis_edu.key /etc/ssl/private/sandbox_dss_ucdavis_edu.key
+ADD ./certs/messenger_dss_ucdavis_edu.cer /etc/ssl/certs/messenger_dss_ucdavis_edu.cer
+ADD ./certs/messenger_dss_ucdavis_edu.key /etc/ssl/private/messenger_dss_ucdavis_edu.key
 ADD ./nginx.conf /etc/nginx/nginx.conf
 
 # Add our source files precompile assets
