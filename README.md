@@ -30,14 +30,20 @@ docker-compose.example.yml Move this file to docker-compose.yml and set the appr
 Run this command from project root to deploy to active docker-machine
 `docker-compose up -d`
 
-After initial deployment of the app you need to migrate and seed the database:
+After initial deployment of the app you need to copy the SSL certificates:
+`docker cp ./certs/server.cer dssmessenger_web_1:/certs/messenger_dss_ucdavis_edu.cer`
+`docker cp ./certs/server.key dssmessenger_web_1:/certs/messenger_dss_ucdavis_edu.key`
+
+You will also need to migrate the database, either from an existing sql dump:
+- `docker cp ./dump.sql:/dump.sql`
+- `docker exec -it dssmessenger_db_1 bash`
+- `psql database_name < /dump.sql`
+
+Or, start with a fresh schema
 `docker-compose run -e RAILS_ENV=production web rake db:migrate db:seed`
 
-# Screenshots
-
-![Compose New Message View](app/assets/images/new_message_screen.png "Compose New Message View")
-![Preview Message](app/assets/images/preview_message_screen.png "Preview Message")
-![Application Preferences](app/assets/images/preferences_screen.png "Application Preferences")
+After copying SSL certificates and migrating DB, you need to restart the services:
+`docker-compose restart`
 
 # Authors
 

@@ -18,8 +18,6 @@ RUN bundle install && \
 
 
 # Configure nginx
-ADD ./certs/messenger_dss_ucdavis_edu.cer /etc/ssl/certs/messenger_dss_ucdavis_edu.cer
-ADD ./certs/messenger_dss_ucdavis_edu.key /etc/ssl/private/messenger_dss_ucdavis_edu.key
 ADD ./nginx.conf /etc/nginx/nginx.conf
 
 # Add our source files precompile assets
