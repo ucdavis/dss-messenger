@@ -6,20 +6,25 @@ db:
     - "5432:5432"
   volumes:
     - messenger_db_data:/var/lib/postgresql/data
-  environment:
+  environment: &dbEnvironment
     POSTGRES_DB: <production_db>
     POSTGRES_USER: <db_user>
-    POSTGRES_PASSWORD: <mysecretpassword>
+    POSTGRES_PASSWORD: <db_password>
 
 # Rails app
 web:
   build: .
   environment:
+    <<: *dbEnvironment
     RAILS_ENV: production
-    POSTGRES_USER: <db_user>
-    POSTGRES_PASSWORD: <mysecretpassword>
-    SECRET_KEY_BASE: <outputOfRakeSecretOrAnyRandomLongSecretKey>
+    SECRET_KEY_BASE: <secret_key>
+    RM_HOST: <rm_host>
+    RM_USER: <rm_user>
+    RM_PASSWORD: <rm_password>
+    SMTP_USERNAME: <smtp_user>
+    SMTP_PASSWORD: <smtp_password>
   ports:
     - '80:80'
+    - '443:443'
   links:
     - db
