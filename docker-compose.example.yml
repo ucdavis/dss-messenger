@@ -28,5 +28,6 @@ web:
     - '443:443'
   volumes:
     - certs:/certs
+    - messenger_logs:/usr/src/app/log
   links:
     - db
