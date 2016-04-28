@@ -68,7 +68,7 @@ DssMessenger::Application.configure do
 
   #SMTP Settings
   ActionMailer::Base.smtp_settings = {
-    :address              => "smtp.office365.com",
+    :address              => ENV['SMTP_SERVER'],
     :port                 => 587,
     :authentication       => :login,
     :domain               => "ucdavis.edu",
@@ -81,7 +81,7 @@ DssMessenger::Application.configure do
   config.middleware.use ExceptionNotification::Rack,
     :email => {
       :email_prefix => "[DSS Messenger] ",
-      :sender_address => %{dssapps@ucdavis.edu},
+      :sender_address => %{noreply@dss.ucdavis.edu},
       :exception_recipients => %w{dssit-devs-exceptions@ucdavis.edu}
     }
 

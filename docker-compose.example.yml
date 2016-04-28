@@ -21,6 +21,7 @@ web:
     RM_HOST: <rm_host>
     RM_USER: <rm_user>
     RM_PASSWORD: <rm_password>
+    SMTP_SERVER: <smtp_server>
     SMTP_USERNAME: <smtp_user>
     SMTP_PASSWORD: <smtp_password>
   ports:
