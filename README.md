@@ -3,8 +3,6 @@
 The main purpose of Messenger is sending emails to DSS users about updates, reminders
 , cancellations... of IT service degradations, outages or planned maintenance.
 
-![Main Messenger Screen](app/assets/images/main_screen.png "Main Messenger Screen")
-
 # Requirements
 
 Messenger was written for Ruby 1.9 and Rails 3.2 and is deployed using Unicorn and PostgreSQL.
@@ -28,22 +26,23 @@ config/deploy.rb You'll likely want to set this to your own Capistrano setup or 
 docker-compose.example.yml Move this file to docker-compose.yml and set the appropriate values.
 
 Run this command from project root to deploy to active docker-machine
-`docker-compose up -d`
+- `docker-compose up -d`
 
 After initial deployment of the app you need to copy the SSL certificates:
-`docker cp ./certs/server.cer dssmessenger_web_1:/certs/messenger_dss_ucdavis_edu.cer`
-`docker cp ./certs/server.key dssmessenger_web_1:/certs/messenger_dss_ucdavis_edu.key`
+- `docker cp ./certs/server.cer dssmessenger_web_1:/certs/messenger_dss_ucdavis_edu.cer`
+- `docker cp ./certs/server.key dssmessenger_web_1:/certs/messenger_dss_ucdavis_edu.key`
 
 You will also need to migrate the database, either from an existing sql dump:
 - `docker cp ./dump.sql:/dump.sql`
 - `docker exec -it dssmessenger_db_1 bash`
+- `su - postgres`
 - `psql database_name < /dump.sql`
 
 Or, start with a fresh schema
-`docker-compose run -e RAILS_ENV=production web rake db:migrate db:seed`
+- `docker-compose run -e RAILS_ENV=production web rake db:migrate db:seed`
 
 After copying SSL certificates and migrating DB, you need to restart the services:
-`docker-compose restart`
+- `docker-compose restart`
 
 # Authors
 
