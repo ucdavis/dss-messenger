@@ -8,7 +8,7 @@ class DssMailer < ActionMailer::Base
     @mle_id = message_receipt_id
 
     begin
-      mail(:to => "#{member.name} <#{member.email}>", :subject => subject).deliver
+      mail(:to => "#{member.name} <#{member.email}>", :subject => subject).deliver!
     rescue Net::SMTPFatalError => e
        if e.backtrace.include?('User unknown')
          # Nothing we can do about an incorrect e-mail address ...

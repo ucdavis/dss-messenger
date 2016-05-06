@@ -21,7 +21,7 @@ RUN bundle install && \
 ADD ./nginx.conf /etc/nginx/nginx.conf
 
 # Add our source files precompile assets
-COPY . /usr/src/app
+ADD . /usr/src/app
 RUN RAILS_ENV=production bundle exec rake assets:precompile
 
 EXPOSE 443
