@@ -7,7 +7,6 @@ gem 'rake'
 gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'unicorn'
-gem 'foreman'
 gem 'mail'
 gem 'whenever'
 

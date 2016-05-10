@@ -9,7 +9,7 @@ RUN apt-get update -qq && \
 # More info on this here: http://ilikestuffblog.com/2014/01/06/how-to-skip-bundle-install-when-deploying-a-rails-app-to-docker/
 # Copy the Gemfile and Gemfile.lock into the image.
 WORKDIR /usr/src/app/
-COPY ["Gemfile", "Gemfile.lock", "Procfile", "./"]
+COPY ["Gemfile", "Gemfile.lock", "./"]
 RUN bundle install && \
 # This line to fix an incompatibility bug between rubygems and bundler: https://github.com/bundler/bundler/issues/4381
 	gem install bundler --pre
@@ -19,13 +19,11 @@ RUN bundle install && \
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
 # Copy our source files precompile assets
-COPY . /usr/src/app
+COPY . ./
+RUN chown -R www-data:www-data .
 RUN RAILS_ENV=production bundle exec rake assets:precompile
 
 EXPOSE 443
-
-# Start up foreman
-# CMD ["foreman", "start"]
 
 # Start supervisor
 CMD ["/usr/bin/supervisord"]

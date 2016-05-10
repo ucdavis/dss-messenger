@@ -1,3 +1,5 @@
+user "www-data"
+
 app_dir = "/usr/src/app/"
 working_directory app_dir
 
