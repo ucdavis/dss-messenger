@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 4.2.7'
 
+# Use CoffeeScript for .coffee assets and views
+gem 'coffee-rails', '~> 4.1.0'
+
 gem 'rubycas-client'
 gem 'rake'
 gem 'delayed_job_active_record'
