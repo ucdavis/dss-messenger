@@ -1,4 +1,4 @@
-FROM ruby:2.1.9
+FROM ruby:2.3
 
 # Update and install stuff your app needs to run
 RUN apt-get update -qq && \
