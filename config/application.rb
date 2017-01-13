@@ -6,12 +6,6 @@ if defined?(Bundler)
   Bundler.require(*Rails.groups)
 end
 
-require 'bootstrap-sass'
-require 'sass-rails'
-require 'jquery-rails'
-require 'turbolinks'
-require 'js-routes'
-
 module DssMessenger
   class Application < Rails::Application
 

@@ -1,5 +1,3 @@
-require 'RestClient'
-
 class Entity
   attr_accessor :id, :name, :member_count, :type, :members, :email, :loginid
 

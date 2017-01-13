@@ -1,5 +1,3 @@
-require 'RestClient'
-
 class Group
   attr_accessor :id, :name, :members
 
