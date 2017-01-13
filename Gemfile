@@ -11,7 +11,8 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'unicorn'
 gem 'mail'
-gem 'whenever'
+
+gem 'whenever', require: false
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -52,3 +53,6 @@ gem 'exception_notification'
 
 # For loading remote JSON
 gem 'rest-client'
+
+# For profiling memory usage of gems
+gem 'derailed', group: :development

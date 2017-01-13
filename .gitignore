@@ -22,3 +22,6 @@ docker-compose.yml
 
 # SSL Certificates
 certs/
+
+# Sensitive config files
+config/dss_rm.yml
