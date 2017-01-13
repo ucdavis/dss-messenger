@@ -6,8 +6,15 @@ if defined?(Bundler)
   Bundler.require(*Rails.groups)
 end
 
+require 'bootstrap-sass'
+require 'sass-rails'
+require 'jquery-rails'
+require 'turbolinks'
+require 'js-routes'
+
 module DssMessenger
   class Application < Rails::Application
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

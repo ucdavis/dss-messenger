@@ -6,6 +6,8 @@ require "delayed_rake"
 # Initialize the rails application
 DssMessenger::Application.initialize!
 
+require 'rubycas-client'
+
 # Configure the CAS server
 CASClient::Frameworks::Rails::Filter.configure(
   :cas_base_url => "https://cas.ucdavis.edu/cas/"

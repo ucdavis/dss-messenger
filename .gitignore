@@ -25,3 +25,6 @@ certs/
 
 # Sensitive config files
 config/dss_rm.yml
+
+# Ignore debug files
+.byebug_history

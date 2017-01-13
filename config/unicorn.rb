@@ -10,4 +10,4 @@ stdout_path "#{app_dir}/log/unicorn.stdout.log"
 
 worker_processes 1
 listen "/tmp/unicorn.sock", :backlog => 64
-timeout 30
+timeout 25

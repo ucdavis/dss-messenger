@@ -1,3 +1,5 @@
+require 'RestClient'
+
 class Person
   attr_accessor :id, :name, :loginid, :email, :role_symbols
 
