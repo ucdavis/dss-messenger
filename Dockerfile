@@ -25,5 +25,16 @@ RUN RAILS_ENV=production bundle exec rake assets:precompile
 
 EXPOSE 443
 
+RUN ln -sf /dev/stdout /usr/src/app/log/production.log
+RUN ln -sf /dev/stdout /usr/src/app/log/development.log
+RUN ln -sf /dev/stdout /usr/src/app/log/test.log
+RUN ln -sf /dev/stdout /usr/src/app/log/delayed_rake.log
+RUN ln -sf /dev/stdout /usr/src/app/log/unicorn.stdout.log
+#RUN ln -sf /dev/stdout /usr/src/app/log/delayed_job.log
+RUN ln -sf /dev/stdout /var/log/nginx/access.log
+
+RUN ln -sf /dev/stderr /usr/src/app/unicorn.stderr.log
+RUN ln -sf /dev/stderr /var/log/nginx/error.log
+
 # Start supervisor
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord", "-c", "./supervisord.conf"]
