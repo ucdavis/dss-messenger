@@ -10,10 +10,22 @@ RUN apt-get update -qq && \
 # Copy the Gemfile and Gemfile.lock into the image.
 WORKDIR /usr/src/app/
 COPY ["Gemfile", "Gemfile.lock", "./"]
-RUN bundle install && \
-# This line to fix an incompatibility bug between rubygems and bundler: https://github.com/bundler/bundler/issues/4381
-	gem install bundler --pre
 
+RUN gem install bundler
+RUN bundle install
+
+RUN mkdir -p /usr/src/app/log
+RUN mkdir -p /var/log/nginx
+
+RUN ln -sf /dev/stdout /usr/src/app/log/production.log
+RUN ln -sf /dev/stdout /usr/src/app/log/development.log
+RUN ln -sf /dev/stdout /usr/src/app/log/test.log
+RUN ln -sf /dev/stdout /usr/src/app/log/delayed_rake.log
+RUN ln -sf /dev/stdout /usr/src/app/log/unicorn.stdout.log
+RUN ln -sf /dev/stdout /var/log/nginx/access.log
+
+RUN ln -sf /dev/stderr /usr/src/app/unicorn.stderr.log
+RUN ln -sf /dev/stderr /var/log/nginx/error.log
 
 # Configure nginx
 COPY ./nginx.conf /etc/nginx/nginx.conf
@@ -21,20 +33,9 @@ COPY ./nginx.conf /etc/nginx/nginx.conf
 # Copy our source files precompile assets
 COPY . ./
 RUN chown -R www-data:www-data .
-RUN RAILS_ENV=production bundle exec rake assets:precompile
+RUN bundle exec rake assets:precompile
 
 EXPOSE 443
-
-RUN ln -sf /dev/stdout /usr/src/app/log/production.log
-RUN ln -sf /dev/stdout /usr/src/app/log/development.log
-RUN ln -sf /dev/stdout /usr/src/app/log/test.log
-RUN ln -sf /dev/stdout /usr/src/app/log/delayed_rake.log
-RUN ln -sf /dev/stdout /usr/src/app/log/unicorn.stdout.log
-#RUN ln -sf /dev/stdout /usr/src/app/log/delayed_job.log
-RUN ln -sf /dev/stdout /var/log/nginx/access.log
-
-RUN ln -sf /dev/stderr /usr/src/app/unicorn.stderr.log
-RUN ln -sf /dev/stderr /var/log/nginx/error.log
 
 # Start supervisor
 CMD ["/usr/bin/supervisord", "-c", "./supervisord.conf"]
