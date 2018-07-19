@@ -23,8 +23,8 @@ module Authentication
       # CAS session exists. Has access?
       @user = Person.find(session[:cas_user])
 
-      if @user
-        # Valid user found through CAS.
+      if @user && @user.role_symbols.include?(:access)
+        # Valid user found through CAS
         Authentication.current_user = @user
 
         logger.info 'Valid CAS user is in our database. Passes authentication.'

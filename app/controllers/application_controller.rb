@@ -4,12 +4,12 @@ class ApplicationController < ActionController::Base
   before_action :authenticate, except: [:open, :show, :status]
 
   protect_from_forgery with: :exception
-  
+
   def logout
-      CASClient::Frameworks::Rails::Filter.logout(self)
+    CASClient::Frameworks::Rails::Filter.logout(self)
   end
 
   def status
-    render :json => { status: 'ok' }, :status => :ok
+    render json: { status: 'ok' }, status: :ok
   end
 end

@@ -1,9 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy, :archive, :duplicate, :reactivate]
 
-  #filter_access_to [:show, :update, :destroy], :attribute_check => true
-  #filter_access_to [:index, :create, :open], :attribute_check => false
-
   def index
     @display_archived = (params[:display] and params[:display] == 'archived') ? true : false
 
@@ -81,11 +78,7 @@ class MessagesController < ApplicationController
 
     # The message is open or closed depending on the selected modifier
     unless @message.modifier.nil?
-      if @message.modifier.open_ended
-        @message.closed = false
-      else
-        @message.closed = true
-      end
+      @message.closed = !@message.modifier.open_ended
     end
 
     respond_to do |format|
