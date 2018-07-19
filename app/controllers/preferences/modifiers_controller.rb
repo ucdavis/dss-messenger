@@ -1,7 +1,7 @@
 class Preferences::ModifiersController < ApplicationController
   before_action :set_modifier, only: [:show, :edit, :update, :destroy]
 
-  filter_access_to :all
+  #filter_access_to :all
 
   def index
     @modifiers = Modifier.all

@@ -1,19 +1,10 @@
+require 'roles_management'
+
 class Person
   attr_accessor :id, :name, :loginid, :email, :role_symbols
 
   def self.find(id)
-    response = RestClient::Request.new(
-      :method => :get,
-      :url => $DSS_RM_SETTINGS['HOST'] + "/people/#{id}",
-      :user => $DSS_RM_SETTINGS['USER'],
-      :password => $DSS_RM_SETTINGS['PASSWORD'],
-      :headers => {
-        :accept => "application/vnd.roles-management.v1",
-        :content_type => :json
-      }
-    ).execute
-
-    json = JSON.parse(response)
+    json = RolesManagementApi::request("/people/#{id}")
 
     p = Person.new
 

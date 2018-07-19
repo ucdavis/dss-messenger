@@ -1,7 +1,7 @@
 class MessageReceiptsController < ApplicationController
   filter_resource_access
 
-  filter_access_to :all, :attribute_check => true
+  #filter_access_to :all, :attribute_check => true
 
   def show
     message_receipt = MessageReceipt.find_by(id: params[:id])

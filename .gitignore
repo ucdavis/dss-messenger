@@ -23,8 +23,7 @@ docker-compose.yml
 # SSL Certificates
 certs/
 
-# Sensitive config files
-config/dss_rm.yml
-
-# Ignore debug files
+# Ignore developer files
 .byebug_history
+.rbenv-vars
+

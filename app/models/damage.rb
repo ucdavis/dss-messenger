@@ -1,5 +1,4 @@
-class Damage < ActiveRecord::Base
-  #attr_accessible :impacted_service_id, :message_id
+class Damage < ApplicationRecord
   belongs_to :message
   belongs_to :impacted_service
 end

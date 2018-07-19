@@ -1,4 +1,4 @@
-class Modifier < ActiveRecord::Base
+class Modifier < ApplicationRecord
   has_many :messages
 
   validates :description, presence: true

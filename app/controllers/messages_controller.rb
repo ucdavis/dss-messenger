@@ -1,8 +1,8 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy, :archive, :duplicate, :reactivate]
 
-  filter_access_to [:show, :update, :destroy], :attribute_check => true
-  filter_access_to [:index, :create, :open], :attribute_check => false
+  #filter_access_to [:show, :update, :destroy], :attribute_check => true
+  #filter_access_to [:index, :create, :open], :attribute_check => false
 
   def index
     @display_archived = (params[:display] and params[:display] == 'archived') ? true : false

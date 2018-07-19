@@ -1,4 +1,4 @@
-class Classification < ActiveRecord::Base
+class Classification < ApplicationRecord
   has_many :messages
 
   validates :description, presence: true

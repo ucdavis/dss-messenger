@@ -4,12 +4,12 @@
 # Each MessageLog object tracks its own unique send receipts.
 # MessageLog 'entries' may not be correctly filled in while status is 'queued'
 # as the background bulk_send task still needs to set up the data.
-class MessageLog < ActiveRecord::Base
+class MessageLog < ApplicationRecord
   STATUSES = [:queued, :sending, :completed, :error]
 
   belongs_to :message
   belongs_to :publisher
-  has_many :entries, :class_name => "MessageReceipt"
+  has_many :entries, class_name: "MessageReceipt"
 
   # Enforce pseudo-'enum' behavior for self.status
   def status

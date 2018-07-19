@@ -1,7 +1,7 @@
 class Preferences::PublishersController < ApplicationController
   before_action :set_publisher, only: [:show, :edit, :update, :destroy]
 
-  filter_access_to :all
+  #filter_access_to :all
 
   def index
     @publishers = Publisher.all

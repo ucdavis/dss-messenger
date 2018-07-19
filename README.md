@@ -17,7 +17,7 @@ Messenger is designed to be re-deployable in any organization, though there are 
 
 config/dss_rm.example.yml Move this file to config/dss_rm.yml and set the appropriate values.
 
-config/environment.rb Recode the cas.ucdavis.edu URL to your CAS server, or remove CAS entirely. If you decide to remove CAS, also remove the before_filter in app/controllers/application_controller.rb.
+config/environment.rb Recode the cas.ucdavis.edu URL to your CAS server, or remove CAS entirely. If you decide to remove CAS, also remove the before_action in app/controllers/application_controller.rb.
 
 config/deploy.rb You'll likely want to set this to your own Capistrano setup or delete it if you do not use Capistrano.
 

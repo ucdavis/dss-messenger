@@ -1,19 +1,10 @@
+require 'roles_management'
+
 class Group
   attr_accessor :id, :name, :members
 
   def self.find(id)
-    response = RestClient::Request.new(
-      :method => :get,
-      :url => $DSS_RM_SETTINGS['HOST'] + "/groups/#{id}",
-      :user => $DSS_RM_SETTINGS['USER'],
-      :password => $DSS_RM_SETTINGS['PASSWORD'],
-      :headers => {
-        :accept => "application/vnd.roles-management.v1",
-        :content_type => :json
-      }
-    ).execute
-
-    json = JSON.parse(response)
+    json = RolesManagementApi::request("/groups/#{id}")
 
     g = Group.new
 

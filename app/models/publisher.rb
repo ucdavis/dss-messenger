@@ -1,9 +1,9 @@
 # Publisher is the base class for all publisher plugins (e.g., plugins for
 # sending e-mails or posting messages to third-party services). All publishers
 # should inherit off of this class in order to be called from +Delayed::Job+.
-class Publisher < ActiveRecord::Base
+class Publisher < ApplicationRecord
   has_many :message_logs
-  has_many :messages, :through => :message_logs
+  has_many :messages, through: :message_logs
 
   # Called from +lib/tasks/bulk_send.rake+ in order to schedule a message to be
   # published.

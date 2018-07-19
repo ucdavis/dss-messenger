@@ -1,12 +1,12 @@
-# Load the rails application
-require File.expand_path('../application', __FILE__)
+# Load the Rails application.
+require_relative 'application'
 
-require "delayed_rake"
+require 'delayed_rake'
 
-# Initialize the rails application
-DssMessenger::Application.initialize!
+# Initialize the Rails application.
+Rails.application.initialize!
 
 # Configure the CAS server
 CASClient::Frameworks::Rails::Filter.configure(
-  :cas_base_url => "https://cas.ucdavis.edu/cas/"
+  cas_base_url: Rails.application.secrets[:cas_url]
 )

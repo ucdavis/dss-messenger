@@ -1,7 +1,7 @@
 class Preferences::ClassificationsController < ApplicationController
   before_action :set_classification, only: [:show, :edit, :update, :destroy]
 
-  filter_access_to :all
+  #filter_access_to :all
 
   def index
     @classifications = Classification.all
