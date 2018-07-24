@@ -1,5 +1,5 @@
 # Configure Turbolinks
-Turbolinks.enableProgressBar()
+#Turbolinks.enableProgressBar()
 
 # Configure toastr (displays flash messages)
 toastr.options =

@@ -54,7 +54,7 @@ class MessagesController < ApplicationController
       end
     else
       # Calculate the e-mail footer for the message preview section
-      @footer = Setting.where(:item_name => 'footer').first
+      @footer = Setting.where(item_name: 'footer').first
       if @footer
         @footer = @footer.item_value
       else

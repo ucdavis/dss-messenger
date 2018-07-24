@@ -10,8 +10,8 @@ class DssMailerPublisher < Publisher
     classification = message.classification.description + ":" if message.classification
 
     # Construct the subject
-    modifier = modifier.slice(0..(modifier.index(':')))+" " if message.modifier
-    classification = classification.slice(0..(classification.index(':')))+" " if message.classification
+    modifier = modifier.slice(0..(modifier.index(':'))) + " " if message.modifier
+    classification = classification.slice(0..(classification.index(':'))) + " " if message.classification
     subject = "#{modifier}#{classification}#{message.subject}"
 
     # Get the footer (if one is set)

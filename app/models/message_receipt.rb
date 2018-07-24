@@ -108,7 +108,7 @@ class MessageReceipt
 
     encoded_receipt[:Viewed] = @viewed if @viewed
     encoded_receipt[:LoginId] = @login_id if @login_id
-    encoded_receipt[:PerformedAt] = @performed_at if @performed_at
+    encoded_receipt[:PerformedAt] = @performed_at.to_s if @performed_at
 
     begin
       resp = DynamoDbClient.put_item(
@@ -151,7 +151,7 @@ class MessageReceipt
   def self.instance_from_dynamodb_item(item)
     receipt = MessageReceipt.new
 
-    receipt.id = item["MessageReceiptId"].to_i
+    receipt.id = item["MessageReceiptId"]
     receipt.message_log_id = item["MessageLogId"].to_i
     receipt.recipient_name = item["RecipientName"]
     receipt.recipient_email = item["RecipientEmail"]
