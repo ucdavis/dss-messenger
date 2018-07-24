@@ -48,3 +48,4 @@ After copying SSL certificates and migrating DB, you need to restart the service
 
 Obada Kadri (okadri@ucdavis.edu)
 Eric Lin (ericflin@ucdavis.edu)
+Christopher Thielen (cmthielen@ucdavis.edu)

@@ -13,8 +13,6 @@ class Publisher < ApplicationRecord
   # [+recipient_list+] Array of +Persons+ representing the list of all
   #                    recipients of this message.
   def self.schedule(message_log, recipient_list)
-    message = message_log.message
-
     Rails.logger.debug "Publisher will schedule for message log ##{message_log.id} with #{recipient_list.count} recipients"
 
     recipient_list.each do |recipient|
@@ -28,8 +26,9 @@ class Publisher < ApplicationRecord
       receipt.recipient_name = recipient.name
       receipt.recipient_email = recipient.email
       receipt.login_id = recipient.loginid
+      receipt.message_log_id = message_log.id
 
-      message_log.entries << receipt
+      receipt.save
 
       self.delay.perform(receipt.id, recipient)
     end
@@ -42,14 +41,16 @@ class Publisher < ApplicationRecord
   # message, and publication medium combination, unless +schedule+ is overriden
   # not to create +MessageReceipts+.
   def self.perform(receipt_id, recipient)
-    receipt = MessageReceipt.find_by(id: receipt_id)
-    
+    receipt = MessageReceipt.find_by_id(receipt_id)
+
     self.publish(receipt.id, receipt.message, recipient)
 
-    if receipt.message_log.entries.where('performed_at is not null').length == receipt.message_log.recipient_count
-      receipt.message_log.status = :completed
-      receipt.message_log.finish = Time.now
-      receipt.message_log.save!
+    message_log = receipt.message_log
+
+    if message_log.entries(only_performed: true).length == message_log.recipient_count
+      message_log.status = :completed
+      message_log.finish = Time.now
+      message_log.save!
     end
   end
 

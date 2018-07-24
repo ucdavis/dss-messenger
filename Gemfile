@@ -70,3 +70,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# For AWS DynamoDB support, used in message receipts
+gem 'aws-sdk-dynamodb', '~> 1.6'
+gem 'aws-sdk-core', '~> 3.0'

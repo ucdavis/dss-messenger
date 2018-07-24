@@ -75,12 +75,12 @@ Rails.application.configure do
 
   # SMTP Settings
   ActionMailer::Base.smtp_settings = {
-    address:               ENV['SMTP_SERVER'],
-    port:                  587,
+    address:               Rails.application.secrets.smtp_address,
+    port:                  Rails.application.secrets.smtp_port,
     authentication:        :login,
-    domain:                'ucdavis.edu',
-    user_name:             ENV['SMTP_USERNAME'],
-    password:              ENV['SMTP_PASSWORD'],
+    domain:                Rails.application.secrets.smtp_domain,
+    user_name:             Rails.application.secrets.smtp_username,
+    password:              Rails.application.secrets.smtp_password,
     enable_starttls_auto:  true
   }
 

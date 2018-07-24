@@ -1,5 +1,4 @@
 DssMessenger::Application.routes.draw do
-
   # This action must come before 'resources :messages'
   get "/messages/open" => 'messages#open'
 

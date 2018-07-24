@@ -9,15 +9,23 @@ class MessageLog < ApplicationRecord
 
   belongs_to :message
   belongs_to :publisher
-  has_many :entries, class_name: "MessageReceipt"
 
   # Enforce pseudo-'enum' behavior for self.status
   def status
     value = read_attribute(:status)
     STATUSES[value] if value
   end
-  def status= (value)
+
+  def status=(value)
     i = STATUSES.index(value)
     write_attribute(:status, i) if i
+  end
+
+  def entries(only_performed = false)
+    entries = MessageReceipt.find_by_message_log_id(id)
+
+    entries.select!{ |e| e.performed_at.present? } if only_performed
+
+    return entries
   end
 end
