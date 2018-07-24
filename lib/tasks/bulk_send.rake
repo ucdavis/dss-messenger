@@ -25,13 +25,15 @@ namespace :message do
       message_log = MessageLog.find_by(id: args.message_log_id)
       unless message_log
         Rails.logger.error "Unable to find message log with ID #{args.message_log_id}"
-        next # used in rake to abort a rake task (as well as in loops)
+        raise "Unable to publish message. Message log with ID #{args.message_log_id} missing. See logs."
+        exit(-1)
       end
 
       message = message_log.message
       unless message
         Rails.logger.error "Unable to find message for message log with ID #{message_log.id}"
-        next
+        raise "Unable to publish message. Message with ID #{message_log.id} is missing for message log with ID #{args.message_log_id}. See logs."
+        exit(-1)
       end
 
       timestamp_start = Time.now
@@ -55,6 +57,7 @@ namespace :message do
         # If entity is a group, determine its individual members
         if entity.type == "Group"
           g = Group.find(entity.id)
+          Rails.logger.info "Resolving e-mail addresses for Group with ID #{entity.id} ..."
 
           g.members.each do |m|
             p = Person.new
@@ -63,9 +66,12 @@ namespace :message do
             p.email = m[:email]
             p.id = m[:id]
 
+            Rails.logger.info "Resolved e-mail address for group member with ID #{p.id} for Group with ID #{entity.id}"
+
             members << p
           end
         elsif entity.type == "Person"
+          Rails.logger.info "Resolving e-mail address for Person with ID #{entity.id} ..."
           members << entity
         end
       end
@@ -76,6 +82,8 @@ namespace :message do
       message_log.save!
 
       recipient_list = members.uniq { |p| p.email }
+
+      Rails.logger.info "Resolved #{recipient_list.length} unique e-mails to address"
 
       message_log.publisher.classify.schedule(message_log, recipient_list)
 

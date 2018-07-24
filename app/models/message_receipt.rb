@@ -5,7 +5,7 @@ class MessageReceipt
                 :created_at, :updated_at, :viewed, :login_id, :performed_at, :_new_record
 
   def initialize
-    _new_record = true
+    @_new_record = true
   end
 
   def self.find_by_id(id)
@@ -89,43 +89,43 @@ class MessageReceipt
   end
 
   def save
-    old_updated_at = updated_at
-    updated_at = Time.now
+    old_updated_at = @updated_at
+    @updated_at = Time.now
 
-    if _new_record
-      id = SecureRandom.uuid
-      created_at = updated_at
+    if @_new_record
+      @id = SecureRandom.uuid
+      @created_at = @updated_at
     end
 
     encoded_receipt = {
-      MessageReceiptId: id,
-      MessageLogId: message_log_id,
-      RecipientName: recipient_name,
-      RecipientEmail: recipient_email,
-      CreatedAt: created_at,
-      UpdatedAt: updated_at
+      MessageReceiptId: @id.to_s,
+      MessageLogId: @message_log_id.to_s,
+      RecipientName: @recipient_name,
+      RecipientEmail: @recipient_email,
+      CreatedAt: @created_at.to_s,
+      UpdatedAt: @updated_at.to_s
     }
 
-    encoded_receipt[:Viewed] = viewed if viewed
-    encoded_receipt[:LoginId] = login_id if login_id
-    encoded_receipt[:PerformedAt] = performed_at if performed_at
+    encoded_receipt[:Viewed] = @viewed if @viewed
+    encoded_receipt[:LoginId] = @login_id if @login_id
+    encoded_receipt[:PerformedAt] = @performed_at if @performed_at
 
     begin
-      DynamoDbClient.put_item(
+      resp = DynamoDbClient.put_item(
         table_name: DynamoDbTable,
         item: encoded_receipt
       )
 
-      _new_record = false
+      @_new_record = false
 
       return true
     rescue Aws::DynamoDB::Errors::ServiceError => error
       Rails.logger.error 'Unable to write message receipt to DynamoDB:'
       Rails.logger.error error.message.to_s
-      updated_at = old_updated_at
-      if _new_record
-        created_at = nil
-        id = nil
+      @updated_at = old_updated_at
+      if @_new_record
+        @created_at = nil
+        @id = nil
       end
 
       return false

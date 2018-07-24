@@ -1,13 +1,43 @@
-# Not sure it's a good idea to mingle test data with real data. Maybe.
-# unless Classification.exists?
-#   ActiveRecord::Fixtures.create_fixtures("#{Rails.root}/test/fixtures", "classifications")
-# end
-# unless Modifier.exists?
-#   ActiveRecord::Fixtures.create_fixtures("#{Rails.root}/test/fixtures", "modifiers")
-# end
-# unless ImpactedService.exists?
-#   ActiveRecord::Fixtures.create_fixtures("#{Rails.root}/test/fixtures", "impacted_services")
-# end
-# unless Setting.exists?
-#   ActiveRecord::Fixtures.create_fixtures("#{Rails.root}/test/fixtures", "settings")
-# end
+Classification.create(description: 'SERVICE DEGRADATION: service is operational but slow or with some features disabled')
+Classification.create(description: 'SERVICE OUTAGE: service is unexpectedly unavailable')
+Classification.create(description: 'PLANNED MAINTENANCE: will impact service availability')
+Classification.create(description: 'EMERGENCY MAINTENANCE: will impact service availability')
+Classification.create(description: 'URGENT MAINTENANCE: will impact service availability')
+Classification.create(description: 'CLOSURE: will impact support services')
+Classification.create(description: 'SECURITY NOTICE: security warnings and notifications')
+Classification.create(description: 'SERVICE NOTICE: general notes about service issues that are not incidents')
+
+ImpactedService.create(name: 'DSS File Services (Shared S: and User U: Drives)')
+ImpactedService.create(name: 'DSS Print Services (Network Printing and Print Metering)')
+ImpactedService.create(name: 'Department and Project Websites (hosted by DSS IT)')
+ImpactedService.create(name: 'uConnect Email and Calendaring Services')
+ImpactedService.create(name: 'Network Connectivity')
+ImpactedService.create(name: 'Moobilenetx and eduRoam Wireless Networks')
+ImpactedService.create(name: 'Matlab Network Licensing')
+ImpactedService.create(name: 'DSS IT Service Desk')
+ImpactedService.create(name: 'DSS VPN Service')
+ImpactedService.create(name: 'DSS IT Desktop Support')
+ImpactedService.create(name: 'Banner')
+ImpactedService.create(name: 'Psychology Website')
+ImpactedService.create(name: 'SSDS Research Servers (Painter & Sapper)')
+ImpactedService.create(name: 'All Apple iOS Devices (iPhone, iPad)')
+ImpactedService.create(name: 'Campus Cyrus/Geckomail Email Service')
+ImpactedService.create(name: 'PrePurchasing (prepurchasing.ucdavis.edu)')
+ImpactedService.create(name: 'L&S Websites and Web Applications')
+ImpactedService.create(name: 'eVote')
+ImpactedService.create(name: 'DSS Wayfinding Kiosks')
+ImpactedService.create(name: 'Kerr Hall Drop-in Location')
+ImpactedService.create(name: 'projects.ls.ucdavis.edu (projects.ucdavis.edu)')
+ImpactedService.create(name: 'DSS IT Phone System')
+
+Modifier.create(description: 'UPDATE: prefix to previous subject when sending an update to an existing issue', open_ended: '1')
+Modifier.create(description: 'RESOLVED: prefix to previous subject when notifying that an issue has been resolved', open_ended: '0')
+Modifier.create(description: 'CANCELED: prefix to previous subject when notifying of cancellation of planned maintenance', open_ended: '0')
+Modifier.create(description: 'REMINDER: prefix to previous subject when sending a reminder about planned maintenance', open_ended: '1')
+Modifier.create(description: 'HEADS-UP: prefix to subject when serious outage or degradation is suspected but not confirmed', open_ended: '1')
+Modifier.create(description: 'RE-SCHEDULED: prefix to subject when a Maintenance must be re-scheduled', open_ended: '1')
+
+Publisher.create(name: 'Dss Mailer', class_name: 'DssMailerPublisher', default: '1')
+Publisher.create(name: 'Rss', class_name: 'RSSPublisher', default: '1')
+
+Setting.create(item_name: 'footer', item_value: 'Please contact the Social Sciences IT Service Desk with any questions or concerns:\r\n\r\n  Via web: http://it.dss.ucdavis.edu/\r\n  Via phone: 530-752-8800\r\n  Via email: ithelp@dss.ucdavis.edu \r\n  In person:\r\n    2235 SS&H\r\n    118 Young Hall\r\n    483 Kerr Hall\r\n    267 Cousteau, Room 137')

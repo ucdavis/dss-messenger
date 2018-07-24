@@ -18,7 +18,7 @@ class Entity
   end
 
   def self.find(id)
-    json = roles_api_request("/entities/#{id}")
+    json = RolesManagementApi::request("/entities/#{id}")
 
     return new_entity(json)
   end

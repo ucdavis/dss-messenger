@@ -41,7 +41,7 @@ class MessagesController < ApplicationController
       if (email_log.status == :sending) || (email_log.status == :completed)
         @read = email_log.viewed_count
         @unread = email_log.recipient_count - @read
-        @sent = email_log.entries.where('performed_at is not null').length
+        @sent = email_log.entries(only_performed: true).length
         @unsent = email_log.recipient_count - @sent
       end
     end
@@ -96,10 +96,10 @@ class MessagesController < ApplicationController
           Rails.logger.info "Enqueued new message ##{@message.id} for sending via #{Publisher.find(publisher_id).name}. message:publish[#{ml.id}] should pick it up."
         end
 
-        format.html { redirect_to messages_path(:display => 'active'), notice: 'Message was successfully queued.' }
+        format.html { redirect_to messages_path(display: 'active'), notice: 'Message was successfully queued.' }
         format.json { render json: @message, status: :created, location: @message }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end

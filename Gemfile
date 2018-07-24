@@ -39,6 +39,7 @@ gem "js-routes"
 gem 'jbuilder', '~> 2.5'
 
 gem 'mysql2', '~> 0.4.0'
+gem 'sqlite3' # for testing
 
 gem 'jquery-rails'
 
