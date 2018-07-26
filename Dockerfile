@@ -13,10 +13,7 @@ COPY ["Gemfile", "Gemfile.lock", "./"]
 RUN gem install bundler
 RUN bundle install
 
-RUN mkdir -p /usr/src/app
-
-# Copy our source files precompile assets
-COPY . ./
+RUN mkdir -p /usr/src/app/log
 
 # Environment variables
 ARG SECRET_KEY_BASE
@@ -49,10 +46,10 @@ ARG DB_PASSWORD
 ENV DB_PASSWORD $DB_PASSWORD
 ARG DB_SCHEMA
 ENV DB_SCHEMA $DB_SCHEMA
-
-# Set Rails to run in production
-ENV RAILS_ENV production
-ENV RACK_ENV production
+ARG RAILS_ENV
+ENV RAILS_ENV $RAILS_ENV
+ARG RACK_ENV
+ENV RACK_ENV $RACK_ENV
 
 # Use Rails for static files in public
 ENV RAILS_SERVE_STATIC_FILES 0
@@ -63,9 +60,17 @@ ENV RACK_TIMEOUT_SERVICE_TIMEOUT 120
 # Log to STDOUT
 ENV RAILS_LOG_TO_STDOUT 1
 
+# Ensure delayed_job logs go to STDOUT
+RUN ln -sf /proc/1/fd/1 /usr/src/app/log/delayed_rake.log
+RUN ln -sf /proc/1/fd/1 /usr/src/app/log/delayed_job.log
+ 
+# Copy our source files precompile assets
+COPY . ./
+
 RUN bundle exec rake assets:precompile
 
 EXPOSE 3000
 
 # Start supervisor
 CMD ["/usr/bin/supervisord", "-c", "./supervisord.conf"]
+#CMD ["bundle", "exec", "bin/delayed_job", "start", "-n", "10", "-t"]
