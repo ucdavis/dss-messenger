@@ -47,8 +47,6 @@ gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'sass-rails', '~> 5.0'
 
-gem 'exception_notification'
-
 # For loading remote JSON
 gem 'rest-client'
 

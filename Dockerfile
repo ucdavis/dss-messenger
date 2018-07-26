@@ -54,6 +54,15 @@ ENV DB_SCHEMA $DB_SCHEMA
 ENV RAILS_ENV production
 ENV RACK_ENV production
 
+# Use Rails for static files in public
+ENV RAILS_SERVE_STATIC_FILES 0
+
+# Set Rack::Timeout values
+ENV RACK_TIMEOUT_SERVICE_TIMEOUT 120
+
+# Log to STDOUT
+ENV RAILS_LOG_TO_STDOUT 1
+
 RUN bundle exec rake assets:precompile
 
 EXPOSE 3000
