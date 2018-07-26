@@ -13,9 +13,7 @@ COPY ["Gemfile", "Gemfile.lock", "./"]
 RUN gem install bundler
 RUN bundle install
 
-RUN mkdir -p /usr/src/app/log
-
-RUN ln -sf /dev/stdout /usr/src/app/log/delayed_rake.log
+RUN mkdir -p /usr/src/app
 
 # Copy our source files precompile assets
 COPY . ./
