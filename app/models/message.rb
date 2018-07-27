@@ -7,10 +7,10 @@ class Message < ApplicationRecord
   has_many :audiences
   has_many :recipients, through: :audiences
 
-  belongs_to :classification
-  belongs_to :modifier
+  belongs_to :classification, optional: true
+  belongs_to :modifier, optional: true
 
-  has_many :logs, class_name: "MessageLog"
+  has_many :logs, class_name: 'MessageLog'
   has_many :publishers, through: :logs
 
   # Validations
