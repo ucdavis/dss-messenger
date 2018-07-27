@@ -154,6 +154,8 @@
 
 <script type="text/javascript">
 	ready = function() {
+    console.log('here1');
+
 		// Make monochrome colors and set them as default for all pies
     Highcharts.getOptions().plotOptions.pie.colors = (function () {
         var colors = [];
@@ -231,5 +233,6 @@
     });
 	};
 
-	$(document).on('ready page:load', ready);
+  console.log('here0');
+	$(document).on('ready turbolinks:load', ready);
 </script>

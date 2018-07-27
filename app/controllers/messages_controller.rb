@@ -58,7 +58,7 @@ class MessagesController < ApplicationController
       if @footer
         @footer = @footer.item_value
       else
-        @footer = ""
+        @footer = ''
       end
     end
   end
