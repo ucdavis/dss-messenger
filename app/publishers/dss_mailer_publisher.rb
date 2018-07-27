@@ -2,7 +2,7 @@
 class DssMailerPublisher < Publisher
   # Constructs the necessary parts of the e-mail and sends it via +DssMailer+.
   def self.publish(message_receipt_id, message, recipient)
-    Rails.logger.debug "DssMailer is publishing for message receipt ##{message_receipt_id} ..."
+    Delayed::Worker.logger.info "DssMailerPublisher(#{message_receipt_id}): Publishing for message receipt ##{message_receipt_id} ..."
 
     # Add a colon to the modifier and classification if one doesn't exist
     # already.
@@ -22,11 +22,14 @@ class DssMailerPublisher < Publisher
       footer = '' # set Footer text to empty if unset
     end
 
+    Delayed::Worker.logger.info "DssMailerPublisher(#{message_receipt_id}): Calling deliver_message for #{recipient.email} ..."
     DssMailer.deliver_message(subject, message, message_receipt_id, recipient, footer).deliver_now
 
+    Delayed::Worker.logger.info "DssMailerPublisher(#{message_receipt_id}): Updating message receipt ..."
     receipt = MessageReceipt.find_by_id(message_receipt_id)
     receipt.performed_at = Time.now
     receipt.save!
+    Delayed::Worker.logger.info "DssMailerPublisher(#{message_receipt_id}): Done"
   end
 
   # Keeps track of how many people have viewed their e-mails, assuming their

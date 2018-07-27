@@ -70,7 +70,7 @@ namespace :message do
 
             members << p
           end
-        elsif entity.type == "Person"
+        elsif entity.type == 'Person'
           Rails.logger.info "Resolving e-mail address for Person with ID #{entity.id} to #{entity.email} ..."
           members << entity
         end
@@ -81,13 +81,11 @@ namespace :message do
       message_log.recipient_count = members.length
       message_log.save!
 
-      recipient_list = members.uniq { |p| p.email }
+      recipient_list = members.uniq(&:email)
 
-      Rails.logger.info "Resolved #{recipient_list.length} unique e-mails to address"
+      Rails.logger.info "Resolved #{recipient_list.length} unique e-mails to address. Took #{Time.now - timestamp_start} seconds"
 
       message_log.publisher.classify.schedule(message_log, recipient_list)
-
-      Rails.logger.info "Enqueueing message ##{message.id} for #{members.length} recipients took #{Time.now - timestamp_start} seconds"
     end
   end
 end

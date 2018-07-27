@@ -13,24 +13,30 @@ class Publisher < ApplicationRecord
   # [+recipient_list+] Array of +Persons+ representing the list of all
   #                    recipients of this message.
   def self.schedule(message_log, recipient_list)
-    Rails.logger.debug "Publisher will schedule for message log ##{message_log.id} with #{recipient_list.count} recipients"
+    Rails.logger.tagged('Publisher:schedule') do
+      Rails.logger.info "Publisher will schedule for message log ##{message_log.id} with #{recipient_list.count} recipients"
 
-    recipient_list.each do |recipient|
-      Rails.logger.debug "Publisher is scheduling for message log ##{message_log.id}, recipient (#{recipient.name}) ..."
+      timestamp_start = Time.now
 
-      # Generate a message receipt for each recipient.
-      # Note that the existence of a receipt does not mean a message
-      # was sent - check the 'performed_at' column for that information.
-      receipt = MessageReceipt.new
+      recipient_list.each do |recipient|
+        Rails.logger.info "Publisher is scheduling for message log ##{message_log.id}, recipient (#{recipient.name}) ..."
 
-      receipt.recipient_name = recipient.name
-      receipt.recipient_email = recipient.email
-      receipt.login_id = recipient.loginid
-      receipt.message_log_id = message_log.id
+        # Generate a message receipt for each recipient.
+        # Note that the existence of a receipt does not mean a message
+        # was sent - check the 'performed_at' column for that information.
+        receipt = MessageReceipt.new
 
-      receipt.save
+        receipt.recipient_name = recipient.name
+        receipt.recipient_email = recipient.email
+        receipt.login_id = recipient.loginid
+        receipt.message_log_id = message_log.id
 
-      self.delay.perform(receipt.id, recipient)
+        receipt.save
+
+        self.delay.perform(receipt.id, recipient)
+      end
+
+      Rails.logger.info "Scheduled #{recipient_list.length} recipient jobs. Took #{Time.now - timestamp_start} seconds"
     end
   end
 
@@ -41,8 +47,10 @@ class Publisher < ApplicationRecord
   # message, and publication medium combination, unless +schedule+ is overriden
   # not to create +MessageReceipts+.
   def self.perform(receipt_id, recipient)
+    Rails.logger.info "Publisher.perform() looking up message receipt for ID #{receipt_id} ..."
     receipt = MessageReceipt.find_by_id(receipt_id)
 
+    Rails.logger.info "Publisher.perform() calling publish ..."
     self.publish(receipt.id, receipt.message, recipient)
 
     message_log = receipt.message_log
@@ -65,6 +73,7 @@ class Publisher < ApplicationRecord
   #             being sent.
   # [+recipient+] +Person+ object representing the recipient of the message.
   def self.publish(message_receipt_id, message, recipient)
+    Rails.logger.error "Publisher.publish() NO-OP called. This should not happen!"
   end
 
   # <em>Not implemented by default</em>. Called from
