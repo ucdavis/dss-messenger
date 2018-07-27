@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_27_210400) do
+ActiveRecord::Schema.define(version: 2018_07_27_214645) do
 
   create_table "audiences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "message_id"
@@ -67,17 +67,6 @@ ActiveRecord::Schema.define(version: 2018_07_27_210400) do
     t.integer "publisher_id"
     t.index ["message_id"], name: "index_message_logs_on_message_id"
     t.index ["publisher_id"], name: "index_message_logs_on_publisher_id"
-  end
-
-  create_table "message_receipts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "message_log_id"
-    t.string "recipient_name"
-    t.string "recipient_email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean "viewed"
-    t.string "login_id"
-    t.datetime "performed_at"
   end
 
   create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
