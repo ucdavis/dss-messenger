@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,140 +10,125 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150831220209) do
+ActiveRecord::Schema.define(version: 2018_07_27_210400) do
 
-  create_table "audiences", force: :cascade do |t|
-    t.integer  "message_id",   limit: 4
-    t.integer  "recipient_id", limit: 4
+  create_table "audiences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "message_id"
+    t.integer "recipient_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "broadcasts", force: :cascade do |t|
-    t.integer  "message_id",         limit: 4
-    t.integer  "messenger_event_id", limit: 4
+  create_table "classifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["id"], name: "index_classifications_on_id"
+  end
+
+  create_table "damages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "message_id"
+    t.integer "impacted_service_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "classifications", force: :cascade do |t|
-    t.string   "description", limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "classifications", ["id"], name: "index_classifications_on_id", using: :btree
-
-  create_table "damages", force: :cascade do |t|
-    t.integer  "message_id",          limit: 4
-    t.integer  "impacted_service_id", limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "delayed_jobs", force: :cascade do |t|
-    t.integer  "priority",   limit: 4,     default: 0
-    t.integer  "attempts",   limit: 4,     default: 0
-    t.text     "handler",    limit: 65535
-    t.text     "last_error", limit: 65535
+  create_table "delayed_jobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "priority", default: 0
+    t.integer "attempts", default: 0
+    t.text "handler"
+    t.text "last_error"
     t.datetime "run_at"
     t.datetime "locked_at"
     t.datetime "failed_at"
-    t.string   "locked_by",  limit: 255
-    t.string   "queue",      limit: 255
+    t.string "locked_by"
+    t.string "queue"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
-
-  create_table "impacted_services", force: :cascade do |t|
-    t.string   "name",       limit: 255
+  create_table "impacted_services", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["id"], name: "index_impacted_services_on_id"
   end
 
-  add_index "impacted_services", ["id"], name: "index_impacted_services_on_id", using: :btree
-
-  create_table "message_logs", force: :cascade do |t|
-    t.integer  "message_id",      limit: 4
+  create_table "message_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "message_id"
     t.datetime "start"
     t.datetime "finish"
-    t.integer  "status",          limit: 4
+    t.integer "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "recipient_count", limit: 4
-    t.integer  "viewed_count",    limit: 4, default: 0
-    t.integer  "publisher_id",    limit: 4
+    t.integer "recipient_count"
+    t.integer "viewed_count", default: 0
+    t.integer "publisher_id"
+    t.index ["message_id"], name: "index_message_logs_on_message_id"
+    t.index ["publisher_id"], name: "index_message_logs_on_publisher_id"
   end
 
-  add_index "message_logs", ["message_id"], name: "index_message_logs_on_message_id", using: :btree
-  add_index "message_logs", ["publisher_id"], name: "index_message_logs_on_publisher_id", using: :btree
-
-  create_table "message_receipts", force: :cascade do |t|
-    t.integer  "message_log_id",  limit: 4
-    t.string   "recipient_name",  limit: 255
-    t.string   "recipient_email", limit: 255
+  create_table "message_receipts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "message_log_id"
+    t.string "recipient_name"
+    t.string "recipient_email"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "viewed"
-    t.string   "login_id",        limit: 255
+    t.boolean "viewed"
+    t.string "login_id"
     t.datetime "performed_at"
   end
 
-  create_table "messages", force: :cascade do |t|
-    t.string   "subject",           limit: 255
-    t.text     "impact_statement",  limit: 65535
+  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "subject"
+    t.text "impact_statement"
     t.datetime "window_start"
     t.datetime "window_end"
-    t.text     "purpose",           limit: 65535
-    t.text     "resolution",        limit: 65535
-    t.text     "workaround",        limit: 65535
-    t.text     "other_services",    limit: 65535
-    t.string   "sender",            limit: 255
+    t.text "purpose"
+    t.text "resolution"
+    t.text "workaround"
+    t.text "other_services"
+    t.string "sender"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "classification_id", limit: 4
-    t.integer  "modifier_id",       limit: 4
-    t.boolean  "closed",                          default: false
+    t.integer "classification_id"
+    t.integer "modifier_id"
+    t.boolean "closed", default: false
+    t.index ["id"], name: "index_messages_on_id"
   end
 
-  add_index "messages", ["id"], name: "index_messages_on_id", using: :btree
-
-  create_table "modifiers", force: :cascade do |t|
-    t.string   "description", limit: 255
+  create_table "modifiers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "open_ended"
+    t.boolean "open_ended"
+    t.index ["id"], name: "index_modifiers_on_id"
   end
 
-  add_index "modifiers", ["id"], name: "index_modifiers_on_id", using: :btree
-
-  create_table "publishers", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "class_name", limit: 255
-    t.boolean  "default"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "recipients", force: :cascade do |t|
-    t.string   "uid",        limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "name",       limit: 255
-  end
-
-  add_index "recipients", ["id"], name: "index_recipients_on_id", using: :btree
-  add_index "recipients", ["uid"], name: "index_recipients_on_uid", using: :btree
-
-  create_table "settings", force: :cascade do |t|
-    t.string   "item_name",  limit: 255
-    t.text     "item_value", limit: 65535
+  create_table "publishers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "class_name"
+    t.boolean "default"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "settings", ["id"], name: "index_settings_on_id", using: :btree
+  create_table "recipients", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string "name"
+    t.index ["id"], name: "index_recipients_on_id"
+    t.index ["uid"], name: "index_recipients_on_uid"
+  end
+
+  create_table "settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "item_name"
+    t.text "item_value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["id"], name: "index_settings_on_id"
+  end
 
 end
