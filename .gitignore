@@ -17,13 +17,14 @@
 # Ignore Mac hidden meta-data files
 *.DS_Store
 
-# dockercompose file contains API keys and secret token
-docker-compose.yml
-
 # SSL Certificates
 certs/
 
 # Ignore developer files
 .byebug_history
 .rbenv-vars
+
+# Ignore generated directories and files
+node_modules
+public/assets
 

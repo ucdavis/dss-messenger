@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy, :archive, :duplicate, :reactivate]
 
   def index
-    @display_archived = (params[:display] and params[:display] == 'archived') ? true : false
+    @display_archived = params[:display] == 'archived'
 
     if params[:q]
       messages_table = Message.arel_table
@@ -16,7 +16,7 @@ class MessagesController < ApplicationController
         .or(messages_table[:other_services].matches("%#{params[:q]}%"))
       )
     else
-      @messages = Message.where(:closed => @display_archived).order('messages.created_at DESC')
+      @messages = Message.where(closed: @display_archived).order('messages.created_at DESC')
     end
 
     @modifiers = Modifier.all
@@ -25,7 +25,7 @@ class MessagesController < ApplicationController
   def show
     # Determine the number of sent/unsent as well as read/unread
     # Note: This calculation is only valid if they're using the E-Mail publisher
-    email_log = @message.logs.find{ |l| l.publisher.present? && (l.publisher.class_name == "DssMailerPublisher")}
+    email_log = @message.logs.find { |l| l.publisher.present? && (l.publisher.class_name == 'DssMailerPublisher')}
 
     # Our charts only show percentages so, in the case of an unknown number of
     # recipients, we can get away with, e.g. a read percentage of "0 / 1"

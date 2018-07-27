@@ -73,4 +73,3 @@ EXPOSE 3000
 
 # Start supervisor
 CMD ["/usr/bin/supervisord", "-c", "./supervisord.conf"]
-#CMD ["bundle", "exec", "bin/delayed_job", "start", "-n", "10", "-t"]
