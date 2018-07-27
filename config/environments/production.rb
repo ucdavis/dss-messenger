@@ -104,6 +104,9 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  # Colorized logs are harder to read on AWS
+  config.colorize_logging = false
+
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 

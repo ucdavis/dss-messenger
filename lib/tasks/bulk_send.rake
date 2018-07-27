@@ -2,7 +2,7 @@ require 'rake'
 
 namespace :message do
   desc 'Auto-archive messages after their close window'
-  task :auto_archive => :environment do |t, args|
+  task auto_archive: :environment do |t, args|
     Message.all.each do |message|
       # If they message isn't closed ...
       unless message.closed
@@ -55,7 +55,7 @@ namespace :message do
         end
 
         # If entity is a group, determine its individual members
-        if entity.type == "Group"
+        if entity.type == 'Group'
           g = Group.find(entity.id)
           Rails.logger.info "Resolving e-mail addresses for Group with ID #{entity.id} ..."
 
@@ -66,12 +66,12 @@ namespace :message do
             p.email = m[:email]
             p.id = m[:id]
 
-            Rails.logger.info "Resolved e-mail address for group member with ID #{p.id} for Group with ID #{entity.id}"
+            Rails.logger.info "Resolved e-mail address for group member with ID #{p.id} for Group with ID #{entity.id} to #{p.email}"
 
             members << p
           end
         elsif entity.type == "Person"
-          Rails.logger.info "Resolving e-mail address for Person with ID #{entity.id} ..."
+          Rails.logger.info "Resolving e-mail address for Person with ID #{entity.id} to #{entity.email} ..."
           members << entity
         end
       end
