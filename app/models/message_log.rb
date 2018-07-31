@@ -24,8 +24,8 @@ class MessageLog < ApplicationRecord
   def entries(only_performed = false)
     entries = MessageReceipt.find_by_message_log_id(id)
 
-    entries.select!{ |e| e.performed_at.present? } if only_performed
+    entries&.select! { |e| e.performed_at.present? } if only_performed
 
-    return entries
+    return entries || []
   end
 end
