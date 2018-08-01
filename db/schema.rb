@@ -12,28 +12,28 @@
 
 ActiveRecord::Schema.define(version: 2018_07_27_214645) do
 
-  create_table "audiences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "audiences", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "message_id"
     t.integer "recipient_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "classifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "classifications", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "description"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["id"], name: "index_classifications_on_id"
   end
 
-  create_table "damages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "damages", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "message_id"
     t.integer "impacted_service_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "delayed_jobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "delayed_jobs", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "priority", default: 0
     t.integer "attempts", default: 0
     t.text "handler"
@@ -48,14 +48,14 @@ ActiveRecord::Schema.define(version: 2018_07_27_214645) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
-  create_table "impacted_services", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "impacted_services", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["id"], name: "index_impacted_services_on_id"
   end
 
-  create_table "message_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "message_logs", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "message_id"
     t.datetime "start"
     t.datetime "finish"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 2018_07_27_214645) do
     t.index ["publisher_id"], name: "index_message_logs_on_publisher_id"
   end
 
-  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "messages", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "subject"
     t.text "impact_statement"
     t.datetime "window_start"
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 2018_07_27_214645) do
     t.index ["id"], name: "index_messages_on_id"
   end
 
-  create_table "modifiers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "modifiers", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 2018_07_27_214645) do
     t.index ["id"], name: "index_modifiers_on_id"
   end
 
-  create_table "publishers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "publishers", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.string "class_name"
     t.boolean "default"
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 2018_07_27_214645) do
     t.datetime "updated_at"
   end
 
-  create_table "recipients", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "recipients", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "uid"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 2018_07_27_214645) do
     t.index ["uid"], name: "index_recipients_on_uid"
   end
 
-  create_table "settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "settings", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "item_name"
     t.text "item_value"
     t.datetime "created_at"
