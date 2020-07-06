@@ -23,7 +23,7 @@ class MessagesController < ApplicationController
   end
 
   def show
-    if @current_user.nil?
+    if Authentication.current_user.nil?
       @footer = get_footer
       render "public", layout: 'layouts/public' 
     end
