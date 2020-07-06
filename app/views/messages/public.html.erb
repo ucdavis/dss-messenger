@@ -1,0 +1,69 @@
+<table class="table table-striped table-bordered">
+  <tbody>
+    <tr>
+      <td>
+        <dl class="dl-horizontal" style="margin-bottom: 0;">
+          <dt>Subject</dt>
+          <dd><%= @message.subject %></dd>
+          <dt>Created</dt>
+          <dd><%= @message.created_at.strftime("%A, %B %d, %Y at %l:%M %p") %></dd>
+          <dt>Sender</dt>
+          <dd><%= @message.sender %></dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <% if @message.impact_statement %>
+          <p><b>SUMMARY:</b></p>
+          <%= simple_format(@message.impact_statement, {}, sanitize: false) %>
+        <% end %>
+
+        <% if @message.purpose %>
+          <p><b>PURPOSE:</b></p>
+          <%= simple_format(@message.purpose, {}, sanitize: false) %>
+        <% end %>
+
+        <% if @message.resolution %>
+          <p><b>RESOLUTION:</b></p>
+          <%= simple_format(@message.resolution, {}, sanitize: false) %>
+        <% end %>
+
+        <% if @message.workaround %>
+          <p><b>WORKAROUND:</b></p>
+          <%= simple_format(@message.workaround, {}, sanitize: false) %>
+        <% end %>
+
+        <% if @message.window_start %>
+          <p><b>START OF WINDOW:</b></p>
+          <p>
+          <%= @message.window_start.strftime("%A, %B %d, %Y at %l:%M %p") %><%= @message.window_end.nil? ? ', ONGOING' : '' %>
+          </p>
+        <% end %>
+
+        <% if @message.window_end %>
+          <p><b>END OF WINDOW:</b></p>
+          <p>
+          <%= @message.window_end.strftime("%A, %B %d, %Y at %l:%M %p") %>
+          </p>
+        <% end %>
+
+        <% if @message.impacted_services.length > 0 %>
+          <p><b>IMPACTED SERVICES:</b></p>
+          <ul>
+          <% @message.impacted_services.each do |i| %>
+            <li><%= i.name %></li>
+          <% end %>
+          </ul>
+        <% end %>
+
+        <% if @message.other_services %>
+          <p><b>OTHER SERVICES:</b></p>
+          <%= simple_format(@message.other_services, {}, sanitize: false) %>
+        <% end %>
+
+        <%= simple_format(@footer, {}, sanitize: false) %>
+      </td>
+    </tr>
+  </tbody>
+</table>

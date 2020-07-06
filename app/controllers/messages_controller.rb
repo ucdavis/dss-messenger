@@ -23,6 +23,11 @@ class MessagesController < ApplicationController
   end
 
   def show
+    if @current_user.nil?
+      @footer = get_footer
+      render "public", layout: 'layouts/public' 
+    end
+
     # Determine the number of sent/unsent as well as read/unread
     # Note: This calculation is only valid if they're using the E-Mail publisher
     email_log = @message.logs.find { |l| l.publisher.present? && (l.publisher.class_name == 'DssMailerPublisher')}
@@ -53,13 +58,7 @@ class MessagesController < ApplicationController
         @recipients = []
       end
     else
-      # Calculate the e-mail footer for the message preview section
-      @footer = Setting.where(item_name: 'footer').first
-      if @footer
-        @footer = @footer.item_value
-      else
-        @footer = ''
-      end
+      @footer = get_footer
     end
   end
 
@@ -184,6 +183,16 @@ class MessagesController < ApplicationController
     def set_message
       @message = Message.find(params[:id]) if params[:id]
       @message = Message.find(params[:message_id]) unless @message
+    end
+
+    def get_footer
+      # Calculate the e-mail footer for the message preview section
+      footer = Setting.where(item_name: 'footer').first
+      if footer
+        footer = footer.item_value
+      else
+        footer = ''
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
