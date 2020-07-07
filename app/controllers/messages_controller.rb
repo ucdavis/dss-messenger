@@ -23,9 +23,9 @@ class MessagesController < ApplicationController
   end
 
   def show
-    if @current_user.nil?
+    if not authorized?
       @footer = get_footer
-      render "public", layout: 'layouts/public' 
+      render "public", layout: 'layouts/public'
     end
 
     # Determine the number of sent/unsent as well as read/unread

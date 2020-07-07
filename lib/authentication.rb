@@ -7,6 +7,12 @@ module Authentication
     Thread.current['_auth_current_user'] = user
   end
 
+  def authorized?
+    if session[:cas_user]
+      @user = Person.find(session[:cas_user])
+      return @user.role_symbols.include?(:access)
+    end
+  end
 
   def authenticate
     if session[:cas_user]
