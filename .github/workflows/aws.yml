@@ -64,14 +64,18 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
-    - name: Download task definition
+    - name: Force deployment
       run: |
-        aws ecs describe-task-definition --task-definition dss-messenger-web --query taskDefinition > task-definition.json
+        aws ecs update-service --cluster default --service dss-messenger-web --force-new-deployment
 
-    - name: Deploy Amazon ECS task definition
-      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-      with:
-        task-definition: task-definition.json
-        service: dss-messenger-web
-        cluster: default
-        wait-for-service-stability: true
+    # - name: Download task definition
+    #   run: |
+    #     aws ecs describe-task-definition --task-definition dss-messenger-web --query taskDefinition > task-definition.json
+
+    # - name: Deploy Amazon ECS task definition
+    #   uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+    #   with:
+    #     task-definition: task-definition.json
+    #     service: dss-messenger-web
+    #     cluster: default
+    #     wait-for-service-stability: true
