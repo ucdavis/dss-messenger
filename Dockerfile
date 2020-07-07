@@ -1,4 +1,4 @@
-FROM ruby:2.6-alpine
+FROM ruby:2.6
 
 # Update and install stuff your app needs to run
 RUN apt-get update -qq && \
