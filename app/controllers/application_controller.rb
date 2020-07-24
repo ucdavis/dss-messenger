@@ -20,6 +20,11 @@ class ApplicationController < ActionController::Base
     render plain: "No such path #{@requested_path}", status: 404
   end
 
+  def clear_queue
+    system 'rake message:clear_queue_and_restart'
+    redirect_to :root
+  end
+
   protected
 
   def bad_request

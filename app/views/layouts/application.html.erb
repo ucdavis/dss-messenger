@@ -45,6 +45,8 @@
               <li class="dropdown-header">Display &hellip;</li>
               <li><%= link_to "Active Messages", messages_path(:display => 'active') %></li>
               <li><%= link_to "Archived Messages", messages_path(:display => 'archived') %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to "Clear Queue", clear_queue_path %></li>
             </ul>
           </li>
         </ul>
