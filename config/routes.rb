@@ -19,6 +19,8 @@ DssMessenger::Application.routes.draw do
     resources :settings
   end
 
+  get '/clear_queue' => 'application#clear_queue'
+
   get '/logout' => 'application#logout'
 
   get '/status' => 'application#status'
