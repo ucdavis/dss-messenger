@@ -4,11 +4,11 @@ class DelayedJobStatusController < ApplicationController
 
     case status
     when DelayedJobWorker::RUNNING
-      render :text => "Yes", :status => :ok
+      render :plain => "Yes", :status => :ok
     when DelayedJobWorker::NO_PROCESS, DelayedJobWorker::NO_LOCKED_JOBS
-      render :text => "Maybe", :status => :ok
+      render :plain => "Maybe", :status => :ok
     else
-      render :nothing => true, :status => :error
+      head :internal_server_error
     end
   end
 end
