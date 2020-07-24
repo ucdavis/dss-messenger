@@ -88,4 +88,11 @@ namespace :message do
       message_log.publisher.classify.schedule(message_log, recipient_list)
     end
   end
+
+  desc 'Clear queued jobs and restart delayed_job process'
+  task clear_queue_and_restart: :environment do |t, args|
+    Delayed::Job.delete_all
+
+    system('bin/delayed_job -n 10 -p messenger restart')
+  end
 end
