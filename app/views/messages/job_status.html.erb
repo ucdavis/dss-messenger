@@ -24,7 +24,7 @@
     </table>
 
     <div style="margin-top:15px;">
-      <%= link_to "Clear Queue", clear_queue_path, class: 'btn btn-danger' %>
+      <%= link_to "Clear Queue", clear_queue_path, class: 'btn btn-danger', data: { confirm: "Delete items from queue and restart process?" } %>
     </div>
     <% else %>
       <p>Nothing to see here, move along!</p>
