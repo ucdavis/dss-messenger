@@ -1,0 +1,32 @@
+<div class="col-md-12">
+  <h3>
+    Job Status <small>(only jobs with issues are shown)</small>
+  </h3>
+
+  <% if @attempted_jobs.length > 0 %>
+    <table style="width: 100%">
+      <thead>
+        <tr>
+          <th style="width: 10%">Attempts</th>
+          <th>Last Error</th>
+          <th>Failed At</th>
+      </tr>
+      </thead>
+      <tbody>
+        <% @attempted_jobs.each do |attempted_job| %>
+        <tr>
+          <td><%= attempted_job.attempts %></td>
+          <td><%= attempted_job.last_error.lines.first %></td>
+          <td><%= attempted_job.failed_at ? attempted_job.failed_at.strftime("%m/%d/%y %I:%M %p") : '' %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <div style="margin-top:15px;">
+      <%= link_to "Clear Queue", clear_queue_path, class: 'btn btn-danger' %>
+    </div>
+    <% else %>
+      <p>Nothing to see here, move along!</p>
+  <% end %>
+</div>
