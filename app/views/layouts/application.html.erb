@@ -79,6 +79,12 @@
       </script>
     <% end %>
 
+    <% if alert %>
+      <script type="text/javascript">
+        toastr["error"]("<%= escape_javascript(alert) %>")
+      </script>
+    <% end %>
+
     <%= content_for?(:content) ? yield(:content) : '' %>
 		<%= yield %>
 	</div> <!-- .container -->

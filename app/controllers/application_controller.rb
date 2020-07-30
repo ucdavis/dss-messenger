@@ -21,13 +21,18 @@ class ApplicationController < ActionController::Base
   end
 
   def job_status
+    @is_superuser = Authentication.current_user.superuser?
     @attempted_jobs = DelayedJob.where('attempts > 1');
     render 'messages/job_status'
   end
 
   def clear_queue
-    system 'rake message:clear_queue_and_restart'
-    redirect_to :root
+    if Authentication.current_user.superuser?
+      system 'rake message:clear_queue_and_restart'
+      redirect_to :root, notice: "Queue cleared and background process restarted successfully"
+    else
+      redirect_to :root, alert: "You must be a superuser to complete action"
+    end
   end
 
   protected

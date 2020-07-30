@@ -23,4 +23,8 @@ class Person
 
     return p
   end
+
+  def superuser?
+    self.role_symbols.include?(:superuser)
+  end
 end
