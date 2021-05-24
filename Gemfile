@@ -34,7 +34,7 @@ gem 'hpricot'
 gem 'premailer-rails'
 
 # For JS-accessible routes
-gem "js-routes"
+gem "js-routes", '~> 1.4.9'
 
 gem 'jbuilder', '~> 2.5'
 
