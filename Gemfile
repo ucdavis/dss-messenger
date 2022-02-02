@@ -13,7 +13,7 @@ gem 'rails', '~> 5.0'
 gem 'coffee-rails', '~> 4.2'
 
 # Use Puma as the app server
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 5.6'
 
 gem 'rubycas-client'
 gem 'rake'
@@ -44,7 +44,7 @@ gem 'sqlite3' # for testing
 gem 'jquery-rails'
 
 # For Bootstrap support
-gem 'bootstrap-sass', '~> 3.3.5'
+gem 'bootstrap-sass', '~> 3.4'
 gem 'sass-rails', '~> 5.0'
 
 # For loading remote JSON
