@@ -45,7 +45,7 @@ GEM
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     arel (9.0.0)
-    autoprefixer-rails (10.4.2.0)
+    autoprefixer-rails (10.4.15.0)
       execjs (~> 2)
     aws-eventstream (1.1.1)
     aws-partitions (1.465.0)
@@ -103,7 +103,7 @@ GEM
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.12.0)
-    execjs (2.8.1)
+    execjs (2.9.1)
     ffi (1.15.5)
     get_process_mem (0.2.7)
       ffi (~> 1.0)
@@ -278,7 +278,7 @@ DEPENDENCIES
   hpricot
   jbuilder (~> 2.5)
   jquery-rails
-  js-routes (~> 1.4.9)
+  js-routes (~> 1.4)
   listen (~> 3.0.5)
   mail
   mysql2 (~> 0.5.0)
