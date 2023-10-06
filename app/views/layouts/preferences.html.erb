@@ -5,15 +5,30 @@
       <ul class="nav nav-tabs">
         <%
           nav_array = {
-            'Classifications' => preferences_classifications_path,
-            'Modifiers' => preferences_modifiers_path,
-            'Impacted Services' => preferences_impacted_services_path,
-            'Publishers' => preferences_publishers_path,
-            'E-Mail Footer' => preferences_settings_path
+            'Classifications' => {
+              controller: "classifications",
+              url: preferences_classifications_path,
+            },
+            'Modifiers' => {
+              controller: "modifiers",
+              url: preferences_modifiers_path,
+            },
+            'Impacted Services' => {
+              controller: "impacted_services",
+              url: preferences_impacted_services_path,
+            },
+            'Publishers' => {
+              controller: "publishers",
+              url: preferences_publishers_path,
+            },
+            'E-Mail Footer' => {
+              controller: "settings",
+              url: preferences_settings_path
+            }
           }
         %>
-        <% nav_array.each do |title, url| %>
-          <li role="presentation"<%= controller_name == title.downcase.tr(" ", "_") ? ' class="active"'.html_safe : '' %> ><%= link_to title, url %></li>
+        <% nav_array.each do |title, details| %>
+          <li role="presentation"<%= controller_name == details[:controller] ? ' class="active"'.html_safe : '' %> ><%= link_to title, details[:url] %></li>
         <% end %>
       </ul>
 
