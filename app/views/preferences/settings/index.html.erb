@@ -10,12 +10,12 @@
       <tbody>
         <% @settings.each do |setting| %>
           <tr>
-            <%= form_for [:preferences, setting] do |f| %>
-              <td>
+            <td>
+              <%= form_for [:preferences, setting] do |f| %>
                 <%= f.text_area :item_value, class: "typeahead form-control", rows: 7 %><br />
                 <%= f.submit "Save", class: "btn btn-primary" %>
-              </td>
-            <% end %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>

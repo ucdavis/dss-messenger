@@ -10,21 +10,22 @@
       <tbody>
         <% @classifications.each do |classification| %>
           <tr>
-            <%= form_for [:preferences, classification] do |f| %>
-              <td>
-                <%= f.text_field :description, class: "typeahead form-control" %>
-              </td>
-              <td width="20%"><%= f.submit "Update", class: "btn btn-default", style: 'width: 45%' %> <%= link_to 'Remove', [:preferences, classification], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger", style: 'width: 45%' %></td>
-            <% end %>
+            <td>
+              <%= form_for [:preferences, classification], html: { class: "preferences__form" } do |f| %>
+                <%= f.text_field :description, class: "typeahead form-control preferences__input" %>
+                <%= f.submit "Update", class: "btn btn-default preferences__button" %> 
+                <%= link_to 'Remove', [:preferences, classification], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger", style: 'width: 8em; margin-right: .5em' %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
         <tr>
-          <%= form_for [:preferences, Classification.new] do |f| %>
-            <td>
-              <%= f.text_field :description, class: "typeahead form-control" %>
-            </td>
-            <td><%= f.submit "Create", class: "btn btn-primary", style: 'width: 90%' %></td>
-          <% end %>
+          <td>
+            <%= form_for [:preferences, Classification.new], html: { class: "preferences__form" } do |f| %>
+              <%= f.text_field :description, class: "typeahead form-control preferences__input" %>
+              <%= f.submit "Create", class: "btn btn-primary preferences__button--large" %>
+            <% end %>
+          </td>
         </tr>
       </tbody>
     </table>

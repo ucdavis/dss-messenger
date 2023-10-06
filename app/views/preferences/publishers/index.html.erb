@@ -10,20 +10,18 @@
       <tbody>
         <% @publishers.each do |publisher| %>
           <tr>
-            <%= form_for [:preferences, publisher] do |f| %>
-              <td>
-                <%= f.text_field :name, class: "typeahead form-control" %>
-              </td>
-              <td width="8%">
-                <div class="checkbox">
+            <td>
+              <%= form_for [:preferences, publisher], html: { class: "preferences__form" } do |f| %>
+                <%= f.text_field :name, class: "typeahead form-control preferences__input" %>
+                <div class="checkbox preferences__input" >
                   <label>
                     <%= f.check_box :default %>
                     Default
                   </label>
                 </div>
+                <%= f.submit "Update", class: "btn btn-default preferences__button--large" %>
+                <% end %>
               </td>
-              <td width="20%"><%= f.submit "Update", class: "btn btn-default", style: 'width: 90%' %></td>
-            <% end %>
           </tr>
         <% end %>
       </tbody>

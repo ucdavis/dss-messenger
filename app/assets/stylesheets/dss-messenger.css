@@ -239,3 +239,19 @@ span.twitter-typeahead {
 td.actions>a:hover {
 	text-decoration: none;
 }
+
+.preferences__form {
+  display: flex;
+  align-items: center;
+}
+.preferences__input {
+  margin-right: 1em;
+}
+.preferences__button {
+  width: 8em;
+  margin-right: .5em;
+}
+.preferences__button--large {
+  width: 17em;
+  margin-right: .5em;
+}

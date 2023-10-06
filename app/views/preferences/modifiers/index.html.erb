@@ -10,20 +10,19 @@
       <tbody>
         <% @modifiers.each do |modifier| %>
           <tr>
-            <%= form_for [:preferences, modifier] do |f| %>
               <td>
-                <%= f.text_field :description, class: "typeahead form-control" %>
-              </td>
-              <td width="20%"><%= f.submit "Update", class: "btn btn-default", style: 'width: 45%' %> <%= link_to 'Remove', [:preferences, modifier], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger", style: 'width: 45%' %></td>
-            <% end %>
+                <%= form_for [:preferences, modifier], html: { class: "preferences__form" } do |f| %>
+                  <%= f.text_field :description, class: "typeahead form-control preferences__input" %>
+                  <%= f.submit "Update", class: "btn btn-default preferences__button" %>
+                  <%= link_to 'Remove', [:preferences, modifier], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger preferences__button"  %></td>
+                <% end %>
           </tr>
         <% end %>
         <tr>
-          <%= form_for [:preferences, Modifier.new] do |f| %>
-            <td>
-              <%= f.text_field :description, class: "typeahead form-control" %>
-            </td>
-            <td><%= f.submit "Create", class: "btn btn-primary", style: 'width: 90%' %></td>
+          <td>
+            <%= form_for [:preferences, Modifier.new], html: { class: "preferences__form" } do |f| %>
+              <%= f.text_field :description, class: "typeahead form-control preferences__input" %>
+              <%= f.submit "Create", class: "btn btn-primary preferences__button--large" %></td>
           <% end %>
         </tr>
       </tbody>
