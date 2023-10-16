@@ -25,7 +25,7 @@ class Preferences::ImpactedServicesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @impacted_service.update_attributes(impacted_service_params)
+      if @impacted_service.update(impacted_service_params)
         format.html { redirect_to preferences_impacted_services_url, notice: 'Impacted service was successfully updated.' }
         format.json { head :no_content }
       else

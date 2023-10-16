@@ -9,7 +9,7 @@ class Preferences::SettingsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @setting.update_attributes(setting_params)
+      if @setting.update(setting_params)
         format.html { redirect_to preferences_settings_url, notice: 'Setting was successfully updated.' }
         format.json { head :no_content }
       else

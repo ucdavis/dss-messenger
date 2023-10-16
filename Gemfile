@@ -5,9 +5,11 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '>= 2.2'
+ruby '>= 3.1'
+# gem no longer bundled as of Ruby 3.0
+gem 'rexml'
 
-gem 'rails', '~> 5.0'
+gem 'rails', '~> 6.0'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

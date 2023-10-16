@@ -106,7 +106,7 @@ class MessagesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @message.update_attributes(message_params)
+      if @message.update(message_params)
         format.html { redirect_to @message, notice: 'Message successfully updated.' }
         format.json { head :no_content }
       else
