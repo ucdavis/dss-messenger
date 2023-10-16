@@ -25,7 +25,7 @@ class Preferences::ModifiersController < ApplicationController
 
   def update
     respond_to do |format|
-      if @modifier.update_attributes(modifier_params)
+      if @modifier.update(modifier_params)
         format.html { redirect_to preferences_modifiers_url, notice: 'Modifier was successfully updated.' }
         format.json { head :no_content }
       else

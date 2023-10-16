@@ -25,7 +25,7 @@ class Preferences::ClassificationsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @classification.update_attributes(classification_params)
+      if @classification.update(classification_params)
         format.html { redirect_to preferences_classifications_url, notice: 'Classification was successfully updated.' }
         format.json { head :no_content }
       else

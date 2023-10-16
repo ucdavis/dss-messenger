@@ -11,7 +11,7 @@ class Preferences::PublishersController < ApplicationController
 
   def update
     respond_to do |format|
-      if @publisher.update_attributes(publisher_params)
+      if @publisher.update(publisher_params)
         format.html { redirect_to preferences_publishers_url, notice: 'Publisher was successfully updated.' }
         format.json { head :no_content }
       else
