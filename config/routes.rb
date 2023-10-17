@@ -1,4 +1,6 @@
-DssMessenger::Application.routes.draw do
+Rails.application.routes.draw do
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
   # This action must come before 'resources :messages'
   get '/messages/open' => 'messages#open'
 
