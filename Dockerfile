@@ -71,5 +71,8 @@ RUN bundle exec rake assets:precompile
 
 EXPOSE 3000
 
+# create directory needed for puma pid file
+RUN mkdir -p tmp/pids
+
 # Start supervisor
 CMD ["/usr/bin/supervisord", "-c", "./supervisord.conf"]
