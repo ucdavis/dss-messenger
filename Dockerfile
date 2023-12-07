@@ -66,6 +66,7 @@ RUN ln -sf /proc/1/fd/1 /usr/src/app/log/delayed_job.log
  
 # Copy our source files precompile assets
 COPY . ./
+RUN curl https://truststore.pki.rds.amazonaws.com/us-west-2/us-west-2-bundle.pem -o us-west-2-bundle.pem -s
 
 RUN bundle exec rake assets:precompile
 

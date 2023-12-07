@@ -21,3 +21,6 @@ production:
   password: <%= ENV['DB_PASSWORD'] %>
   host: <%= ENV['DB_HOST'] %>
   port: <%= ENV['DB_PORT'] %>
+  reconnect: true
+  sslverify: true
+  sslca: <%= ENV['CA_CERT_PATH'] %>
