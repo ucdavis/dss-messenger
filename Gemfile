@@ -9,7 +9,7 @@ ruby '>= 3.1'
 # gem no longer bundled as of Ruby 3.0
 gem 'rexml'
 
-gem 'rails', '~> 6.0'
+gem 'rails', '~> 6.1'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
