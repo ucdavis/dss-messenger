@@ -10,6 +10,7 @@ ruby '>= 3.1'
 gem 'rexml'
 
 gem 'rails', '~> 6.0'
+gem 'concurrent-ruby', '< 1.3.5' # https://github.com/rails/rails/pull/54264
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
