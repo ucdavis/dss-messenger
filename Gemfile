@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '>= 3.1'
+ruby '>= 3.2'
 # gem no longer bundled as of Ruby 3.0
 gem 'rexml'
 
@@ -33,11 +33,11 @@ gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks'
 
 # For automatic inline CSS for mailer
-gem 'hpricot'
-gem 'premailer-rails'
+# gem 'hpricot'
+# gem 'premailer-rails'
 
 # For JS-accessible routes
-gem "js-routes", '~> 1.4'
+gem 'js-routes'
 
 gem 'jbuilder', '~> 2.5'
 
