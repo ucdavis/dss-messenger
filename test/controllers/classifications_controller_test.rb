@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ClassificationsControllerTest < ActionController::TestCase
   setup do
-    CASClient::Frameworks::Rails::Filter.fake("okadri")
+    fake_cas_login
     @classification = classifications(:degradation)
   end
 

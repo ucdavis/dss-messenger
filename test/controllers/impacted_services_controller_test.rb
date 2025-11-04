@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ImpactedServicesControllerTest < ActionController::TestCase
   setup do
-    CASClient::Frameworks::Rails::Filter.fake("okadri")
+    fake_cas_login
     @impacted_service = impacted_services(:file)
     @controller = Preferences::ImpactedServicesController.new
   end

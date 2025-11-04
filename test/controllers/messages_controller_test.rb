@@ -2,7 +2,7 @@ require 'test_helper'
 
 class MessagesControllerTest < ActionController::TestCase
   setup do
-    CASClient::Frameworks::Rails::Filter.fake("okadri")
+    fake_cas_login
     @message = messages(:one)
     @recipient = recipients(:one)
     @publisher = publishers(:one)
@@ -11,7 +11,7 @@ class MessagesControllerTest < ActionController::TestCase
   test "unauthorized users redirected to CAS" do
     revoke_all_access
     get :index
-    assert_response 302
+    assert_response :unauthorized
   end
 
   # test "should get index and assign needed variables" do
