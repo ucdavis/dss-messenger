@@ -8,29 +8,26 @@ module Authentication
   end
 
   def authorized?
-    if cas_login
-      @user = Person.find(cas_login)
+    if session[:cas_user]
+      @user = Person.find(session[:cas_user])
       return @user.role_symbols.include?(:access)
     end
   end
 
   def authenticate
-    unless cas_login
-      head :unauthorized
-      return
-    end
-
-    if cas_login
-      Authentication.current_user = Person.find(cas_login)
+    if session[:cas_user]
+      Authentication.current_user = Person.find(session[:cas_user])
       logger.info 'User authentication passed due to existing session'
       return
     end
 
-    if cas_login
+    CASClient::Frameworks::Rails::Filter.filter(self)
+
+    if session[:cas_user]
       logger.debug 'authenticate: cas_user exists in session.'
 
       # CAS session exists. Has access?
-      @user = Person.find(cas_login)
+      @user = Person.find(session[:cas_user])
 
       if @user && @user.role_symbols.include?(:access)
         # Valid user found through CAS
@@ -46,11 +43,5 @@ module Authentication
         redirect_to controller: 'site', action: 'access_denied'
       end
     end
-  end
-
-  private
-
-  def cas_login
-    session.dig('cas', 'user')
   end
 end

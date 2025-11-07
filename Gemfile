@@ -18,7 +18,7 @@ gem 'coffee-rails', '~> 4.2'
 # Use Puma as the app server
 gem 'puma', '~> 5.6'
 
-gem 'rack-cas'
+gem 'rubycas-client'
 gem 'rake'
 gem 'delayed_job_active_record'
 gem 'daemons'

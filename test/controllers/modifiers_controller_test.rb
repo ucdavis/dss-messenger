@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ModifiersControllerTest < ActionController::TestCase
   setup do
-    fake_cas_login
+    CASClient::Frameworks::Rails::Filter.fake("okadri")
     @modifier = modifiers(:update)
   end
 
