@@ -73,7 +73,7 @@ class MessagesController < ApplicationController
 
     # Include distribution channels through which to send messages in model
     @message = Message.new(message_params)
-    @message.sender = Person.find(session[:cas_user]).name
+    @message.sender = Person.find(cas_login).name
 
     # The message is open or closed depending on the selected modifier
     unless @message.modifier.nil?
