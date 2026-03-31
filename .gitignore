@@ -27,5 +27,6 @@ certs/
 # Ignore generated directories and files
 node_modules
 public/assets
+vendor/bundle
 
 *.env
