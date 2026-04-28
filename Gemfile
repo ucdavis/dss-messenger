@@ -9,8 +9,8 @@ ruby '>= 3.2'
 # gem no longer bundled as of Ruby 3.0
 gem 'rexml'
 
-gem 'rails', '~> 6.0'
-gem 'concurrent-ruby', '< 1.3.5' # https://github.com/rails/rails/pull/54264
+gem 'rails', '~> 6.1.7.10'
+# gem 'concurrent-ruby', '< 1.3.5' # https://github.com/rails/rails/pull/54264
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

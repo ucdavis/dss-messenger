@@ -1,5 +1,3 @@
-require 'roles_management'
-
 class Group
   attr_accessor :id, :name, :members
 
