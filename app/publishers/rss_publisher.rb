@@ -1,4 +1,4 @@
-# +RSSPublisher+ doesn't actually do anything. The controller action that
+# +RssPublisher+ doesn't actually do anything. The controller action that
 # displays the RSS feed only shows messages that have an RSS publisher
 # attached.
 class RssPublisher < Publisher

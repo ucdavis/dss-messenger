@@ -38,6 +38,6 @@ Modifier.create(description: 'HEADS-UP: prefix to subject when serious outage or
 Modifier.create(description: 'RE-SCHEDULED: prefix to subject when a Maintenance must be re-scheduled', open_ended: '1')
 
 Publisher.create(name: 'Dss Mailer', class_name: 'DssMailerPublisher', default: '1')
-Publisher.create(name: 'Rss', class_name: 'RSSPublisher', default: '1')
+Publisher.create(name: 'Rss', class_name: 'RssPublisher', default: '1')
 
 Setting.create(item_name: 'footer', item_value: 'Please contact the Social Sciences IT Service Desk with any questions or concerns:\r\n\r\n  Via web: http://it.dss.ucdavis.edu/\r\n  Via phone: 530-752-8800\r\n  Via email: ithelp@dss.ucdavis.edu \r\n  In person:\r\n    2235 SS&H\r\n    118 Young Hall\r\n    483 Kerr Hall\r\n    267 Cousteau, Room 137')

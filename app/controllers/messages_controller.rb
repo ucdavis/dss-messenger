@@ -126,7 +126,7 @@ class MessagesController < ApplicationController
   end
 
   def open
-    rss_publisher = Publisher.where(class_name: 'RSSPublisher').first
+    rss_publisher = Publisher.where(class_name: 'RssPublisher').first
 
     @open_messages = rss_publisher.nil? ? Message.none : rss_publisher.messages.where(closed: false).order('created_at DESC').take(20)
 
