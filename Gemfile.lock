@@ -235,10 +235,6 @@ GEM
     sassc (2.4.0)
       ffi (~> 1.9)
     sorbet-runtime (0.5.12024)
-    spring (2.1.1)
-    spring-watcher-listen (2.0.1)
-      listen (>= 2.7, < 4.0)
-      spring (>= 1.2, < 3.0)
     sprockets (3.7.5)
       base64
       concurrent-ruby (~> 1.0)
@@ -262,11 +258,11 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.7)
-    web-console (3.7.0)
-      actionview (>= 5.0)
-      activemodel (>= 5.0)
+    web-console (4.2.1)
+      actionview (>= 6.0.0)
+      activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
-      railties (>= 5.0)
+      railties (>= 6.0.0)
     websocket-driver (0.7.7)
       base64
       websocket-extensions (>= 0.1.0)
@@ -299,8 +295,6 @@ DEPENDENCIES
   rest-client
   rexml
   sass-rails (~> 5.0)
-  spring
-  spring-watcher-listen (~> 2.0.0)
   sqlite3
   turbolinks
   tzinfo-data
