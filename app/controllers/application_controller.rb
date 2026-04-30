@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include Authentication
 
-  before_action :authenticate, except: [:open, :show, :status, :error_404, :bad_request]
+  before_action :authenticate, except: [:open, :show, :status, :error_404]
   protect_from_forgery with: :exception
 
   rescue_from ActionController::UnknownFormat, with: :bad_request
