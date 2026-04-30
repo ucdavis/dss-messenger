@@ -221,19 +221,14 @@ GEM
       netrc (~> 0.8)
     rexml (3.4.4)
     ruby-statistics (3.0.2)
-    sass (3.7.4)
-      sass-listen (~> 4.0.0)
-    sass-listen (4.0.0)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
-    sass-rails (5.1.0)
-      railties (>= 5.2.0)
-      sass (~> 3.1)
-      sprockets (>= 2.8, < 4.0)
-      sprockets-rails (>= 2.0, < 4.0)
-      tilt (>= 1.1, < 3)
     sassc (2.4.0)
       ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     sorbet-runtime (0.5.12024)
     sprockets (3.7.5)
       base64
@@ -246,7 +241,7 @@ GEM
     sqlite3 (2.6.0)
       mini_portile2 (~> 2.8.0)
     thor (1.3.2)
-    tilt (2.0.10)
+    tilt (2.7.0)
     timeout (0.4.3)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
@@ -294,7 +289,7 @@ DEPENDENCIES
   rake
   rest-client
   rexml
-  sass-rails (~> 5.0)
+  sassc-rails (~> 2.1)
   sqlite3
   turbolinks
   tzinfo-data

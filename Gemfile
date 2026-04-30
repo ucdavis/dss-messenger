@@ -45,7 +45,7 @@ gem 'jquery-rails'
 
 # For Bootstrap support
 gem 'bootstrap-sass', '~> 3.4'
-gem 'sass-rails', '~> 5.0'
+gem 'sassc-rails', '~> 2.1'
 
 # For loading remote JSON
 gem 'rest-client'
