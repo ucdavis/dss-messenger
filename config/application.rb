@@ -24,6 +24,11 @@ module DssMessenger
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+    # Please, add to the `ignore` list any other `lib` subdirectories that do
+    # not contain `.rb` files, or that should not be reloaded or eager loaded.
+    # Common ones are `templates`, `generators`, or `middleware`, for example.
+    config.autoload_lib(ignore: %w(assets tasks))
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -33,8 +38,6 @@ module DssMessenger
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.time_zone = 'Pacific Time (US & Canada)'
-    config.autoload_paths << "#{config.root}/lib"
-
     config.encoding = "utf-8"
     config.filter_parameters += [:password]
     config.active_support.escape_html_entities_in_json = true
