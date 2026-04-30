@@ -9,12 +9,12 @@ ruby '>= 3.2'
 # gem no longer bundled as of Ruby 3.0
 gem 'rexml'
 
-gem 'rails', '~> 7.0.0'
+gem 'rails', '~> 7.1.0'
 gem 'bootsnap', require: false
 # gem 'concurrent-ruby', '< 1.3.5' # https://github.com/rails/rails/pull/54264
 
 # Use Puma as the app server
-gem 'puma', '~> 5.6'
+gem 'puma', '~> 6.0'
 
 gem 'rack-cas'
 gem 'rake'
