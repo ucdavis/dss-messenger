@@ -12,9 +12,6 @@ gem 'rexml'
 gem 'rails', '~> 6.1.7.10'
 # gem 'concurrent-ruby', '< 1.3.5' # https://github.com/rails/rails/pull/54264
 
-# Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
-
 # Use Puma as the app server
 gem 'puma', '~> 5.6'
 
