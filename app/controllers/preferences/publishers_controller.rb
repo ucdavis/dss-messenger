@@ -1,5 +1,5 @@
 class Preferences::PublishersController < ApplicationController
-  before_action :set_publisher, only: [:show, :edit, :update, :destroy]
+  before_action :set_publisher, only: [:update]
 
   #filter_access_to :all
 

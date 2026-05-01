@@ -1,5 +1,5 @@
 class Preferences::SettingsController < ApplicationController
-  before_action :set_setting, only: [:show, :edit, :update, :destroy]
+  before_action :set_setting, only: [:update]
 
   def index
     @settings = Setting.all

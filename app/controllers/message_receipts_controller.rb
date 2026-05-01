@@ -1,4 +1,5 @@
 class MessageReceiptsController < ApplicationController
+  skip_before_action :authenticate, only: [:show]
   before_action :set_message_receipt, only: [:show]
 
   def show
