@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  skip_before_action :authenticate, only: [:open, :show]
   before_action :set_message, only: [:show, :edit, :update, :destroy, :archive, :duplicate, :reactivate]
 
   def index

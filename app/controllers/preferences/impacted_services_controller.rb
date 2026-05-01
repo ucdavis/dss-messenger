@@ -1,5 +1,5 @@
 class Preferences::ImpactedServicesController < ApplicationController
-  before_action :set_impacted_service, only: [:show, :edit, :update, :destroy]
+  before_action :set_impacted_service, only: [:update, :destroy]
 
   #filter_access_to :all
 
