@@ -80,12 +80,12 @@ Rails.application.configure do
 
   # SMTP Settings
   ActionMailer::Base.smtp_settings = {
-    address:               Rails.application.secrets.smtp_address,
-    port:                  Rails.application.secrets.smtp_port,
+    address:               ENV.fetch("SMTP_ADDRESS"),
+    port:                  ENV.fetch("SMTP_PORT"),
     authentication:        :login,
-    domain:                Rails.application.secrets.smtp_domain,
-    user_name:             Rails.application.secrets.smtp_username,
-    password:              Rails.application.secrets.smtp_password,
+    domain:                ENV.fetch("SMTP_DOMAIN"),
+    user_name:             ENV.fetch("SMTP_USERNAME"),
+    password:              ENV.fetch("SMTP_PASSWORD"),
     enable_starttls_auto:  true,
     logger:                Rails.logger
   }
