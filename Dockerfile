@@ -16,7 +16,7 @@ RUN bundle install
 RUN mkdir -p /usr/src/app/log
 
 # Environment variables
-ARG SECRET_KEY_BASE
+ARG SECRET_KEY_BASE=placeholder_for_assets_precompile
 ENV SECRET_KEY_BASE $SECRET_KEY_BASE
 ARG CAS_URL=something.cas
 ENV CAS_URL $CAS_URL
