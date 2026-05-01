@@ -10,9 +10,9 @@ module RolesManagementApi
 
     response = RestClient::Request.new(
       method: :get,
-      url: Rails.application.secrets[:roles_host] + path,
-      user: Rails.application.secrets[:roles_user],
-      password: Rails.application.secrets[:roles_password],
+      url: ENV.fetch("ROLES_HOST") + path,
+      user: ENV.fetch("ROLES_USER"),
+      password: ENV.fetch("ROLES_PASSWORD"),
       headers: headers
     ).execute
 

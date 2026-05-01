@@ -1,6 +1,6 @@
-region = Rails.application.secrets[:dynamodb_region]
-access_key = Rails.application.secrets[:dynamodb_access_key]
-secret_key = Rails.application.secrets[:dynamodb_secret_key]
+region = ENV["DYNAMODB_REGION"]
+access_key = ENV["DYNAMODB_AWS_ACCESS_KEY"]
+secret_key = ENV["DYNAMODB_AWS_SECRET_KEY"]
 
 Aws.config.update({
   region: region,
@@ -9,5 +9,5 @@ Aws.config.update({
 
 if region && access_key && secret_key
   ::DynamoDbClient = Aws::DynamoDB::Client.new
-  ::DynamoDbTable = Rails.application.secrets[:dynamodb_message_receipt_table]
+  ::DynamoDbTable = ENV["DYNAMODB_MESSAGE_RECEIPT_TABLE"]
 end
