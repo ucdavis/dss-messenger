@@ -1,5 +1,5 @@
 class Preferences::ClassificationsController < ApplicationController
-  before_action :set_classification, only: [:show, :edit, :update, :destroy]
+  before_action :set_classification, only: [:update, :destroy]
 
   #filter_access_to :all
 
