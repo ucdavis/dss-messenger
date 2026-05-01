@@ -9,7 +9,7 @@ ruby '>= 3.2'
 # gem no longer bundled as of Ruby 3.0
 gem 'rexml'
 
-gem 'rails', '~> 7.1.0'
+gem 'rails', '~> 7.2.0'
 gem 'bootsnap', require: false
 # gem 'concurrent-ruby', '< 1.3.5' # https://github.com/rails/rails/pull/54264
 
@@ -61,8 +61,7 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '~> 3.0.5'
+  gem 'web-console', '~> 4.2'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
