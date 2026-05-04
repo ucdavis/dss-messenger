@@ -1,4 +1,4 @@
-FROM ruby:3.2
+FROM ruby:3.4
 
 # Update and install stuff your app needs to run
 RUN apt-get update -qq && \
