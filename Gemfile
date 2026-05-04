@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '>= 3.2'
+ruby '>= 3.4'
 # gem no longer bundled as of Ruby 3.0
 gem 'rexml'
 
