@@ -289,6 +289,8 @@ GEM
     sqlite3 (2.6.0)
       mini_portile2 (~> 2.8.0)
     stringio (3.2.0)
+    terser (1.2.7)
+      execjs (>= 0.3.0, < 3)
     thor (1.5.0)
     tilt (2.7.0)
     timeout (0.6.1)
@@ -298,8 +300,6 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    uglifier (4.2.0)
-      execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.7)
@@ -342,14 +342,14 @@ DEPENDENCIES
   rexml
   sassc-rails (~> 2.1)
   sqlite3
+  terser
   turbolinks
   tzinfo-data
-  uglifier (>= 1.3.0)
   web-console (~> 4.2)
   whenever
 
 RUBY VERSION
-   ruby 3.2.8p263
+   ruby 3.4.9p82
 
 BUNDLED WITH
    2.3.6
