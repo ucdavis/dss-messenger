@@ -47,9 +47,6 @@ gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.4'
 gem 'sassc-rails', '~> 2.1'
 
-# For loading remote JSON
-gem 'rest-client'
-
 # For profiling memory usage of gems
 gem 'derailed', group: :development
 
