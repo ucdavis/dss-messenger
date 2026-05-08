@@ -1,8 +1,10 @@
-FROM ruby:3.4
+FROM ruby:3.4-slim
 
-# Update and install stuff your app needs to run
-RUN apt-get update -qq && \
-	apt-get install -yq nodejs supervisor
+RUN apt-get update -qq && apt-get install --no-install-recommends -y \
+    curl build-essential pkg-config \
+		default-libmysqlclient-dev libsqlite3-dev libyaml-dev libffi-dev \
+		nodejs supervisor \
+		&& rm -rf /var/lib/apt/lists/*
 
 # Installing your gems this way caches this step so you dont have to reintall your gems every time you rebuild your image.
 # More info on this here: http://ilikestuffblog.com/2014/01/06/how-to-skip-bundle-install-when-deploying-a-rails-app-to-docker/
