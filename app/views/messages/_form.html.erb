@@ -35,6 +35,23 @@
       ]
     });
 
+    // Tokens selected from the typeahead carry a numeric Roles Management
+    // entity ID as their value. Typed or pasted text (e.g. a comma-separated
+    // list of names) carries the raw text instead and can't be resolved at
+    // publish time, so mark those tokens invalid (red dotted underline) and
+    // try to match them against Roles Management by name. Unmatched tokens
+    // stay invalid; saveRecipientList() filters them out of the submission.
+    $('input.typeahead').on('tokenfield:createdtoken', function(event) {
+      if (!/^\d+$/.test(String(event.attrs.value))) {
+        $(event.relatedTarget).addClass('invalid');
+        resolveRecipientName(event.attrs.value, event.relatedTarget);
+      }
+    });
+
+    $('input.typeahead').on('tokenfield:removedtoken', function() {
+      updateInvalidRecipientsWarning();
+    });
+
     <% if @message.recipients %>
     // If message has validation errors or is a duplicate of another message,
     // we may already have recipients to add to the token list.
@@ -56,6 +73,45 @@
     });
   });
 
+  var pendingRecipientLookups = 0;
+
+  function updateInvalidRecipientsWarning() {
+    var hasInvalid = $('.tokenfield .token.invalid').length > 0;
+
+    // While lookups are in flight, show a neutral "checking" note instead of
+    // declaring entries invalid — they may still resolve.
+    $('#recipients-resolving-note').toggle(pendingRecipientLookups > 0 && hasInvalid);
+    $('#invalid-recipients-warning').toggle(pendingRecipientLookups === 0 && hasInvalid);
+  }
+
+  // Looks up a pasted/typed name in Roles Management. On a unique exact match
+  // (case-insensitive), the invalid token is updated in place with the entity
+  // ID. Otherwise the token is left marked invalid.
+  function resolveRecipientName(name, tokenElement) {
+    pendingRecipientLookups++;
+    updateInvalidRecipientsWarning();
+
+    $.getJSON(Routes.recipients_path() + '.json', { q: name }, function(results) {
+      var matches = $.grep(results, function(r) {
+        return r.label.toLowerCase() === name.toLowerCase();
+      });
+
+      if (matches.length === 1) {
+        // Update the token in place: getTokens() reads the 'attrs' data, so
+        // this is enough for saveRecipientList() to pick up the entity ID.
+        // (Removing and re-creating the token doesn't work reliably —
+        // tokenfield's remove() is a no-op while its input has focus.)
+        $(tokenElement)
+          .data('attrs', { value: String(matches[0].value), label: matches[0].label })
+          .removeClass('invalid')
+          .find('.token-label').text(matches[0].label);
+      }
+    }).always(function() {
+      pendingRecipientLookups--;
+      updateInvalidRecipientsWarning();
+    });
+  }
+
   // Called by the form's onSubmit to convert tokenfield's API data into
   // something readable by the backend.
   function saveRecipientList() {
@@ -65,6 +121,11 @@
       var recipients = [];
 
       for (var i = 0; i < tokens.length; i++) {
+        // Skip invalid tokens (non-numeric value, i.e. not chosen from the typeahead)
+        if (!/^\d+$/.test(String(tokens[i].value))) {
+          continue;
+        }
+
         recipients.push({ uid: tokens[i].value, name: tokens[i].label });
       }
 
@@ -95,6 +156,14 @@
     <div class="form-group">
       <%= label_tag(:recipients, "Recipients") %>
       <%= f.text_field :recipients, class: "typeahead form-control", value: "" %>
+      <span id="recipients-resolving-note" class="help-block" style="display: none;">
+        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+        Looking up pasted entries in Roles Management&hellip;
+      </span>
+      <span id="invalid-recipients-warning" class="help-block" style="display: none; color: #d9534f;">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        Entries with a red dotted underline couldn't be matched to a known recipient and won't receive the message. Check the spelling or pick them from the suggestion list.
+      </span>
     </div>
 
     <div class="form-group">
