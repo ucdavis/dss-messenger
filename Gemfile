@@ -14,7 +14,7 @@ gem 'bootsnap', require: false
 # gem 'concurrent-ruby', '< 1.3.5' # https://github.com/rails/rails/pull/54264
 
 # Use Puma as the app server
-gem 'puma', '~> 6.0'
+gem 'puma', '~> 7.2'
 
 gem 'rack-cas'
 gem 'rake'
