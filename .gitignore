@@ -30,3 +30,4 @@ public/assets
 vendor/bundle
 
 *.env
+.envrc
