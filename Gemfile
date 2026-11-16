@@ -9,9 +9,9 @@ ruby '>= 3.4'
 # gem no longer bundled as of Ruby 3.0
 gem 'rexml'
 
-gem 'rails', '~> 7.2.0'
+gem 'rails', '~> 8.1.0'
+gem 'sprockets-rails' # Asset pipeline. Rails 8 no longer depends on it.
 gem 'bootsnap', require: false
-# gem 'concurrent-ruby', '< 1.3.5' # https://github.com/rails/rails/pull/54264
 
 # Use Puma as the app server
 gem 'puma', '~> 7.2'
